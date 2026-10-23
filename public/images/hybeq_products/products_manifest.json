@@ -1,0 +1,92 @@
+[
+  {
+    "slug": "hy-coat-h111",
+    "name": "Hy Coat H111",
+    "file": "public/images/hybeq_products/hy-coat-h111.png",
+    "rel_path": "/images/hybeq_products/hy-coat-h111.png"
+  },
+  {
+    "slug": "hy-dampproof-ultra",
+    "name": "Hy Dampproof Ultra",
+    "file": "public/images/hybeq_products/hy-dampproof-ultra.png",
+    "rel_path": "/images/hybeq_products/hy-dampproof-ultra.png"
+  },
+  {
+    "slug": "hy-masterflex-pu",
+    "name": "Hy Masterflex Pu",
+    "file": "public/images/hybeq_products/hy-masterflex-pu.png",
+    "rel_path": "/images/hybeq_products/hy-masterflex-pu.png"
+  },
+  {
+    "slug": "hy-spot-bond-ep510",
+    "name": "Hy Spot Bond Ep510",
+    "file": "public/images/hybeq_products/hy-spot-bond-ep510.png",
+    "rel_path": "/images/hybeq_products/hy-spot-bond-ep510.png"
+  },
+  {
+    "slug": "hy-stonegrip-511",
+    "name": "Hy Stonegrip 511",
+    "file": "public/images/hybeq_products/hy-stonegrip-511.png",
+    "rel_path": "/images/hybeq_products/hy-stonegrip-511.png"
+  },
+  {
+    "slug": "hy-stoneseal",
+    "name": "Hy Stoneseal",
+    "file": "public/images/hybeq_products/hy-stoneseal.png",
+    "rel_path": "/images/hybeq_products/hy-stoneseal.png"
+  },
+  {
+    "slug": "hy-superconcrete-ls",
+    "name": "Hy Superconcrete Ls",
+    "file": "public/images/hybeq_products/hy-superconcrete-ls.png",
+    "rel_path": "/images/hybeq_products/hy-superconcrete-ls.png"
+  },
+  {
+    "slug": "hy-tile-grout",
+    "name": "Hy Tile Grout",
+    "file": "public/images/hybeq_products/hy-tile-grout.png",
+    "rel_path": "/images/hybeq_products/hy-tile-grout.png"
+  },
+  {
+    "slug": "hybeq-metacor",
+    "name": "Hybeq Metacor",
+    "file": "public/images/hybeq_products/hybeq-metacor.png",
+    "rel_path": "/images/hybeq_products/hybeq-metacor.png"
+  },
+  {
+    "slug": "hybeq-superclean",
+    "name": "Hybeq Superclean",
+    "file": "public/images/hybeq_products/hybeq-superclean.png",
+    "rel_path": "/images/hybeq_products/hybeq-superclean.png"
+  },
+  {
+    "slug": "hycera-505",
+    "name": "Hycera 505",
+    "file": "public/images/hybeq_products/hycera-505.png",
+    "rel_path": "/images/hybeq_products/hycera-505.png"
+  },
+  {
+    "slug": "hyflex-535",
+    "name": "Hyflex 535",
+    "file": "public/images/hybeq_products/hyflex-535.png",
+    "rel_path": "/images/hybeq_products/hyflex-535.png"
+  },
+  {
+    "slug": "hyintra-507",
+    "name": "Hyintra 507",
+    "file": "public/images/hybeq_products/hyintra-507.png",
+    "rel_path": "/images/hybeq_products/hyintra-507.png"
+  },
+  {
+    "slug": "hymax-525",
+    "name": "Hymax 525",
+    "file": "public/images/hybeq_products/hymax-525.png",
+    "rel_path": "/images/hybeq_products/hymax-525.png"
+  },
+  {
+    "slug": "hyultra-515",
+    "name": "Hyultra 515",
+    "file": "public/images/hybeq_products/hyultra-515.png",
+    "rel_path": "/images/hybeq_products/hyultra-515.png"
+  }
+]
