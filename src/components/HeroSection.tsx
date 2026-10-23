@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { CircularPlayButton } from './CircularPlayButton';
-import { ChevronLeft, ChevronRight, ArrowRight, CheckCircle2 } from 'lucide-react';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 interface HeroSectionProps {
   onOpenVideo: () => void;
@@ -13,8 +13,6 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
 }) => {
   const [activeSlide, setActiveSlide] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
-  const [phoneInput, setPhoneInput] = useState('');
-  const [isSent, setIsSent] = useState(false);
   const touchStartX = useRef<number | null>(null);
 
   const slides = [
@@ -23,7 +21,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
       image: '/images/hero_banner_01.png?v=5',
       category: 'TILE & STONE ADHESIVE',
       badge: 'ENGINEERED FOR STRONGER STRUCTURES',
-      shortDesc: 'German polymer engineered adhesives formulated for extreme bond strength & zero tile slippage.',
+      desc: 'We engineer advanced bonding solutions for each market, using a combination of high-grade polymers, natural minerals, and specialized additives along with our deep expertise in specialized building chemicals.',
       productName: 'HYBEQ Tile & Stone Adhesive (505, 507, 515+)',
       alt: 'HYBEQ Tile & Stone Adhesive - German Polymer Technology'
     },
@@ -32,7 +30,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
       image: '/images/hero_banner_02.png?v=5',
       category: 'WATERPROOFING SOLUTIONS',
       badge: 'PROTECT WHAT MATTERS MOST',
-      shortDesc: 'Advanced elastomeric & crystalline waterproofing barriers stopping water penetration permanently.',
+      desc: 'We develop innovative waterproofing solutions for each market, using a combination of elastomeric and crystalline raw materials along with our deep knowledge & expertise in specialized building chemicals.',
       productName: 'HYBEQ Waterproofing Solutions (DAMPPROOF, MASTERFLEX PU)',
       alt: 'HYBEQ Advanced Waterproofing Solutions - Stop Water Leaks Permanently'
     },
@@ -41,7 +39,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
       image: '/images/hero_banner_03.png?v=5',
       category: 'PRECISION TILE FIXING & GROUTS',
       badge: 'LET THE WORLD KNOW YOUR COLORFUL PERSONALITY',
-      shortDesc: 'Precision-engineered epoxy grouts & bonding systems for unyielding strength and vibrant, stain-free joints.',
+      desc: 'We formulate precision epoxy solutions for each market, using a combination of stain-resistant resins and high-purity quartz fillers along with our deep knowledge & expertise in specialized building chemicals.',
       productName: 'HYBEQ Tile Fixing & Grout (SPOT BOND EP510, STONESEAL)',
       alt: 'HYBEQ Precision Tile Fixing & Epoxy Grouts - Stain-Resistant & Vibrant'
     }
@@ -88,21 +86,6 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
       }
     }
     touchStartX.current = null;
-  };
-
-  const handleQuickFormSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    e.stopPropagation();
-    if (!phoneInput.trim()) {
-      onOpenEnquiry && onOpenEnquiry(slides[activeSlide].productName);
-      return;
-    }
-    setIsSent(true);
-    setTimeout(() => {
-      onOpenEnquiry && onOpenEnquiry(`${slides[activeSlide].productName} (Direct Lead: ${phoneInput.trim()})`);
-      setIsSent(false);
-      setPhoneInput('');
-    }, 700);
   };
 
   return (
@@ -212,58 +195,25 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
           </button>
 
           {/* ============================================================
-              TOP-RIGHT NOTCH CARD:
-              Fits cleanly inside the stepped cutout notch.
-              Adapts dynamically with the active slide ("changeable form").
+          {/* ============================================================
+              TOP-RIGHT NOTCH CONTENT (1:1 VURA Reference Treatment):
+              Clean, deliberately positioned supporting text block
+              with balanced line lengths and certified seal.
               ============================================================ */}
           <div
             className="vura-banner-thumb-content"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="vura-notch-header">
-              <span className="vura-notch-tag">{slides[activeSlide].category}</span>
+            <p className="vura-notch-desc">
+              {slides[activeSlide].desc}
+            </p>
+            <div className="vura-notch-cert-wrap">
               <img
                 src="/images/GPTW-Certified.png"
                 alt="Great Place to Work / ISO Certified"
                 className="vura-notch-cert-img"
               />
             </div>
-
-            <p className="vura-notch-text">
-              {slides[activeSlide].shortDesc}
-            </p>
-
-            {/* Changeable Quick Lead / Enquiry Form */}
-            <form className="vura-notch-form" onSubmit={handleQuickFormSubmit}>
-              <div className="vura-notch-input-wrap">
-                <input
-                  type="tel"
-                  className="vura-notch-input"
-                  placeholder="Enter phone for quote..."
-                  value={phoneInput}
-                  onChange={(e) => setPhoneInput(e.target.value)}
-                  maxLength={15}
-                  aria-label="Phone number for instant quote"
-                />
-                <button
-                  type="submit"
-                  className={`vura-notch-submit-btn ${isSent ? 'sent' : ''}`}
-                  title="Request Technical Quote"
-                >
-                  {isSent ? (
-                    <>
-                      <CheckCircle2 size={13} />
-                      <span>Sent</span>
-                    </>
-                  ) : (
-                    <>
-                      <span>Quote</span>
-                      <ArrowRight size={13} />
-                    </>
-                  )}
-                </button>
-              </div>
-            </form>
           </div>
 
           {/* Bottom Left Pill Button: Active category badge */}

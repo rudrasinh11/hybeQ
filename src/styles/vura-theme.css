@@ -1057,13 +1057,13 @@ body {
    TOP-RIGHT NOTCH CARD (Section 3.C & Changable Form):
    Nests seamlessly within the transparent stepped cutout notch
    ============================================================ */
-/* ── Notch Info Card (top-right inside stepped cutout) ── */
+/* ── Notch Info Content (top-right inside stepped cutout, 1:1 VURA Reference) ── */
 .vura-banner-thumb-content {
   position: absolute;
-  top: clamp(8px, 1.1vw, 16px);
-  right: clamp(14px, 2vw, 36px);
+  top: clamp(12px, 1.6vw, 24px);
+  right: clamp(20px, 2.8vw, 54px);
   width: auto;
-  max-width: clamp(320px, 30vw, 440px);
+  max-width: clamp(340px, 32vw, 440px);
   z-index: 10;
   pointer-events: auto;
 
@@ -1076,119 +1076,34 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  gap: clamp(5px, 0.6vw, 9px);
+  gap: clamp(8px, 0.8vw, 12px);
   box-sizing: border-box;
 }
 
-.vura-notch-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 12px;
+.vura-notch-desc {
+  font-family: "vurafonts", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  color: #071A45;
+  font-size: clamp(12.5px, 0.9vw, 15px);
+  line-height: 1.55;
+  font-weight: 500;
   margin: 0;
+  text-align: left;
+  letter-spacing: -0.01em;
 }
 
-.vura-notch-tag {
-  font-family: "vurasemiboldfonts", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  font-size: clamp(9px, 0.72vw, 10.5px);
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: #0A2362;
-  background: #EAF8F0;
-  border: 1px solid rgba(70, 201, 133, 0.45);
-  padding: 3px 9px;
-  border-radius: 9999px;
-  display: inline-block;
-  white-space: nowrap;
+.vura-notch-cert-wrap {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-top: 2px;
 }
 
 .vura-notch-cert-img {
-  height: clamp(20px, 1.8vw, 26px);
+  height: clamp(22px, 2vw, 30px);
   width: auto;
   object-fit: contain;
   flex-shrink: 0;
-  filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.08));
-}
-
-.vura-notch-text {
-  font-family: "vurafonts", system-ui, -apple-system, sans-serif;
-  color: #334155;
-  font-size: clamp(10px, 0.76vw, 12px);
-  line-height: 1.35;
-  font-weight: 500;
-  margin: 0;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
-
-/* Changeable Quick Lead Form */
-.vura-notch-form {
-  margin: 0;
-  width: 100%;
-}
-
-.vura-notch-input-wrap {
-  display: flex;
-  align-items: center;
-  background: #FFFFFF;
-  border: 1.5px solid #E2E8F0;
-  border-radius: 9999px;
-  padding: 2px 3px 2px 11px;
-  box-shadow: 0 2px 8px rgba(10, 35, 98, 0.06);
-  transition: all 0.2s ease;
-}
-
-.vura-notch-input-wrap:focus-within {
-  border-color: #46C985;
-  box-shadow: 0 0 0 3px rgba(70, 201, 133, 0.22);
-}
-
-.vura-notch-input {
-  flex: 1;
-  border: none;
-  background: transparent;
-  font-family: "vurafonts", system-ui, sans-serif;
-  font-size: clamp(10px, 0.74vw, 11.5px);
-  color: #0F172A;
-  outline: none;
-  min-width: 0;
-  padding: 3px 0;
-}
-
-.vura-notch-input::placeholder {
-  color: #94A3B8;
-  font-size: clamp(9.5px, 0.7vw, 11px);
-}
-
-.vura-notch-submit-btn {
-  background: #0A2362;
-  color: #FFFFFF;
-  border: none;
-  border-radius: 9999px;
-  padding: 4px 12px;
-  font-family: "vurasemiboldfonts", system-ui, sans-serif;
-  font-size: clamp(9.5px, 0.72vw, 11px);
-  font-weight: 600;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  transition: all 0.22s ease;
-  white-space: nowrap;
-  flex-shrink: 0;
-}
-
-.vura-notch-submit-btn:hover {
-  background: #46C985;
-  color: #071A45;
-}
-
-.vura-notch-submit-btn.sent {
-  background: #10B981;
-  color: #FFFFFF;
+  filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.10));
 }
 
 /* Bottom Controls */
@@ -4444,18 +4359,43 @@ div.text-custom-storke-cs,
 }
 
 .vura-enquiry-btn {
-  border-color: rgba(255, 255, 255, 0.25);
+  border: 1.5px solid #0A2362;
   background: transparent;
-  color: #FFFFFF;
+  color: #0A2362;
+  border-radius: 9999px;
+  height: 38px;
+  padding: 0 18px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: "vurasemiboldfonts", system-ui, sans-serif;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.25s ease;
+  white-space: nowrap;
 }
 
 .vura-enquiry-btn:hover {
-  border-color: #46C985;
-  background: rgba(70, 201, 133, 0.06);
+  border-color: #0A2362;
+  background: #0A2362;
+  color: #FFFFFF;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(10, 35, 98, 0.15);
+}
+
+.vura-enquiry-btn:hover .vura-enquiry-arrow {
+  color: #46C985 !important;
+  transform: translate(2px, -2px);
 }
 
 .vura-enquiry-arrow {
   color: #46C985 !important;
+  stroke-width: 2.8;
+  transition: transform 0.2s ease;
 }
 
 @media (max-width: 1024px) {

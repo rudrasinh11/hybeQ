@@ -10,10 +10,10 @@ import {
 } from 'lucide-react';
 import { HeroSection } from '../components/HeroSection';
 import { ClientsPartnersSection } from '../components/ClientsPartnersSection';
+import { ProductRangeSection } from '../components/ProductRangeSection';
 import { PRODUCTS } from '../data/productsData';
 import { BLOG_POSTS } from '../data/blogData';
 import { MarqueeTicker } from '../components/MarqueeTicker';
-import { ProductRangeMarquee } from '../components/ProductRangeMarquee';
 import { ProductCard } from '../components/ProductCard';
 
 interface HomePageProps {
@@ -28,7 +28,7 @@ export const HomePage: React.FC<HomePageProps> = ({
   const [selectedProductCategory, setSelectedProductCategory] = useState<string>('all');
   const carouselRef = useRef<HTMLDivElement>(null);
 
-  // Requirement 4: Display approximately 5-6 products per horizontal carousel
+  // Curated 5-6 products per horizontal carousel
   const carouselProducts = (
     selectedProductCategory === 'all'
       ? PRODUCTS
@@ -49,109 +49,14 @@ export const HomePage: React.FC<HomePageProps> = ({
     <div className="vura-home-page" style={{ backgroundColor: 'var(--color-page-background)', color: 'var(--color-body)' }}>
       
       {/* ============================================================
-          SECTION 1: HERO SECTION (Header + Two-line Headline +
-          Play Button + Showcase Media Card + Bottom Socials)
+          SECTION 1: HERO SECTION
+          Header + Two-line Headline + Play Button + Showcase Media Card
           ============================================================ */}
       <HeroSection onOpenVideo={onOpenVideo} onOpenEnquiry={onOpenEnquiry} />
 
       {/* ============================================================
-          SECTION 2: AUTHENTIC HYBEQ CLIENTS & PARTNERS SHOWCASE
-          (Marquee + Grid View, Chamfered Cards, Full Color Logos)
-          ============================================================ */}
-      <ClientsPartnersSection />
-
-      {/* ============================================================
-          SECTION 3: OUR PRODUCT RANGE (Kinetic Typography Marquee)
-          ============================================================ */}
-      <ProductRangeMarquee />
-
-      {/* ============================================================
-          SECTION 4: THREE PILLARS (PRINCIPLE, MISSION, VISION)
-          ============================================================ */}
-      <section className="vura-pillars-section">
-        <div className="vura-container">
-          <div style={{ textAlign: 'center', maxWidth: 760, margin: '0 auto' }}>
-            <span className="vura-section-tag">Foundational Pillars</span>
-            <h2 className="vura-section-heading">
-              Built On Integrity, Precision &amp; Engineering Excellence
-            </h2>
-            <p className="vura-section-desc">
-              Three non-negotiable principles that drive our formulation chemistry, raw material selection, and applicator training programs across India.
-            </p>
-          </div>
-
-          <div className="vura-pillars-grid">
-            {/* Pillar 1: Principle */}
-            <div className="vura-pillar-card">
-              <div className="vura-pillar-media">
-                <img
-                  src="/images/plant-blending-tower.jpg"
-                  alt="Automated Dry-Mix Chemical Plant"
-                  className="vura-pillar-img"
-                />
-                <div className="vura-pillar-overlay" />
-                <div className="vura-pillar-icon-box">
-                  <Compass size={24} />
-                </div>
-              </div>
-              <div className="vura-pillar-content">
-                <span className="vura-pillar-tag">Core Principle</span>
-                <h3 className="vura-pillar-title">Zero Compromise Chemical Purity</h3>
-                <p className="vura-pillar-desc">
-                  We use 100% virgin redispersible polymer powders sourced directly from certified European synthesizers. We never dilute with calcium carbonate fillers or unreacted extenders.
-                </p>
-              </div>
-            </div>
-
-            {/* Pillar 2: Mission */}
-            <div className="vura-pillar-card">
-              <div className="vura-pillar-media">
-                <img
-                  src="/images/lab-testing-rig.jpg"
-                  alt="Materials Testing Laboratory"
-                  className="vura-pillar-img"
-                />
-                <div className="vura-pillar-overlay" />
-                <div className="vura-pillar-icon-box">
-                  <Target size={24} />
-                </div>
-              </div>
-              <div className="vura-pillar-content">
-                <span className="vura-pillar-tag">Corporate Mission</span>
-                <h3 className="vura-pillar-title">Permanence in Civil Infrastructure</h3>
-                <p className="vura-pillar-desc">
-                  Eliminating post-handover tile debonding, basement flooding, and concrete carbonation through high-durability polymer mortars designed for a 50+ year design life.
-                </p>
-              </div>
-            </div>
-
-            {/* Pillar 3: Vision */}
-            <div className="vura-pillar-card">
-              <div className="vura-pillar-media">
-                <img
-                  src="/images/hero-facade.jpg"
-                  alt="Sustainable Green Architecture"
-                  className="vura-pillar-img"
-                />
-                <div className="vura-pillar-overlay" />
-                <div className="vura-pillar-icon-box">
-                  <Eye size={24} />
-                </div>
-              </div>
-              <div className="vura-pillar-content">
-                <span className="vura-pillar-tag">Strategic Vision</span>
-                <h3 className="vura-pillar-title">India's Benchmark in Green Chemistry</h3>
-                <p className="vura-pillar-desc">
-                  Leading the construction sector toward carbon-reduced cementitious formulations and zero-VOC waterborne elastomeric sealants by 2030.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ============================================================
-          SECTION 5: FEATURED PRODUCTS CAROUSEL (Limited to 5–6 Curated Formulations)
+          SECTION 2: FEATURED FORMULATIONS (CURATED 5–6)
+          High-Performance Catalog Carousel
           ============================================================ */}
       <section className="vura-products-section" id="featured-products">
         <div className="vura-container">
@@ -242,7 +147,106 @@ export const HomePage: React.FC<HomePageProps> = ({
       </section>
 
       {/* ============================================================
-          SECTION 8: INSIDE STORY / BLOG ARTICLES
+          SECTION 3: OUR CLIENTS & PARTNERS
+          "Trusted by Leading Builders & Developers"
+          Dual-Row Infinite Logo Marquee + 500+ / 200+ / 21+ / 4+ Authentic Statistics
+          ============================================================ */}
+      <ClientsPartnersSection />
+
+      {/* ============================================================
+          SECTION 4: WHAT WE OFFER — OUR PRODUCT RANGE
+          Interactive Product Division Showcase with Actual Products,
+          Metrics, Certifications & Real Technical Anatomy
+          ============================================================ */}
+      <ProductRangeSection onOpenEnquiry={onOpenEnquiry} />
+
+      {/* ============================================================
+          SECTION 5: THREE PILLARS (PRINCIPLE, MISSION, VISION)
+          ============================================================ */}
+      <section className="vura-pillars-section">
+        <div className="vura-container">
+          <div style={{ textAlign: 'center', maxWidth: 760, margin: '0 auto' }}>
+            <span className="vura-section-tag">Foundational Pillars</span>
+            <h2 className="vura-section-heading">
+              Built On Integrity, Precision &amp; Engineering Excellence
+            </h2>
+            <p className="vura-section-desc">
+              Three non-negotiable principles that drive our formulation chemistry, raw material selection, and applicator training programs across India.
+            </p>
+          </div>
+
+          <div className="vura-pillars-grid">
+            {/* Pillar 1: Principle */}
+            <div className="vura-pillar-card">
+              <div className="vura-pillar-media">
+                <img
+                  src="/images/plant-blending-tower.jpg"
+                  alt="Automated Dry-Mix Chemical Plant"
+                  className="vura-pillar-img"
+                />
+                <div className="vura-pillar-overlay" />
+                <div className="vura-pillar-icon-box">
+                  <Compass size={24} />
+                </div>
+              </div>
+              <div className="vura-pillar-content">
+                <span className="vura-pillar-tag">Core Principle</span>
+                <h3 className="vura-pillar-title">Zero Compromise Chemical Purity</h3>
+                <p className="vura-pillar-desc">
+                  We use 100% virgin redispersible polymer powders sourced directly from certified European synthesizers. We never dilute with calcium carbonate fillers or unreacted extenders.
+                </p>
+              </div>
+            </div>
+
+            {/* Pillar 2: Mission */}
+            <div className="vura-pillar-card">
+              <div className="vura-pillar-media">
+                <img
+                  src="/images/lab-testing-rig.jpg"
+                  alt="Materials Testing Laboratory"
+                  className="vura-pillar-img"
+                />
+                <div className="vura-pillar-overlay" />
+                <div className="vura-pillar-icon-box">
+                  <Target size={24} />
+                </div>
+              </div>
+              <div className="vura-pillar-content">
+                <span className="vura-pillar-tag">Corporate Mission</span>
+                <h3 className="vura-pillar-title">Permanence in Civil Infrastructure</h3>
+                <p className="vura-pillar-desc">
+                  Eliminating post-handover tile debonding, basement flooding, and concrete carbonation through high-durability polymer mortars designed for a 50+ year design life.
+                </p>
+              </div>
+            </div>
+
+            {/* Pillar 3: Vision */}
+            <div className="vura-pillar-card">
+              <div className="vura-pillar-media">
+                <img
+                  src="/images/hero-facade.jpg"
+                  alt="Sustainable Green Architecture"
+                  className="vura-pillar-img"
+                />
+                <div className="vura-pillar-overlay" />
+                <div className="vura-pillar-icon-box">
+                  <Eye size={24} />
+                </div>
+              </div>
+              <div className="vura-pillar-content">
+                <span className="vura-pillar-tag">Strategic Vision</span>
+                <h3 className="vura-pillar-title">India's Benchmark in Green Chemistry</h3>
+                <p className="vura-pillar-desc">
+                  Leading the construction sector toward carbon-reduced cementitious formulations and zero-VOC waterborne elastomeric sealants by 2030.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ============================================================
+          SECTION 6: INSIDE STORY / BLOG ARTICLES
           ============================================================ */}
       <section className="vura-articles-section">
         <div className="vura-container">
@@ -284,7 +288,7 @@ export const HomePage: React.FC<HomePageProps> = ({
       </section>
 
       {/* ============================================================
-          AUTHENTIC VURA MARQUEE BANNER: "Time to build better"
+          SECTION 7: AUTHENTIC VURA MARQUEE BANNER: "Time to build better"
           ============================================================ */}
       <MarqueeTicker />
 
