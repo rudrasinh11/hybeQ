@@ -58,22 +58,20 @@ export const ClientsPartnersSection: React.FC = () => {
   const [statsVisible, setStatsVisible] = useState(false);
   const bottomBarRef = useRef<HTMLDivElement>(null);
 
-  // Trigger counter animation on scroll into view or after initial load
+  // Trigger counter animation strictly when the user comes into this section
   useEffect(() => {
-    // Immediate fallback trigger after 400ms so numbers are never blank
-    const fallbackTimer = setTimeout(() => {
-      setStatsVisible(true);
-    }, 400);
-
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             setStatsVisible(true);
+          } else {
+            // Reset when scrolled away so it plays each time user enters the section
+            setStatsVisible(false);
           }
         });
       },
-      { threshold: 0.05 }
+      { threshold: 0.15 }
     );
 
     const currentElem = bottomBarRef.current;
@@ -82,7 +80,6 @@ export const ClientsPartnersSection: React.FC = () => {
     }
 
     return () => {
-      clearTimeout(fallbackTimer);
       if (currentElem) observer.unobserve(currentElem);
     };
   }, []);

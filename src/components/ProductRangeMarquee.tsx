@@ -83,15 +83,13 @@ export const ProductRangeMarquee: React.FC = () => {
 
   // IntersectionObserver for the counter animation trigger
   useEffect(() => {
-    const fallbackTimer = setTimeout(() => {
-      setCountersVisible(true);
-    }, 500);
-
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             setCountersVisible(true);
+          } else {
+            setCountersVisible(false);
           }
         });
       },
@@ -104,7 +102,6 @@ export const ProductRangeMarquee: React.FC = () => {
     }
 
     return () => {
-      clearTimeout(fallbackTimer);
       if (currentElem) observer.unobserve(currentElem);
     };
   }, []);
