@@ -1,32 +1,24 @@
-# React + TypeScript + Vite
+# HybeQ Chemicals
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+High-performance construction chemicals web application built with React, TypeScript, and Vite. Inspired by international architectural standards with interactive hero showcases, kinetic typography marquees, animated metric counters, and authentic product packaging.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- **Hero Showcase Carousel**: Custom stepped notch geometry with interactive lead form and authentic Hybeq product lineup.
+- **Our Product Range**: Centered header, kinetic marquee text with scroll scrub, and animated counter metrics.
+- **Client & Partner Marquees**: Dual opposite scrolling marquees with high-contrast logos.
+- **Big Stats Section**: Animated numbers from 0 on scroll.
+- **White Theme**: Architectural, crisp, modern styling.
 
-## React Compiler
+## Getting Started
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+```bash
+# Install dependencies
+npm install
 
-## Expanding the Oxlint configuration
+# Start development server
+npm run dev
 
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
-
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
+# Build for production
+npm run build
 ```
-
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
