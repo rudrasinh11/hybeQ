@@ -181,7 +181,6 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                   alt={s.alt}
                   className="vura-banner-slide-img"
                   loading={idx === 0 ? 'eager' : 'lazy'}
-                  // @ts-expect-error fetchPriority attribute
                   fetchPriority={idx === 0 ? 'high' : 'auto'}
                 />
               </div>
