@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import {
   ArrowUpRight,
   Compass,
   Target,
-  Eye
+  Eye,
+  ChevronLeft,
+  ChevronRight
 } from 'lucide-react';
 import { HeroSection } from '../components/HeroSection';
 import { ClientsPartnersSection } from '../components/ClientsPartnersSection';
@@ -24,10 +26,24 @@ export const HomePage: React.FC<HomePageProps> = ({
   onOpenEnquiry
 }) => {
   const [selectedProductCategory, setSelectedProductCategory] = useState<string>('all');
+  const carouselRef = useRef<HTMLDivElement>(null);
 
-  const filteredProducts = selectedProductCategory === 'all'
-    ? PRODUCTS.slice(0, 8)
-    : PRODUCTS.filter(p => p.category === selectedProductCategory);
+  // Requirement 4: Display approximately 5-6 products per horizontal carousel
+  const carouselProducts = (
+    selectedProductCategory === 'all'
+      ? PRODUCTS
+      : PRODUCTS.filter(p => p.category === selectedProductCategory)
+  ).slice(0, 6);
+
+  const scrollCarousel = (direction: 'left' | 'right') => {
+    if (carouselRef.current) {
+      const scrollAmount = 330;
+      carouselRef.current.scrollBy({
+        left: direction === 'left' ? -scrollAmount : scrollAmount,
+        behavior: 'smooth'
+      });
+    }
+  };
 
   return (
     <div className="vura-home-page" style={{ backgroundColor: 'var(--color-page-background)', color: 'var(--color-body)' }}>
@@ -135,53 +151,90 @@ export const HomePage: React.FC<HomePageProps> = ({
       </section>
 
       {/* ============================================================
-          SECTION 5: PRODUCTS SECTION (Filterable Catalog Grid)
+          SECTION 5: FEATURED PRODUCTS CAROUSEL (Limited to 5–6 Curated Formulations)
           ============================================================ */}
       <section className="vura-products-section" id="featured-products">
         <div className="vura-container">
           <div className="vura-products-header">
             <div>
-              <span className="vura-section-tag">High Performance Catalog</span>
+              <span className="vura-section-tag">Featured Formulations (Curated 5–6)</span>
               <h2 className="vura-section-heading" style={{ margin: 0 }}>
-                Featured Formulations
+                High-Performance Catalog
               </h2>
             </div>
 
-            {/* Category Filter Pills */}
-            <div className="vura-cat-pills">
-              {[
-                { id: 'all', label: 'All Products' },
-                { id: 'tile-fixing', label: 'Tile & Stone Fixing' },
-                { id: 'waterproofing', label: 'Waterproofing' },
-                { id: 'repairs', label: 'Repair Mortars' },
-                { id: 'grouts', label: 'Epoxy Grouts' }
-              ].map(cat => (
+            {/* Category Filter Pills & Carousel Controls */}
+            <div className="vura-products-header-actions">
+              <div className="vura-cat-pills">
+                {[
+                  { id: 'all', label: 'All Products' },
+                  { id: 'tile-fixing', label: 'Tile & Stone' },
+                  { id: 'waterproofing', label: 'Waterproofing' },
+                  { id: 'repairs', label: 'Repairs' },
+                  { id: 'grouts', label: 'Grouts' }
+                ].map(cat => (
+                  <button
+                    key={cat.id}
+                    type="button"
+                    onClick={() => {
+                      setSelectedProductCategory(cat.id);
+                      if (carouselRef.current) carouselRef.current.scrollTo({ left: 0, behavior: 'smooth' });
+                    }}
+                    className={`vura-cat-pill ${selectedProductCategory === cat.id ? 'active' : ''}`}
+                  >
+                    {cat.label}
+                  </button>
+                ))}
+              </div>
+
+              {/* Subtle Previous / Next Carousel Buttons */}
+              <div className="vura-carousel-controls-deck">
                 <button
-                  key={cat.id}
                   type="button"
-                  onClick={() => setSelectedProductCategory(cat.id)}
-                  className={`vura-cat-pill ${selectedProductCategory === cat.id ? 'active' : ''}`}
+                  className="vura-carousel-control-btn"
+                  onClick={() => scrollCarousel('left')}
+                  aria-label="Previous products"
+                  title="Previous products"
                 >
-                  {cat.label}
+                  <ChevronLeft size={18} />
                 </button>
+                <button
+                  type="button"
+                  className="vura-carousel-control-btn"
+                  onClick={() => scrollCarousel('right')}
+                  aria-label="Next products"
+                  title="Next products"
+                >
+                  <ChevronRight size={18} />
+                </button>
+              </div>
+            </div>
+          </div>
+
+          {/* Curated Product Carousel: Limited to 5-6 products per section */}
+          <div className="vura-products-carousel-wrap">
+            <div
+              className="vura-products-carousel-track"
+              ref={carouselRef}
+              tabIndex={0}
+              role="region"
+              aria-label="Featured Products Carousel (up to 6 products)"
+            >
+              {carouselProducts.map(product => (
+                <div key={product.id} className="vura-carousel-card-item">
+                  <ProductCard
+                    product={product}
+                    onOpenEnquiry={onOpenEnquiry}
+                  />
+                </div>
               ))}
             </div>
           </div>
 
-          {/* Product Grid - Clean Responsive CSS Grid */}
-          <div className="vura-products-grid">
-            {filteredProducts.map(product => (
-              <ProductCard
-                key={product.id}
-                product={product}
-                onOpenEnquiry={onOpenEnquiry}
-              />
-            ))}
-          </div>
-
-          <div style={{ textAlign: 'center', marginTop: 50 }}>
-            <Link to="/products" className="vura-enquiry-btn" style={{ padding: '14px 32px' }}>
-              <span>VIEW COMPLETE CATALOGUE (12+ PRODUCTS)</span>
+          {/* Discoverability: Link to complete product catalog */}
+          <div style={{ textAlign: 'center', marginTop: 44 }}>
+            <Link to="/products" className="vura-enquiry-btn" style={{ padding: '14px 34px' }}>
+              <span>VIEW COMPLETE CATALOGUE ({PRODUCTS.length} PRODUCTS)</span>
               <ArrowUpRight size={18} className="vura-enquiry-arrow" />
             </Link>
           </div>

@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link, NavLink, useNavigate } from 'react-router-dom';
-import { ArrowUpRight, Search, SlidersHorizontal, Menu, X, ChevronDown, ChevronRight } from 'lucide-react';
+import { ArrowUpRight, Search, Calculator, Menu, X, ChevronDown, ChevronRight } from 'lucide-react';
 
 interface HeaderProps {
   onOpenSearch: () => void;
@@ -265,15 +265,49 @@ export const Header: React.FC<HeaderProps> = ({
               src="/images/hybeq-original-logo.png"
               alt="HybeQ by Chemax"
               className="vura-logo-img"
-              style={{ height: '36px', width: 'auto', objectFit: 'contain' }}
             />
           </Link>
         </div>
 
-        {/* Center: Main Desktop Navigation */}
+        {/* Center: Main Desktop Navigation (Exact order: Products, Sustainability, Downloads, Innovations, About Us, Blog, Contact) */}
         <nav className="vura-nav-center" aria-label="Main Navigation">
           
-          {/* ABOUT US with Submenu */}
+          {/* 1. PRODUCTS with Full-Width Mega Menu */}
+          <div
+            className="vura-nav-item-wrap vura-nav-products-wrap"
+            onMouseEnter={handleProductsEnter}
+            onMouseLeave={handleProductsLeave}
+          >
+            <NavLink
+              to="/products"
+              className={({ isActive }) => `vura-nav-link ${isActive || productsMegaOpen ? 'active' : ''}`}
+              onClick={() => setProductsMegaOpen(!productsMegaOpen)}
+              aria-expanded={productsMegaOpen}
+              aria-haspopup="true"
+            >
+              <ArrowUpRight size={14} className="vura-nav-arrow" />
+              <span>PRODUCTS</span>
+            </NavLink>
+          </div>
+
+          {/* 2. SUSTAINABILITY */}
+          <NavLink to="/sustainability" className={({ isActive }) => `vura-nav-link ${isActive ? 'active' : ''}`}>
+            <ArrowUpRight size={14} className="vura-nav-arrow" />
+            <span>SUSTAINABILITY</span>
+          </NavLink>
+
+          {/* 3. DOWNLOADS */}
+          <NavLink to="/downloads" className={({ isActive }) => `vura-nav-link ${isActive ? 'active' : ''}`}>
+            <ArrowUpRight size={14} className="vura-nav-arrow" />
+            <span>DOWNLOADS</span>
+          </NavLink>
+
+          {/* 4. INNOVATIONS */}
+          <NavLink to="/innovations" className={({ isActive }) => `vura-nav-link ${isActive ? 'active' : ''}`}>
+            <span>INNOVATIONS</span>
+          </NavLink>
+
+          {/* 5. ABOUT US with Submenu */}
           <div
             className="vura-nav-item-wrap"
             onMouseEnter={handleAboutEnter}
@@ -323,42 +357,12 @@ export const Header: React.FC<HeaderProps> = ({
             )}
           </div>
 
-          {/* PRODUCTS with Full-Width Mega Menu */}
-          <div
-            className="vura-nav-item-wrap vura-nav-products-wrap"
-            onMouseEnter={handleProductsEnter}
-            onMouseLeave={handleProductsLeave}
-          >
-            <NavLink
-              to="/products"
-              className={({ isActive }) => `vura-nav-link ${isActive || productsMegaOpen ? 'active' : ''}`}
-              onClick={() => setProductsMegaOpen(!productsMegaOpen)}
-              aria-expanded={productsMegaOpen}
-              aria-haspopup="true"
-            >
-              <ArrowUpRight size={14} className="vura-nav-arrow" />
-              <span>PRODUCTS</span>
-            </NavLink>
-          </div>
-
-          <NavLink to="/sustainability" className={({ isActive }) => `vura-nav-link ${isActive ? 'active' : ''}`}>
-            <ArrowUpRight size={14} className="vura-nav-arrow" />
-            <span>SUSTAINABILITY</span>
-          </NavLink>
-
-          <NavLink to="/downloads" className={({ isActive }) => `vura-nav-link ${isActive ? 'active' : ''}`}>
-            <ArrowUpRight size={14} className="vura-nav-arrow" />
-            <span>DOWNLOADS</span>
-          </NavLink>
-
-          <NavLink to="/innovations" className={({ isActive }) => `vura-nav-link ${isActive ? 'active' : ''}`}>
-            <span>INNOVATIONS</span>
-          </NavLink>
-
+          {/* 6. BLOG */}
           <NavLink to="/blog" className={({ isActive }) => `vura-nav-link ${isActive ? 'active' : ''}`}>
             <span>BLOG</span>
           </NavLink>
 
+          {/* 7. CONTACT */}
           <NavLink to="/contact" className={({ isActive }) => `vura-nav-link ${isActive ? 'active' : ''}`}>
             <span>CONTACT</span>
           </NavLink>
@@ -366,15 +370,15 @@ export const Header: React.FC<HeaderProps> = ({
 
         {/* Right: Controls & Business Enquiry Button */}
         <div className="vura-header-right">
-          {/* Filter/Calculator Icon */}
+          {/* Calculator Icon (Replaced filter icon with calculator) */}
           <button
             type="button"
             className="vura-icon-btn"
             onClick={() => navigate('/calculator')}
-            title="Material Calculator"
-            aria-label="Open Material Calculator"
+            title="Calculator"
+            aria-label="Calculator"
           >
-            <SlidersHorizontal size={18} />
+            <Calculator size={19} />
           </button>
 
           {/* Search Icon */}
@@ -475,31 +479,7 @@ export const Header: React.FC<HeaderProps> = ({
         <div className="vura-mobile-menu">
           <div className="vura-mobile-links">
             
-            {/* Mobile About Us Accordion */}
-            <div className="vura-mobile-accordion">
-              <button
-                type="button"
-                className="vura-mobile-accordion-toggle"
-                onClick={() => setMobileAboutOpen(!mobileAboutOpen)}
-              >
-                <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-                  <ArrowUpRight size={16} className="vura-nav-arrow" />
-                  <span>ABOUT US</span>
-                </div>
-                <ChevronDown size={18} style={{ transform: mobileAboutOpen ? 'rotate(180deg)' : 'none', transition: 'transform 0.2s' }} />
-              </button>
-              {mobileAboutOpen && (
-                <div className="vura-mobile-sublist">
-                  <Link to="/about#story" onClick={closeAllMenus} className="vura-mobile-sublink">Story</Link>
-                  <Link to="/about#principle" onClick={closeAllMenus} className="vura-mobile-sublink">Principle</Link>
-                  <Link to="/about#mission" onClick={closeAllMenus} className="vura-mobile-sublink">Mission</Link>
-                  <Link to="/about#vision" onClick={closeAllMenus} className="vura-mobile-sublink">Vision</Link>
-                  <Link to="/about#infrastructure" onClick={closeAllMenus} className="vura-mobile-sublink">Infrastructure</Link>
-                </div>
-              )}
-            </div>
-
-            {/* Mobile Products Accordion */}
+            {/* 1. Mobile Products Accordion */}
             <div className="vura-mobile-accordion">
               <button
                 type="button"
@@ -535,28 +515,58 @@ export const Header: React.FC<HeaderProps> = ({
               )}
             </div>
 
+            {/* 2. Sustainability */}
             <Link to="/sustainability" onClick={closeAllMenus} className="vura-mobile-link">
               <ArrowUpRight size={16} className="vura-nav-arrow" />
               <span>SUSTAINABILITY</span>
             </Link>
 
+            {/* 3. Downloads */}
             <Link to="/downloads" onClick={closeAllMenus} className="vura-mobile-link">
               <ArrowUpRight size={16} className="vura-nav-arrow" />
               <span>DOWNLOADS</span>
             </Link>
 
+            {/* 4. Innovations */}
             <Link to="/innovations" onClick={closeAllMenus} className="vura-mobile-link">
               <span>INNOVATIONS</span>
             </Link>
 
+            {/* 5. Mobile About Us Accordion */}
+            <div className="vura-mobile-accordion">
+              <button
+                type="button"
+                className="vura-mobile-accordion-toggle"
+                onClick={() => setMobileAboutOpen(!mobileAboutOpen)}
+              >
+                <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                  <ArrowUpRight size={16} className="vura-nav-arrow" />
+                  <span>ABOUT US</span>
+                </div>
+                <ChevronDown size={18} style={{ transform: mobileAboutOpen ? 'rotate(180deg)' : 'none', transition: 'transform 0.2s' }} />
+              </button>
+              {mobileAboutOpen && (
+                <div className="vura-mobile-sublist">
+                  <Link to="/about#story" onClick={closeAllMenus} className="vura-mobile-sublink">Story</Link>
+                  <Link to="/about#principle" onClick={closeAllMenus} className="vura-mobile-sublink">Principle</Link>
+                  <Link to="/about#mission" onClick={closeAllMenus} className="vura-mobile-sublink">Mission</Link>
+                  <Link to="/about#vision" onClick={closeAllMenus} className="vura-mobile-sublink">Vision</Link>
+                  <Link to="/about#infrastructure" onClick={closeAllMenus} className="vura-mobile-sublink">Infrastructure</Link>
+                </div>
+              )}
+            </div>
+
+            {/* 6. Blog */}
             <Link to="/blog" onClick={closeAllMenus} className="vura-mobile-link">
               <span>BLOG</span>
             </Link>
 
+            {/* 7. Contact */}
             <Link to="/contact" onClick={closeAllMenus} className="vura-mobile-link">
               <span>CONTACT</span>
             </Link>
 
+            {/* Calculator Link */}
             <Link to="/calculator" onClick={closeAllMenus} className="vura-mobile-link">
               <span>MATERIAL CALCULATOR</span>
             </Link>

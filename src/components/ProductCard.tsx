@@ -13,8 +13,10 @@ export const ProductCard: React.FC<ProductCardProps> = ({
   product,
   onOpenEnquiry
 }) => {
+  const productUrl = `/products/${product.category}/${product.id}`;
+
   return (
-    <div className="vura-product-card-modern">
+    <article className="vura-product-card-modern" aria-label={product.name}>
       {/* Top Badges Row: Flex row to prevent overlap and clipping */}
       <div className="vura-card-badges-row">
         <span className="vura-badge-classification" title={product.badge}>
@@ -25,19 +27,29 @@ export const ProductCard: React.FC<ProductCardProps> = ({
         </span>
       </div>
 
-      {/* Product Image Stage: Fixed 200px box with object-fit: contain */}
-      <div className="vura-product-stage-box">
-        <img
-          src={getProductImage(product)}
-          alt={product.name}
-          className="vura-product-img-clean"
-          loading="lazy"
-        />
-      </div>
+      {/* Product Image Stage: Clickable Link to Product Detail */}
+      <Link
+        to={productUrl}
+        className="vura-product-stage-link"
+        aria-label={`View specifications for ${product.name}`}
+      >
+        <div className="vura-product-stage-box">
+          <img
+            src={getProductImage(product)}
+            alt={product.name}
+            className="vura-product-img-clean"
+            loading="lazy"
+          />
+        </div>
+      </Link>
 
       {/* Content Area: Flex-grow with uniform heights */}
       <div className="vura-card-content-area">
-        <h3 className="vura-card-title">{product.name}</h3>
+        <h3 className="vura-card-title">
+          <Link to={productUrl} className="vura-card-title-link">
+            {product.name}
+          </Link>
+        </h3>
         <span className="vura-card-category">{product.categoryLabel}</span>
 
         <p className="vura-card-desc-clamped">
@@ -59,7 +71,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
         {/* Action Footer: Always pinned to bottom with horizontal alignment */}
         <div className="vura-card-action-footer">
           <Link
-            to={`/products/${product.category}/${product.id}`}
+            to={productUrl}
             className="vura-card-btn-specs"
           >
             View Specs
@@ -67,12 +79,17 @@ export const ProductCard: React.FC<ProductCardProps> = ({
           <button
             type="button"
             className="vura-card-btn-inquire"
-            onClick={() => onOpenEnquiry(product.name)}
+            onClick={(e) => {
+              e.stopPropagation();
+              e.preventDefault();
+              onOpenEnquiry(product.name);
+            }}
+            aria-label={`Inquire about ${product.name}`}
           >
             Inquire
           </button>
         </div>
       </div>
-    </div>
+    </article>
   );
 };
