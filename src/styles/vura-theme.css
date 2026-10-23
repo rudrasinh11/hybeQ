@@ -1000,7 +1000,7 @@ body {
 
 .vura-banner-slide-img {
   width: 100%;
-  aspect-ratio: 1024 / 375;
+  aspect-ratio: 1410 / 521;
   height: auto;
   display: block;
   object-fit: contain;
@@ -1055,29 +1055,33 @@ body {
 
 /* ============================================================
    TOP-RIGHT NOTCH CARD (Section 3.C & Changable Form):
-   Nests within the transparent stepped cutout notch of the banner
+   Nests seamlessly within the transparent stepped cutout notch
    ============================================================ */
 /* ── Notch Info Card (top-right inside stepped cutout) ── */
 .vura-banner-thumb-content {
   position: absolute;
   top: 0;
   right: 0;
-  width: 36.4%;
-  height: 26.6%;
+  width: 36.88%;
+  height: 27.25%;
   z-index: 10;
   pointer-events: auto;
 
   /* Seamless white background matching the cutout interior */
   background: rgba(255, 255, 255, 0.98);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  border: none;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
 
-  /* Match outer banner top-right radius (20px) and inner step notch curve (18px) */
-  border-top-right-radius: 20px;
-  border-bottom-left-radius: 18px;
+  /* Match outer banner top-right radius (24px) and inner step notch curve (20px) */
+  border-top-right-radius: 24px;
+  border-bottom-left-radius: 20px;
   border-top-left-radius: 0;
   border-bottom-right-radius: 0;
+  border-left: 1.5px solid rgba(15, 23, 42, 0.12);
+  border-bottom: 1.5px solid rgba(15, 23, 42, 0.12);
+  border-top: none;
+  border-right: none;
+  box-shadow: -4px 6px 18px rgba(15, 23, 42, 0.05);
 
   padding: clamp(6px, 0.8vw, 11px) clamp(10px, 1.3vw, 20px);
   display: flex;

@@ -20,30 +20,30 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
   const slides = [
     {
       id: 0,
-      image: '/images/hero_banner_01.png',
+      image: '/images/hero_banner_01.png?v=5',
       category: 'TILE & STONE ADHESIVE',
       badge: 'ENGINEERED FOR STRONGER STRUCTURES',
       shortDesc: 'German polymer engineered adhesives formulated for extreme bond strength & zero tile slippage.',
       productName: 'HYBEQ Tile & Stone Adhesive (505, 507, 515+)',
-      alt: 'HYBEQ Tile & Stone Adhesive - Engineered for Stronger Structures'
+      alt: 'HYBEQ Tile & Stone Adhesive - German Polymer Technology'
     },
     {
       id: 1,
-      image: '/images/hero_banner_02.png',
+      image: '/images/hero_banner_02.png?v=5',
       category: 'WATERPROOFING SOLUTIONS',
       badge: 'PROTECT WHAT MATTERS MOST',
-      shortDesc: 'Advanced elastomeric & crystalline waterproofing barriers stopping water ingress permanently.',
-      productName: 'HYBEQ Waterproofing Solutions (W101, HyMastik Pro)',
-      alt: 'HYBEQ Advanced Waterproofing Solutions - Stop Leaks & Water Penetration'
+      shortDesc: 'Advanced elastomeric & crystalline waterproofing barriers stopping water penetration permanently.',
+      productName: 'HYBEQ Waterproofing Solutions (DAMPPROOF, MASTERFLEX PU)',
+      alt: 'HYBEQ Advanced Waterproofing Solutions - Stop Water Leaks Permanently'
     },
     {
       id: 2,
-      image: '/images/hero_banner_03.png',
-      category: 'PRECISION TILE FIXING',
-      badge: 'DESIGNED FOR BETTER FINISHES',
-      shortDesc: 'Precision-engineered polymer tile mortars & grouts for unyielding bond strength and flawless tile leveling.',
-      productName: 'HYBEQ Tile Fixing & Grout (515+, Stone-Grip)',
-      alt: 'HYBEQ Precision Tile Fixing & Grouting - Designed for Better Finishes'
+      image: '/images/hero_banner_03.png?v=5',
+      category: 'PRECISION TILE FIXING & GROUTS',
+      badge: 'LET THE WORLD KNOW YOUR COLORFUL PERSONALITY',
+      shortDesc: 'Precision-engineered epoxy grouts & bonding systems for unyielding strength and vibrant, stain-free joints.',
+      productName: 'HYBEQ Tile Fixing & Grout (SPOT BOND EP510, STONESEAL)',
+      alt: 'HYBEQ Precision Tile Fixing & Epoxy Grouts - Stain-Resistant & Vibrant'
     }
   ];
 
