@@ -207,13 +207,6 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
             <p className="vura-notch-desc">
               {slides[activeSlide].desc}
             </p>
-            <div className="vura-notch-cert-wrap">
-              <img
-                src="/images/GPTW-Certified.png"
-                alt="Great Place to Work / ISO Certified"
-                className="vura-notch-cert-img"
-              />
-            </div>
           </div>
 
           {/* Bottom Left Pill Button: Active category badge */}
