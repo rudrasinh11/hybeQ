@@ -9,7 +9,7 @@ interface HeroSectionProps {
 
 export const HeroSection: React.FC<HeroSectionProps> = ({
   onOpenVideo,
-  onOpenEnquiry
+  onOpenEnquiry: _onOpenEnquiry
 }) => {
   const [activeSlide, setActiveSlide] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
@@ -18,7 +18,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
   const slides = [
     {
       id: 0,
-      image: '/images/hero_banner_01.png?v=5',
+      image: '/images/hero_banner_01.png?v=8',
       category: 'TILE & STONE ADHESIVE',
       badge: 'ENGINEERED FOR STRONGER STRUCTURES',
       desc: 'We engineer advanced bonding solutions for each market, using a combination of high-grade polymers, natural minerals, and specialized additives along with our deep expertise in specialized building chemicals.',
@@ -27,7 +27,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
     },
     {
       id: 1,
-      image: '/images/hero_banner_02.png?v=5',
+      image: '/images/hero_banner_02.png?v=8',
       category: 'WATERPROOFING SOLUTIONS',
       badge: 'PROTECT WHAT MATTERS MOST',
       desc: 'We develop innovative waterproofing solutions for each market, using a combination of elastomeric and crystalline raw materials along with our deep knowledge & expertise in specialized building chemicals.',
@@ -36,7 +36,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
     },
     {
       id: 2,
-      image: '/images/hero_banner_03.png?v=5',
+      image: '/images/hero_banner_03.png?v=8',
       category: 'PRECISION TILE FIXING & GROUTS',
       badge: 'LET THE WORLD KNOW YOUR COLORFUL PERSONALITY',
       desc: 'We formulate precision epoxy solutions for each market, using a combination of stain-resistant resins and high-purity quartz fillers along with our deep knowledge & expertise in specialized building chemicals.',
@@ -207,22 +207,6 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
             <p className="vura-notch-desc">
               {slides[activeSlide].desc}
             </p>
-          </div>
-
-          {/* Bottom Left Pill Button: Active category badge */}
-          <div className="vura-banner-bottom-left-pill">
-            <button
-              type="button"
-              className="vura-banner-pill-btn"
-              onClick={(e) => {
-                e.stopPropagation();
-                onOpenEnquiry && onOpenEnquiry(slides[activeSlide].productName);
-              }}
-              title="Click to view formulations"
-            >
-              <span className="vura-pill-dot" />
-              <span>{slides[activeSlide].category}</span>
-            </button>
           </div>
 
           {/* Center Pagination: 3 pill dots indicating active hero slide */}

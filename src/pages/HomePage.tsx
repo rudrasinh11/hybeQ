@@ -61,7 +61,7 @@ export const HomePage: React.FC<HomePageProps> = ({
       <ClientsPartnersSection />
 
       {/* ============================================================
-          SECTION 2B: FEATURED FORMULATIONS / HIGH-PERFORMANCE CATALOG
+          SECTION 3: FEATURED FORMULATIONS / HIGH-PERFORMANCE CATALOG
           (Curated 5–6 formulations, Category filter pills & carousel)
           ============================================================ */}
       <section className="vura-products-section" id="featured-products">
@@ -153,13 +153,13 @@ export const HomePage: React.FC<HomePageProps> = ({
       </section>
 
       {/* ============================================================
-          SECTION 3: WHAT WE OFFER — OUR PRODUCT RANGE
+          SECTION 4: WHAT WE OFFER — OUR PRODUCT RANGE
           (Dual-Layer Kinetic Typography Marquee)
           ============================================================ */}
       <ProductRangeMarquee />
 
       {/* ============================================================
-          SECTION 4: THREE PILLARS (PRINCIPLE, MISSION, VISION)
+          SECTION 5: THREE PILLARS (PRINCIPLE, MISSION, VISION)
           ============================================================ */}
       <section className="vura-pillars-section">
         <div className="vura-container">
