@@ -495,30 +495,35 @@ body {
 .vura-enquiry-btn {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 8px;
-  background: var(--color-primary, #0A2362);
-  border: 1px solid var(--color-primary, #0A2362);
-  color: var(--color-white, #FFFFFF);
-  padding: 9px 18px;
+  background: transparent;
+  border: 1.5px solid #0A2362;
+  color: #0A2362;
+  padding: 0 18px;
+  height: 38px;
   font-size: 0.75rem;
-  font-weight: 800;
-  letter-spacing: 1px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
   text-transform: uppercase;
   cursor: pointer;
-  border-radius: 6px;
+  border-radius: 9999px;
   text-decoration: none;
-  transition: border-color 0.25s, color 0.25s, background-color 0.25s, transform 0.25s;
+  white-space: nowrap;
+  transition: all 0.25s ease;
+  line-height: 1;
 }
 
 .vura-enquiry-btn:hover {
-  border-color: var(--color-accent, #46C985);
-  color: var(--color-primary, #0A2362);
-  background-color: var(--color-accent, #46C985);
+  border-color: #0A2362;
+  color: #FFFFFF;
+  background-color: #0A2362;
   transform: translateY(-1px);
+  box-shadow: 0 4px 14px rgba(10, 35, 98, 0.15);
 }
 
 .vura-enquiry-arrow {
-  color: var(--color-accent);
+  color: #46C985 !important;
   stroke-width: 2.8;
   transition: transform 0.2s ease;
 }
@@ -861,6 +866,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-right: clamp(28px, 4.5vw, 84px);
 }
 
 .vura-step-textcircle {
@@ -1379,10 +1385,21 @@ body {
     margin: 0 16px 12px;
     display: inline-block;
   }
-  .vura-nav-center,
-  .vura-header-right .vura-icon-btn,
-  .vura-header-right .vura-enquiry-btn {
+  .vura-nav-center {
     display: none;
+  }
+  .vura-header-right {
+    gap: 12px;
+  }
+  .vura-header-right .vura-icon-btn {
+    width: 36px;
+    height: 36px;
+  }
+  .vura-header-right .vura-enquiry-btn {
+    display: inline-flex;
+    height: 36px;
+    padding: 0 14px;
+    font-size: 0.7rem;
   }
   .vura-mobile-toggle {
     display: block;
@@ -1398,6 +1415,7 @@ body {
   .vura-hero-play-wrap {
     align-self: flex-end;
     padding-top: 0;
+    margin-right: clamp(16px, 2.5vw, 40px);
   }
   .vura-hero-headline-wrap {
     width: 100%;
@@ -3188,10 +3206,10 @@ div.text-custom-storke-cs,
    Matching hybeq.com content & VURA ultra-premium aesthetics
    ============================================================ */
 .vura-clients-section {
-  background-color: var(--color-background);
+  background-color: #FFFFFF;
   border-top: 1px solid var(--color-border);
-  border-bottom: 1px solid var(--color-border);
-  padding: 42px 0 28px;
+  border-bottom: none;
+  padding: 48px 0 0;
   position: relative;
   overflow: hidden;
 }
@@ -4358,19 +4376,58 @@ div.text-custom-storke-cs,
   color: #46C985 !important;
 }
 
-.vura-enquiry-btn {
-  border-color: rgba(255, 255, 255, 0.25);
+.vura-header-right .vura-enquiry-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
   background: transparent;
+  border: 1.5px solid #0A2362;
+  color: #0A2362;
+  padding: 0 18px;
+  height: 38px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  cursor: pointer;
+  border-radius: 9999px;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: all 0.25s ease;
+  line-height: 1;
+}
+
+.vura-header-right .vura-enquiry-btn:hover {
+  border-color: #0A2362;
+  background-color: #0A2362;
   color: #FFFFFF;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 14px rgba(10, 35, 98, 0.15);
 }
 
-.vura-enquiry-btn:hover {
-  border-color: #46C985;
-  background: rgba(70, 201, 133, 0.06);
-}
-
-.vura-enquiry-arrow {
+.vura-header-right .vura-enquiry-btn:hover .vura-enquiry-arrow {
   color: #46C985 !important;
+  transform: translate(2px, -2px);
+}
+
+@media (max-width: 560px) {
+  .vura-header-right {
+    gap: 8px;
+  }
+  .vura-header-right .vura-icon-btn {
+    width: 34px;
+    height: 34px;
+  }
+  .vura-header-right .vura-enquiry-btn {
+    width: 34px;
+    height: 34px;
+    padding: 0;
+    border-radius: 50%;
+  }
+  .vura-header-right .vura-enquiry-btn span {
+    display: none;
+  }
 }
 
 @media (max-width: 1024px) {
@@ -4389,6 +4446,7 @@ div.text-custom-storke-cs,
   }
   .vura-hero-play-wrap {
     align-self: flex-end;
+    margin-right: 12px;
   }
   .vura-step-textcircle {
     width: 110px;
@@ -4429,9 +4487,11 @@ div.text-custom-storke-cs,
    BIG OUTLINED STATS COUNTER SECTION (1:1 with user reference image)
    ========================================================================== */
 .vura-big-stats-section {
-  padding: 56px 0 68px;
+  padding: 48px 0 44px;
   background-color: #FFFFFF;
   border-top: 1px solid rgba(226, 232, 240, 0.8);
+  border-bottom: none;
+  margin-bottom: 0;
   position: relative;
   z-index: 10;
 }

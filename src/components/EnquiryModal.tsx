@@ -35,8 +35,8 @@ export const EnquiryModal: React.FC<EnquiryModalProps> = ({
     if (!formData.name.trim()) errs.name = 'Full name is required';
     if (!formData.phone.trim()) {
       errs.phone = 'Contact phone number is required';
-    } else if (!/^[0-9+ -]{8,15}$/.test(formData.phone.trim())) {
-      errs.phone = 'Please enter a valid phone number';
+    } else if (!/^[0-9]{10}$/.test(formData.phone.trim())) {
+      errs.phone = 'Phone number must contain exactly 10 digits';
     }
     if (!formData.email.trim()) {
       errs.email = 'Email address is required';
@@ -124,9 +124,23 @@ export const EnquiryModal: React.FC<EnquiryModalProps> = ({
                   </label>
                   <input
                     type="tel"
+                    inputMode="numeric"
+                    maxLength={10}
+                    minLength={10}
+                    pattern="^[0-9]{10}$"
                     value={formData.phone}
-                    onChange={e => setFormData({ ...formData, phone: e.target.value })}
-                    placeholder="+91 98251 00000"
+                    onChange={e => {
+                      const cleanDigits = e.target.value.replace(/\D/g, '').slice(0, 10);
+                      setFormData({ ...formData, phone: cleanDigits });
+                      if (errors.phone && cleanDigits.length === 10) {
+                        setErrors(prev => {
+                          const updated = { ...prev };
+                          delete updated.phone;
+                          return updated;
+                        });
+                      }
+                    }}
+                    placeholder="Enter 10-digit mobile number"
                     style={{
                       width: '100%',
                       padding: '10px 14px',

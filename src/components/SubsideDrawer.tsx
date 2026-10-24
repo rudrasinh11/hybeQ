@@ -96,7 +96,7 @@ export const SubsideDrawer: React.FC<SubsideDrawerProps> = ({
             <Phone size={18} style={{ color: '#46C985', flexShrink: 0 }} />
             <div>
               <strong style={{ display: 'block', color: '#FFFFFF', fontSize: '0.8125rem' }}>Direct Line</strong>
-              <a href="tel:+919825112345" style={{ color: 'rgba(255,255,255,0.85)' }}>+91 98251 12345</a>
+              <a href="tel:9825112345" style={{ color: 'rgba(255,255,255,0.85)' }}>9825112345</a>
             </div>
           </div>
 
