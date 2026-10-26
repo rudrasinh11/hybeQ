@@ -1,20 +1,12 @@
-import React, { useState, useRef } from 'react';
-import { Link } from 'react-router-dom';
-import {
-  ArrowUpRight,
-  Compass,
-  Target,
-  Eye,
-  ChevronLeft,
-  ChevronRight
-} from 'lucide-react';
+import React from 'react';
 import { HeroSection } from '../components/HeroSection';
-import { ClientsPartnersSection } from '../components/ClientsPartnersSection';
-import { PRODUCTS } from '../data/productsData';
-import { BLOG_POSTS } from '../data/blogData';
-import { MarqueeTicker } from '../components/MarqueeTicker';
-import { ProductRangeMarquee } from '../components/ProductRangeMarquee';
-import { ProductCard } from '../components/ProductCard';
+import { TrustedPartnersMarquee } from '../components/TrustedPartnersMarquee';
+import { WhatWeOfferSection } from '../components/WhatWeOfferSection';
+import { FeaturedProductsSection } from '../components/FeaturedProductsSection';
+import { WhyHybeqSection } from '../components/WhyHybeqSection';
+import { CalculatorSection } from '../components/CalculatorSection';
+import { TechnicalGuidesSection } from '../components/TechnicalGuidesSection';
+import { DirectContactStrip } from '../components/DirectContactStrip';
 
 interface HomePageProps {
   onOpenVideo: () => void;
@@ -25,270 +17,68 @@ export const HomePage: React.FC<HomePageProps> = ({
   onOpenVideo,
   onOpenEnquiry
 }) => {
-  const [selectedProductCategory, setSelectedProductCategory] = useState<string>('all');
-  const carouselRef = useRef<HTMLDivElement>(null);
-
-  // Requirement 4: Display approximately 5-6 products per horizontal carousel
-  const carouselProducts = (
-    selectedProductCategory === 'all'
-      ? PRODUCTS
-      : PRODUCTS.filter(p => p.category === selectedProductCategory)
-  ).slice(0, 6);
-
-  const scrollCarousel = (direction: 'left' | 'right') => {
-    if (carouselRef.current) {
-      const scrollAmount = 330;
-      carouselRef.current.scrollBy({
-        left: direction === 'left' ? -scrollAmount : scrollAmount,
-        behavior: 'smooth'
-      });
-    }
-  };
-
   return (
-    <div className="vura-home-page" style={{ backgroundColor: '#FFFFFF', color: 'var(--color-body)' }}>
-      
+    <div className="hybeq-homepage-master" style={{ backgroundColor: 'var(--theme-bg-page)', color: 'var(--theme-text-primary)' }}>
       {/* ============================================================
-          SECTION 1: HYBEQ CINEMATIC HERO SECTION (VERSION 4 FROSTED HUD)
+          SECTION 2: HERO SECTION (Gridfly Reference)
+          Headline: "Engineered Protection. Built to Last."
           ============================================================ */}
-      <HeroSection onOpenVideo={onOpenVideo} onOpenEnquiry={onOpenEnquiry} />
-
-      {/* ============================================================
-          SECTION 2: AUTHENTIC HYBEQ CLIENTS & PARTNERS SHOWCASE
-          (Marquee + Grid View, Chamfered Cards, Full Color Logos)
-          ============================================================ */}
-      <ClientsPartnersSection />
+      <HeroSection
+        onOpenVideo={onOpenVideo}
+        onOpenEnquiry={onOpenEnquiry}
+      />
 
       {/* ============================================================
-          SECTION 3: FEATURED FORMULATIONS / HIGH-PERFORMANCE CATALOG
-          (Curated 5–6 formulations, Category filter pills & carousel)
+          SECTION 3: TRUSTED PARTNERS (Resido Reference)
+          Two separate horizontal logo rows moving in opposite directions
           ============================================================ */}
-      <section className="vura-products-section" id="featured-products">
-        <div className="vura-container">
-          <div className="vura-products-header">
-            <div>
-              <span className="vura-section-tag">Featured Formulations (Curated 5–6)</span>
-              <h2 className="vura-section-heading" style={{ margin: 0 }}>
-                High-Performance Catalog
-              </h2>
-            </div>
-
-            {/* Category Filter Pills & Carousel Controls */}
-            <div className="vura-products-header-actions">
-              <div className="vura-cat-pills">
-                {[
-                  { id: 'all', label: 'All Products' },
-                  { id: 'tile-fixing', label: 'Tile & Stone' },
-                  { id: 'waterproofing', label: 'Waterproofing' },
-                  { id: 'repairs', label: 'Repairs' },
-                  { id: 'grouts', label: 'Grouts' }
-                ].map(cat => (
-                  <button
-                    key={cat.id}
-                    type="button"
-                    onClick={() => {
-                      setSelectedProductCategory(cat.id);
-                      if (carouselRef.current) carouselRef.current.scrollTo({ left: 0, behavior: 'smooth' });
-                    }}
-                    className={`vura-cat-pill ${selectedProductCategory === cat.id ? 'active' : ''}`}
-                  >
-                    {cat.label}
-                  </button>
-                ))}
-              </div>
-
-              {/* Subtle Previous / Next Carousel Buttons */}
-              <div className="vura-carousel-controls-deck">
-                <button
-                  type="button"
-                  className="vura-carousel-control-btn"
-                  onClick={() => scrollCarousel('left')}
-                  aria-label="Previous products"
-                  title="Previous products"
-                >
-                  <ChevronLeft size={18} />
-                </button>
-                <button
-                  type="button"
-                  className="vura-carousel-control-btn"
-                  onClick={() => scrollCarousel('right')}
-                  aria-label="Next products"
-                  title="Next products"
-                >
-                  <ChevronRight size={18} />
-                </button>
-              </div>
-            </div>
-          </div>
-
-          {/* Curated Product Carousel: Limited to 5-6 products per section */}
-          <div className="vura-products-carousel-wrap">
-            <div
-              className="vura-products-carousel-track"
-              ref={carouselRef}
-              tabIndex={0}
-              role="region"
-              aria-label="Featured Products Carousel (up to 6 products)"
-            >
-              {carouselProducts.map(product => (
-                <div key={product.id} className="vura-carousel-card-item">
-                  <ProductCard
-                    product={product}
-                    onOpenEnquiry={onOpenEnquiry}
-                  />
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Discoverability: Link to complete product catalog */}
-          <div style={{ textAlign: 'center', marginTop: 44 }}>
-            <Link to="/products" className="vura-enquiry-btn" style={{ padding: '14px 34px' }}>
-              <span>VIEW COMPLETE CATALOGUE ({PRODUCTS.length} PRODUCTS)</span>
-              <ArrowUpRight size={18} className="vura-enquiry-arrow" />
-            </Link>
-          </div>
-        </div>
-      </section>
+      <TrustedPartnersMarquee />
 
       {/* ============================================================
-          SECTION 4: WHAT WE OFFER — OUR PRODUCT RANGE
-          (Dual-Layer Kinetic Typography Marquee)
+          SECTION 4: WHAT WE OFFER (Gridfly Reference)
+          Four core chemical categories overview
           ============================================================ */}
-      <ProductRangeMarquee />
+      <WhatWeOfferSection />
 
       {/* ============================================================
-          SECTION 5: THREE PILLARS (PRINCIPLE, MISSION, VISION)
+          SECTION 5: FEATURED PRODUCTS (Existing HYBEQ Catalog Improved)
+          Preserved verified product specs, images, filters, enquiry actions
           ============================================================ */}
-      <section className="vura-pillars-section">
-        <div className="vura-container">
-          <div style={{ textAlign: 'center', maxWidth: 760, margin: '0 auto' }}>
-            <span className="vura-section-tag">Foundational Pillars</span>
-            <h2 className="vura-section-heading">
-              Built On Integrity, Precision &amp; Engineering Excellence
-            </h2>
-            <p className="vura-section-desc">
-              Three non-negotiable principles that drive our formulation chemistry, raw material selection, and applicator training programs across India.
-            </p>
-          </div>
-
-          <div className="vura-pillars-grid">
-            {/* Pillar 1: Principle */}
-            <div className="vura-pillar-card">
-              <div className="vura-pillar-media">
-                <img
-                  src="/images/plant-blending-tower.jpg"
-                  alt="Automated Dry-Mix Chemical Plant"
-                  className="vura-pillar-img"
-                />
-                <div className="vura-pillar-overlay" />
-                <div className="vura-pillar-icon-box">
-                  <Compass size={24} />
-                </div>
-              </div>
-              <div className="vura-pillar-content">
-                <span className="vura-pillar-tag">Core Principle</span>
-                <h3 className="vura-pillar-title">Zero Compromise Chemical Purity</h3>
-                <p className="vura-pillar-desc">
-                  We use 100% virgin redispersible polymer powders sourced directly from certified European synthesizers. We never dilute with calcium carbonate fillers or unreacted extenders.
-                </p>
-              </div>
-            </div>
-
-            {/* Pillar 2: Mission */}
-            <div className="vura-pillar-card">
-              <div className="vura-pillar-media">
-                <img
-                  src="/images/lab-testing-rig.jpg"
-                  alt="Materials Testing Laboratory"
-                  className="vura-pillar-img"
-                />
-                <div className="vura-pillar-overlay" />
-                <div className="vura-pillar-icon-box">
-                  <Target size={24} />
-                </div>
-              </div>
-              <div className="vura-pillar-content">
-                <span className="vura-pillar-tag">Corporate Mission</span>
-                <h3 className="vura-pillar-title">Permanence in Civil Infrastructure</h3>
-                <p className="vura-pillar-desc">
-                  Eliminating post-handover tile debonding, basement flooding, and concrete carbonation through high-durability polymer mortars designed for a 50+ year design life.
-                </p>
-              </div>
-            </div>
-
-            {/* Pillar 3: Vision */}
-            <div className="vura-pillar-card">
-              <div className="vura-pillar-media">
-                <img
-                  src="/images/hero-facade.jpg"
-                  alt="Sustainable Green Architecture"
-                  className="vura-pillar-img"
-                />
-                <div className="vura-pillar-overlay" />
-                <div className="vura-pillar-icon-box">
-                  <Eye size={24} />
-                </div>
-              </div>
-              <div className="vura-pillar-content">
-                <span className="vura-pillar-tag">Strategic Vision</span>
-                <h3 className="vura-pillar-title">India's Benchmark in Green Chemistry</h3>
-                <p className="vura-pillar-desc">
-                  Leading the construction sector toward carbon-reduced cementitious formulations and zero-VOC waterborne elastomeric sealants by 2030.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      <FeaturedProductsSection
+        onOpenEnquiry={onOpenEnquiry}
+      />
 
       {/* ============================================================
-          SECTION 8: INSIDE STORY / BLOG ARTICLES
+          SECTION 6: WHY HYBEQ (Resido Reference)
+          Brand differentiation: German polymer tech, ISO 9001 QA, civil audits
           ============================================================ */}
-      <section className="vura-articles-section">
-        <div className="vura-container">
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', flexWrap: 'wrap', gap: 20 }}>
-            <div>
-              <span className="vura-section-tag">Technical Knowledge Base</span>
-              <h2 className="vura-section-heading" style={{ margin: 0 }}>
-                Inside Story &amp; Engineering Guides
-              </h2>
-            </div>
-            <Link to="/blog" className="vura-enquiry-btn" style={{ padding: '10px 20px' }}>
-              <span>ALL ARTICLES</span>
-              <ArrowUpRight size={15} className="vura-enquiry-arrow" />
-            </Link>
-          </div>
-
-          <div className="vura-articles-grid">
-            {BLOG_POSTS.map((post, idx) => (
-              <article key={post.id} className="vura-article-card">
-                <div>
-                  <div style={{ height: 160, borderRadius: 10, overflow: 'hidden', marginBottom: 18, border: '1px solid rgba(255,255,255,0.08)' }}>
-                    <img
-                      src={idx % 2 === 0 ? '/images/hybeq_live/blog_b3370.jpeg' : '/images/hybeq_live/blog_b2692.jpeg'}
-                      alt={post.title}
-                      style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-                    />
-                  </div>
-                  <span className="vura-article-tag">{post.category} • {post.readTime}</span>
-                  <h3 className="vura-article-title">{post.title}</h3>
-                  <p className="vura-article-snippet">{post.summary}</p>
-                </div>
-                <Link to={`/blog/${post.slug}`} className="vura-article-link">
-                  Read Technical Guide <ArrowUpRight size={16} />
-                </Link>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
+      <WhyHybeqSection
+        onOpenEnquiry={() => onOpenEnquiry()}
+      />
 
       {/* ============================================================
-          AUTHENTIC VURA MARQUEE BANNER: "Time to build better"
+          SECTION 7: MATERIAL CALCULATOR (Existing HYBEQ Estimator Improved)
+          Preserved accurate civil formulas, grouped inputs, instant results
           ============================================================ */}
-      <MarqueeTicker />
+      <CalculatorSection
+        onOpenEnquiry={onOpenEnquiry}
+      />
 
+      {/* ============================================================
+          SECTION 8: TECHNICAL GUIDES & BLOG (Bildora Reference)
+          Editorial layout: prominent lead story + supporting articles
+          ============================================================ */}
+      <TechnicalGuidesSection />
+
+      {/* ============================================================
+          SECTION 9: DIRECT CONTACT & ACTION STRIP (Original Conversion Strip)
+          Direct WhatsApp, click-to-call 1800 419 3637, site inspection trigger
+          ============================================================ */}
+      <DirectContactStrip
+        onOpenEnquiry={() => onOpenEnquiry()}
+      />
     </div>
   );
 };
+
+export default HomePage;

@@ -1,15 +1,5 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { Link } from 'react-router-dom';
-import { CircularPlayButton } from './CircularPlayButton';
-import { 
-  ArrowRight, 
-  ChevronLeft, 
-  ChevronRight, 
-  ShieldCheck, 
-  FileDown, 
-  Play,
-  Sparkles
-} from 'lucide-react';
+import React from 'react';
+import { ArrowRight, PhoneCall, ShieldCheck, Award, Layers, Play } from 'lucide-react';
 
 interface HeroSectionProps {
   onOpenVideo: () => void;
@@ -20,251 +10,152 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
   onOpenVideo,
   onOpenEnquiry
 }) => {
-  const [activeSlide, setActiveSlide] = useState(0);
-  const [isPaused, setIsPaused] = useState(false);
-  const touchStartX = useRef<number | null>(null);
-
-  const slides = [
-    {
-      id: 0,
-      category: 'HYDRO-POLYMER WATERPROOFING',
-      headline: 'Impervious Subterranean Barrier Systems.',
-      tagline: 'Elastomeric 2K polymers engineered for extreme hydrostatic pressure, podium slabs, and subterranean basements.',
-      bg: '/images/hero-waterproofing.jpg',
-      featuredProduct: 'HY-DAMPPROOF ULTRA 2K',
-      thumb: '/images/hybeq_products/hy-dampproof-ultra.png',
-      specs: [
-        { key: 'Elongation At Break', val: '250%' },
-        { key: 'Crack Bridging Capacity', val: 'Up to 2.8 mm' },
-        { key: 'Hydrostatic Resistance', val: '> 7.0 Bar DIN 1048' }
-      ],
-      link: '/products/waterproofing'
-    },
-    {
-      id: 1,
-      category: 'HIGH-POLYMER TILE & STONE FIXING',
-      headline: 'Engineered For Heavy Large-Format Slabs.',
-      tagline: 'Zero-sag polymer modified mortars certified for jumbo vitrified porcelain slabs and demanding vertical facades.',
-      bg: '/images/hero-facade.jpg',
-      featuredProduct: 'HYMAX-525 ADHESIVE',
-      thumb: '/images/hybeq_products/hymax-525.png',
-      specs: [
-        { key: 'Standard Classification', val: 'EN 12004 C2TE S1' },
-        { key: 'Vertical Slip Resistance', val: '< 0.5 mm (Zero-Slip)' },
-        { key: 'Tensile Adhesion Strength', val: '> 1.85 N/mm²' }
-      ],
-      link: '/products/tile-adhesives'
-    },
-    {
-      id: 2,
-      category: 'HEAVY INDUSTRIAL RESIN SCREEDS',
-      headline: 'Impact, Abrasion & Chemical Immune Floors.',
-      tagline: '100% solids epoxy screeds and self-levelling polyurethane resins for cleanrooms, automotive plants, and logistics.',
-      bg: '/images/hero-flooring.jpg',
-      featuredProduct: 'HY-SPOT BOND EP-510',
-      thumb: '/images/hybeq_products/hy-spot-bond-ep510.png',
-      specs: [
-        { key: 'Compressive Toughness', val: '> 80 MPa' },
-        { key: 'Chemical Defense', val: 'Acids, Alkalis & Solvents' },
-        { key: 'Traffic Readiness', val: 'Light Foot Traffic in 12h' }
-      ],
-      link: '/products/epoxy-flooring'
-    },
-    {
-      id: 3,
-      category: 'STRUCTURAL RESTORATION & GROUTS',
-      headline: 'High-Yield Concrete Rehabilitation Mortars.',
-      tagline: 'Non-shrink micro-concretes and polymer repair systems designed for rapid structural load-bearing restoration.',
-      bg: '/images/lab-testing-rig.jpg',
-      featuredProduct: 'HY-SUPERCONCRETE LS',
-      thumb: '/images/hybeq_products/hy-superconcrete-ls.png',
-      specs: [
-        { key: 'Compressive Yield (28d)', val: '> 65 N/mm²' },
-        { key: 'Shrinkage Compensation', val: 'Zero Dimensional Shrink' },
-        { key: 'Interfacial Bond Strength', val: '> 2.5 N/mm² to Concrete' }
-      ],
-      link: '/products/repairs'
+  const scrollToProducts = () => {
+    const el = document.getElementById('featured-products');
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth' });
+    } else {
+      window.location.href = '/products';
     }
-  ];
-
-  const current = slides[activeSlide];
-
-  const nextSlide = () => {
-    setActiveSlide((prev) => (prev + 1) % slides.length);
-  };
-
-  const prevSlide = () => {
-    setActiveSlide((prev) => (prev - 1 + slides.length) % slides.length);
-  };
-
-  // Auto-advance carousel every 6.5s unless paused
-  useEffect(() => {
-    if (isPaused) return;
-    const timer = setInterval(nextSlide, 6500);
-    return () => clearInterval(timer);
-  }, [isPaused, slides.length]);
-
-  // Touch swipe support for mobile devices
-  const handleTouchStart = (e: React.TouchEvent) => {
-    touchStartX.current = e.touches[0].clientX;
-  };
-
-  const handleTouchEnd = (e: React.TouchEvent) => {
-    if (touchStartX.current === null) return;
-    const touchEndX = e.changedTouches[0].clientX;
-    const diff = touchStartX.current - touchEndX;
-    if (Math.abs(diff) > 40) {
-      if (diff > 0) nextSlide();
-      else prevSlide();
-    }
-    touchStartX.current = null;
   };
 
   return (
-    <section 
-      className="hybeq-cinematic-hero"
-      aria-label="HYBEQ Featured Chemical Engineering Solutions"
-      onMouseEnter={() => setIsPaused(true)}
-      onMouseLeave={() => setIsPaused(false)}
-      onTouchStart={handleTouchStart}
-      onTouchEnd={handleTouchEnd}
-    >
-      {/* Background Slides with Smooth Fade & Cinematic Ken-Burns Motion */}
-      {slides.map((slide, index) => {
-        const isActive = index === activeSlide;
-        return (
-          <div
-            key={slide.id}
-            className={`cinematic-bg-layer ${isActive ? 'active' : ''}`}
-            style={{ backgroundImage: `url(${slide.bg})` }}
-            aria-hidden={!isActive}
-          >
-            <div className="cinematic-bg-scrim" />
-          </div>
-        );
-      })}
-
-      {/* Top Bar inside Hero: Category Tag & Rotating Play Video Button */}
-      <div className="cinematic-top-bar">
-        <div className="cinematic-kicker">
-          <span className="kicker-pulse-dot" />
-          <span className="kicker-text">ADVANCED POLYMER FORMULATIONS • GERMAN TECHNOLOGY</span>
-        </div>
-
-        <div className="cinematic-play-wrap">
-          <CircularPlayButton onClick={onOpenVideo} title="Watch HYBEQ Corporate Video" />
-        </div>
-      </div>
-
-      {/* Bottom Floating Frosted Glass Heads-Up Display (HUD) */}
-      <div className="cinematic-hud-wrapper">
-        <div className="cinematic-hud-card">
-          
-          {/* Column 1: Category Tag, Punchy Headline & CTAs */}
-          <div className="hud-col-headline">
-            <div className="hud-category-chip">
-              <Sparkles size={14} color="#00E676" />
-              <span>{current.category}</span>
-            </div>
-
-            <h1 className="hud-main-headline">
-              {current.headline}
-            </h1>
-
-            <p className="hud-tagline">
-              {current.tagline}
-            </p>
-
-            <div className="hud-cta-row">
-              <Link to={current.link} className="hud-btn-primary">
-                Explore Formulations <ArrowRight size={18} />
-              </Link>
-              <button 
-                onClick={onOpenVideo}
-                className="hud-btn-video"
-                aria-label="Watch application video"
-              >
-                <Play size={15} fill="#FFFFFF" /> Watch In Action
-              </button>
-            </div>
+    <section className="hybeq-hero-gridfly" id="hero-section" aria-label="Engineered Protection Hero">
+      <div className="hybeq-hero-bg-accent" aria-hidden="true" />
+      
+      <div className="hybeq-hero-container">
+        {/* Left Column: Bold Typographic Hierarchy & Conversion Triggers */}
+        <div className="hybeq-hero-content">
+          {/* Trust Kicker Badge */}
+          <div className="hybeq-hero-kicker">
+            <span className="hybeq-hero-kicker-dot" />
+            <span className="hybeq-hero-kicker-text">ISO 9001:2015 CERTIFIED • GERMAN POLYMER TECHNOLOGY</span>
           </div>
 
-          {/* Column 2: Quantitative Lab-Certified Specifications */}
-          <div className="hud-col-specs">
-            <div className="hud-specs-header">
-              <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                <ShieldCheck size={18} color="#00E676" />
-                <span className="hud-specs-title">Laboratory Certified Specs</span>
+          {/* Primary Headline */}
+          <h1 className="hybeq-hero-title">
+            Engineered Protection. <br />
+            <span className="hybeq-hero-title-highlight">Built to Last.</span>
+          </h1>
+
+          {/* Concise Supporting Copy */}
+          <p className="hybeq-hero-subtitle">
+            Advanced tile adhesives, elastomeric waterproofing membranes, and structural concrete repair systems. Engineered with pure European redispersible polymers to withstand India's most demanding climatic conditions.
+          </p>
+
+          {/* Action CTAs */}
+          <div className="hybeq-hero-actions">
+            <button
+              type="button"
+              className="hybeq-btn hybeq-btn-primary"
+              onClick={scrollToProducts}
+              aria-label="Explore HYBEQ Products"
+            >
+              <span>Explore Products</span>
+              <ArrowRight size={18} className="hybeq-btn-arrow" />
+            </button>
+
+            <button
+              type="button"
+              className="hybeq-btn hybeq-btn-secondary"
+              onClick={() => onOpenEnquiry && onOpenEnquiry()}
+              aria-label="Talk to a Technical Expert"
+            >
+              <PhoneCall size={17} />
+              <span>Talk to an Expert</span>
+            </button>
+          </div>
+
+          {/* Institutional Trust Indicators Bar */}
+          <div className="hybeq-hero-trust-bar">
+            <div className="hybeq-trust-item">
+              <div className="hybeq-trust-icon-wrap">
+                <ShieldCheck size={20} className="hybeq-trust-icon" />
               </div>
-              <div className="hud-product-pill">
-                <img src={current.thumb} alt={current.featuredProduct} className="hud-product-thumb" />
-                <span className="hud-product-name">{current.featuredProduct}</span>
+              <div className="hybeq-trust-info">
+                <strong className="hybeq-trust-metric">IS 15477:2019</strong>
+                <span className="hybeq-trust-label">Type 1 to 4 Certified</span>
               </div>
             </div>
 
-            <div className="hud-specs-table">
-              {current.specs.map((item, idx) => (
-                <div key={idx} className="hud-spec-row">
-                  <span className="hud-spec-key">{item.key}:</span>
-                  <span className="hud-spec-val">{item.val}</span>
-                </div>
-              ))}
+            <div className="hybeq-trust-divider" />
+
+            <div className="hybeq-trust-item">
+              <div className="hybeq-trust-icon-wrap">
+                <Award size={20} className="hybeq-trust-icon" />
+              </div>
+              <div className="hybeq-trust-info">
+                <strong className="hybeq-trust-metric">100% Virgin</strong>
+                <span className="hybeq-trust-label">European Polymers</span>
+              </div>
             </div>
 
-            <div className="hud-specs-footer">
-              <button
-                onClick={() => onOpenEnquiry && onOpenEnquiry(current.featuredProduct)}
-                className="hud-tds-trigger"
-                title={`Download Technical Data Sheet for ${current.featuredProduct}`}
-              >
-                <FileDown size={15} /> Request Official TDS Sheet
-              </button>
-              <Link to="/calculator" className="hud-calc-trigger">
-                Consumption Calculator →
-              </Link>
+            <div className="hybeq-trust-divider" />
+
+            <div className="hybeq-trust-item">
+              <div className="hybeq-trust-icon-wrap">
+                <Layers size={20} className="hybeq-trust-icon" />
+              </div>
+              <div className="hybeq-trust-info">
+                <strong className="hybeq-trust-metric">50+ Years</strong>
+                <span className="hybeq-trust-label">Civil Durability Life</span>
+              </div>
             </div>
           </div>
+        </div>
 
-          {/* Column 3: Slide Tracker & Interactive Navigation Arrows */}
-          <div className="hud-col-controls">
-            <div className="hud-counter">
-              <span className="counter-current">0{activeSlide + 1}</span>
-              <span className="counter-sep">/</span>
-              <span className="counter-total">0{slides.length}</span>
+        {/* Right Column: Gridfly Asymmetrical Architectural Showcase */}
+        <div className="hybeq-hero-visual-wrap">
+          {/* Main Visual Card */}
+          <div className="hybeq-hero-main-card">
+            <img
+              src="/images/hero-facade.jpg"
+              alt="Engineered Civil Structure Protected by HYBEQ Formulations"
+              className="hybeq-hero-img"
+              loading="eager"
+            />
+            <div className="hybeq-hero-img-overlay" />
+
+            {/* Play Button Overlay */}
+            <button
+              type="button"
+              className="hybeq-hero-play-btn"
+              onClick={onOpenVideo}
+              aria-label="Watch Corporate Lab & Application Video"
+              title="Watch Lab & Quality Video"
+            >
+              <div className="hybeq-hero-play-ripple" />
+              <Play size={20} fill="currentColor" />
+            </button>
+
+            {/* Top Left Floating Certification Tag */}
+            <div className="hybeq-hero-floating-tag">
+              <span className="hybeq-tag-pulse" />
+              <span>NABL LAB TESTED FORMULATION</span>
             </div>
 
-            <div className="hud-arrow-buttons">
-              <button 
-                onClick={prevSlide}
-                className="hud-nav-arrow"
-                aria-label="Previous Slide"
-              >
-                <ChevronLeft size={22} />
-              </button>
-              <button 
-                onClick={nextSlide}
-                className="hud-nav-arrow"
-                aria-label="Next Slide"
-              >
-                <ChevronRight size={22} />
-              </button>
-            </div>
-
-            {/* Pagination Dots */}
-            <div className="hud-pagination-dots" role="tablist">
-              {slides.map((s, idx) => (
-                <button
-                  key={s.id}
-                  className={`hud-dot ${idx === activeSlide ? 'active' : ''}`}
-                  onClick={() => setActiveSlide(idx)}
-                  role="tab"
-                  aria-selected={idx === activeSlide}
-                  aria-label={`Go to slide ${idx + 1}: ${s.category}`}
+            {/* Bottom Floating HUD Card: Featured Technical Product */}
+            <div className="hybeq-hero-hud-card">
+              <div className="hybeq-hud-product-thumb">
+                <img
+                  src="/images/hybeq_products/hymax-525.png"
+                  alt="Hymax 525 Structural Adhesive"
                 />
-              ))}
+              </div>
+
+              <div className="hybeq-hud-details">
+                <div className="hybeq-hud-badge">BENCHMARK FORMULATION</div>
+                <h4 className="hybeq-hud-title">HYMAX-525 HEAVY ADHESIVE</h4>
+                <p className="hybeq-hud-spec">
+                  EN 12004 C2TE S1 • Zero Vertical Slip (&lt;0.5mm)
+                </p>
+                <div className="hybeq-hud-stats">
+                  <span className="hybeq-hud-stat-pill">Tensile: &gt;1.85 N/mm²</span>
+                  <span className="hybeq-hud-stat-pill">Bed: 3-12 mm</span>
+                </div>
+              </div>
             </div>
           </div>
-
         </div>
       </div>
     </section>

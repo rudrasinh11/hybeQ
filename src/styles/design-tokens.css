@@ -1,0 +1,177 @@
+/**
+ * ============================================================================
+ * HYBEQ CENTRALIZED DESIGN TOKEN SYSTEM
+ * ============================================================================
+ * All visual styles across the HYBEQ website derive from these CSS custom
+ * properties. When the final client brand colors are supplied, update ONLY
+ * the variables in this section to re-theme the entire website globally
+ * without touching component layouts or templates.
+ * ============================================================================
+ */
+
+:root {
+  /* ==========================================================================
+     1. BRAND PALETTE (CENTRALIZED TOKENS — REPLACE VALUES HERE)
+     ========================================================================== */
+  /* Primary Brand Hue (Deep Industrial Navy / Slate) */
+  --theme-brand-primary: #0A2362;
+  --theme-brand-primary-hover: #071A4B;
+  --theme-brand-primary-light: #EBF1FF;
+  --theme-brand-primary-rgb: 10, 35, 98;
+
+  /* Secondary / Accent Hue (High-Vis Industrial Mint / Green) */
+  --theme-brand-accent: #22C55E;
+  --theme-brand-accent-hover: #16A34A;
+  --theme-brand-accent-light: #DCFCE7;
+  --theme-brand-accent-rgb: 34, 197, 94;
+
+  /* Alternative Secondary / Tech Steel */
+  --theme-brand-steel: #334155;
+  --theme-brand-steel-light: #F1F5F9;
+
+  /* ==========================================================================
+     2. NEUTRAL PALETTE & SURFACES
+     ========================================================================== */
+  --theme-bg-page: #FFFFFF;
+  --theme-bg-surface: #FFFFFF;
+  --theme-bg-surface-elevated: #FFFFFF;
+  --theme-bg-muted: #F8FAFC;
+  --theme-bg-subtle: #F1F5F9;
+  --theme-bg-contrast: #0F172A;
+  --theme-bg-dark: #0A1128;
+  --theme-bg-dark-elevated: #111C3A;
+  --theme-bg-dark-border: rgba(255, 255, 255, 0.1);
+
+  /* Overlays & Frosted Glass */
+  --theme-glass-bg: rgba(255, 255, 255, 0.85);
+  --theme-glass-border: rgba(226, 232, 240, 0.8);
+  --theme-glass-dark-bg: rgba(10, 17, 40, 0.88);
+  --theme-glass-dark-border: rgba(255, 255, 255, 0.12);
+
+  /* ==========================================================================
+     3. TYPOGRAPHY COLORS
+     ========================================================================== */
+  --theme-text-primary: #0F172A;
+  --theme-text-secondary: #334155;
+  --theme-text-muted: #64748B;
+  --theme-text-light: #94A3B8;
+  --theme-text-inverse: #FFFFFF;
+  --theme-text-inverse-muted: #94A3B8;
+  --theme-text-accent: #15803D;
+
+  /* ==========================================================================
+     4. BORDERS & DIVIDERS
+     ========================================================================== */
+  --theme-border-subtle: #F1F5F9;
+  --theme-border-default: #E2E8F0;
+  --theme-border-medium: #CBD5E1;
+  --theme-border-strong: #94A3B8;
+  --theme-border-focus: var(--theme-brand-primary);
+
+  /* ==========================================================================
+     5. INTERACTIVE & BUTTON TOKENS
+     ========================================================================== */
+  --theme-btn-primary-bg: var(--theme-brand-primary);
+  --theme-btn-primary-text: #FFFFFF;
+  --theme-btn-primary-hover: var(--theme-brand-primary-hover);
+  --theme-btn-primary-shadow: 0 4px 14px rgba(10, 35, 98, 0.22);
+
+  --theme-btn-accent-bg: var(--theme-brand-accent);
+  --theme-btn-accent-text: #064E3B;
+  --theme-btn-accent-hover: var(--theme-brand-accent-hover);
+
+  --theme-btn-secondary-bg: #FFFFFF;
+  --theme-btn-secondary-text: var(--theme-text-primary);
+  --theme-btn-secondary-border: var(--theme-border-default);
+  --theme-btn-secondary-hover-bg: var(--theme-bg-subtle);
+
+  /* ==========================================================================
+     6. BADGES, STATUS & METRICS
+     ========================================================================== */
+  --theme-badge-bg: var(--theme-brand-primary-light);
+  --theme-badge-text: var(--theme-brand-primary);
+  --theme-badge-border: rgba(10, 35, 98, 0.15);
+
+  --theme-badge-accent-bg: var(--theme-brand-accent-light);
+  --theme-badge-accent-text: #166534;
+  --theme-badge-accent-border: rgba(34, 197, 94, 0.25);
+
+  /* ==========================================================================
+     7. TYPOGRAPHY SCALE & WEIGHTS
+     ========================================================================== */
+  --theme-font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --theme-font-mono: 'Space Grotesk', ui-monospace, SFMono-Regular, monospace;
+
+  /* Fluid Headings using clamp() */
+  --theme-text-hero: clamp(2.25rem, 5vw + 1rem, 4.25rem);
+  --theme-text-h1: clamp(2rem, 3.8vw + 0.5rem, 3.25rem);
+  --theme-text-h2: clamp(1.65rem, 2.5vw + 0.5rem, 2.5rem);
+  --theme-text-h3: clamp(1.25rem, 1.8vw + 0.25rem, 1.75rem);
+  --theme-text-h4: clamp(1.05rem, 1.2vw + 0.2rem, 1.25rem);
+  --theme-text-body: 1rem;
+  --theme-text-sm: 0.875rem;
+  --theme-text-xs: 0.75rem;
+
+  /* Line Heights */
+  --theme-lh-tight: 1.15;
+  --theme-lh-heading: 1.25;
+  --theme-lh-body: 1.6;
+
+  /* ==========================================================================
+     8. SPACING SCALE
+     ========================================================================== */
+  --theme-space-1: 4px;
+  --theme-space-2: 8px;
+  --theme-space-3: 12px;
+  --theme-space-4: 16px;
+  --theme-space-5: 20px;
+  --theme-space-6: 24px;
+  --theme-space-8: 32px;
+  --theme-space-10: 40px;
+  --theme-space-12: 48px;
+  --theme-space-16: 64px;
+  --theme-space-20: 80px;
+  --theme-space-24: 96px;
+
+  /* Section Spacing */
+  --theme-section-padding-y: clamp(56px, 7vw, 104px);
+  --theme-section-gap: clamp(40px, 5vw, 64px);
+
+  /* Container Widths */
+  --theme-container-max: 1280px;
+  --theme-container-narrow: 1080px;
+  --theme-container-padding: clamp(16px, 4vw, 32px);
+
+  /* ==========================================================================
+     9. CORNER RADII & SHADOWS
+     ========================================================================== */
+  --theme-radius-sm: 6px;
+  --theme-radius-md: 10px;
+  --theme-radius-lg: 16px;
+  --theme-radius-xl: 24px;
+  --theme-radius-full: 9999px;
+
+  --theme-shadow-xs: 0 1px 2px rgba(15, 23, 42, 0.04);
+  --theme-shadow-sm: 0 2px 6px rgba(15, 23, 42, 0.06);
+  --theme-shadow-md: 0 6px 18px rgba(15, 23, 42, 0.08);
+  --theme-shadow-lg: 0 12px 32px rgba(15, 23, 42, 0.1);
+  --theme-shadow-xl: 0 24px 48px rgba(15, 23, 42, 0.14);
+
+  /* ==========================================================================
+     10. TRANSITIONS & MOTION
+     ========================================================================== */
+  --theme-transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --theme-transition-default: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  --theme-transition-smooth: 400ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Backwards compatibility aliases with existing codebase */
+:root {
+  --color-primary: var(--theme-brand-primary);
+  --color-accent: var(--theme-brand-accent);
+  --color-deep-navy: var(--theme-bg-dark);
+  --color-background: var(--theme-bg-muted);
+  --color-white: #FFFFFF;
+  --color-body-text: var(--theme-text-secondary);
+  --color-border: var(--theme-border-default);
+}
