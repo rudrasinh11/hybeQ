@@ -1,6 +1,15 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { Link } from 'react-router-dom';
 import { CircularPlayButton } from './CircularPlayButton';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { 
+  ArrowRight, 
+  ChevronLeft, 
+  ChevronRight, 
+  ShieldCheck, 
+  FileDown, 
+  Play,
+  Sparkles
+} from 'lucide-react';
 
 interface HeroSectionProps {
   onOpenVideo: () => void;
@@ -9,7 +18,7 @@ interface HeroSectionProps {
 
 export const HeroSection: React.FC<HeroSectionProps> = ({
   onOpenVideo,
-  onOpenEnquiry: _onOpenEnquiry
+  onOpenEnquiry
 }) => {
   const [activeSlide, setActiveSlide] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
@@ -18,32 +27,67 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
   const slides = [
     {
       id: 0,
-      image: '/images/hero_banner_01.png?v=10',
-      category: 'TILE & STONE ADHESIVE',
-      badge: 'ENGINEERED FOR STRONGER STRUCTURES',
-      desc: 'We engineer advanced bonding solutions for each market, using a combination of high-grade polymers, natural minerals, and specialized additives along with our deep expertise in specialized building chemicals.',
-      productName: 'HYBEQ Tile & Stone Adhesive (505, 507, 515+)',
-      alt: 'HYBEQ Tile & Stone Adhesive - German Polymer Technology'
+      category: 'HYDRO-POLYMER WATERPROOFING',
+      headline: 'Impervious Subterranean Barrier Systems.',
+      tagline: 'Elastomeric 2K polymers engineered for extreme hydrostatic pressure, podium slabs, and subterranean basements.',
+      bg: '/images/hero-waterproofing.jpg',
+      featuredProduct: 'HY-DAMPPROOF ULTRA 2K',
+      thumb: '/images/hybeq_products/hy-dampproof-ultra.png',
+      specs: [
+        { key: 'Elongation At Break', val: '250%' },
+        { key: 'Crack Bridging Capacity', val: 'Up to 2.8 mm' },
+        { key: 'Hydrostatic Resistance', val: '> 7.0 Bar DIN 1048' }
+      ],
+      link: '/products/waterproofing'
     },
     {
       id: 1,
-      image: '/images/hero_banner_02.png?v=10',
-      category: 'WATERPROOFING & PROTECTION SOLUTIONS',
-      badge: 'SHIELDED FROM THE TOUGHEST ELEMENTS',
-      desc: 'Superior dampproof, elastomeric coatings, and bonding solutions for durable, leak-free, and weather-resistant structures.',
-      productName: 'HYBEQ Waterproofing Solutions (DAMPPROOF ULTRA, FLEXICOAT 2C)',
-      alt: 'HYBEQ Waterproofing & Protection Solutions - Shielded From The Toughest Elements'
+      category: 'HIGH-POLYMER TILE & STONE FIXING',
+      headline: 'Engineered For Heavy Large-Format Slabs.',
+      tagline: 'Zero-sag polymer modified mortars certified for jumbo vitrified porcelain slabs and demanding vertical facades.',
+      bg: '/images/hero-facade.jpg',
+      featuredProduct: 'HYMAX-525 ADHESIVE',
+      thumb: '/images/hybeq_products/hymax-525.png',
+      specs: [
+        { key: 'Standard Classification', val: 'EN 12004 C2TE S1' },
+        { key: 'Vertical Slip Resistance', val: '< 0.5 mm (Zero-Slip)' },
+        { key: 'Tensile Adhesion Strength', val: '> 1.85 N/mm²' }
+      ],
+      link: '/products/tile-adhesives'
     },
     {
       id: 2,
-      image: '/images/hero_banner_03.png?v=10',
-      category: 'EPOXY FLOORING & SURFACE SOLUTIONS',
-      badge: 'BUILT FOR THE TOUGHEST FLOORS',
-      desc: 'Superior epoxy, screed, microcement, and floor hardener solutions for durable, seamless, and high-traffic surfaces.',
-      productName: 'HYBEQ Epoxy Flooring & Surface Solutions (HARDTOP 330, S03)',
-      alt: 'HYBEQ Epoxy Flooring & Surface Solutions - Built For The Toughest Floors'
+      category: 'HEAVY INDUSTRIAL RESIN SCREEDS',
+      headline: 'Impact, Abrasion & Chemical Immune Floors.',
+      tagline: '100% solids epoxy screeds and self-levelling polyurethane resins for cleanrooms, automotive plants, and logistics.',
+      bg: '/images/hero-flooring.jpg',
+      featuredProduct: 'HY-SPOT BOND EP-510',
+      thumb: '/images/hybeq_products/hy-spot-bond-ep510.png',
+      specs: [
+        { key: 'Compressive Toughness', val: '> 80 MPa' },
+        { key: 'Chemical Defense', val: 'Acids, Alkalis & Solvents' },
+        { key: 'Traffic Readiness', val: 'Light Foot Traffic in 12h' }
+      ],
+      link: '/products/epoxy-flooring'
+    },
+    {
+      id: 3,
+      category: 'STRUCTURAL RESTORATION & GROUTS',
+      headline: 'High-Yield Concrete Rehabilitation Mortars.',
+      tagline: 'Non-shrink micro-concretes and polymer repair systems designed for rapid structural load-bearing restoration.',
+      bg: '/images/lab-testing-rig.jpg',
+      featuredProduct: 'HY-SUPERCONCRETE LS',
+      thumb: '/images/hybeq_products/hy-superconcrete-ls.png',
+      specs: [
+        { key: 'Compressive Yield (28d)', val: '> 65 N/mm²' },
+        { key: 'Shrinkage Compensation', val: 'Zero Dimensional Shrink' },
+        { key: 'Interfacial Bond Strength', val: '> 2.5 N/mm² to Concrete' }
+      ],
+      link: '/products/repairs'
     }
   ];
+
+  const current = slides[activeSlide];
 
   const nextSlide = () => {
     setActiveSlide((prev) => (prev + 1) % slides.length);
@@ -60,16 +104,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
     return () => clearInterval(timer);
   }, [isPaused, slides.length]);
 
-  // Keyboard navigation for carousel
-  const handleKeyDown = (e: React.KeyboardEvent) => {
-    if (e.key === 'ArrowRight') {
-      nextSlide();
-    } else if (e.key === 'ArrowLeft') {
-      prevSlide();
-    }
-  };
-
-  // Touch swipe support
+  // Touch swipe support for mobile devices
   const handleTouchStart = (e: React.TouchEvent) => {
     touchStartX.current = e.touches[0].clientX;
   };
@@ -79,178 +114,159 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
     const touchEndX = e.changedTouches[0].clientX;
     const diff = touchStartX.current - touchEndX;
     if (Math.abs(diff) > 40) {
-      if (diff > 0) {
-        nextSlide();
-      } else {
-        prevSlide();
-      }
+      if (diff > 0) nextSlide();
+      else prevSlide();
     }
     touchStartX.current = null;
   };
 
   return (
-    <section className="hero-section-version2 vura-hero-section position-relative" id="hero" aria-label="HYBEQ Homepage Hero">
-      <div className="vura-hero-container">
-        
-        {/* ============================================================
-            HERO TOP ROW:
-            Left: TWO-LINE ANIMATED HEADLINE ("TIME TO PUSH / [Arrow] THE BOUNDARIES")
-            Right: ROTATING CIRCULAR PLAY BUTTON
-            ============================================================ */}
-        <div className="vura-hero-top-row">
-          
-          <div className="vura-hero-headline-wrap">
-            <h1 className="vura-hero-headline" aria-label="TIME TO PUSH THE BOUNDARIES">
-              {/* Line 1: TIME TO PUSH (Solid #071A45 / #FFFFFF depending on theme, clamp(40px, 6vw, 76px)) */}
-              <span className="vura-headline-line1">TIME TO PUSH</span>
-
-              {/* Line 2: [Arrow Icon] THE BOUNDARIES */}
-              <span className="vura-headline-line2">
-                <span className="vura-headline-arrow-icon" aria-hidden="true">
-                  <img
-                    src="/images/arrow-navy.png"
-                    alt="Arrow"
-                    className="vura-headline-arrow-img"
-                  />
-                </span>
-                <span className="vura-word-the">THE</span>
-                <span
-                  className="vura-word-boundaries"
-                  data-text="BOUNDARIES"
-                >
-                  BOUNDARIES
-                </span>
-              </span>
-            </h1>
+    <section 
+      className="hybeq-cinematic-hero"
+      aria-label="HYBEQ Featured Chemical Engineering Solutions"
+      onMouseEnter={() => setIsPaused(true)}
+      onMouseLeave={() => setIsPaused(false)}
+      onTouchStart={handleTouchStart}
+      onTouchEnd={handleTouchEnd}
+    >
+      {/* Background Slides with Smooth Fade & Cinematic Ken-Burns Motion */}
+      {slides.map((slide, index) => {
+        const isActive = index === activeSlide;
+        return (
+          <div
+            key={slide.id}
+            className={`cinematic-bg-layer ${isActive ? 'active' : ''}`}
+            style={{ backgroundImage: `url(${slide.bg})` }}
+            aria-hidden={!isActive}
+          >
+            <div className="cinematic-bg-scrim" />
           </div>
+        );
+      })}
 
-          {/* Right: Circular Rotating Play Button */}
-          <div className="vura-hero-play-wrap">
-            <CircularPlayButton onClick={onOpenVideo} title="Watch HYBEQ Corporate Video" />
-          </div>
-
+      {/* Top Bar inside Hero: Category Tag & Rotating Play Video Button */}
+      <div className="cinematic-top-bar">
+        <div className="cinematic-kicker">
+          <span className="kicker-pulse-dot" />
+          <span className="kicker-text">ADVANCED POLYMER FORMULATIONS • GERMAN TECHNOLOGY</span>
         </div>
 
-        {/* ============================================================
-            HERO SHOWCASE BANNER CONTAINER:
-            Switchable carousel with transparent stepped shape,
-            interactive notch card with changeable enquiry form,
-            and sleek navigation controls.
-            ============================================================ */}
-        <div
-          className="vura-banner-v2-thumb"
-          tabIndex={0}
-          role="region"
-          aria-roledescription="carousel"
-          aria-label="HYBEQ Featured Formulations Carousel"
-          onMouseEnter={() => setIsPaused(true)}
-          onMouseLeave={() => setIsPaused(false)}
-          onFocus={() => setIsPaused(true)}
-          onBlur={() => setIsPaused(false)}
-          onKeyDown={handleKeyDown}
-          onTouchStart={handleTouchStart}
-          onTouchEnd={handleTouchEnd}
-        >
-          {/* Active Carousel Banner Image Slides */}
-          <div className="vura-carousel-inner">
-            {slides.map((s, idx) => (
-              <div
-                key={s.id}
-                className={`vura-carousel-slide ${idx === activeSlide ? 'active' : ''}`}
-                aria-hidden={idx !== activeSlide}
+        <div className="cinematic-play-wrap">
+          <CircularPlayButton onClick={onOpenVideo} title="Watch HYBEQ Corporate Video" />
+        </div>
+      </div>
+
+      {/* Bottom Floating Frosted Glass Heads-Up Display (HUD) */}
+      <div className="cinematic-hud-wrapper">
+        <div className="cinematic-hud-card">
+          
+          {/* Column 1: Category Tag, Punchy Headline & CTAs */}
+          <div className="hud-col-headline">
+            <div className="hud-category-chip">
+              <Sparkles size={14} color="#00E676" />
+              <span>{current.category}</span>
+            </div>
+
+            <h1 className="hud-main-headline">
+              {current.headline}
+            </h1>
+
+            <p className="hud-tagline">
+              {current.tagline}
+            </p>
+
+            <div className="hud-cta-row">
+              <Link to={current.link} className="hud-btn-primary">
+                Explore Formulations <ArrowRight size={18} />
+              </Link>
+              <button 
+                onClick={onOpenVideo}
+                className="hud-btn-video"
+                aria-label="Watch application video"
               >
-                <img
-                  src={s.image}
-                  alt={s.alt}
-                  className="vura-banner-slide-img"
-                  loading={idx === 0 ? 'eager' : 'lazy'}
-                  fetchPriority={idx === 0 ? 'high' : 'auto'}
-                />
+                <Play size={15} fill="#FFFFFF" /> Watch In Action
+              </button>
+            </div>
+          </div>
+
+          {/* Column 2: Quantitative Lab-Certified Specifications */}
+          <div className="hud-col-specs">
+            <div className="hud-specs-header">
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <ShieldCheck size={18} color="#00E676" />
+                <span className="hud-specs-title">Laboratory Certified Specs</span>
               </div>
-            ))}
+              <div className="hud-product-pill">
+                <img src={current.thumb} alt={current.featuredProduct} className="hud-product-thumb" />
+                <span className="hud-product-name">{current.featuredProduct}</span>
+              </div>
+            </div>
 
-            {/* Manual Carousel Navigation Arrows (Centered on the banner image) */}
-            <button
-              type="button"
-              className="vura-carousel-nav-btn prev"
-              aria-label="Previous slide"
-              onClick={(e) => {
-                e.stopPropagation();
-                prevSlide();
-              }}
-            >
-              <ChevronLeft size={22} />
-            </button>
-            <button
-              type="button"
-              className="vura-carousel-nav-btn next"
-              aria-label="Next slide"
-              onClick={(e) => {
-                e.stopPropagation();
-                nextSlide();
-              }}
-            >
-              <ChevronRight size={22} />
-            </button>
+            <div className="hud-specs-table">
+              {current.specs.map((item, idx) => (
+                <div key={idx} className="hud-spec-row">
+                  <span className="hud-spec-key">{item.key}:</span>
+                  <span className="hud-spec-val">{item.val}</span>
+                </div>
+              ))}
+            </div>
 
-            {/* Center Pagination: 3 pill dots indicating active hero slide pinned inside banner */}
-            <div className="vura-banner-indicators" role="tablist" aria-label="Hero Slides">
+            <div className="hud-specs-footer">
+              <button
+                onClick={() => onOpenEnquiry && onOpenEnquiry(current.featuredProduct)}
+                className="hud-tds-trigger"
+                title={`Download Technical Data Sheet for ${current.featuredProduct}`}
+              >
+                <FileDown size={15} /> Request Official TDS Sheet
+              </button>
+              <Link to="/calculator" className="hud-calc-trigger">
+                Consumption Calculator →
+              </Link>
+            </div>
+          </div>
+
+          {/* Column 3: Slide Tracker & Interactive Navigation Arrows */}
+          <div className="hud-col-controls">
+            <div className="hud-counter">
+              <span className="counter-current">0{activeSlide + 1}</span>
+              <span className="counter-sep">/</span>
+              <span className="counter-total">0{slides.length}</span>
+            </div>
+
+            <div className="hud-arrow-buttons">
+              <button 
+                onClick={prevSlide}
+                className="hud-nav-arrow"
+                aria-label="Previous Slide"
+              >
+                <ChevronLeft size={22} />
+              </button>
+              <button 
+                onClick={nextSlide}
+                className="hud-nav-arrow"
+                aria-label="Next Slide"
+              >
+                <ChevronRight size={22} />
+              </button>
+            </div>
+
+            {/* Pagination Dots */}
+            <div className="hud-pagination-dots" role="tablist">
               {slides.map((s, idx) => (
                 <button
                   key={s.id}
-                  type="button"
+                  className={`hud-dot ${idx === activeSlide ? 'active' : ''}`}
+                  onClick={() => setActiveSlide(idx)}
                   role="tab"
                   aria-selected={idx === activeSlide}
-                  aria-label={`Slide ${idx + 1}: ${s.category}`}
-                  className={`vura-banner-indicator ${idx === activeSlide ? 'active' : ''}`}
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    setActiveSlide(idx);
-                  }}
+                  aria-label={`Go to slide ${idx + 1}: ${s.category}`}
                 />
               ))}
             </div>
           </div>
 
-          {/* ============================================================
-              TOP-RIGHT NOTCH CONTENT (1:1 VURA Reference Treatment):
-              Clean, deliberately positioned supporting text block
-              with balanced line lengths and certified seal.
-              ============================================================ */}
-          <div
-            className="vura-banner-thumb-content"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <p className="vura-notch-desc">
-              {slides[activeSlide].desc}
-            </p>
-          </div>
-
         </div>
-
-        {/* ============================================================
-            BOTTOM HERO STRIP: Socials & Verified Contacts
-            ============================================================ */}
-        <div className="vura-hero-bottom-strip">
-          <div className="vura-bottom-socials">
-            <a href="https://www.facebook.com/share/1DVTdtmXDD/" target="_blank" rel="noopener noreferrer" className="vura-bottom-social-link">FACEBOOK</a>
-            <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="vura-bottom-social-link">TWITTER</a>
-            <a href="https://www.instagram.com/hybeq_chemicals_pvt_ltd/" target="_blank" rel="noopener noreferrer" className="vura-bottom-social-link">INSTAGRAM</a>
-            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="vura-bottom-social-link">LINKEDIN</a>
-            <a href="https://youtube.com/@hybeq-thebuildingchemicalsexpe" target="_blank" rel="noopener noreferrer" className="vura-bottom-social-link">YOUTUBE</a>
-          </div>
-
-          <div className="vura-bottom-contacts">
-            <a href="tel:18004193637" className="vura-bottom-contact-item">TOLL-FREE : 1800 419 3637</a>
-            <span style={{ color: 'rgba(10,35,98,0.25)' }}>•</span>
-            <a href="tel:+918000803933" className="vura-bottom-contact-item">CALL : +91 8000803933</a>
-            <span style={{ color: 'rgba(10,35,98,0.25)' }}>•</span>
-            <a href="mailto:info@hybeq.com" className="vura-bottom-contact-item">MAIL : INFO@HYBEQ.COM</a>
-          </div>
-        </div>
-
       </div>
     </section>
   );
 };
-

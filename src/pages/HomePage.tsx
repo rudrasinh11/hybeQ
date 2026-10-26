@@ -49,8 +49,7 @@ export const HomePage: React.FC<HomePageProps> = ({
     <div className="vura-home-page" style={{ backgroundColor: '#FFFFFF', color: 'var(--color-body)' }}>
       
       {/* ============================================================
-          SECTION 1: HERO SECTION (Header + Two-line Headline +
-          Play Button + Showcase Media Card + Bottom Socials)
+          SECTION 1: HYBEQ CINEMATIC HERO SECTION (VERSION 4 FROSTED HUD)
           ============================================================ */}
       <HeroSection onOpenVideo={onOpenVideo} onOpenEnquiry={onOpenEnquiry} />
 

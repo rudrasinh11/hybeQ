@@ -473,10 +473,10 @@ export const Header: React.FC<HeaderProps> = ({
       )}
 
       {/* ============================================================
-          MOBILE DRAWER NAVIGATION WITH ACCORDION
+          MOBILE DRAWER NAVIGATION WITH ACCORDION ("THREE LINES" MENU)
           ============================================================ */}
       {mobileMenuOpen && (
-        <div className="vura-mobile-menu">
+        <div className="vura-mobile-menu" role="dialog" aria-label="Mobile Navigation Menu">
           <div className="vura-mobile-links">
             
             {/* 1. Mobile Products Accordion */}
@@ -485,17 +485,21 @@ export const Header: React.FC<HeaderProps> = ({
                 type="button"
                 className="vura-mobile-accordion-toggle"
                 onClick={() => setMobileProductsOpen(!mobileProductsOpen)}
+                aria-expanded={mobileProductsOpen}
               >
-                <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-                  <ArrowUpRight size={16} className="vura-nav-arrow" />
+                <div className="vura-mobile-link-left">
+                  <ArrowUpRight size={17} className="vura-mobile-nav-arrow" />
                   <span>PRODUCTS</span>
                 </div>
-                <ChevronDown size={18} style={{ transform: mobileProductsOpen ? 'rotate(180deg)' : 'none', transition: 'transform 0.2s' }} />
+                <ChevronDown 
+                  size={19} 
+                  className={`vura-mobile-chevron ${mobileProductsOpen ? 'open' : ''}`} 
+                />
               </button>
               {mobileProductsOpen && (
                 <div className="vura-mobile-sublist">
                   {megaMenuColumns.map((col, cIdx) => (
-                    <div key={cIdx} style={{ marginBottom: 16 }}>
+                    <div key={cIdx} style={{ marginBottom: 14 }}>
                       {col.sections.map((section, sIdx) => (
                         <div key={sIdx} style={{ marginBottom: 12 }}>
                           <span className="vura-mobile-cat-header">{section.heading}</span>
@@ -517,19 +521,26 @@ export const Header: React.FC<HeaderProps> = ({
 
             {/* 2. Sustainability */}
             <Link to="/sustainability" onClick={closeAllMenus} className="vura-mobile-link">
-              <ArrowUpRight size={16} className="vura-nav-arrow" />
-              <span>SUSTAINABILITY</span>
+              <div className="vura-mobile-link-left">
+                <ArrowUpRight size={17} className="vura-mobile-nav-arrow" />
+                <span>SUSTAINABILITY</span>
+              </div>
             </Link>
 
             {/* 3. Downloads */}
             <Link to="/downloads" onClick={closeAllMenus} className="vura-mobile-link">
-              <ArrowUpRight size={16} className="vura-nav-arrow" />
-              <span>DOWNLOADS</span>
+              <div className="vura-mobile-link-left">
+                <ArrowUpRight size={17} className="vura-mobile-nav-arrow" />
+                <span>DOWNLOADS</span>
+              </div>
             </Link>
 
             {/* 4. Innovations */}
             <Link to="/innovations" onClick={closeAllMenus} className="vura-mobile-link">
-              <span>INNOVATIONS</span>
+              <div className="vura-mobile-link-left">
+                <ArrowUpRight size={17} className="vura-mobile-nav-arrow" />
+                <span>INNOVATIONS</span>
+              </div>
             </Link>
 
             {/* 5. Mobile About Us Accordion */}
@@ -538,45 +549,58 @@ export const Header: React.FC<HeaderProps> = ({
                 type="button"
                 className="vura-mobile-accordion-toggle"
                 onClick={() => setMobileAboutOpen(!mobileAboutOpen)}
+                aria-expanded={mobileAboutOpen}
               >
-                <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-                  <ArrowUpRight size={16} className="vura-nav-arrow" />
+                <div className="vura-mobile-link-left">
+                  <ArrowUpRight size={17} className="vura-mobile-nav-arrow" />
                   <span>ABOUT US</span>
                 </div>
-                <ChevronDown size={18} style={{ transform: mobileAboutOpen ? 'rotate(180deg)' : 'none', transition: 'transform 0.2s' }} />
+                <ChevronDown 
+                  size={19} 
+                  className={`vura-mobile-chevron ${mobileAboutOpen ? 'open' : ''}`} 
+                />
               </button>
               {mobileAboutOpen && (
                 <div className="vura-mobile-sublist">
-                  <Link to="/about#story" onClick={closeAllMenus} className="vura-mobile-sublink">Story</Link>
-                  <Link to="/about#principle" onClick={closeAllMenus} className="vura-mobile-sublink">Principle</Link>
-                  <Link to="/about#mission" onClick={closeAllMenus} className="vura-mobile-sublink">Mission</Link>
-                  <Link to="/about#vision" onClick={closeAllMenus} className="vura-mobile-sublink">Vision</Link>
-                  <Link to="/about#infrastructure" onClick={closeAllMenus} className="vura-mobile-sublink">Infrastructure</Link>
+                  <Link to="/about#story" onClick={closeAllMenus} className="vura-mobile-sublink">Our Story</Link>
+                  <Link to="/about#principle" onClick={closeAllMenus} className="vura-mobile-sublink">Guiding Principles</Link>
+                  <Link to="/about#mission" onClick={closeAllMenus} className="vura-mobile-sublink">Mission & Vision</Link>
+                  <Link to="/about#infrastructure" onClick={closeAllMenus} className="vura-mobile-sublink">Manufacturing Plant</Link>
                 </div>
               )}
             </div>
 
             {/* 6. Blog */}
             <Link to="/blog" onClick={closeAllMenus} className="vura-mobile-link">
-              <span>BLOG</span>
+              <div className="vura-mobile-link-left">
+                <ArrowUpRight size={17} className="vura-mobile-nav-arrow" />
+                <span>BLOG & NEWS</span>
+              </div>
             </Link>
 
             {/* 7. Contact */}
             <Link to="/contact" onClick={closeAllMenus} className="vura-mobile-link">
-              <span>CONTACT</span>
+              <div className="vura-mobile-link-left">
+                <ArrowUpRight size={17} className="vura-mobile-nav-arrow" />
+                <span>CONTACT US</span>
+              </div>
             </Link>
 
-            {/* Calculator Link */}
+            {/* 8. Calculator */}
             <Link to="/calculator" onClick={closeAllMenus} className="vura-mobile-link">
-              <span>MATERIAL CALCULATOR</span>
+              <div className="vura-mobile-link-left">
+                <Calculator size={17} className="vura-mobile-nav-arrow" />
+                <span>MATERIAL CALCULATOR</span>
+              </div>
             </Link>
 
+            {/* 9. Prominent Business Enquiry CTA */}
             <button
               type="button"
-              className="vura-enquiry-btn mobile-cta"
+              className="vura-mobile-cta-btn"
               onClick={() => { closeAllMenus(); onOpenEnquiry(); }}
             >
-              <ArrowUpRight size={16} strokeWidth={2.8} className="vura-enquiry-arrow" />
+              <ArrowUpRight size={18} strokeWidth={2.8} />
               <span>BUSINESS ENQUIRY</span>
             </button>
           </div>
