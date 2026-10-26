@@ -115,7 +115,8 @@ export const DownloadsPage: React.FC = () => {
               border: '1.5px solid #DFE6EF',
               borderRadius: 10,
               padding: '6px 14px',
-              minWidth: 280
+              width: '100%',
+              maxWidth: 360
             }}>
               <Search size={16} style={{ color: '#0A2362', marginRight: 8 }} />
               <input
@@ -131,7 +132,7 @@ export const DownloadsPage: React.FC = () => {
       </section>
 
       {/* Document List */}
-      <section style={{ padding: '70px 0 90px', background: '#FFFFFF' }}>
+      <section style={{ padding: 'clamp(40px, 6vw, 70px) 0 clamp(50px, 7vw, 90px)', background: '#FFFFFF' }}>
         <div className="container">
           <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
             {filteredDocs.map(doc => {
