@@ -83,34 +83,25 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ onOpenEnqu
       </section>
 
       {/* Main Details Grid */}
-      <section style={{ padding: '70px 0', background: '#FFFFFF' }}>
+      <section style={{ padding: 'clamp(40px, 6vw, 70px) 0', background: '#FFFFFF' }}>
         <div className="container">
-          <div style={{ display: 'grid', gridTemplateColumns: '1.4fr 1fr', gap: 48 }}>
+          <div className="product-detail-grid">
             {/* Left Column: Specs, Features & Applications */}
             <div>
               {/* Product Visual Showcase Banner */}
-              <div style={{
-                background: 'linear-gradient(135deg, #F8FAFC 0%, #FFFFFF 100%)',
-                border: '1.5px solid #DFE6EF',
-                borderRadius: 16,
-                padding: '24px 32px',
-                display: 'flex',
-                alignItems: 'center',
-                gap: 32,
-                marginBottom: 40,
-                boxShadow: '0 6px 24px rgba(10,35,98,0.04)'
-              }}>
+              <div className="product-detail-pack-banner">
                 <div style={{
-                  width: 160,
-                  height: 160,
+                  width: 140,
+                  height: 140,
                   flexShrink: 0,
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
                   background: '#FFFFFF',
                   borderRadius: 12,
-                  border: '1px solid #DFE6EF',
-                  padding: 10
+                  border: '1.5px solid #DFE6EF',
+                  padding: 10,
+                  margin: '0 auto'
                 }}>
                   <img
                     src={getProductImage(product)}
@@ -127,7 +118,7 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ onOpenEnqu
                   <span style={{ fontSize: '0.75rem', fontWeight: 800, color: '#46C985', background: '#EAF8F0', padding: '4px 10px', borderRadius: 4, textTransform: 'uppercase' }}>
                     Authentic Industrial Formulation
                   </span>
-                  <h3 style={{ fontSize: '1.4rem', color: '#0A2362', fontWeight: 900, margin: '8px 0 6px' }}>
+                  <h3 style={{ fontSize: 'clamp(1.15rem, 3.5vw, 1.4rem)', color: '#0A2362', fontWeight: 900, margin: '8px 0 6px' }}>
                     {product.name} Packaging Specification
                   </h3>
                   <p style={{ fontSize: '0.875rem', color: '#64748B', lineHeight: 1.6, margin: 0 }}>
@@ -141,7 +132,7 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ onOpenEnqu
                 <h3 style={{ fontSize: '1.35rem', color: '#0A2362', fontWeight: 900, marginBottom: 16 }}>
                   Performance Characteristics
                 </h3>
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 14 }}>
+                <div className="product-features-grid">
                   {product.features.map((feature, idx) => (
                     <div key={idx} style={{ display: 'flex', alignItems: 'flex-start', gap: 10, background: '#F5F7FB', padding: '14px 16px', borderRadius: 10 }}>
                       <CheckCircle2 size={18} style={{ color: '#46C985', flexShrink: 0, marginTop: 2 }} />
@@ -156,8 +147,8 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ onOpenEnqu
                 <h3 style={{ fontSize: '1.35rem', color: '#0A2362', fontWeight: 900, marginBottom: 16 }}>
                   Laboratory Test Parameters
                 </h3>
-                <div style={{ border: '1px solid #DFE6EF', borderRadius: 12, overflow: 'hidden' }}>
-                  <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', fontSize: '0.875rem' }}>
+                <div className="table-responsive" style={{ border: '1.5px solid #DFE6EF', borderRadius: 12 }}>
+                  <table style={{ width: '100%', minWidth: 320, borderCollapse: 'collapse', textAlign: 'left', fontSize: '0.875rem' }}>
                     <tbody>
                       {Object.entries(product.specs).map(([key, val], idx) => (
                         <tr key={key} style={{ background: idx % 2 === 0 ? '#FFFFFF' : '#F5F7FB', borderBottom: '1px solid #DFE6EF' }}>
@@ -200,7 +191,7 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ onOpenEnqu
                 background: '#F5F7FB',
                 border: '1.5px solid #DFE6EF',
                 borderRadius: 16,
-                padding: 32,
+                padding: 'clamp(16px, 3vw, 32px)',
                 position: 'sticky',
                 top: 100
               }}>

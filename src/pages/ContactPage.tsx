@@ -59,9 +59,9 @@ export const ContactPage: React.FC = () => {
       </section>
 
       {/* Main Grid */}
-      <section style={{ padding: '80px 0', background: '#FFFFFF' }}>
+      <section style={{ padding: 'clamp(40px, 6vw, 80px) 0', background: '#FFFFFF' }}>
         <div className="container">
-          <div style={{ display: 'grid', gridTemplateColumns: '1.2fr 1fr', gap: 56 }}>
+          <div className="contact-main-grid">
             {/* Left: Contact Form */}
             <div>
               <span className="section-tag">Direct Inquiry Channel</span>
@@ -71,7 +71,7 @@ export const ContactPage: React.FC = () => {
 
               {!isSubmitted ? (
                 <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: 18 }}>
-                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
+                  <div className="contact-form-row">
                     <div>
                       <label style={{ display: 'block', fontSize: '0.8125rem', fontWeight: 700, color: '#0A2362', marginBottom: 6 }}>
                         Full Name *
@@ -129,7 +129,7 @@ export const ContactPage: React.FC = () => {
                     </div>
                   </div>
 
-                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
+                  <div className="contact-form-row">
                     <div>
                       <label style={{ display: 'block', fontSize: '0.8125rem', fontWeight: 700, color: '#0A2362', marginBottom: 6 }}>
                         Official Email *
