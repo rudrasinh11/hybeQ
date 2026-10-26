@@ -23,12 +23,12 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onOpenEnquiry }) => {
       </section>
 
       {/* Main Narrative */}
-      <section style={{ padding: '80px 0', background: '#FFFFFF' }}>
+      <section style={{ padding: 'clamp(40px, 6vw, 80px) 0', background: '#FFFFFF' }}>
         <div className="container">
-          <div style={{ display: 'grid', gridTemplateColumns: '1.2fr 1fr', gap: 56, alignItems: 'center' }}>
+          <div className="about-narrative-grid">
             <div>
               <span className="section-tag">Our Proven Track Record</span>
-              <h2 style={{ fontSize: '2.4rem', color: '#0A2362', fontWeight: 900, lineHeight: 1.2, marginBottom: 20 }}>
+              <h2 style={{ fontSize: 'clamp(1.8rem, 4vw, 2.4rem)', color: '#0A2362', fontWeight: 900, lineHeight: 1.2, marginBottom: 20 }}>
                 Formulating Trust Across 500+ Landmark Indian Infrastructure Projects
               </h2>
               <p style={{ fontSize: '1.05rem', color: '#64748B', lineHeight: 1.7, marginBottom: 16 }}>
@@ -38,7 +38,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onOpenEnquiry }) => {
                 Every formulation is developed in close partnership with European polymer chemistry pioneers. We synthesize adhesives capable of absorbing structural thermal movement and seismic deflection without debonding or micro-cracking.
               </p>
 
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 20 }}>
+              <div className="about-stats-grid">
                 <div style={{ background: '#F5F7FB', padding: 20, borderRadius: 12, border: '1px solid #DFE6EF' }}>
                   <Award size={28} style={{ color: '#46C985', marginBottom: 8 }} />
                   <h4 style={{ fontSize: '1.05rem', color: '#0A2362', fontWeight: 800 }}>IS 15477:2019 Certified</h4>
@@ -57,7 +57,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onOpenEnquiry }) => {
             <div style={{
               background: 'linear-gradient(135deg, #0A2362 0%, #071A45 100%)',
               borderRadius: 20,
-              padding: 40,
+              padding: 'clamp(24px, 4vw, 40px)',
               color: '#FFFFFF',
               boxShadow: '0 20px 50px rgba(10,35,98,0.2)'
             }}>
@@ -96,16 +96,16 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onOpenEnquiry }) => {
       </section>
 
       {/* 3 Pillars Deep Dive */}
-      <section style={{ padding: '80px 0', background: '#071A45', color: '#FFFFFF' }}>
+      <section style={{ padding: 'clamp(40px, 6vw, 80px) 0', background: '#071A45', color: '#FFFFFF' }}>
         <div className="container">
           <div style={{ textAlign: 'center', maxWidth: 700, margin: '0 auto 48px' }}>
             <span className="section-tag on-dark">Core Ethos</span>
-            <h2 style={{ fontSize: '2.5rem', color: '#FFFFFF', fontWeight: 900 }}>
+            <h2 style={{ fontSize: 'clamp(1.8rem, 4vw, 2.5rem)', color: '#FFFFFF', fontWeight: 900 }}>
               The Hybeq Triad: Principle, Mission, Vision
             </h2>
           </div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 32 }}>
+          <div className="about-triad-grid">
             <div style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', padding: 32, borderRadius: 16 }}>
               <Compass size={36} style={{ color: '#46C985', marginBottom: 16 }} />
               <h3 style={{ fontSize: '1.3rem', color: '#FFFFFF', fontWeight: 800, marginBottom: 12 }}>Our Principle</h3>

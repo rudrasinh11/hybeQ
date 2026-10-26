@@ -63,7 +63,7 @@ export const CalculatorWidget: React.FC<CalculatorWidgetProps> = ({
       background: '#FFFFFF',
       borderRadius: 16,
       border: '1.5px solid #DFE6EF',
-      padding: compact ? '24px' : '36px',
+      padding: compact ? '20px 16px' : 'clamp(18px, 3.5vw, 36px)',
       boxShadow: '0 8px 30px rgba(10,35,98,0.06)'
     }}>
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 20 }}>
@@ -99,7 +99,7 @@ export const CalculatorWidget: React.FC<CalculatorWidgetProps> = ({
         </button>
       </div>
 
-      <div style={{ display: 'grid', gridTemplateColumns: compact ? '1fr' : '1.2fr 1fr', gap: 28 }}>
+      <div className={`calc-widget-grid ${compact ? 'compact' : ''}`}>
         {/* Controls */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: 18 }}>
           {/* Product Select */}

@@ -22,12 +22,12 @@ export const CalculatorPage: React.FC<CalculatorPageProps> = ({ onOpenEnquiry })
       </section>
 
       {/* Main Interactive Calculator */}
-      <section style={{ padding: '80px 0', background: '#F5F7FB' }}>
+      <section style={{ padding: 'clamp(36px, 5vw, 80px) 0', background: '#F5F7FB' }}>
         <div className="container" style={{ maxWidth: 1040 }}>
           <CalculatorWidget onOpenEnquiry={onOpenEnquiry} compact={false} />
 
           {/* Reference Table Below Calculator */}
-          <div style={{ marginTop: 60, background: '#FFFFFF', borderRadius: 16, border: '1.5px solid #DFE6EF', padding: 36 }}>
+          <div style={{ marginTop: 'clamp(28px, 5vw, 60px)', background: '#FFFFFF', borderRadius: 16, border: '1.5px solid #DFE6EF', padding: 'clamp(18px, 4vw, 36px)' }}>
             <h3 style={{ fontSize: '1.35rem', color: '#0A2362', fontWeight: 800, marginBottom: 16 }}>
               Recommended Notch Trowel Sizing Chart (IS 15477 Guidelines)
             </h3>
@@ -35,8 +35,8 @@ export const CalculatorPage: React.FC<CalculatorPageProps> = ({ onOpenEnquiry })
               To ensure 100% bed transfer without hollow sounds, match the trowel notch size to your tile dimension:
             </p>
 
-            <div style={{ overflowX: 'auto' }}>
-              <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', fontSize: '0.875rem' }}>
+            <div className="table-responsive">
+              <table style={{ width: '100%', minWidth: 600, borderCollapse: 'collapse', textAlign: 'left', fontSize: '0.875rem' }}>
                 <thead>
                   <tr style={{ background: '#0A2362', color: '#FFFFFF' }}>
                     <th style={{ padding: '12px 16px' }}>Tile Format / Dimensions</th>

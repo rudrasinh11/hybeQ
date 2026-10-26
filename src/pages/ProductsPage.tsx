@@ -88,7 +88,7 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({ onOpenEnquiry }) => 
             </div>
 
             {/* Category Buttons */}
-            <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
+            <div className="products-filter-row" style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
               {categories.map(cat => {
                 const IconComponent = cat.icon;
                 const isActive = selectedCat === cat.id;
@@ -125,9 +125,9 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({ onOpenEnquiry }) => 
       </section>
 
       {/* Products Grid */}
-      <section style={{ padding: '70px 0 90px', background: '#FFFFFF' }}>
+      <section style={{ padding: 'clamp(40px, 6vw, 70px) 0 clamp(50px, 7vw, 90px)', background: '#FFFFFF' }}>
         <div className="container">
-          <div style={{ marginBottom: 24, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+          <div style={{ marginBottom: 24, display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 12 }}>
             <span style={{ fontSize: '0.875rem', color: '#64748B', fontWeight: 600 }}>
               Showing <strong>{filteredProducts.length}</strong> verified formulations
             </span>
@@ -148,7 +148,7 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({ onOpenEnquiry }) => 
               <p style={{ color: '#64748B', marginTop: 8 }}>Try adjusting your search query or selecting "All Products".</p>
             </div>
           ) : (
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))', gap: 32 }}>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 280px), 1fr))', gap: 'clamp(20px, 3vw, 32px)' }}>
               {filteredProducts.map(product => (
                 <div
                   key={product.id}

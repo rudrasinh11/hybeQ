@@ -1145,4 +1145,19 @@ h1, h2, h3, h4, h5, h6 {
   .modal-card {
     padding: 24px;
   }
+  .floating-actions {
+    bottom: 20px;
+    right: 14px;
+    gap: 8px;
+    z-index: 100;
+  }
+  .floating-scroll-top {
+    width: 38px;
+    height: 38px;
+    opacity: 0.9;
+  }
+  .floating-whatsapp-btn {
+    width: 44px;
+    height: 44px;
+  }
 }

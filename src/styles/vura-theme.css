@@ -70,9 +70,27 @@
   --color-border-subtle: rgba(255, 255, 255, 0.08);
 }
 
-body {
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html, body {
+  width: 100%;
+  max-width: 100vw;
+  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
   background-color: var(--color-page-background);
   color: var(--color-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#root, .hybeq-site-layout {
+  width: 100%;
+  max-width: 100vw;
+  overflow-x: hidden;
+  position: relative;
 }
 
 /* ============================================================
@@ -572,10 +590,19 @@ body {
 .vura-mobile-toggle {
   display: none;
   background: transparent;
-  border: none;
-  color: #FFFFFF;
+  border: 1.5px solid #DFE6EF;
+  border-radius: 8px;
+  color: #0A2362;
   cursor: pointer;
-  padding: 6px;
+  padding: 6px 8px;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+
+.vura-mobile-toggle:hover {
+  background: #F5F7FB;
+  border-color: #0A2362;
 }
 
 /* Mobile Drawer */
@@ -753,23 +780,24 @@ body {
   color: var(--color-primary, #0A2362);
   margin-bottom: 6px;
   font-family: "vurasemiboldfonts", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  font-size: clamp(40px, 6vw, 76px);
+  font-size: clamp(24px, 5.5vw, 76px);
   font-weight: 800;
   letter-spacing: -0.025em;
-  line-height: 1;
+  line-height: 1.05;
 }
 
 .vura-headline-line2 {
   display: inline-flex;
   align-items: center;
   flex-wrap: nowrap;
-  gap: clamp(12px, 1.5vw, 20px);
+  gap: clamp(8px, 1.5vw, 20px);
   font-family: "vurasemiboldfonts", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  font-size: clamp(40px, 6vw, 76px);
+  font-size: clamp(24px, 5.5vw, 76px);
   font-weight: 800;
   letter-spacing: -0.025em;
-  line-height: 1;
+  line-height: 1.05;
   color: var(--color-primary, #0A2362);
+  max-width: 100%;
 }
 
 .vura-headline-arrow-icon {
@@ -1402,20 +1430,25 @@ body {
     font-size: 0.7rem;
   }
   .vura-mobile-toggle {
-    display: block;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
   }
   .vura-mobile-menu {
     display: block;
   }
   .vura-hero-top-row {
-    flex-direction: column-reverse;
-    align-items: flex-start;
-    gap: 20px;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 18px;
   }
   .vura-hero-play-wrap {
-    align-self: flex-end;
+    align-self: center;
     padding-top: 0;
-    margin-right: clamp(16px, 2.5vw, 40px);
+    margin-right: 0;
+    flex-shrink: 0;
   }
   .vura-hero-headline-wrap {
     width: 100%;
@@ -1450,25 +1483,41 @@ body {
   .vura-logo-img {
     height: 30px;
   }
-  .vura-hero-headline {
-    font-size: clamp(1.85rem, 9.2vw, 2.7rem);
-    line-height: 1.05;
+  .vura-hero-top-row {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+  .vura-hero-headline-wrap {
+    flex: 1;
+    min-width: 0;
+  }
+  .vura-hero-play-wrap {
+    align-self: center;
+    margin: 0;
+    flex-shrink: 0;
+  }
+  .vura-headline-line1 {
+    font-size: clamp(22px, 6.2vw, 36px);
   }
   .vura-headline-line2 {
-    flex-wrap: wrap;
-    gap: 6px;
+    font-size: clamp(22px, 6.2vw, 36px);
+    flex-wrap: nowrap;
+    gap: 8px;
   }
-  .vura-headline-arrow-box {
-    width: 34px;
-    height: 34px;
+  .vura-step-textcircle {
+    width: clamp(70px, 18vw, 88px);
+    height: clamp(70px, 18vw, 88px);
   }
   .vura-circular-play-container {
-    width: 96px;
-    height: 96px;
+    width: 78px;
+    height: 78px;
   }
   .vura-play-center-btn {
-    width: 48px;
-    height: 48px;
+    width: 38px;
+    height: 38px;
   }
   .vura-hero-media-card {
     border-radius: 18px;
@@ -3986,10 +4035,58 @@ div.text-custom-storke-cs,
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 640px) {
+  .vura-range-counters-wrap {
+    padding: 24px 0 16px;
+  }
   .vura-range-counters-container {
-    grid-template-columns: repeat(1, 1fr);
-    gap: 24px;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px 14px;
+  }
+  .vura-range-counter-num {
+    font-size: clamp(34px, 10vw, 48px);
+  }
+  .vura-range-counter-divider {
+    margin: 8px 0 6px;
+  }
+  .vura-range-counter-label {
+    font-size: 0.8125rem;
+  }
+  .vura-products-header {
+    margin-bottom: 24px;
+    gap: 14px;
+  }
+  .vura-products-header-actions {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+  .vura-cat-pills {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    gap: 8px;
+    padding-bottom: 4px;
+    width: 100%;
+  }
+  .vura-cat-pills::-webkit-scrollbar {
+    display: none;
+  }
+  .vura-cat-pill {
+    white-space: nowrap;
+    flex-shrink: 0;
+    padding: 7px 14px;
+    font-size: 0.78rem;
+  }
+  .vura-carousel-controls-deck {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+    margin: 0;
   }
 }
 
@@ -4439,33 +4536,39 @@ div.text-custom-storke-cs,
 
 @media (max-width: 768px) {
   .vura-hero-top-row {
-    flex-direction: column-reverse;
-    align-items: flex-start;
-    gap: 18px;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 14px;
     margin-bottom: 18px;
   }
+  .vura-hero-headline-wrap {
+    flex: 1;
+    min-width: 0;
+  }
   .vura-hero-play-wrap {
-    align-self: flex-end;
-    margin-right: 12px;
+    align-self: center;
+    margin: 0;
+    flex-shrink: 0;
   }
   .vura-step-textcircle {
-    width: 110px;
-    height: 110px;
+    width: clamp(74px, 16vw, 96px);
+    height: clamp(74px, 16vw, 96px);
   }
   .vura-headline-line1,
   .vura-headline-line2 {
-    font-size: clamp(28px, 7.5vw, 44px);
+    font-size: clamp(24px, 6.5vw, 42px);
   }
   .vura-headline-arrow-icon {
     width: 32px;
     height: 32px;
   }
   .vura-range-kinetic-section {
-    min-height: 360px;
-    padding: 80px 0;
+    min-height: auto;
+    padding: 44px 0 32px;
   }
   .vura-kinetic-word {
-    font-size: clamp(3.2rem, 12vw, 5rem);
+    font-size: clamp(2.2rem, 7vw, 3.6rem);
   }
   .vura-banner-thumb-content {
     position: static;
@@ -4574,13 +4677,23 @@ div.text-custom-storke-cs,
   }
 }
 
-@media (max-width: 540px) {
+@media (max-width: 640px) {
+  .vura-big-stats-section {
+    padding: 28px 0 24px;
+  }
   .vura-big-stats-container {
-    grid-template-columns: 1fr;
-    gap: 28px;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px 16px;
+    padding: 0 18px;
   }
   .vura-big-stat-num-outline {
-    font-size: clamp(44px, 12vw, 64px);
+    font-size: clamp(36px, 10vw, 50px);
+  }
+  .vura-big-stat-divider {
+    margin: 8px 0 6px;
+  }
+  .vura-big-stat-label {
+    font-size: 0.8125rem;
   }
 }
 
@@ -5213,3 +5326,202 @@ div.text-custom-storke-cs,
     grid-template-columns: 1fr;
   }
 }
+
+/* ============================================================
+   RESPONSIVE UTILITIES & FLUID ADAPTATIONS (MOBILE / TABLET / LAPTOP)
+   ============================================================ */
+
+/* Product Detail Page Responsive Grid */
+.product-detail-grid {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 48px;
+}
+
+@media (max-width: 992px) {
+  .product-detail-grid {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+}
+
+.product-detail-pack-banner {
+  background: linear-gradient(135deg, #F8FAFC 0%, #FFFFFF 100%);
+  border: 1.5px solid #DFE6EF;
+  border-radius: 16px;
+  padding: 24px 32px;
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  margin-bottom: 40px;
+  box-shadow: 0 6px 24px rgba(10,35,98,0.04);
+}
+
+@media (max-width: 640px) {
+  .product-detail-pack-banner {
+    flex-direction: column;
+    text-align: center;
+    padding: 20px 16px;
+    gap: 16px;
+  }
+}
+
+.product-features-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+@media (max-width: 640px) {
+  .product-features-grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+}
+
+/* Calculator Widget Responsive Grid */
+.calc-widget-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 28px;
+}
+
+.calc-widget-grid.compact {
+  grid-template-columns: 1fr;
+}
+
+@media (max-width: 860px) {
+  .calc-widget-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+}
+
+/* About Page Responsive Grids */
+.about-narrative-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 56px;
+  align-items: center;
+}
+
+@media (max-width: 992px) {
+  .about-narrative-grid {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+}
+
+.about-stats-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+@media (max-width: 580px) {
+  .about-stats-grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+}
+
+.about-triad-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+}
+
+@media (max-width: 992px) {
+  .about-triad-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+}
+
+@media (max-width: 640px) {
+  .about-triad-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+}
+
+/* Contact Page Responsive Grids */
+.contact-main-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 56px;
+}
+
+@media (max-width: 992px) {
+  .contact-main-grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+}
+
+.contact-form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+@media (max-width: 640px) {
+  .contact-form-row {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+}
+
+/* Innovations Page Lab Grid */
+.innovations-lab-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  align-items: center;
+}
+
+@media (max-width: 992px) {
+  .innovations-lab-grid {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+}
+
+/* Table Responsive Container */
+.table-responsive {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Header Action Responsive */
+@media (max-width: 540px) {
+  .vura-header-right .vura-enquiry-btn {
+    display: none;
+  }
+}
+
+/* Filter Pills Touch Friendly Row */
+.products-filter-row {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 768px) {
+  .products-filter-row {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    padding-bottom: 8px;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .products-filter-row::-webkit-scrollbar {
+    display: none;
+  }
+  .products-filter-row button {
+    flex-shrink: 0;
+    white-space: nowrap;
+  }
+}
+
