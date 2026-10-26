@@ -1,0 +1,926 @@
+/* ==========================================================================
+   HYBEQ CHEMICALS - HERO CONCEPTS LABORATORY STYLES
+   5 Premium Archetypes: Fully Responsive, Polished, Isolated
+   ========================================================================== */
+
+/* -------------------------------------------------------------
+   LAB SWITCHER BAR (Sticky / Floating Dock at Top of Hero)
+   ------------------------------------------------------------- */
+.hero-lab-dock {
+  background: linear-gradient(135deg, #071942 0%, #0A2362 100%);
+  border-bottom: 2px solid rgba(0, 200, 83, 0.3);
+  padding: 10px 16px;
+  position: sticky;
+  top: 72px; /* right below header */
+  z-index: 90;
+  box-shadow: 0 8px 24px rgba(7, 25, 66, 0.25);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.hero-lab-dock-inner {
+  max-width: 1360px;
+  margin: 0 auto;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.hero-lab-dock-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-heading, inherit);
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #FFFFFF;
+}
+
+.hero-lab-badge {
+  background: rgba(0, 200, 83, 0.15);
+  color: #00E676;
+  border: 1px solid rgba(0, 200, 83, 0.4);
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 0.7rem;
+  font-weight: 800;
+}
+
+.hero-lab-pills {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  overflow-x: auto;
+  padding-bottom: 2px;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+.hero-lab-pills::-webkit-scrollbar {
+  display: none;
+}
+
+.hero-lab-pill {
+  padding: 6px 12px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.06);
+  color: #E2E8F0;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.hero-lab-pill:hover {
+  background: rgba(255, 255, 255, 0.15);
+  color: #FFFFFF;
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.hero-lab-pill.active {
+  background: #00C853;
+  color: #071942;
+  border-color: #00E676;
+  font-weight: 800;
+  box-shadow: 0 0 16px rgba(0, 200, 83, 0.4);
+}
+
+/* -------------------------------------------------------------
+   CONCEPT 1: ARCHITECTURAL SPLIT SHOWCASE
+   ------------------------------------------------------------- */
+.c1-hero-wrapper {
+  background: radial-gradient(circle at 80% 20%, rgba(10, 35, 98, 0.04) 0%, rgba(255, 255, 255, 1) 70%),
+              linear-gradient(180deg, #F8FAFC 0%, #FFFFFF 100%);
+  position: relative;
+  overflow: hidden;
+  padding: 48px 24px 64px;
+}
+
+.c1-grid-pattern {
+  position: absolute;
+  inset: 0;
+  background-image: 
+    linear-gradient(to right, rgba(10, 35, 98, 0.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(10, 35, 98, 0.03) 1px, transparent 1px);
+  background-size: 40px 40px;
+  pointer-events: none;
+}
+
+.c1-container {
+  max-width: 1360px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  align-items: center;
+  gap: 48px;
+  position: relative;
+  z-index: 2;
+}
+
+.c1-content {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.c1-kicker-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  border-radius: 999px;
+  background: rgba(10, 35, 98, 0.06);
+  border: 1px solid rgba(10, 35, 98, 0.12);
+  color: #0A2362;
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  width: fit-content;
+}
+
+.c1-headline {
+  font-family: var(--font-heading, inherit);
+  font-size: clamp(2.4rem, 4.5vw, 4.2rem);
+  font-weight: 900;
+  line-height: 1.08;
+  letter-spacing: -0.03em;
+  color: #0A2362;
+  margin: 0;
+}
+
+.c1-headline span.highlight {
+  color: #00A844;
+  position: relative;
+  display: inline-block;
+}
+
+.c1-description {
+  font-size: clamp(1rem, 1.3vw, 1.18rem);
+  line-height: 1.6;
+  color: #475569;
+  max-width: 580px;
+  margin: 0;
+}
+
+.c1-cta-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-top: 8px;
+}
+
+.c1-btn-primary {
+  background: #0A2362;
+  color: #FFFFFF;
+  padding: 14px 28px;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  transition: all 0.25s ease;
+  box-shadow: 0 4px 14px rgba(10, 35, 98, 0.2);
+}
+
+.c1-btn-primary:hover {
+  background: #00C853;
+  color: #071942;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 200, 83, 0.3);
+}
+
+.c1-btn-secondary {
+  background: #FFFFFF;
+  color: #0A2362;
+  border: 1.5px solid #CBD5E1;
+  padding: 13px 24px;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.25s ease;
+}
+
+.c1-btn-secondary:hover {
+  border-color: #0A2362;
+  background: #F8FAFC;
+  transform: translateY(-2px);
+}
+
+.c1-trust-strip {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding-top: 16px;
+  border-top: 1px solid #E2E8F0;
+  flex-wrap: wrap;
+}
+
+.c1-trust-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #64748B;
+}
+
+.c1-trust-item svg {
+  color: #00C853;
+}
+
+/* C1 Product Showcase Stage */
+.c1-stage {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 480px;
+}
+
+.c1-stage-glow {
+  position: absolute;
+  width: 380px;
+  height: 380px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(0, 200, 83, 0.15) 0%, rgba(10, 35, 98, 0.08) 50%, transparent 70%);
+  filter: blur(40px);
+  z-index: 1;
+}
+
+.c1-pedestal {
+  position: absolute;
+  bottom: 20px;
+  width: 320px;
+  height: 40px;
+  background: radial-gradient(ellipse at center, rgba(10, 35, 98, 0.25) 0%, transparent 75%);
+  z-index: 1;
+}
+
+.c1-product-img {
+  position: relative;
+  z-index: 2;
+  max-width: 360px;
+  width: 90%;
+  height: auto;
+  filter: drop-shadow(0 24px 32px rgba(10, 35, 98, 0.22));
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  animation: c1Float 6s ease-in-out infinite;
+}
+
+@keyframes c1Float {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-10px) rotate(0.8deg); }
+}
+
+.c1-spec-badge {
+  position: absolute;
+  z-index: 3;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(10, 35, 98, 0.12);
+  padding: 10px 14px;
+  border-radius: 12px;
+  box-shadow: 0 12px 28px rgba(10, 35, 98, 0.12);
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  transition: transform 0.3s ease;
+}
+
+.c1-spec-badge:hover {
+  transform: translateY(-4px) scale(1.03);
+}
+
+.c1-badge-top-right {
+  top: 12%;
+  right: -5%;
+}
+
+.c1-badge-bottom-left {
+  bottom: 14%;
+  left: -4%;
+}
+
+.c1-spec-badge .badge-val {
+  font-size: 1.15rem;
+  font-weight: 900;
+  color: #0A2362;
+  letter-spacing: -0.02em;
+}
+
+.c1-spec-badge .badge-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #64748B;
+  letter-spacing: 0.05em;
+}
+
+/* -------------------------------------------------------------
+   CONCEPT 2: INTERACTIVE 3-PILLAR EXPANDABLE HERO
+   ------------------------------------------------------------- */
+.c2-hero-wrapper {
+  background: #071942;
+  position: relative;
+  overflow: hidden;
+  padding: 32px 16px 48px;
+}
+
+.c2-header {
+  max-width: 1360px;
+  margin: 0 auto 24px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.c2-header-title {
+  color: #FFFFFF;
+  font-size: clamp(1.8rem, 3.2vw, 2.8rem);
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  margin: 0;
+}
+
+.c2-header-sub {
+  color: #94A3B8;
+  font-size: 0.95rem;
+  max-width: 480px;
+  margin: 0;
+}
+
+.c2-pillars-grid {
+  max-width: 1360px;
+  margin: 0 auto;
+  display: flex;
+  gap: 16px;
+  height: 520px;
+}
+
+.c2-pillar {
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: flex 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.3s ease;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 32px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.c2-pillar.active {
+  flex: 2.8;
+  border-color: #00E676;
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.5);
+}
+
+.c2-pillar-bg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  transition: transform 0.6s ease;
+  filter: brightness(0.65);
+}
+
+.c2-pillar:hover .c2-pillar-bg,
+.c2-pillar.active .c2-pillar-bg {
+  transform: scale(1.05);
+  filter: brightness(0.5);
+}
+
+.c2-pillar-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(7, 25, 66, 0.1) 0%, rgba(7, 25, 66, 0.92) 80%);
+}
+
+.c2-pillar-content {
+  position: relative;
+  z-index: 2;
+  color: #FFFFFF;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.c2-pillar-num {
+  font-size: 0.85rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  color: #00E676;
+  text-transform: uppercase;
+}
+
+.c2-pillar-title {
+  font-size: clamp(1.3rem, 2vw, 1.9rem);
+  font-weight: 800;
+  margin: 0;
+  line-height: 1.15;
+}
+
+.c2-pillar-details {
+  display: none;
+  flex-direction: column;
+  gap: 16px;
+  animation: fadeIn 0.4s ease forwards;
+}
+
+.c2-pillar.active .c2-pillar-details {
+  display: flex;
+}
+
+.c2-pillar-desc {
+  color: #CBD5E1;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  max-width: 500px;
+  margin: 0;
+}
+
+.c2-product-tag-row {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.c2-prod-thumb {
+  width: 52px;
+  height: 52px;
+  object-fit: contain;
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 8px;
+  padding: 4px;
+}
+
+/* -------------------------------------------------------------
+   CONCEPT 3: BENTO-GRID HIGH-TECH HUB
+   ------------------------------------------------------------- */
+.c3-hero-wrapper {
+  background: #F1F5F9;
+  padding: 40px 20px 60px;
+}
+
+.c3-bento-container {
+  max-width: 1360px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.7fr 1.3fr;
+  grid-template-rows: auto auto;
+  gap: 20px;
+}
+
+.c3-card {
+  background: #FFFFFF;
+  border-radius: 20px;
+  padding: 32px;
+  border: 1px solid #E2E8F0;
+  box-shadow: 0 4px 16px rgba(10, 35, 98, 0.04);
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.c3-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 30px rgba(10, 35, 98, 0.08);
+}
+
+/* Card A: Big Showcase */
+.c3-card-main {
+  grid-row: span 2;
+  background: linear-gradient(135deg, #071942 0%, #0A2362 100%);
+  color: #FFFFFF;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 540px;
+}
+
+.c3-main-text {
+  max-width: 500px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.c3-main-title {
+  font-size: clamp(2.2rem, 3.6vw, 3.4rem);
+  font-weight: 900;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  margin: 0;
+}
+
+.c3-main-product-stage {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 24px;
+}
+
+.c3-main-img {
+  max-height: 280px;
+  object-fit: contain;
+  filter: drop-shadow(0 20px 30px rgba(0, 0, 0, 0.4));
+  animation: c1Float 6s ease-in-out infinite;
+}
+
+/* Card B: Quick Surface Selector Tool */
+.c3-card-tool {
+  background: #FFFFFF;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 18px;
+}
+
+.c3-tool-title {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: #0A2362;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.c3-surface-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.c3-chip {
+  padding: 8px 14px;
+  border-radius: 8px;
+  border: 1px solid #E2E8F0;
+  background: #F8FAFC;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #334155;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.c3-chip:hover {
+  background: #E2E8F0;
+  color: #0A2362;
+}
+
+.c3-chip.active {
+  background: #0A2362;
+  color: #FFFFFF;
+  border-color: #0A2362;
+}
+
+.c3-recommendation-box {
+  background: #F0FDF4;
+  border: 1px solid #BBF7D0;
+  border-radius: 12px;
+  padding: 14px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+/* Sub-Row Cards */
+.c3-bottom-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.c3-metric-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 6px;
+}
+
+.c3-metric-number {
+  font-size: 2.4rem;
+  font-weight: 900;
+  color: #00A844;
+  letter-spacing: -0.03em;
+  line-height: 1;
+}
+
+.c3-metric-label {
+  font-size: 0.85rem;
+  color: #64748B;
+  font-weight: 700;
+}
+
+/* -------------------------------------------------------------
+   CONCEPT 4: FULL-WIDTH CINEMATIC BANNER WITH FROSTED HUD
+   ------------------------------------------------------------- */
+.c4-hero-wrapper {
+  position: relative;
+  min-height: 620px;
+  display: flex;
+  align-items: flex-end;
+  padding: 40px 24px 48px;
+  overflow: hidden;
+}
+
+.c4-bg-slide {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  filter: brightness(0.7);
+  transition: opacity 0.8s ease;
+}
+
+.c4-hud-card {
+  position: relative;
+  z-index: 3;
+  max-width: 1360px;
+  margin: 0 auto;
+  width: 100%;
+  background: rgba(7, 25, 66, 0.78);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 20px;
+  padding: 32px 40px;
+  display: grid;
+  grid-template-columns: 1.4fr 1fr auto;
+  align-items: center;
+  gap: 32px;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.4);
+}
+
+.c4-hud-info {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.c4-hud-cat {
+  color: #00E676;
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.c4-hud-title {
+  color: #FFFFFF;
+  font-size: clamp(1.8rem, 2.5vw, 2.6rem);
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  margin: 0;
+  line-height: 1.15;
+}
+
+.c4-hud-specs {
+  border-left: 1px solid rgba(255, 255, 255, 0.15);
+  padding-left: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.c4-spec-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.85rem;
+  gap: 16px;
+}
+
+.c4-spec-key {
+  color: #94A3B8;
+  font-weight: 600;
+}
+
+.c4-spec-val {
+  color: #FFFFFF;
+  font-weight: 800;
+}
+
+.c4-hud-controls {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.c4-nav-btn {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.c4-nav-btn:hover {
+  background: #00C853;
+  color: #071942;
+  border-color: #00E676;
+}
+
+/* -------------------------------------------------------------
+   CONCEPT 5: TECHNICAL SPEC-CARD MATRIX
+   ------------------------------------------------------------- */
+.c5-hero-wrapper {
+  background: #FFFFFF;
+  padding: 48px 24px 64px;
+  border-bottom: 1px solid #E2E8F0;
+}
+
+.c5-container {
+  max-width: 1360px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  align-items: center;
+  gap: 48px;
+}
+
+.c5-headline {
+  font-size: clamp(2.3rem, 4vw, 3.8rem);
+  font-weight: 900;
+  color: #0A2362;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  margin: 0 0 16px;
+}
+
+.c5-spec-sheet {
+  background: #0F172A;
+  border-radius: 20px;
+  border: 1px solid #1E293B;
+  padding: 32px;
+  color: #FFFFFF;
+  box-shadow: 0 20px 40px rgba(15, 23, 42, 0.15);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.c5-sheet-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #334155;
+}
+
+.c5-tab-row {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+}
+
+.c5-tab {
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  background: #1E293B;
+  color: #94A3B8;
+  border: none;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.c5-tab.active {
+  background: #00C853;
+  color: #071942;
+  font-weight: 800;
+}
+
+.c5-matrix-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.c5-matrix-item {
+  background: #1E293B;
+  border-radius: 10px;
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.c5-matrix-num {
+  font-size: 1.4rem;
+  font-weight: 900;
+  color: #38BDF8;
+}
+
+.c5-matrix-lbl {
+  font-size: 0.75rem;
+  color: #94A3B8;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+/* -------------------------------------------------------------
+   RESPONSIVE OVERRIDES (MOBILE & TABLET)
+   ------------------------------------------------------------- */
+@media (max-width: 991px) {
+  .c1-container,
+  .c5-container {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+
+  .c2-pillars-grid {
+    flex-direction: column;
+    height: auto;
+  }
+  .c2-pillar {
+    min-height: 220px;
+    flex: none !important;
+  }
+  .c2-pillar.active {
+    min-height: 360px;
+  }
+
+  .c3-bento-container {
+    grid-template-columns: 1fr;
+  }
+  .c3-card-main {
+    grid-row: auto;
+    min-height: 420px;
+  }
+
+  .c4-hud-card {
+    grid-template-columns: 1fr;
+    padding: 24px;
+    gap: 20px;
+  }
+  .c4-hud-specs {
+    border-left: none;
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+    padding-left: 0;
+    padding-top: 16px;
+  }
+}
+
+@media (max-width: 640px) {
+  .c1-hero-wrapper,
+  .c2-hero-wrapper,
+  .c3-hero-wrapper,
+  .c4-hero-wrapper,
+  .c5-hero-wrapper {
+    padding-left: 14px;
+    padding-right: 14px;
+    padding-top: 24px;
+    padding-bottom: 36px;
+  }
+
+  .c1-badge-top-right {
+    right: 0;
+    top: 5%;
+  }
+  .c1-badge-bottom-left {
+    left: 0;
+    bottom: 5%;
+  }
+
+  .c3-bottom-row {
+    grid-template-columns: 1fr;
+  }
+
+  .c5-matrix-grid {
+    grid-template-columns: 1fr;
+  }
+}
