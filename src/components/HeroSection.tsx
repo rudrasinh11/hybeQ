@@ -18,7 +18,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
   const slides = [
     {
       id: 0,
-      image: '/images/hero_banner_01.png?v=8',
+      image: '/images/hero_banner_01.png?v=10',
       category: 'TILE & STONE ADHESIVE',
       badge: 'ENGINEERED FOR STRONGER STRUCTURES',
       desc: 'We engineer advanced bonding solutions for each market, using a combination of high-grade polymers, natural minerals, and specialized additives along with our deep expertise in specialized building chemicals.',
@@ -27,21 +27,21 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
     },
     {
       id: 1,
-      image: '/images/hero_banner_02.png?v=8',
-      category: 'WATERPROOFING SOLUTIONS',
-      badge: 'PROTECT WHAT MATTERS MOST',
-      desc: 'We develop innovative waterproofing solutions for each market, using a combination of elastomeric and crystalline raw materials along with our deep knowledge & expertise in specialized building chemicals.',
-      productName: 'HYBEQ Waterproofing Solutions (DAMPPROOF, MASTERFLEX PU)',
-      alt: 'HYBEQ Advanced Waterproofing Solutions - Stop Water Leaks Permanently'
+      image: '/images/hero_banner_02.png?v=10',
+      category: 'WATERPROOFING & PROTECTION SOLUTIONS',
+      badge: 'SHIELDED FROM THE TOUGHEST ELEMENTS',
+      desc: 'Superior dampproof, elastomeric coatings, and bonding solutions for durable, leak-free, and weather-resistant structures.',
+      productName: 'HYBEQ Waterproofing Solutions (DAMPPROOF ULTRA, FLEXICOAT 2C)',
+      alt: 'HYBEQ Waterproofing & Protection Solutions - Shielded From The Toughest Elements'
     },
     {
       id: 2,
-      image: '/images/hero_banner_03.png?v=8',
-      category: 'PRECISION TILE FIXING & GROUTS',
-      badge: 'LET THE WORLD KNOW YOUR COLORFUL PERSONALITY',
-      desc: 'We formulate precision epoxy solutions for each market, using a combination of stain-resistant resins and high-purity quartz fillers along with our deep knowledge & expertise in specialized building chemicals.',
-      productName: 'HYBEQ Tile Fixing & Grout (SPOT BOND EP510, STONESEAL)',
-      alt: 'HYBEQ Precision Tile Fixing & Epoxy Grouts - Stain-Resistant & Vibrant'
+      image: '/images/hero_banner_03.png?v=10',
+      category: 'EPOXY FLOORING & SURFACE SOLUTIONS',
+      badge: 'BUILT FOR THE TOUGHEST FLOORS',
+      desc: 'Superior epoxy, screed, microcement, and floor hardener solutions for durable, seamless, and high-traffic surfaces.',
+      productName: 'HYBEQ Epoxy Flooring & Surface Solutions (HARDTOP 330, S03)',
+      alt: 'HYBEQ Epoxy Flooring & Surface Solutions - Built For The Toughest Floors'
     }
   ];
 
@@ -168,33 +168,50 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                 />
               </div>
             ))}
+
+            {/* Manual Carousel Navigation Arrows (Centered on the banner image) */}
+            <button
+              type="button"
+              className="vura-carousel-nav-btn prev"
+              aria-label="Previous slide"
+              onClick={(e) => {
+                e.stopPropagation();
+                prevSlide();
+              }}
+            >
+              <ChevronLeft size={22} />
+            </button>
+            <button
+              type="button"
+              className="vura-carousel-nav-btn next"
+              aria-label="Next slide"
+              onClick={(e) => {
+                e.stopPropagation();
+                nextSlide();
+              }}
+            >
+              <ChevronRight size={22} />
+            </button>
+
+            {/* Center Pagination: 3 pill dots indicating active hero slide pinned inside banner */}
+            <div className="vura-banner-indicators" role="tablist" aria-label="Hero Slides">
+              {slides.map((s, idx) => (
+                <button
+                  key={s.id}
+                  type="button"
+                  role="tab"
+                  aria-selected={idx === activeSlide}
+                  aria-label={`Slide ${idx + 1}: ${s.category}`}
+                  className={`vura-banner-indicator ${idx === activeSlide ? 'active' : ''}`}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setActiveSlide(idx);
+                  }}
+                />
+              ))}
+            </div>
           </div>
 
-          {/* Manual Carousel Navigation Arrows (Translucent sleek buttons) */}
-          <button
-            type="button"
-            className="vura-carousel-nav-btn prev"
-            aria-label="Previous slide"
-            onClick={(e) => {
-              e.stopPropagation();
-              prevSlide();
-            }}
-          >
-            <ChevronLeft size={22} />
-          </button>
-          <button
-            type="button"
-            className="vura-carousel-nav-btn next"
-            aria-label="Next slide"
-            onClick={(e) => {
-              e.stopPropagation();
-              nextSlide();
-            }}
-          >
-            <ChevronRight size={22} />
-          </button>
-
-          {/* ============================================================
           {/* ============================================================
               TOP-RIGHT NOTCH CONTENT (1:1 VURA Reference Treatment):
               Clean, deliberately positioned supporting text block
@@ -207,24 +224,6 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
             <p className="vura-notch-desc">
               {slides[activeSlide].desc}
             </p>
-          </div>
-
-          {/* Center Pagination: 3 pill dots indicating active hero slide */}
-          <div className="vura-banner-indicators" role="tablist" aria-label="Hero Slides">
-            {slides.map((s, idx) => (
-              <button
-                key={s.id}
-                type="button"
-                role="tab"
-                aria-selected={idx === activeSlide}
-                aria-label={`Slide ${idx + 1}: ${s.category}`}
-                className={`vura-banner-indicator ${idx === activeSlide ? 'active' : ''}`}
-                onClick={(e) => {
-                  e.stopPropagation();
-                  setActiveSlide(idx);
-                }}
-              />
-            ))}
           </div>
 
         </div>

@@ -22,9 +22,9 @@ export const InnovationsPage: React.FC<InnovationsPageProps> = ({ onOpenEnquiry 
       </section>
 
       {/* Lab Highlights */}
-      <section style={{ padding: '80px 0', background: '#FFFFFF' }}>
+      <section style={{ padding: 'clamp(40px, 6vw, 80px) 0', background: '#FFFFFF' }}>
         <div className="container">
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 48, alignItems: 'center' }}>
+          <div className="innovations-lab-grid">
             <div>
               <span className="section-tag">Laboratory Capabilities</span>
               <h2 style={{ fontSize: '2.2rem', color: '#0A2362', fontWeight: 900, lineHeight: 1.2, marginBottom: 20 }}>
@@ -68,7 +68,7 @@ export const InnovationsPage: React.FC<InnovationsPageProps> = ({ onOpenEnquiry 
             <div style={{
               background: 'linear-gradient(135deg, #0A2362 0%, #071A45 100%)',
               borderRadius: 20,
-              padding: 40,
+              padding: 'clamp(24px, 4vw, 40px)',
               color: '#FFFFFF',
               boxShadow: '0 20px 50px rgba(10,35,98,0.2)'
             }}>

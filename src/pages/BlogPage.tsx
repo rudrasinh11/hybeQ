@@ -64,7 +64,8 @@ export const BlogPage: React.FC = () => {
               border: '1.5px solid #DFE6EF',
               borderRadius: 10,
               padding: '6px 14px',
-              minWidth: 260
+              width: '100%',
+              maxWidth: 360
             }}>
               <Search size={16} style={{ color: '#0A2362', marginRight: 8 }} />
               <input
@@ -80,9 +81,9 @@ export const BlogPage: React.FC = () => {
       </section>
 
       {/* Article Grid */}
-      <section style={{ padding: '70px 0 90px', background: '#FFFFFF' }}>
+      <section style={{ padding: 'clamp(40px, 6vw, 70px) 0 clamp(50px, 7vw, 90px)', background: '#FFFFFF' }}>
         <div className="container">
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(340px, 1fr))', gap: 36 }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 300px), 1fr))', gap: 'clamp(20px, 3.5vw, 36px)' }}>
             {filteredPosts.map(post => (
               <article
                 key={post.id}
@@ -107,7 +108,7 @@ export const BlogPage: React.FC = () => {
                   e.currentTarget.style.boxShadow = 'none';
                 }}
               >
-                <div style={{ padding: 32 }}>
+                <div style={{ padding: 'clamp(20px, 4vw, 32px)' }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 16 }}>
                     <span style={{ fontSize: '0.75rem', fontWeight: 800, color: '#46C985', background: '#EAF8F0', padding: '4px 10px', borderRadius: 4, textTransform: 'uppercase' }}>
                       {post.category}
