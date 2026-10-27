@@ -68,7 +68,7 @@ export const HomePage: React.FC<HomePageProps> = ({
         <div className="vura-container">
           <div className="vura-products-header">
             <div>
-              <span className="vura-section-tag">Featured Formulations (Curated 5–6)</span>
+              <span className="vura-section-tag">Engineered Formulations</span>
               <h2 className="vura-section-heading" style={{ margin: 0 }}>
                 High-Performance Catalog
               </h2>
@@ -81,7 +81,7 @@ export const HomePage: React.FC<HomePageProps> = ({
                   { id: 'all', label: 'All Products' },
                   { id: 'tile-fixing', label: 'Tile & Stone' },
                   { id: 'waterproofing', label: 'Waterproofing' },
-                  { id: 'repairs', label: 'Repairs' },
+                  { id: 'structural-repair', label: 'Structural Repair' },
                   { id: 'grouts', label: 'Grouts' }
                 ].map(cat => (
                   <button

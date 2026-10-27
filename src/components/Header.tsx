@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link, NavLink, useNavigate } from 'react-router-dom';
-import { ArrowUpRight, Search, Calculator, Menu, X, ChevronDown, ChevronRight } from 'lucide-react';
+import { ArrowUpRight, Search, Calculator, Menu, X, ChevronDown } from 'lucide-react';
 
 interface HeaderProps {
   onOpenSearch: () => void;
@@ -13,12 +13,9 @@ export const Header: React.FC<HeaderProps> = ({
 }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [productsMegaOpen, setProductsMegaOpen] = useState(false);
-  const [aboutMenuOpen, setAboutMenuOpen] = useState(false);
   const [mobileProductsOpen, setMobileProductsOpen] = useState(false);
-  const [mobileAboutOpen, setMobileAboutOpen] = useState(false);
   
   const productsTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const aboutTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const headerRef = useRef<HTMLElement>(null);
   const navigate = useNavigate();
 
@@ -27,7 +24,6 @@ export const Header: React.FC<HeaderProps> = ({
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
         setProductsMegaOpen(false);
-        setAboutMenuOpen(false);
         setMobileMenuOpen(false);
       }
     };
@@ -40,7 +36,6 @@ export const Header: React.FC<HeaderProps> = ({
     const handleClickOutside = (e: MouseEvent) => {
       if (headerRef.current && !headerRef.current.contains(e.target as Node)) {
         setProductsMegaOpen(false);
-        setAboutMenuOpen(false);
       }
     };
     document.addEventListener('mousedown', handleClickOutside);
@@ -50,7 +45,6 @@ export const Header: React.FC<HeaderProps> = ({
   // Handlers for Products Mega Menu hover with grace period
   const handleProductsEnter = () => {
     if (productsTimeoutRef.current) clearTimeout(productsTimeoutRef.current);
-    setAboutMenuOpen(false);
     setProductsMegaOpen(true);
   };
 
@@ -60,22 +54,8 @@ export const Header: React.FC<HeaderProps> = ({
     }, 200);
   };
 
-  // Handlers for About Us Menu hover with grace period
-  const handleAboutEnter = () => {
-    if (aboutTimeoutRef.current) clearTimeout(aboutTimeoutRef.current);
-    setProductsMegaOpen(false);
-    setAboutMenuOpen(true);
-  };
-
-  const handleAboutLeave = () => {
-    aboutTimeoutRef.current = setTimeout(() => {
-      setAboutMenuOpen(false);
-    }, 200);
-  };
-
   const closeAllMenus = () => {
     setProductsMegaOpen(false);
-    setAboutMenuOpen(false);
     setMobileMenuOpen(false);
   };
 
@@ -114,7 +94,7 @@ export const Header: React.FC<HeaderProps> = ({
         },
         {
           heading: 'DECORATIVE FLOOR & WALL',
-          link: '/products/precast',
+          link: '/products/decorative-floor-wall',
           products: [
             'Hybeq Hardtop 330',
             'Hybeq Hardtop M331',
@@ -130,7 +110,7 @@ export const Header: React.FC<HeaderProps> = ({
       sections: [
         {
           heading: 'PRECAST ADDITIVES',
-          link: '/products/precast',
+          link: '/products/precast-additives',
           products: [
             'Hy Fastset AC Hybrid',
             'Hy Fastset AC',
@@ -146,7 +126,7 @@ export const Header: React.FC<HeaderProps> = ({
         },
         {
           heading: 'SURFACE TREATMENT',
-          link: '/products/repairs',
+          link: '/products/surface-treatment',
           products: [
             'Hybeq Metacor',
             'Hybeq Meta Rust',
@@ -156,7 +136,7 @@ export const Header: React.FC<HeaderProps> = ({
         },
         {
           heading: 'DRYMIX MORTAR',
-          link: '/products/repairs',
+          link: '/products/drymix-mortar',
           products: [
             'Co Superplast PB',
             'Hy Blockcrete',
@@ -185,7 +165,7 @@ export const Header: React.FC<HeaderProps> = ({
         },
         {
           heading: 'BONDING AGENT',
-          link: '/products/repairs',
+          link: '/products/bonding-agent',
           products: [
             'Hybeq Hack Aid',
             'Hybeq Hyporfoc 700',
@@ -194,7 +174,7 @@ export const Header: React.FC<HeaderProps> = ({
         },
         {
           heading: 'CURING COMPOUNDS',
-          link: '/products/precast',
+          link: '/products/curing-compounds',
           products: [
             'Hy Supercure W1',
             'Hy Supercure W4',
@@ -203,7 +183,7 @@ export const Header: React.FC<HeaderProps> = ({
         },
         {
           heading: 'EPOXY SCREED',
-          link: '/products/precast',
+          link: '/products/epoxy-screed',
           products: [
             'Hybeq Epoxy Screed Finish'
           ]
@@ -215,7 +195,7 @@ export const Header: React.FC<HeaderProps> = ({
       sections: [
         {
           heading: 'PLASTICIZERS RMC/PQC',
-          link: '/products/precast',
+          link: '/products/plasticizers',
           products: [
             'Hy Superconcrete 650',
             'Hy Superconcrete P-480',
@@ -227,7 +207,7 @@ export const Header: React.FC<HeaderProps> = ({
         },
         {
           heading: 'STRUCTURAL REPAIR',
-          link: '/products/repairs',
+          link: '/products/structural-repair',
           products: [
             'Hy Microconcrete M40',
             'Hy Microconcrete M70',
@@ -236,7 +216,7 @@ export const Header: React.FC<HeaderProps> = ({
         },
         {
           heading: 'SEALANTS',
-          link: '/products/grouts',
+          link: '/products/sealants',
           products: [
             'Hybeq Jointseal MS',
             'Hybeq Jointseal PU',
@@ -245,7 +225,7 @@ export const Header: React.FC<HeaderProps> = ({
         },
         {
           heading: 'EPOXY FLOORING',
-          link: '/products/precast',
+          link: '/products/epoxy-flooring',
           products: [
             'Hybeq Epoxy Self Level 500'
           ]
@@ -292,13 +272,11 @@ export const Header: React.FC<HeaderProps> = ({
 
           {/* 2. SUSTAINABILITY */}
           <NavLink to="/sustainability" className={({ isActive }) => `vura-nav-link ${isActive ? 'active' : ''}`}>
-            <ArrowUpRight size={14} className="vura-nav-arrow" />
             <span>SUSTAINABILITY</span>
           </NavLink>
 
           {/* 3. DOWNLOADS */}
           <NavLink to="/downloads" className={({ isActive }) => `vura-nav-link ${isActive ? 'active' : ''}`}>
-            <ArrowUpRight size={14} className="vura-nav-arrow" />
             <span>DOWNLOADS</span>
           </NavLink>
 
@@ -307,55 +285,10 @@ export const Header: React.FC<HeaderProps> = ({
             <span>INNOVATIONS</span>
           </NavLink>
 
-          {/* 5. ABOUT US with Submenu */}
-          <div
-            className="vura-nav-item-wrap"
-            onMouseEnter={handleAboutEnter}
-            onMouseLeave={handleAboutLeave}
-          >
-            <NavLink
-              to="/about"
-              className={({ isActive }) => `vura-nav-link ${isActive || aboutMenuOpen ? 'active' : ''}`}
-              onClick={() => setAboutMenuOpen(!aboutMenuOpen)}
-              aria-expanded={aboutMenuOpen}
-              aria-haspopup="true"
-            >
-              <ArrowUpRight size={14} className="vura-nav-arrow" />
-              <span>ABOUT US</span>
-            </NavLink>
-
-            {/* About Us Submenu Dropdown */}
-            {aboutMenuOpen && (
-              <div
-                className="vura-about-dropdown"
-                onMouseEnter={handleAboutEnter}
-                onMouseLeave={handleAboutLeave}
-                role="menu"
-                aria-label="About Us Submenu"
-              >
-                <Link to="/about#story" className="vura-about-item" onClick={closeAllMenus} role="menuitem">
-                  <span>Story</span>
-                  <ChevronRight size={14} className="vura-submenu-arrow" />
-                </Link>
-                <Link to="/about#principle" className="vura-about-item" onClick={closeAllMenus} role="menuitem">
-                  <span>Principle</span>
-                  <ChevronRight size={14} className="vura-submenu-arrow" />
-                </Link>
-                <Link to="/about#mission" className="vura-about-item" onClick={closeAllMenus} role="menuitem">
-                  <span>Mission</span>
-                  <ChevronRight size={14} className="vura-submenu-arrow" />
-                </Link>
-                <Link to="/about#vision" className="vura-about-item" onClick={closeAllMenus} role="menuitem">
-                  <span>Vision</span>
-                  <ChevronRight size={14} className="vura-submenu-arrow" />
-                </Link>
-                <Link to="/about#infrastructure" className="vura-about-item" onClick={closeAllMenus} role="menuitem">
-                  <span>Infrastructure</span>
-                  <ChevronRight size={14} className="vura-submenu-arrow" />
-                </Link>
-              </div>
-            )}
-          </div>
+          {/* 5. ABOUT US */}
+          <NavLink to="/about" className={({ isActive }) => `vura-nav-link ${isActive ? 'active' : ''}`}>
+            <span>ABOUT US</span>
+          </NavLink>
 
           {/* 6. BLOG */}
           <NavLink to="/blog" className={({ isActive }) => `vura-nav-link ${isActive ? 'active' : ''}`}>
@@ -517,13 +450,11 @@ export const Header: React.FC<HeaderProps> = ({
 
             {/* 2. Sustainability */}
             <Link to="/sustainability" onClick={closeAllMenus} className="vura-mobile-link">
-              <ArrowUpRight size={16} className="vura-nav-arrow" />
               <span>SUSTAINABILITY</span>
             </Link>
 
             {/* 3. Downloads */}
             <Link to="/downloads" onClick={closeAllMenus} className="vura-mobile-link">
-              <ArrowUpRight size={16} className="vura-nav-arrow" />
               <span>DOWNLOADS</span>
             </Link>
 
@@ -532,29 +463,10 @@ export const Header: React.FC<HeaderProps> = ({
               <span>INNOVATIONS</span>
             </Link>
 
-            {/* 5. Mobile About Us Accordion */}
-            <div className="vura-mobile-accordion">
-              <button
-                type="button"
-                className="vura-mobile-accordion-toggle"
-                onClick={() => setMobileAboutOpen(!mobileAboutOpen)}
-              >
-                <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-                  <ArrowUpRight size={16} className="vura-nav-arrow" />
-                  <span>ABOUT US</span>
-                </div>
-                <ChevronDown size={18} style={{ transform: mobileAboutOpen ? 'rotate(180deg)' : 'none', transition: 'transform 0.2s' }} />
-              </button>
-              {mobileAboutOpen && (
-                <div className="vura-mobile-sublist">
-                  <Link to="/about#story" onClick={closeAllMenus} className="vura-mobile-sublink">Story</Link>
-                  <Link to="/about#principle" onClick={closeAllMenus} className="vura-mobile-sublink">Principle</Link>
-                  <Link to="/about#mission" onClick={closeAllMenus} className="vura-mobile-sublink">Mission</Link>
-                  <Link to="/about#vision" onClick={closeAllMenus} className="vura-mobile-sublink">Vision</Link>
-                  <Link to="/about#infrastructure" onClick={closeAllMenus} className="vura-mobile-sublink">Infrastructure</Link>
-                </div>
-              )}
-            </div>
+            {/* 5. About Us (Direct link, no nested accordion) */}
+            <Link to="/about" onClick={closeAllMenus} className="vura-mobile-link">
+              <span>ABOUT US</span>
+            </Link>
 
             {/* 6. Blog */}
             <Link to="/blog" onClick={closeAllMenus} className="vura-mobile-link">

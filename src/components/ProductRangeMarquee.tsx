@@ -106,27 +106,25 @@ export const ProductRangeMarquee: React.FC = () => {
     };
   }, []);
 
-  // HYBEQ categories for kinetic typography
+  // 14 official HYBEQ categories for kinetic typography
   const kineticRow1 = [
     'TILE & STONE FIXING',
+    'PRECAST ADDITIVES',
     'WATERPROOFING',
-    'REPAIRS',
+    'PLASTICIZERS RMC/PQC',
     'GROUTING SYSTEMS',
-    'FLOOR HARDENER',
-    'CONCRETE ADMIXTURES',
     'SURFACE TREATMENT',
-    'PRECAST ADDITIVES'
+    'BONDING AGENT'
   ];
 
   const kineticRow2 = [
-    'STONECARE',
-    'REPAIRS & MORTARS',
-    'WATERPROOFING',
-    'EPOXY GROUTING',
+    'STRUCTURAL REPAIR',
     'SEALANTS',
+    'DECORATIVE FLOOR & WALL',
     'DRYMIX MORTAR',
-    'POLYMER MORTARS',
-    'CRYSTALLINE MEMBRANES'
+    'CURING COMPOUNDS',
+    'EPOXY FLOORING',
+    'EPOXY SCREED'
   ];
 
   return (
@@ -220,11 +218,11 @@ export const ProductRangeMarquee: React.FC = () => {
           <div className="vura-range-counter-col">
             <div className="vura-range-counter-num-wrap">
               <span className="vura-range-counter-num">
-                <CounterNumber end={5} suffix="" startTrigger={countersVisible} duration={1600} />
+                <CounterNumber end={14} suffix="" startTrigger={countersVisible} duration={1600} />
               </span>
             </div>
             <div className="vura-range-counter-divider" />
-            <span className="vura-range-counter-label">Core Divisions</span>
+            <span className="vura-range-counter-label">Chemical Divisions</span>
           </div>
 
           <div className="vura-range-counter-col">

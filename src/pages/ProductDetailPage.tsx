@@ -37,7 +37,7 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ onOpenEnqu
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: 20 }}>
             <div>
               <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 10 }}>
-                <span style={{ fontSize: '0.75rem', fontWeight: 800, background: '#46C985', color: '#0A2362', padding: '4px 12px', borderRadius: 20, textTransform: 'uppercase' }}>
+                <span style={{ fontSize: '0.75rem', fontWeight: 700, background: 'rgba(255,255,255,0.15)', color: '#FFFFFF', border: '1px solid rgba(255,255,255,0.25)', padding: '4px 12px', borderRadius: 4, textTransform: 'uppercase', letterSpacing: 0.5 }}>
                   {product.badge}
                 </span>
                 <span style={{ fontSize: '0.8125rem', color: 'rgba(255,255,255,0.8)', fontWeight: 600 }}>
@@ -215,7 +215,7 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ onOpenEnqu
                   Estimate bags required for <strong>{product.name}</strong> according to your specific site area.
                 </p>
 
-                <CalculatorWidget onOpenEnquiry={onOpenEnquiry} compact={true} />
+                <CalculatorWidget initialProductId={product.id} onOpenEnquiry={onOpenEnquiry} compact={true} />
 
                 <div style={{ marginTop: 24, paddingTop: 20, borderTop: '1px solid #DFE6EF', display: 'flex', flexDirection: 'column', gap: 12 }}>
                   <button

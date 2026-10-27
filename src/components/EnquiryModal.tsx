@@ -84,19 +84,19 @@ export const EnquiryModal: React.FC<EnquiryModalProps> = ({
 
         {!isSubmitted ? (
           <div>
-            <div style={{ marginBottom: 24 }}>
+            <div style={{ marginBottom: 16 }}>
               <span className="section-tag">Direct Factory Connection</span>
-              <h3 style={{ fontSize: '1.6rem', color: '#0A2362', fontWeight: 800, margin: '8px 0 4px' }}>
+              <h3 style={{ fontSize: '1.45rem', color: '#0A2362', fontWeight: 800, margin: '6px 0 2px' }}>
                 Commercial Project Inquiry
               </h3>
-              <p style={{ fontSize: '0.875rem', color: '#64748B' }}>
+              <p style={{ fontSize: '0.8125rem', color: '#64748B', margin: 0 }}>
                 Connect directly with Hybeq technical application engineers for project estimates, site inspections, and sample dispatch.
               </p>
             </div>
 
-            <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
+            <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
               {/* Name & Phone */}
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 14 }}>
                 <div>
                   <label style={{ display: 'block', fontSize: '0.8125rem', fontWeight: 700, color: '#0A2362', marginBottom: 6 }}>
                     Your Name *
@@ -259,19 +259,19 @@ export const EnquiryModal: React.FC<EnquiryModalProps> = ({
                   Project Details / Substrate Type
                 </label>
                 <textarea
-                  rows={3}
+                  rows={2}
                   value={formData.message}
                   onChange={e => setFormData({ ...formData, message: e.target.value })}
                   placeholder="Specify substrate condition, tile dimensions (e.g. 1200x1800mm), or technical questions..."
                   style={{
                     width: '100%',
-                    padding: '10px 14px',
+                    padding: '8px 12px',
                     borderRadius: 8,
                     border: '1.5px solid #DFE6EF',
                     fontSize: '0.875rem',
                     outline: 'none',
                     fontFamily: 'inherit',
-                    resize: 'vertical'
+                    resize: 'none'
                   }}
                 />
               </div>
@@ -280,7 +280,7 @@ export const EnquiryModal: React.FC<EnquiryModalProps> = ({
                 type="submit"
                 disabled={submitting}
                 className="btn btn-primary"
-                style={{ width: '100%', padding: '14px', fontSize: '1rem', marginTop: 8 }}
+                style={{ width: '100%', padding: '11px', fontSize: '0.9375rem', marginTop: 4 }}
               >
                 {submitting ? 'Transmitting to Technical Desk...' : (
                   <>

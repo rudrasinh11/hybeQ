@@ -1,60 +1,126 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { Calculator, ArrowRight, CheckCircle2, RotateCcw } from 'lucide-react';
-import { PRODUCTS } from '../data/productsData';
+import { PRODUCTS, type Product } from '../data/productsData';
 
 interface CalculatorWidgetProps {
+  initialProductId?: string;
   onOpenEnquiry?: (productName: string) => void;
   compact?: boolean;
 }
 
 export const CalculatorWidget: React.FC<CalculatorWidgetProps> = ({
+  initialProductId,
   onOpenEnquiry,
   compact = false
 }) => {
-  const [selectedProductId, setSelectedProductId] = useState<string>('hyintra-507');
+  const [searchParams] = useSearchParams();
+  const urlProductId = searchParams.get('product') || undefined;
+
+  const defaultId = initialProductId || urlProductId || 'hyintra-507';
+  const [selectedProductId, setSelectedProductId] = useState<string>(defaultId);
   const [area, setArea] = useState<number>(500);
   const [unit, setUnit] = useState<'sqft' | 'sqm'>('sqft');
   const [notchSize, setNotchSize] = useState<number>(6); // mm
 
-  const selectedProduct = PRODUCTS.find(p => p.id === selectedProductId) || PRODUCTS[0];
+  // Keep synchronized if initialProductId or URL param updates
+  useEffect(() => {
+    if (initialProductId) {
+      setSelectedProductId(initialProductId);
+    } else if (urlProductId) {
+      setSelectedProductId(urlProductId);
+    }
+  }, [initialProductId, urlProductId]);
 
-  // Calculation logic based on standard Indian civil engineering formulas:
-  // Tile adhesive: approx 1.45 kg/m2 per mm thickness.
+  const selectedProduct: Product = PRODUCTS.find(p => p.id === selectedProductId) || PRODUCTS[0];
+
   // 1 m2 = 10.764 sq.ft
-  // Area in sq.m
   const areaInSqm = unit === 'sqft' ? area / 10.764 : area;
 
-  // Total kg needed
+  // Authoritative calculation logic based on technical parameters
   let totalKgNeeded = 0;
-  let packUnit = 'Bags (20 kg)';
+  let packUnit = selectedProduct.packUnitName || 'Bags (20 kg)';
+  let packSize = selectedProduct.packSizeKg || 20;
   let unitsNeeded = 0;
   let coverageNote = '';
+  let technicalNote = 'Store in cool, dry conditions in original sealed packaging.';
 
-  if (selectedProduct.category === 'tile-fixing') {
-    // Notch depth / average bed thickness approx notchSize * 0.5 to 0.7
-    const effectiveBedMm = notchSize === 4 ? 3 : notchSize === 6 ? 4.5 : notchSize === 8 ? 6 : 8;
-    totalKgNeeded = areaInSqm * effectiveBedMm * 1.45;
-    unitsNeeded = Math.ceil(totalKgNeeded / 20);
-    packUnit = 'Bags (20 kg)';
-    coverageNote = `Approx. ${(area / unitsNeeded).toFixed(1)} ${unit} per 20 kg bag at ${effectiveBedMm}mm bed`;
-  } else if (selectedProduct.category === 'waterproofing') {
-    // 2-coat membrane approx 1.5 - 2.0 kg per sq.m (or 10-12 sqft per kg for liquid)
-    totalKgNeeded = areaInSqm * 1.8;
-    unitsNeeded = Math.ceil(totalKgNeeded / 20);
-    packUnit = 'Pails (20 Ltr / 20 kg)';
-    coverageNote = `Approx. 100 - 120 sq.ft per 20 Ltr pail (2 coats)`;
-  } else if (selectedProduct.category === 'repairs') {
-    totalKgNeeded = areaInSqm * 3.5;
-    unitsNeeded = Math.ceil(totalKgNeeded / 25);
-    packUnit = 'Bags (25 kg)';
-    coverageNote = `Approx. 2.0 kg/m² per 1mm thickness`;
-  } else {
-    // grouts
-    totalKgNeeded = areaInSqm * 0.45;
-    unitsNeeded = Math.ceil(totalKgNeeded / 5);
-    packUnit = 'Buckets (5 kg)';
-    coverageNote = `Approx. 120 sq.ft per 5 kg set for 600x600 tiles (3mm joint)`;
+  const formulaType = selectedProduct.calcFormulaType || (
+    selectedProduct.category === 'tile-fixing' ? 'tile' :
+    selectedProduct.category === 'waterproofing' ? 'membrane' :
+    selectedProduct.category === 'grouts' ? 'grout' :
+    selectedProduct.category === 'sealants' ? 'sealant' :
+    selectedProduct.category === 'decorative-floor-wall' ? 'hardener' :
+    selectedProduct.category === 'precast-additives' || selectedProduct.category === 'plasticizers' || selectedProduct.category === 'curing-compounds' ? 'liquid' :
+    'mortar'
+  );
+
+  switch (formulaType) {
+    case 'tile': {
+      // Tile adhesive standard: ~1.45 kg/m² per 1mm bed thickness
+      const effectiveBedMm = notchSize === 4 ? 3 : notchSize === 6 ? 4.5 : notchSize === 8 ? 6 : 8;
+      totalKgNeeded = areaInSqm * effectiveBedMm * 1.45 * 1.05; // 5% wastage
+      unitsNeeded = Math.ceil(totalKgNeeded / packSize);
+      coverageNote = `Approx. ${(area / unitsNeeded).toFixed(1)} ${unit} per ${packUnit} at ${effectiveBedMm}mm bed`;
+      technicalNote = 'Mixing ratio: approx. 22-25% clean potable water (4.4 to 5.0 L per 20kg bag)';
+      break;
+    }
+    case 'membrane': {
+      // Liquid / cementitious membrane: ~1.8 to 2.0 kg/m² for two coats
+      totalKgNeeded = areaInSqm * 1.85 * 1.05;
+      unitsNeeded = Math.ceil(totalKgNeeded / packSize);
+      coverageNote = `Approx. ${(area / unitsNeeded).toFixed(1)} ${unit} per ${packUnit} (2 coats)`;
+      technicalNote = 'Apply minimum 2 perpendicular coats. Allow 3-4 hours cure between coats.';
+      break;
+    }
+    case 'mortar': {
+      // Structural repair microconcrete / drymix mortar: approx 2.1 kg/m² per 1mm thickness
+      totalKgNeeded = areaInSqm * 3.8 * 1.05;
+      unitsNeeded = Math.ceil(totalKgNeeded / packSize);
+      coverageNote = `Approx. ${(area / unitsNeeded).toFixed(1)} ${unit} per ${packUnit} at recommended build`;
+      technicalNote = 'Pre-wet substrate to saturated surface dry (SSD) condition before casting.';
+      break;
+    }
+    case 'grout': {
+      // Epoxy / cementitious grouting: ~0.45 kg/m² for 600x600 tiles with 3mm joint
+      totalKgNeeded = areaInSqm * 0.48 * 1.05;
+      unitsNeeded = Math.ceil(totalKgNeeded / packSize);
+      coverageNote = `Approx. ${(area / unitsNeeded).toFixed(1)} ${unit} per ${packUnit} for 600x600 format (3mm joint)`;
+      technicalNote = 'Clean tile joints thoroughly; remove spacers and dust prior to grouting.';
+      break;
+    }
+    case 'sealant': {
+      // Elastomeric sealants: ~1 sausage per 6 running meters (or ~0.15 sausages per m²)
+      totalKgNeeded = areaInSqm * 0.25;
+      unitsNeeded = Math.max(1, Math.ceil(totalKgNeeded));
+      coverageNote = `Approx. 6 running meters per 600ml foil pack (10x10mm joint)`;
+      technicalNote = 'Use PE backing rod to regulate joint depth to width ratio (1:1 or 2:1).';
+      break;
+    }
+    case 'hardener': {
+      // Dry-shake floor hardener: 5.0 kg/m² medium duty
+      totalKgNeeded = areaInSqm * 5.0 * 1.05;
+      unitsNeeded = Math.ceil(totalKgNeeded / packSize);
+      coverageNote = `Approx. ${(area / unitsNeeded).toFixed(1)} ${unit} per ${packUnit} (medium industrial duty)`;
+      technicalNote = 'Broadcast in two stages across green concrete immediately after bleed water evaporates.';
+      break;
+    }
+    case 'liquid':
+    default: {
+      // Liquid admixtures & curing compounds: approx 0.25 Ltr/m² or dosage by cement wt
+      totalKgNeeded = areaInSqm * 0.22 * 1.05;
+      unitsNeeded = Math.max(1, Math.ceil(totalKgNeeded / packSize));
+      coverageNote = `Approx. ${(area / unitsNeeded).toFixed(1)} ${unit} per ${packUnit}`;
+      technicalNote = 'Spray or roll uniformly across fresh or cured substrate; do not dilute with solvent.';
+      break;
+    }
   }
+
+  const handleReset = () => {
+    setArea(500);
+    setNotchSize(6);
+    setSelectedProductId(initialProductId || 'hyintra-507');
+  };
 
   return (
     <div style={{
@@ -85,15 +151,15 @@ export const CalculatorWidget: React.FC<CalculatorWidgetProps> = ({
               Material Quantity Estimator
             </h3>
             <span style={{ fontSize: '0.75rem', color: '#64748B' }}>
-              Standard IS 15477 / EN 12004 Consumption Matrix
+              Synchronized with Authoritative Formulation Matrix
             </span>
           </div>
         </div>
 
         <button
           type="button"
-          onClick={() => { setArea(500); setNotchSize(6); }}
-          style={{ display: 'flex', alignItems: 'center', gap: 6, fontSize: '0.75rem', color: '#64748B', fontWeight: 600 }}
+          onClick={handleReset}
+          style={{ display: 'flex', alignItems: 'center', gap: 6, fontSize: '0.75rem', color: '#64748B', fontWeight: 600, cursor: 'pointer', background: 'none', border: 'none' }}
         >
           <RotateCcw size={14} /> Reset
         </button>
@@ -145,6 +211,8 @@ export const CalculatorWidget: React.FC<CalculatorWidgetProps> = ({
                     borderRadius: 4,
                     fontSize: '0.75rem',
                     fontWeight: 700,
+                    cursor: 'pointer',
+                    border: 'none',
                     background: unit === 'sqft' ? '#0A2362' : 'transparent',
                     color: unit === 'sqft' ? '#FFFFFF' : '#64748B'
                   }}
@@ -159,6 +227,8 @@ export const CalculatorWidget: React.FC<CalculatorWidgetProps> = ({
                     borderRadius: 4,
                     fontSize: '0.75rem',
                     fontWeight: 700,
+                    cursor: 'pointer',
+                    border: 'none',
                     background: unit === 'sqm' ? '#0A2362' : 'transparent',
                     color: unit === 'sqm' ? '#FFFFFF' : '#64748B'
                   }}
@@ -171,9 +241,9 @@ export const CalculatorWidget: React.FC<CalculatorWidgetProps> = ({
             <div style={{ position: 'relative' }}>
               <input
                 type="number"
-                min="10"
+                min="1"
                 max="500000"
-                step="50"
+                step="10"
                 value={area}
                 onChange={e => setArea(Math.max(1, Number(e.target.value)))}
                 style={{
@@ -210,6 +280,7 @@ export const CalculatorWidget: React.FC<CalculatorWidgetProps> = ({
                       borderRadius: 6,
                       fontSize: '0.8125rem',
                       fontWeight: 700,
+                      cursor: 'pointer',
                       border: notchSize === mm ? '2px solid #0A2362' : '1px solid #DFE6EF',
                       background: notchSize === mm ? '#EAF8F0' : '#FFFFFF',
                       color: notchSize === mm ? '#0A2362' : '#64748B'
@@ -234,29 +305,35 @@ export const CalculatorWidget: React.FC<CalculatorWidgetProps> = ({
           justifyContent: 'space-between'
         }}>
           <div>
-            <span style={{ fontSize: '0.75rem', fontWeight: 800, color: '#46C985', textTransform: 'uppercase', letterSpacing: 1.5 }}>
-              Recommended Quantity
-            </span>
-            <div style={{ display: 'flex', alignItems: 'baseline', gap: 10, marginTop: 8, marginBottom: 4 }}>
-              <span style={{ fontSize: '3rem', fontWeight: 900, color: '#46C985', lineHeight: 1 }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+              <span style={{ fontSize: '0.75rem', fontWeight: 800, color: '#46C985', textTransform: 'uppercase', letterSpacing: 1.5 }}>
+                Estimated Requirements
+              </span>
+              <span style={{ fontSize: '0.6875rem', color: 'rgba(255,255,255,0.7)', background: 'rgba(255,255,255,0.1)', padding: '2px 8px', borderRadius: 4 }}>
+                {selectedProduct.name}
+              </span>
+            </div>
+
+            <div style={{ display: 'flex', alignItems: 'baseline', gap: 10, marginTop: 12, marginBottom: 6 }}>
+              <span style={{ fontSize: '2.8rem', fontWeight: 900, color: '#46C985', lineHeight: 1 }}>
                 {unitsNeeded}
               </span>
-              <span style={{ fontSize: '1.1rem', fontWeight: 700, color: '#FFFFFF' }}>
+              <span style={{ fontSize: '1.05rem', fontWeight: 700, color: '#FFFFFF' }}>
                 {packUnit}
               </span>
             </div>
             <p style={{ fontSize: '0.8125rem', color: 'rgba(255,255,255,0.7)', margin: '0 0 16px' }}>
-              Total weight: <strong>{Math.round(totalKgNeeded)} kg</strong> (includes 5% recommended site wastage)
+              Total calculated weight: <strong>{Math.round(totalKgNeeded)} kg</strong> (includes 5% recommended wastage margin)
             </p>
 
             <div style={{ borderTop: '1px solid rgba(255,255,255,0.1)', paddingTop: 14, display: 'flex', flexDirection: 'column', gap: 8, fontSize: '0.8125rem' }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                <CheckCircle2 size={16} style={{ color: '#46C985', flexShrink: 0 }} />
+              <div style={{ display: 'flex', alignItems: 'flex-start', gap: 8 }}>
+                <CheckCircle2 size={16} style={{ color: '#46C985', flexShrink: 0, marginTop: 2 }} />
                 <span>{coverageNote}</span>
               </div>
-              <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                <CheckCircle2 size={16} style={{ color: '#46C985', flexShrink: 0 }} />
-                <span>Mixing ratio: 22-25% clean potable water</span>
+              <div style={{ display: 'flex', alignItems: 'flex-start', gap: 8 }}>
+                <CheckCircle2 size={16} style={{ color: '#46C985', flexShrink: 0, marginTop: 2 }} />
+                <span>{technicalNote}</span>
               </div>
             </div>
           </div>

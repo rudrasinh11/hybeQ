@@ -98,7 +98,7 @@ export const BlogPostPage: React.FC<BlogPostPageProps> = ({ onOpenEnquiry }) => 
                 {relatedProductsList.map(p => (
                   <div key={p.id} style={{ background: '#F5F7FB', border: '1.5px solid #DFE6EF', borderRadius: 12, padding: 20, display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
                     <div>
-                      <span style={{ fontSize: '0.6875rem', fontWeight: 800, color: '#46C985', textTransform: 'uppercase' }}>{p.badge}</span>
+                      <span style={{ fontSize: '0.6875rem', fontWeight: 800, color: '#0A2362', textTransform: 'uppercase', letterSpacing: 0.5 }}>{p.badge}</span>
                       <h4 style={{ fontSize: '1.15rem', color: '#0A2362', fontWeight: 800, margin: '4px 0 8px' }}>{p.name}</h4>
                       <p style={{ fontSize: '0.8125rem', color: '#64748B', lineHeight: 1.5, margin: 0 }}>{p.shortDesc}</p>
                     </div>
