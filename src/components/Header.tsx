@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link, NavLink, useNavigate } from 'react-router-dom';
-import { ArrowUpRight, Search, Calculator, Menu, X, ChevronDown } from 'lucide-react';
+import { ArrowUpRight, Search, Calculator, Menu, X } from 'lucide-react';
 
 interface HeaderProps {
   onOpenSearch: () => void;
@@ -13,7 +13,6 @@ export const Header: React.FC<HeaderProps> = ({
 }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [productsMegaOpen, setProductsMegaOpen] = useState(false);
-  const [mobileProductsOpen, setMobileProductsOpen] = useState(false);
   
   const productsTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const headerRef = useRef<HTMLElement>(null);
@@ -412,41 +411,11 @@ export const Header: React.FC<HeaderProps> = ({
         <div className="vura-mobile-menu">
           <div className="vura-mobile-links">
             
-            {/* 1. Mobile Products Accordion */}
-            <div className="vura-mobile-accordion">
-              <button
-                type="button"
-                className="vura-mobile-accordion-toggle"
-                onClick={() => setMobileProductsOpen(!mobileProductsOpen)}
-              >
-                <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-                  <ArrowUpRight size={16} className="vura-nav-arrow" />
-                  <span>PRODUCTS</span>
-                </div>
-                <ChevronDown size={18} style={{ transform: mobileProductsOpen ? 'rotate(180deg)' : 'none', transition: 'transform 0.2s' }} />
-              </button>
-              {mobileProductsOpen && (
-                <div className="vura-mobile-sublist">
-                  {megaMenuColumns.map((col, cIdx) => (
-                    <div key={cIdx} style={{ marginBottom: 16 }}>
-                      {col.sections.map((section, sIdx) => (
-                        <div key={sIdx} style={{ marginBottom: 12 }}>
-                          <span className="vura-mobile-cat-header">{section.heading}</span>
-                          {section.products.slice(0, 4).map((p, pIdx) => (
-                            <Link key={pIdx} to={section.link} onClick={closeAllMenus} className="vura-mobile-sublink">
-                              {p}
-                            </Link>
-                          ))}
-                        </div>
-                      ))}
-                    </div>
-                  ))}
-                  <Link to="/products" onClick={closeAllMenus} className="vura-mobile-view-all">
-                    View Complete Catalog &rarr;
-                  </Link>
-                </div>
-              )}
-            </div>
+            {/* 1. Mobile Products: Direct link to full products section */}
+            <Link to="/products" onClick={closeAllMenus} className="vura-mobile-link">
+              <ArrowUpRight size={16} className="vura-nav-arrow" />
+              <span>PRODUCTS</span>
+            </Link>
 
             {/* 2. Sustainability */}
             <Link to="/sustainability" onClick={closeAllMenus} className="vura-mobile-link">
