@@ -69,9 +69,6 @@ export const WhatWeOfferSection: React.FC = () => {
         {/* Section Header: Gridfly Style */}
         <div className="hybeq-offer-header">
           <div className="hybeq-offer-header-left">
-            <div className="hybeq-section-badge">
-              <span>SPECIALIZED FORMULATIONS</span>
-            </div>
             <h2 className="hybeq-offer-heading">
               Four Core Chemical Systems. <br />
               <span className="hybeq-heading-sub">Engineered for Lifelong Civil Durability.</span>

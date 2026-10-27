@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowUpRight, BookOpen, Clock, Calendar, CheckCircle2, ChevronRight } from 'lucide-react';
+import { ArrowUpRight, Clock, Calendar, CheckCircle2, ChevronRight } from 'lucide-react';
 import { BLOG_POSTS } from '../data/blogData';
 
 export const TechnicalGuidesSection: React.FC = () => {
@@ -14,10 +14,6 @@ export const TechnicalGuidesSection: React.FC = () => {
         {/* Section Header: Bildora Editorial Reference */}
         <div className="hybeq-guides-header">
           <div className="hybeq-guides-header-left">
-            <div className="hybeq-section-badge">
-              <BookOpen size={14} />
-              <span>TECHNICAL KNOWLEDGE BASE</span>
-            </div>
             <h2 className="hybeq-guides-title">
               Knowledge That Builds Confidence
             </h2>
@@ -50,9 +46,6 @@ export const TechnicalGuidesSection: React.FC = () => {
                   />
                   <div className="hybeq-lead-img-overlay" />
                 </Link>
-                <div className="hybeq-lead-badge-float">
-                  <span>FEATURED TECHNICAL GUIDE</span>
-                </div>
               </div>
 
               <div className="hybeq-lead-content">

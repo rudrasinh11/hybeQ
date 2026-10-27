@@ -26,11 +26,8 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
       <div className="hybeq-hero-container">
         {/* Left Column: Bold Typographic Hierarchy & Conversion Triggers */}
         <div className="hybeq-hero-content">
-          {/* Trust Kicker Badge */}
-          <div className="hybeq-hero-kicker">
-            <span className="hybeq-hero-kicker-dot" />
-            <span className="hybeq-hero-kicker-text">ISO 9001:2015 CERTIFIED • GERMAN POLYMER TECHNOLOGY</span>
-          </div>
+          {/* Verified Quality & Certification Sub-Heading */}
+          <span className="hybeq-hero-brand-tag">ISO 9001:2015 Certified • German Polymer Technology</span>
 
           {/* Primary Headline */}
           <h1 className="hybeq-hero-title">
@@ -128,12 +125,6 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
               <Play size={20} fill="currentColor" />
             </button>
 
-            {/* Top Left Floating Certification Tag */}
-            <div className="hybeq-hero-floating-tag">
-              <span className="hybeq-tag-pulse" />
-              <span>NABL LAB TESTED FORMULATION</span>
-            </div>
-
             {/* Bottom Floating HUD Card: Featured Technical Product */}
             <div className="hybeq-hero-hud-card">
               <div className="hybeq-hud-product-thumb">
@@ -144,8 +135,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
               </div>
 
               <div className="hybeq-hud-details">
-                <div className="hybeq-hud-badge">BENCHMARK FORMULATION</div>
-                <h4 className="hybeq-hud-title">HYMAX-525 HEAVY ADHESIVE</h4>
+                <h4 className="hybeq-hud-title">HYMAX-525 STRUCTURAL ADHESIVE</h4>
                 <p className="hybeq-hud-spec">
                   EN 12004 C2TE S1 • Zero Vertical Slip (&lt;0.5mm)
                 </p>

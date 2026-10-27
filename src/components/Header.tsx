@@ -272,7 +272,7 @@ export const Header: React.FC<HeaderProps> = ({
         {/* Center: Main Desktop Navigation (Exact order: Products, Sustainability, Downloads, Innovations, About Us, Blog, Contact) */}
         <nav className="vura-nav-center" aria-label="Main Navigation">
           
-          {/* 1. PRODUCTS with Full-Width Mega Menu */}
+          {/* 1. PRODUCTS with Full-Width Mega Menu (Keeps Arrow) */}
           <div
             className="vura-nav-item-wrap vura-nav-products-wrap"
             onMouseEnter={handleProductsEnter}
@@ -290,15 +290,13 @@ export const Header: React.FC<HeaderProps> = ({
             </NavLink>
           </div>
 
-          {/* 2. SUSTAINABILITY */}
+          {/* 2. SUSTAINABILITY (Arrow removed) */}
           <NavLink to="/sustainability" className={({ isActive }) => `vura-nav-link ${isActive ? 'active' : ''}`}>
-            <ArrowUpRight size={14} className="vura-nav-arrow" />
             <span>SUSTAINABILITY</span>
           </NavLink>
 
-          {/* 3. DOWNLOADS */}
+          {/* 3. DOWNLOADS (Arrow removed) */}
           <NavLink to="/downloads" className={({ isActive }) => `vura-nav-link ${isActive ? 'active' : ''}`}>
-            <ArrowUpRight size={14} className="vura-nav-arrow" />
             <span>DOWNLOADS</span>
           </NavLink>
 
@@ -307,7 +305,7 @@ export const Header: React.FC<HeaderProps> = ({
             <span>INNOVATIONS</span>
           </NavLink>
 
-          {/* 5. ABOUT US with Submenu */}
+          {/* 5. ABOUT US with Submenu (Arrow removed) */}
           <div
             className="vura-nav-item-wrap"
             onMouseEnter={handleAboutEnter}
@@ -320,7 +318,6 @@ export const Header: React.FC<HeaderProps> = ({
               aria-expanded={aboutMenuOpen}
               aria-haspopup="true"
             >
-              <ArrowUpRight size={14} className="vura-nav-arrow" />
               <span>ABOUT US</span>
             </NavLink>
 
@@ -362,7 +359,7 @@ export const Header: React.FC<HeaderProps> = ({
             <span>BLOG</span>
           </NavLink>
 
-          {/* 7. CONTACT */}
+          {/* 7. CONTACT (Arrow removed) */}
           <NavLink to="/contact" className={({ isActive }) => `vura-nav-link ${isActive ? 'active' : ''}`}>
             <span>CONTACT</span>
           </NavLink>
@@ -522,7 +519,6 @@ export const Header: React.FC<HeaderProps> = ({
             {/* 2. Sustainability */}
             <Link to="/sustainability" onClick={closeAllMenus} className="vura-mobile-link">
               <div className="vura-mobile-link-left">
-                <ArrowUpRight size={17} className="vura-mobile-nav-arrow" />
                 <span>SUSTAINABILITY</span>
               </div>
             </Link>
@@ -530,7 +526,6 @@ export const Header: React.FC<HeaderProps> = ({
             {/* 3. Downloads */}
             <Link to="/downloads" onClick={closeAllMenus} className="vura-mobile-link">
               <div className="vura-mobile-link-left">
-                <ArrowUpRight size={17} className="vura-mobile-nav-arrow" />
                 <span>DOWNLOADS</span>
               </div>
             </Link>
@@ -538,7 +533,6 @@ export const Header: React.FC<HeaderProps> = ({
             {/* 4. Innovations */}
             <Link to="/innovations" onClick={closeAllMenus} className="vura-mobile-link">
               <div className="vura-mobile-link-left">
-                <ArrowUpRight size={17} className="vura-mobile-nav-arrow" />
                 <span>INNOVATIONS</span>
               </div>
             </Link>
@@ -552,7 +546,6 @@ export const Header: React.FC<HeaderProps> = ({
                 aria-expanded={mobileAboutOpen}
               >
                 <div className="vura-mobile-link-left">
-                  <ArrowUpRight size={17} className="vura-mobile-nav-arrow" />
                   <span>ABOUT US</span>
                 </div>
                 <ChevronDown 
@@ -573,7 +566,6 @@ export const Header: React.FC<HeaderProps> = ({
             {/* 6. Blog */}
             <Link to="/blog" onClick={closeAllMenus} className="vura-mobile-link">
               <div className="vura-mobile-link-left">
-                <ArrowUpRight size={17} className="vura-mobile-nav-arrow" />
                 <span>BLOG & NEWS</span>
               </div>
             </Link>
@@ -581,7 +573,6 @@ export const Header: React.FC<HeaderProps> = ({
             {/* 7. Contact */}
             <Link to="/contact" onClick={closeAllMenus} className="vura-mobile-link">
               <div className="vura-mobile-link-left">
-                <ArrowUpRight size={17} className="vura-mobile-nav-arrow" />
                 <span>CONTACT US</span>
               </div>
             </Link>

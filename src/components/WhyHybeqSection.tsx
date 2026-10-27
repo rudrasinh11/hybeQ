@@ -53,9 +53,6 @@ export const WhyHybeqSection: React.FC<WhyHybeqSectionProps> = ({
         
         {/* Top Header — Resido Reference */}
         <div className="hybeq-why-header">
-          <div className="hybeq-section-badge">
-            <span>ENGINEERING DIFFERENTIATION</span>
-          </div>
           <h2 className="hybeq-why-title">
             Engineered for Zero Failure in Critical Civil Infrastructure
           </h2>

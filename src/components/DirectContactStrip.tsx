@@ -17,11 +17,6 @@ export const DirectContactStrip: React.FC<DirectContactStripProps> = ({
           
           {/* Left Text Column */}
           <div className="hybeq-strip-content">
-            <div className="hybeq-strip-badge">
-              <span className="hybeq-strip-pulse" />
-              <span>DIRECT TECHNICAL SUPPORT DESK</span>
-            </div>
-
             <h2 className="hybeq-strip-title">
               Need the Right Solution for Your Project?
             </h2>

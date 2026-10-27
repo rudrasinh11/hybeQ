@@ -84,21 +84,21 @@ export const EnquiryModal: React.FC<EnquiryModalProps> = ({
 
         {!isSubmitted ? (
           <div>
-            <div style={{ marginBottom: 24 }}>
+            <div style={{ marginBottom: 14 }}>
               <span className="section-tag">Direct Factory Connection</span>
-              <h3 style={{ fontSize: '1.6rem', color: '#0A2362', fontWeight: 800, margin: '8px 0 4px' }}>
+              <h3 style={{ fontSize: '1.45rem', color: '#0A2362', fontWeight: 800, margin: '6px 0 2px' }}>
                 Commercial Project Inquiry
               </h3>
-              <p style={{ fontSize: '0.875rem', color: '#64748B' }}>
+              <p style={{ fontSize: '0.85rem', color: '#64748B', lineHeight: 1.4 }}>
                 Connect directly with Hybeq technical application engineers for project estimates, site inspections, and sample dispatch.
               </p>
             </div>
 
-            <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
+            <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
               {/* Name & Phone */}
               <div className="contact-form-row">
                 <div>
-                  <label style={{ display: 'block', fontSize: '0.8125rem', fontWeight: 700, color: '#0A2362', marginBottom: 6 }}>
+                  <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: 700, color: '#0A2362', marginBottom: 4 }}>
                     Your Name *
                   </label>
                   <input
@@ -108,18 +108,18 @@ export const EnquiryModal: React.FC<EnquiryModalProps> = ({
                     placeholder="e.g. Rahul Sharma"
                     style={{
                       width: '100%',
-                      padding: '10px 14px',
+                      padding: '8px 12px',
                       borderRadius: 8,
                       border: `1.5px solid ${errors.name ? '#EF4444' : '#DFE6EF'}`,
-                      fontSize: '0.875rem',
+                      fontSize: '0.85rem',
                       outline: 'none'
                     }}
                   />
-                  {errors.name && <span style={{ color: '#EF4444', fontSize: '0.75rem', marginTop: 4, display: 'flex', alignItems: 'center', gap: 4 }}><AlertCircle size={12} /> {errors.name}</span>}
+                  {errors.name && <span style={{ color: '#EF4444', fontSize: '0.72rem', marginTop: 3, display: 'flex', alignItems: 'center', gap: 4 }}><AlertCircle size={11} /> {errors.name}</span>}
                 </div>
 
                 <div>
-                  <label style={{ display: 'block', fontSize: '0.8125rem', fontWeight: 700, color: '#0A2362', marginBottom: 6 }}>
+                  <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: 700, color: '#0A2362', marginBottom: 4 }}>
                     Phone / Mobile *
                   </label>
                   <input
@@ -143,21 +143,21 @@ export const EnquiryModal: React.FC<EnquiryModalProps> = ({
                     placeholder="Enter 10-digit mobile number"
                     style={{
                       width: '100%',
-                      padding: '10px 14px',
+                      padding: '8px 12px',
                       borderRadius: 8,
                       border: `1.5px solid ${errors.phone ? '#EF4444' : '#DFE6EF'}`,
-                      fontSize: '0.875rem',
+                      fontSize: '0.85rem',
                       outline: 'none'
                     }}
                   />
-                  {errors.phone && <span style={{ color: '#EF4444', fontSize: '0.75rem', marginTop: 4, display: 'flex', alignItems: 'center', gap: 4 }}><AlertCircle size={12} /> {errors.phone}</span>}
+                  {errors.phone && <span style={{ color: '#EF4444', fontSize: '0.72rem', marginTop: 3, display: 'flex', alignItems: 'center', gap: 4 }}><AlertCircle size={11} /> {errors.phone}</span>}
                 </div>
               </div>
 
               {/* Email & City */}
               <div className="contact-form-row">
                 <div>
-                  <label style={{ display: 'block', fontSize: '0.8125rem', fontWeight: 700, color: '#0A2362', marginBottom: 6 }}>
+                  <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: 700, color: '#0A2362', marginBottom: 4 }}>
                     Email Address *
                   </label>
                   <input
@@ -167,18 +167,18 @@ export const EnquiryModal: React.FC<EnquiryModalProps> = ({
                     placeholder="engineer@company.com"
                     style={{
                       width: '100%',
-                      padding: '10px 14px',
+                      padding: '8px 12px',
                       borderRadius: 8,
                       border: `1.5px solid ${errors.email ? '#EF4444' : '#DFE6EF'}`,
-                      fontSize: '0.875rem',
+                      fontSize: '0.85rem',
                       outline: 'none'
                     }}
                   />
-                  {errors.email && <span style={{ color: '#EF4444', fontSize: '0.75rem', marginTop: 4, display: 'flex', alignItems: 'center', gap: 4 }}><AlertCircle size={12} /> {errors.email}</span>}
+                  {errors.email && <span style={{ color: '#EF4444', fontSize: '0.72rem', marginTop: 3, display: 'flex', alignItems: 'center', gap: 4 }}><AlertCircle size={11} /> {errors.email}</span>}
                 </div>
 
                 <div>
-                  <label style={{ display: 'block', fontSize: '0.8125rem', fontWeight: 700, color: '#0A2362', marginBottom: 6 }}>
+                  <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: 700, color: '#0A2362', marginBottom: 4 }}>
                     Project City / State *
                   </label>
                   <input
@@ -188,21 +188,21 @@ export const EnquiryModal: React.FC<EnquiryModalProps> = ({
                     placeholder="Surat, Gujarat"
                     style={{
                       width: '100%',
-                      padding: '10px 14px',
+                      padding: '8px 12px',
                       borderRadius: 8,
                       border: `1.5px solid ${errors.city ? '#EF4444' : '#DFE6EF'}`,
-                      fontSize: '0.875rem',
+                      fontSize: '0.85rem',
                       outline: 'none'
                     }}
                   />
-                  {errors.city && <span style={{ color: '#EF4444', fontSize: '0.75rem', marginTop: 4, display: 'flex', alignItems: 'center', gap: 4 }}><AlertCircle size={12} /> {errors.city}</span>}
+                  {errors.city && <span style={{ color: '#EF4444', fontSize: '0.72rem', marginTop: 3, display: 'flex', alignItems: 'center', gap: 4 }}><AlertCircle size={11} /> {errors.city}</span>}
                 </div>
               </div>
 
               {/* Product Interest & Project Scale */}
               <div className="contact-form-row">
                 <div>
-                  <label style={{ display: 'block', fontSize: '0.8125rem', fontWeight: 700, color: '#0A2362', marginBottom: 6 }}>
+                  <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: 700, color: '#0A2362', marginBottom: 4 }}>
                     Formulation / Solution
                   </label>
                   <select
@@ -210,10 +210,10 @@ export const EnquiryModal: React.FC<EnquiryModalProps> = ({
                     onChange={e => setFormData({ ...formData, product: e.target.value })}
                     style={{
                       width: '100%',
-                      padding: '10px 14px',
+                      padding: '8px 12px',
                       borderRadius: 8,
                       border: '1.5px solid #DFE6EF',
-                      fontSize: '0.875rem',
+                      fontSize: '0.85rem',
                       background: '#FFFFFF',
                       outline: 'none',
                       color: '#0A2362'
@@ -227,7 +227,7 @@ export const EnquiryModal: React.FC<EnquiryModalProps> = ({
                 </div>
 
                 <div>
-                  <label style={{ display: 'block', fontSize: '0.8125rem', fontWeight: 700, color: '#0A2362', marginBottom: 6 }}>
+                  <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: 700, color: '#0A2362', marginBottom: 4 }}>
                     Estimated Project Area
                   </label>
                   <select
@@ -235,10 +235,10 @@ export const EnquiryModal: React.FC<EnquiryModalProps> = ({
                     onChange={e => setFormData({ ...formData, projectSize: e.target.value })}
                     style={{
                       width: '100%',
-                      padding: '10px 14px',
+                      padding: '8px 12px',
                       borderRadius: 8,
                       border: '1.5px solid #DFE6EF',
-                      fontSize: '0.875rem',
+                      fontSize: '0.85rem',
                       background: '#FFFFFF',
                       outline: 'none',
                       color: '#0A2362'
@@ -255,23 +255,23 @@ export const EnquiryModal: React.FC<EnquiryModalProps> = ({
 
               {/* Message / Requirements */}
               <div>
-                <label style={{ display: 'block', fontSize: '0.8125rem', fontWeight: 700, color: '#0A2362', marginBottom: 6 }}>
+                <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: 700, color: '#0A2362', marginBottom: 4 }}>
                   Project Details / Substrate Type
                 </label>
                 <textarea
-                  rows={3}
+                  rows={2}
                   value={formData.message}
                   onChange={e => setFormData({ ...formData, message: e.target.value })}
                   placeholder="Specify substrate condition, tile dimensions (e.g. 1200x1800mm), or technical questions..."
                   style={{
                     width: '100%',
-                    padding: '10px 14px',
+                    padding: '8px 12px',
                     borderRadius: 8,
                     border: '1.5px solid #DFE6EF',
-                    fontSize: '0.875rem',
+                    fontSize: '0.85rem',
                     outline: 'none',
                     fontFamily: 'inherit',
-                    resize: 'vertical'
+                    resize: 'none'
                   }}
                 />
               </div>
@@ -280,11 +280,11 @@ export const EnquiryModal: React.FC<EnquiryModalProps> = ({
                 type="submit"
                 disabled={submitting}
                 className="btn btn-primary"
-                style={{ width: '100%', padding: '14px', fontSize: '1rem', marginTop: 8 }}
+                style={{ width: '100%', padding: '12px', fontSize: '0.95rem', marginTop: 4 }}
               >
                 {submitting ? 'Transmitting to Technical Desk...' : (
                   <>
-                    SUBMIT INQUIRY <Send size={18} />
+                    SUBMIT INQUIRY <Send size={16} />
                   </>
                 )}
               </button>

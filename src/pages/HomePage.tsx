@@ -4,7 +4,7 @@ import { TrustedPartnersMarquee } from '../components/TrustedPartnersMarquee';
 import { WhatWeOfferSection } from '../components/WhatWeOfferSection';
 import { FeaturedProductsSection } from '../components/FeaturedProductsSection';
 import { WhyHybeqSection } from '../components/WhyHybeqSection';
-import { CalculatorSection } from '../components/CalculatorSection';
+import { GlobalReachSection } from '../components/GlobalReachSection';
 import { TechnicalGuidesSection } from '../components/TechnicalGuidesSection';
 import { DirectContactStrip } from '../components/DirectContactStrip';
 
@@ -41,7 +41,7 @@ export const HomePage: React.FC<HomePageProps> = ({
       <WhatWeOfferSection />
 
       {/* ============================================================
-          SECTION 5: FEATURED PRODUCTS (Existing HYBEQ Catalog Improved)
+          SECTION 5: FEATURED PRODUCTS SHOWCASE (Horizontal Scroll Showcase)
           Preserved verified product specs, images, filters, enquiry actions
           ============================================================ */}
       <FeaturedProductsSection
@@ -57,11 +57,12 @@ export const HomePage: React.FC<HomePageProps> = ({
       />
 
       {/* ============================================================
-          SECTION 7: MATERIAL CALCULATOR (Existing HYBEQ Estimator Improved)
-          Preserved accurate civil formulas, grouped inputs, instant results
+          SECTION 7: GLOBAL REACH & EXPORT AMBITION (Replaces Calculator on Homepage)
+          Clean white content area, centered headline, prominent CTA, 
+          and full-width port logistics visual with rounded upper corners.
           ============================================================ */}
-      <CalculatorSection
-        onOpenEnquiry={onOpenEnquiry}
+      <GlobalReachSection
+        onOpenEnquiry={() => onOpenEnquiry()}
       />
 
       {/* ============================================================

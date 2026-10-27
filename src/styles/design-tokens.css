@@ -133,9 +133,11 @@
   --theme-space-20: 80px;
   --theme-space-24: 96px;
 
-  /* Section Spacing */
-  --theme-section-padding-y: clamp(56px, 7vw, 104px);
-  --theme-section-gap: clamp(40px, 5vw, 64px);
+  /* Section Spacing — Compact, Balanced & Professional (48–64px desktop, 32–44px tablet, 24–32px mobile) */
+  --theme-section-padding-y: clamp(32px, 4.5vw, 64px);
+  --theme-section-gap: clamp(20px, 3vw, 40px);
+  --theme-heading-desc-gap: 8px;
+  --theme-card-padding: clamp(14px, 2vw, 22px);
 
   /* Container Widths */
   --theme-container-max: 1280px;

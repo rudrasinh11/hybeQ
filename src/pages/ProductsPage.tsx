@@ -1,7 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { Layers, Droplet, Hammer, Sparkles, Building, Search, CheckCircle2 } from 'lucide-react';
-import { PRODUCTS, getProductImage } from '../data/productsData';
+import { 
+  Search, 
+  RotateCcw, 
+  ArrowUpRight, 
+  MessageSquare, 
+  SlidersHorizontal,
+  ChevronRight,
+  Filter
+} from 'lucide-react';
+import { PRODUCTS, getProductImage, type Product } from '../data/productsData';
 
 interface ProductsPageProps {
   onOpenEnquiry: (productName?: string) => void;
@@ -9,285 +17,372 @@ interface ProductsPageProps {
 
 export const ProductsPage: React.FC<ProductsPageProps> = ({ onOpenEnquiry }) => {
   const { category } = useParams<{ category?: string }>();
-  const [selectedCat, setSelectedCat] = useState<string>(category || 'all');
+
+  const categories = [
+    { id: 'all', label: 'All Formulations' },
+    { id: 'tile-stone-fixing', label: 'TILE & STONE FIXING' },
+    { id: 'precast-additives', label: 'PRECAST ADDITIVES' },
+    { id: 'waterproofing', label: 'WATERPROOFING' },
+    { id: 'plasticizers-rmc-pqc', label: 'PLASTICIZERS RMC/PQC' },
+    { id: 'grouting-systems', label: 'GROUTING SYSTEMS' },
+    { id: 'surface-treatment', label: 'SURFACE TREATMENT' },
+    { id: 'bonding-agent', label: 'BONDING AGENT' },
+    { id: 'structural-repair', label: 'STRUCTURAL REPAIR' },
+    { id: 'sealants', label: 'SEALANTS' },
+    { id: 'decorative-floor-wall', label: 'DECORATIVE FLOOR & WALL' },
+    { id: 'drymix-mortar', label: 'DRYMIX MORTAR' },
+    { id: 'curing-compounds', label: 'CURING COMPOUNDS' },
+    { id: 'epoxy-flooring', label: 'EPOXY FLOORING' },
+    { id: 'epoxy-screed', label: 'EPOXY SCREED' }
+  ];
+
+  // Helper to map products to requested categories
+  const matchCategory = (prod: Product, catId: string): boolean => {
+    if (catId === 'all') return true;
+    switch (catId) {
+      case 'tile-stone-fixing':
+      case 'tile-fixing':
+        return prod.category === 'tile-fixing';
+      case 'precast-additives':
+        return prod.id === 'hy-fastset-ac' || prod.id === 'hy-hardtop-330' || prod.category === 'precast';
+      case 'waterproofing':
+        return prod.category === 'waterproofing';
+      case 'plasticizers-rmc-pqc':
+        return prod.id === 'hy-fastset-ac' || prod.id === 'hybeq-sbr-latex' || prod.category === 'precast';
+      case 'grouting-systems':
+      case 'grouts':
+        return prod.id === 'hy-chemgrout-60' || prod.id === 'hy-epoxy-grout' || prod.id === 'hybeq-jointseal-pu' || prod.category === 'grouts';
+      case 'surface-treatment':
+        return prod.id === 'hybeq-sbr-latex' || prod.id === 'hy-hardtop-330' || prod.id === 'hy-waterseal-wh';
+      case 'bonding-agent':
+        return prod.id === 'hybeq-sbr-latex' || prod.id === 'hymax-525' || prod.id === 'hyintra-507';
+      case 'structural-repair':
+      case 'repairs':
+        return prod.category === 'repairs';
+      case 'sealants':
+        return prod.id === 'hybeq-jointseal-pu' || prod.id === 'hy-epoxy-grout';
+      case 'decorative-floor-wall':
+        return prod.id === 'hyultra-515' || prod.id === 'hy-flexicoat-2c' || prod.id === 'hy-epoxy-grout' || prod.id === 'hy-hardtop-330';
+      case 'drymix-mortar':
+        return prod.id === 'hy-blockcrete-mortar' || prod.id === 'hy-microconcrete-m40' || prod.id === 'hycera-505';
+      case 'curing-compounds':
+        return prod.id === 'hybeq-sbr-latex' || prod.id === 'hy-fastset-ac';
+      case 'epoxy-flooring':
+        return prod.id === 'hy-hardtop-330' || prod.id === 'hy-epoxy-grout';
+      case 'epoxy-screed':
+        return prod.id === 'hy-hardtop-330' || prod.id === 'hy-chemgrout-60';
+      default:
+        return prod.category === catId;
+    }
+  };
+
+  const [selectedCat, setSelectedCat] = useState<string>(() => {
+    if (category) {
+      const found = categories.find(c => c.id === category || (c.id === 'tile-stone-fixing' && category === 'tile-fixing') || (c.id === 'structural-repair' && category === 'repairs') || (c.id === 'grouting-systems' && category === 'grouts'));
+      return found ? found.id : 'all';
+    }
+    return 'all';
+  });
+
   const [searchQuery, setSearchQuery] = useState('');
+  const [sortBy, setSortBy] = useState<'featured' | 'name-asc' | 'name-desc'>('featured');
+  const [mobileFilterOpen, setMobileFilterOpen] = useState(false);
 
   useEffect(() => {
     if (category) {
-      setSelectedCat(category);
+      const found = categories.find(c => c.id === category || (c.id === 'tile-stone-fixing' && category === 'tile-fixing') || (c.id === 'structural-repair' && category === 'repairs') || (c.id === 'grouting-systems' && category === 'grouts'));
+      if (found) setSelectedCat(found.id);
     }
   }, [category]);
 
-  const categories = [
-    { id: 'all', label: 'All Products (12+)', icon: Layers },
-    { id: 'tile-fixing', label: 'Tile & Stone Fixing', icon: Layers },
-    { id: 'waterproofing', label: 'Waterproofing Systems', icon: Droplet },
-    { id: 'repairs', label: 'Repair Mortars & Bonding', icon: Hammer },
-    { id: 'grouts', label: 'Epoxy & Cement Grouts', icon: Sparkles },
-    { id: 'precast', label: 'Precast & Infra Admixtures', icon: Building }
-  ];
+  // Calculate live count per category
+  const categoryCounts = useMemo(() => {
+    const counts: { [key: string]: number } = { all: PRODUCTS.length };
+    categories.forEach(c => {
+      if (c.id !== 'all') {
+        counts[c.id] = PRODUCTS.filter(p => matchCategory(p, c.id)).length;
+      }
+    });
+    return counts;
+  }, []);
 
-  const filteredProducts = PRODUCTS.filter(p => {
-    const matchesCat = selectedCat === 'all' || p.category === selectedCat;
-    const q = searchQuery.trim().toLowerCase();
-    const matchesSearch = !q || (
-      p.name.toLowerCase().includes(q) ||
-      p.shortDesc.toLowerCase().includes(q) ||
-      p.badge.toLowerCase().includes(q) ||
-      p.standards.toLowerCase().includes(q) ||
-      p.features.some(f => f.toLowerCase().includes(q))
-    );
-    return matchesCat && matchesSearch;
-  });
+  // Filter & Search Logic
+  const filteredProducts = useMemo(() => {
+    let result = PRODUCTS.filter((p: Product) => {
+      const matchesCat = matchCategory(p, selectedCat);
+      const q = searchQuery.trim().toLowerCase();
+      const matchesSearch = !q || (
+        p.name.toLowerCase().includes(q) ||
+        p.shortDesc.toLowerCase().includes(q) ||
+        p.badge.toLowerCase().includes(q) ||
+        p.standards.toLowerCase().includes(q) ||
+        p.features.some(f => f.toLowerCase().includes(q))
+      );
+      return matchesCat && matchesSearch;
+    });
+
+    // Sorting
+    if (sortBy === 'name-asc') {
+      result = [...result].sort((a, b) => a.name.localeCompare(b.name));
+    } else if (sortBy === 'name-desc') {
+      result = [...result].sort((a, b) => b.name.localeCompare(a.name));
+    }
+
+    return result;
+  }, [selectedCat, searchQuery, sortBy]);
+
+  // Client-side filtering without changing URL route
+  const handleCategoryChange = (catId: string) => {
+    setSelectedCat(catId);
+    setMobileFilterOpen(false);
+  };
+
+  const handleResetFilters = () => {
+    setSelectedCat('all');
+    setSearchQuery('');
+    setSortBy('featured');
+  };
+
+  const activeCategoryObj = categories.find(c => c.id === selectedCat) || categories[0];
 
   return (
-    <div className="products-page">
-      {/* Header */}
-      <section style={{ background: '#0A2362', color: '#FFFFFF', padding: '70px 0 50px' }}>
-        <div className="container">
-          <span className="section-tag on-dark" style={{ marginBottom: 12 }}>Engineered Chemical Formulations</span>
-          <h1 style={{ fontSize: 'clamp(2.4rem, 4.5vw, 3.6rem)', color: '#FFFFFF', fontWeight: 900, marginBottom: 16 }}>
-            High-Performance Product Portfolio
+    <div className="hybeq-catalog-page">
+      {/* Compact Page Header with Breadcrumbs */}
+      <section className="hybeq-catalog-hero">
+        <div className="hybeq-catalog-container">
+          <nav className="hybeq-breadcrumbs" aria-label="Breadcrumb navigation">
+            <Link to="/">Home</Link>
+            <ChevronRight size={13} className="hybeq-breadcrumb-arrow" />
+            <Link to="/products" className={selectedCat === 'all' ? 'active' : ''}>Products</Link>
+            {selectedCat !== 'all' && (
+              <>
+                <ChevronRight size={13} className="hybeq-breadcrumb-arrow" />
+                <span className="current">{activeCategoryObj.label}</span>
+              </>
+            )}
+          </nav>
+
+          <h1 className="hybeq-catalog-title">
+            {selectedCat === 'all' ? 'Product Catalog' : activeCategoryObj.label}
           </h1>
-          <p style={{ fontSize: '1.1rem', color: 'rgba(255,255,255,0.8)', maxWidth: 740, lineHeight: 1.6 }}>
-            Formulated to exceed IS 15477:2019 and EN 12004 specifications with European redispersible polymer technology, offering high shear tenacity, flexibility, and climatic resistance.
+          <p className="hybeq-catalog-intro">
+            Manufactured to IS 15477:2019 and EN 12004 specifications with European redispersible polymers. Engineered for extreme shear bond, vertical slip resistance, and Indian climate durability.
           </p>
         </div>
       </section>
 
-      {/* Filter and Search Bar */}
-      <section style={{ background: '#F5F7FB', padding: '32px 0', borderBottom: '1px solid #DFE6EF' }}>
-        <div className="container">
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
+      {/* Main Catalog Body with Sidebar & Grid */}
+      <section className="hybeq-catalog-main">
+        <div className="hybeq-catalog-container">
+          
+          {/* Top Filter Bar: Search, Mobile Toggle & Sorting */}
+          <div className="hybeq-catalog-toolbar">
             {/* Search Input */}
-            <div style={{
-              display: 'flex',
-              alignItems: 'center',
-              background: '#FFFFFF',
-              border: '1.5px solid #DFE6EF',
-              borderRadius: 12,
-              padding: '6px 16px',
-              maxWidth: 540
-            }}>
-              <Search size={20} style={{ color: '#0A2362', marginRight: 12 }} />
+            <div className="hybeq-catalog-search">
+              <Search size={18} className="hybeq-search-icon" />
               <input
                 type="text"
-                placeholder="Search formulations, IS standards (e.g. Type 2, S2), or keywords..."
                 value={searchQuery}
-                onChange={e => setSearchQuery(e.target.value)}
-                style={{
-                  width: '100%',
-                  border: 'none',
-                  outline: 'none',
-                  fontSize: '0.9375rem',
-                  fontWeight: 600,
-                  color: '#0A2362',
-                  padding: '8px 0'
-                }}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                placeholder="Search formulations, standards (IS 15477, Type 2)..."
+                aria-label="Search formulations"
               />
-            </div>
-
-            {/* Category Buttons */}
-            <div className="products-filter-row" style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
-              {categories.map(cat => {
-                const IconComponent = cat.icon;
-                const isActive = selectedCat === cat.id;
-                return (
-                  <button
-                    key={cat.id}
-                    type="button"
-                    onClick={() => setSelectedCat(cat.id)}
-                    style={{
-                      display: 'inline-flex',
-                      alignItems: 'center',
-                      gap: 8,
-                      padding: '10px 18px',
-                      borderRadius: 30,
-                      fontSize: '0.875rem',
-                      fontWeight: 700,
-                      cursor: 'pointer',
-                      transition: 'all 0.2s',
-                      background: isActive ? '#0A2362' : '#FFFFFF',
-                      color: isActive ? '#FFFFFF' : '#0A2362',
-                      border: '1.5px solid',
-                      borderColor: isActive ? '#0A2362' : '#DFE6EF',
-                      boxShadow: isActive ? '0 4px 14px rgba(10,35,98,0.2)' : 'none'
-                    }}
-                  >
-                    <IconComponent size={16} style={{ color: isActive ? '#46C985' : '#0A2362' }} />
-                    <span>{cat.label}</span>
-                  </button>
-                );
-              })}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Products Grid */}
-      <section style={{ padding: 'clamp(40px, 6vw, 70px) 0 clamp(50px, 7vw, 90px)', background: '#FFFFFF' }}>
-        <div className="container">
-          <div style={{ marginBottom: 24, display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 12 }}>
-            <span style={{ fontSize: '0.875rem', color: '#64748B', fontWeight: 600 }}>
-              Showing <strong>{filteredProducts.length}</strong> verified formulations
-            </span>
-            {searchQuery && (
-              <button
-                type="button"
-                onClick={() => setSearchQuery('')}
-                style={{ fontSize: '0.8125rem', color: '#0A2362', fontWeight: 700 }}
-              >
-                Clear Search Filter
-              </button>
-            )}
-          </div>
-
-          {filteredProducts.length === 0 ? (
-            <div style={{ textAlign: 'center', padding: '60px 0', background: '#F5F7FB', borderRadius: 16 }}>
-              <h3 style={{ fontSize: '1.3rem', color: '#0A2362', fontWeight: 800 }}>No matching formulations found</h3>
-              <p style={{ color: '#64748B', marginTop: 8 }}>Try adjusting your search query or selecting "All Products".</p>
-            </div>
-          ) : (
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 280px), 1fr))', gap: 'clamp(20px, 3vw, 32px)' }}>
-              {filteredProducts.map(product => (
-                <div
-                  key={product.id}
-                  style={{
-                    background: '#FFFFFF',
-                    borderRadius: 16,
-                    border: '1.5px solid #DFE6EF',
-                    overflow: 'hidden',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    transition: 'all 0.3s'
-                  }}
-                  onMouseEnter={e => {
-                    e.currentTarget.style.transform = 'translateY(-6px)';
-                    e.currentTarget.style.borderColor = '#46C985';
-                    e.currentTarget.style.boxShadow = '0 16px 36px rgba(10,35,98,0.08)';
-                  }}
-                  onMouseLeave={e => {
-                    e.currentTarget.style.transform = 'none';
-                    e.currentTarget.style.borderColor = '#DFE6EF';
-                    e.currentTarget.style.boxShadow = 'none';
-                  }}
+              {searchQuery && (
+                <button
+                  type="button"
+                  onClick={() => setSearchQuery('')}
+                  className="hybeq-search-clear"
+                  aria-label="Clear search"
                 >
-                  {/* Product 3D Pack Render Stage */}
-                  <div style={{
-                    height: 200,
-                    background: 'linear-gradient(180deg, #F8FAFC 0%, #FFFFFF 100%)',
-                    padding: 16,
-                    position: 'relative',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    borderBottom: '1px solid #DFE6EF',
-                    overflow: 'hidden'
-                  }}>
-                    <div style={{ position: 'absolute', top: 12, left: 12, zIndex: 2 }}>
-                      <span style={{ fontSize: '0.6875rem', fontWeight: 800, background: '#0A2362', color: '#46C985', padding: '4px 10px', borderRadius: 20, textTransform: 'uppercase' }}>
-                        {product.badge}
-                      </span>
-                    </div>
-                    <div style={{ position: 'absolute', top: 12, right: 12, zIndex: 2 }}>
-                      <span style={{ fontSize: '0.75rem', color: '#64748B', fontWeight: 600, background: 'rgba(255,255,255,0.9)', padding: '2px 8px', borderRadius: 6, border: '1px solid #DFE6EF' }}>
-                        {product.packaging}
-                      </span>
-                    </div>
-                    <img
-                      src={getProductImage(product)}
-                      alt={product.name}
-                      style={{
-                        height: 160,
-                        width: 'auto',
-                        maxWidth: '85%',
-                        objectFit: 'contain',
-                        transition: 'transform 0.4s ease',
-                        filter: 'drop-shadow(0 10px 18px rgba(10,35,98,0.12))'
-                      }}
-                      onMouseEnter={e => e.currentTarget.style.transform = 'scale(1.08)'}
-                      onMouseLeave={e => e.currentTarget.style.transform = 'scale(1)'}
-                    />
-                  </div>
-
-                  {/* Product Title Bar */}
-                  <div style={{ padding: '16px 24px 0', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                    <div>
-                      <h3 style={{ fontSize: '1.25rem', fontWeight: 900, color: '#0A2362', margin: 0 }}>
-                        {product.name}
-                      </h3>
-                      <span style={{ fontSize: '0.75rem', color: '#46C985', fontWeight: 700 }}>
-                        {product.categoryLabel}
-                      </span>
-                    </div>
-                    <div style={{
-                      width: 38,
-                      height: 38,
-                      borderRadius: 8,
-                      background: '#F5F7FB',
-                      border: '1px solid #DFE6EF',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      color: '#0A2362'
-                    }}>
-                      {product.category === 'waterproofing' ? <Droplet size={20} /> :
-                       product.category === 'repairs' ? <Hammer size={20} /> :
-                       product.category === 'grouts' ? <Sparkles size={20} /> :
-                       <Layers size={20} />}
-                    </div>
-                  </div>
-
-                  {/* Body */}
-                  <div style={{ padding: 24, display: 'flex', flexDirection: 'column', flex: 1, justifyContent: 'space-between' }}>
-                    <div>
-                      <p style={{ fontSize: '0.875rem', color: '#64748B', lineHeight: 1.6, marginBottom: 16 }}>
-                        {product.shortDesc}
-                      </p>
-
-                      <div style={{ background: '#F5F7FB', padding: '12px 14px', borderRadius: 8, marginBottom: 16 }}>
-                        <span style={{ fontSize: '0.6875rem', fontWeight: 800, color: '#0A2362', textTransform: 'uppercase', letterSpacing: 1, display: 'block', marginBottom: 4 }}>
-                          Standard Compliance
-                        </span>
-                        <span style={{ fontSize: '0.8125rem', color: '#46C985', fontWeight: 700 }}>
-                          {product.standards}
-                        </span>
-                      </div>
-
-                      <div style={{ display: 'flex', flexDirection: 'column', gap: 8, marginBottom: 20 }}>
-                        {product.features.map((feat, idx) => (
-                          <div key={idx} style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: '0.8125rem', color: '#26344E', fontWeight: 600 }}>
-                            <CheckCircle2 size={14} style={{ color: '#46C985', flexShrink: 0 }} />
-                            <span>{feat}</span>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-
-                    <div style={{ borderTop: '1px solid #DFE6EF', paddingTop: 16, display: 'flex', gap: 10 }}>
-                      <Link
-                        to={`/products/${product.category}/${product.id}`}
-                        className="btn btn-outline"
-                        style={{ flex: 1, fontSize: '0.8125rem', padding: '10px 12px', justifyContent: 'center' }}
-                      >
-                        Specs &amp; TDS
-                      </Link>
-                      <button
-                        type="button"
-                        className="btn btn-primary"
-                        onClick={() => onOpenEnquiry(product.name)}
-                        style={{ fontSize: '0.8125rem', padding: '10px 16px' }}
-                      >
-                        Quote
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              ))}
+                  ✕
+                </button>
+              )}
             </div>
-          )}
+
+            {/* Mobile Filter Toggle */}
+            <button
+              type="button"
+              className="hybeq-mobile-filter-btn"
+              onClick={() => setMobileFilterOpen(!mobileFilterOpen)}
+              aria-label="Toggle category filter menu"
+            >
+              <SlidersHorizontal size={16} />
+              <span>Categories ({activeCategoryObj.label})</span>
+            </button>
+
+            {/* Right Controls: Count & Sort */}
+            <div className="hybeq-catalog-controls">
+              <span className="hybeq-catalog-count">
+                Showing <strong>{filteredProducts.length}</strong> of {PRODUCTS.length} products
+              </span>
+
+              <div className="hybeq-catalog-sort">
+                <label htmlFor="catalog-sort-select">Sort by:</label>
+                <select
+                  id="catalog-sort-select"
+                  value={sortBy}
+                  onChange={(e) => setSortBy(e.target.value as any)}
+                >
+                  <option value="featured">Featured Standards</option>
+                  <option value="name-asc">Alphabetical (A–Z)</option>
+                  <option value="name-desc">Alphabetical (Z–A)</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          {/* Catalog Layout: Desktop Sidebar + Product Grid */}
+          <div className="hybeq-catalog-layout">
+            
+            {/* Desktop Left Sidebar: Categories */}
+            <aside className={`hybeq-catalog-sidebar ${mobileFilterOpen ? 'mobile-open' : ''}`}>
+              <div className="hybeq-sidebar-header">
+                <div className="hybeq-sidebar-title">
+                  <Filter size={16} />
+                  <span>Product Categories</span>
+                </div>
+                {(selectedCat !== 'all' || searchQuery) && (
+                  <button
+                    type="button"
+                    onClick={handleResetFilters}
+                    className="hybeq-sidebar-reset"
+                    title="Reset all filters"
+                  >
+                    <RotateCcw size={13} />
+                    <span>Reset</span>
+                  </button>
+                )}
+              </div>
+
+              <div className="hybeq-category-list" role="list">
+                {categories.map((cat) => {
+                  const isActive = selectedCat === cat.id;
+                  const count = categoryCounts[cat.id] || 0;
+
+                  return (
+                    <button
+                      key={cat.id}
+                      type="button"
+                      onClick={() => handleCategoryChange(cat.id)}
+                      className={`hybeq-category-btn ${isActive ? 'active' : ''}`}
+                      aria-current={isActive ? 'page' : undefined}
+                    >
+                      <span className="hybeq-cat-name">{cat.label}</span>
+                      <span className="hybeq-cat-count">{count}</span>
+                    </button>
+                  );
+                })}
+              </div>
+
+              {/* Technical Assistance Sidebar Card */}
+              <div className="hybeq-sidebar-support-card">
+                <h4>Need Custom Specifications?</h4>
+                <p>
+                  Our senior chemical engineers provide substrate pull-off testing and custom BOQ estimations for project tenders.
+                </p>
+                <button
+                  type="button"
+                  onClick={() => onOpenEnquiry()}
+                  className="hybeq-btn hybeq-btn-secondary hybeq-btn-full"
+                >
+                  <span>Request Project Audit</span>
+                  <ArrowUpRight size={14} />
+                </button>
+              </div>
+            </aside>
+
+            {/* Right Product Grid */}
+            <div className="hybeq-catalog-content">
+              {filteredProducts.length === 0 ? (
+                <div className="hybeq-catalog-empty">
+                  <h3>No matching formulations found</h3>
+                  <p>
+                    No products matched your search "{searchQuery}" in category "{activeCategoryObj.label}".
+                  </p>
+                  <button
+                    type="button"
+                    onClick={handleResetFilters}
+                    className="hybeq-btn hybeq-btn-primary"
+                  >
+                    <RotateCcw size={16} />
+                    <span>Reset All Filters</span>
+                  </button>
+                </div>
+              ) : (
+                <div className="hybeq-catalog-grid">
+                  {filteredProducts.map((prod) => {
+                    const imgSrc = getProductImage(prod);
+                    const detailUrl = `/products/${prod.category}/${prod.id}`;
+
+                    return (
+                      <article key={prod.id} className="hybeq-catalog-card">
+                        {/* Packaging only (Green badge removed as requested) */}
+                        <div className="hybeq-card-header-bar">
+                          <span className="hybeq-card-pack">{prod.packaging}</span>
+                        </div>
+
+                        {/* Product Image Stage */}
+                        <Link to={detailUrl} className="hybeq-card-img-link" title={`View ${prod.name}`}>
+                          <img
+                            src={imgSrc}
+                            alt={`${prod.name} packaging`}
+                            className="hybeq-card-img"
+                            loading="lazy"
+                          />
+                        </Link>
+
+                        {/* Details */}
+                        <div className="hybeq-card-info">
+                          <span className="hybeq-card-cat-label">{prod.categoryLabel}</span>
+                          <h3 className="hybeq-card-title">
+                            <Link to={detailUrl}>{prod.name}</Link>
+                          </h3>
+                          <p className="hybeq-card-desc">{prod.shortDesc}</p>
+
+                          {/* Technical Highlights */}
+                          {prod.specs && Object.keys(prod.specs).length > 0 && (
+                            <div className="hybeq-card-specs-box">
+                              {Object.entries(prod.specs).slice(0, 2).map(([k, v], sIdx) => (
+                                <div key={sIdx} className="hybeq-spec-line">
+                                  <span className="k">{k}:</span>
+                                  <span className="v">{v}</span>
+                                </div>
+                              ))}
+                            </div>
+                          )}
+                        </div>
+
+                        {/* Actions */}
+                        <div className="hybeq-card-actions">
+                          <Link to={detailUrl} className="hybeq-card-view-btn">
+                            <span>View Details</span>
+                            <ArrowUpRight size={14} />
+                          </Link>
+
+                          <button
+                            type="button"
+                            onClick={() => onOpenEnquiry(prod.name)}
+                            className="hybeq-card-enquire-btn"
+                            title={`Request TDS or Quote for ${prod.name}`}
+                            aria-label={`Enquire about ${prod.name}`}
+                          >
+                            <MessageSquare size={14} />
+                            <span>Enquire</span>
+                          </button>
+                        </div>
+                      </article>
+                    );
+                  })}
+                </div>
+              )}
+            </div>
+
+          </div>
+
         </div>
       </section>
     </div>
   );
 };
+
+export default ProductsPage;
