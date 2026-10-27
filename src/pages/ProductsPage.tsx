@@ -148,7 +148,7 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({ onOpenEnquiry }) => 
               <p style={{ color: '#64748B', marginTop: 8 }}>Try adjusting your search query or selecting "All Products".</p>
             </div>
           ) : (
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))', gap: 32 }}>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 300px), 1fr))', gap: 28 }}>
               {filteredProducts.map(product => (
                 <div
                   key={product.id}

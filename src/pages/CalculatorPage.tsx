@@ -22,12 +22,12 @@ export const CalculatorPage: React.FC<CalculatorPageProps> = ({ onOpenEnquiry })
       </section>
 
       {/* Main Interactive Calculator */}
-      <section style={{ padding: '80px 0', background: '#F5F7FB' }}>
+      <section style={{ padding: 'clamp(40px, 6vw, 80px) 0', background: '#F5F7FB' }}>
         <div className="container" style={{ maxWidth: 1040 }}>
           <CalculatorWidget onOpenEnquiry={onOpenEnquiry} compact={false} />
 
           {/* Reference Table Below Calculator */}
-          <div style={{ marginTop: 60, background: '#FFFFFF', borderRadius: 16, border: '1.5px solid #DFE6EF', padding: 36 }}>
+          <div style={{ marginTop: 40, background: '#FFFFFF', borderRadius: 16, border: '1.5px solid #DFE6EF', padding: 'clamp(18px, 4vw, 36px)' }}>
             <h3 style={{ fontSize: '1.35rem', color: '#0A2362', fontWeight: 800, marginBottom: 16 }}>
               Recommended Notch Trowel Sizing Chart (IS 15477 Guidelines)
             </h3>

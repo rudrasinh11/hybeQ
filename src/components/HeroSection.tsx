@@ -151,54 +151,74 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
           onTouchStart={handleTouchStart}
           onTouchEnd={handleTouchEnd}
         >
-          {/* Active Carousel Banner Image Slides */}
-          <div className="vura-carousel-inner">
-            {slides.map((s, idx) => (
-              <div
-                key={s.id}
-                className={`vura-carousel-slide ${idx === activeSlide ? 'active' : ''}`}
-                aria-hidden={idx !== activeSlide}
-              >
-                <img
-                  src={s.image}
-                  alt={s.alt}
-                  className="vura-banner-slide-img"
-                  loading={idx === 0 ? 'eager' : 'lazy'}
-                  fetchPriority={idx === 0 ? 'high' : 'auto'}
+          {/* Main Visual Stage (Image Slide + Arrows + Pagination Indicators) */}
+          <div className="vura-banner-stage">
+            {/* Active Carousel Banner Image Slides */}
+            <div className="vura-carousel-inner">
+              {slides.map((s, idx) => (
+                <div
+                  key={s.id}
+                  className={`vura-carousel-slide ${idx === activeSlide ? 'active' : ''}`}
+                  aria-hidden={idx !== activeSlide}
+                >
+                  <img
+                    src={s.image}
+                    alt={s.alt}
+                    className="vura-banner-slide-img"
+                    loading={idx === 0 ? 'eager' : 'lazy'}
+                    fetchPriority={idx === 0 ? 'high' : 'auto'}
+                  />
+                </div>
+              ))}
+            </div>
+
+            {/* Manual Carousel Navigation Arrows */}
+            <button
+              type="button"
+              className="vura-carousel-nav-btn prev"
+              aria-label="Previous slide"
+              onClick={(e) => {
+                e.stopPropagation();
+                prevSlide();
+              }}
+            >
+              <ChevronLeft size={22} />
+            </button>
+            <button
+              type="button"
+              className="vura-carousel-nav-btn next"
+              aria-label="Next slide"
+              onClick={(e) => {
+                e.stopPropagation();
+                nextSlide();
+              }}
+            >
+              <ChevronRight size={22} />
+            </button>
+
+            {/* Center Pagination: 3 pill dots indicating active hero slide */}
+            <div className="vura-banner-indicators" role="tablist" aria-label="Hero Slides">
+              {slides.map((s, idx) => (
+                <button
+                  key={s.id}
+                  type="button"
+                  role="tab"
+                  aria-selected={idx === activeSlide}
+                  aria-label={`Slide ${idx + 1}: ${s.category}`}
+                  className={`vura-banner-indicator ${idx === activeSlide ? 'active' : ''}`}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setActiveSlide(idx);
+                  }}
                 />
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
 
-          {/* Manual Carousel Navigation Arrows (Translucent sleek buttons) */}
-          <button
-            type="button"
-            className="vura-carousel-nav-btn prev"
-            aria-label="Previous slide"
-            onClick={(e) => {
-              e.stopPropagation();
-              prevSlide();
-            }}
-          >
-            <ChevronLeft size={22} />
-          </button>
-          <button
-            type="button"
-            className="vura-carousel-nav-btn next"
-            aria-label="Next slide"
-            onClick={(e) => {
-              e.stopPropagation();
-              nextSlide();
-            }}
-          >
-            <ChevronRight size={22} />
-          </button>
-
           {/* ============================================================
-          {/* ============================================================
-              TOP-RIGHT NOTCH CONTENT (1:1 VURA Reference Treatment):
-              Clean, deliberately positioned supporting text block
-              with balanced line lengths and certified seal.
+              SUPPORTING TEXT CONTENT:
+              Desktop: Elegantly positioned within top-right transparent notch
+              Mobile/Tablet: Rendered as clean modern card below banner stage
               ============================================================ */}
           <div
             className="vura-banner-thumb-content"
@@ -207,24 +227,6 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
             <p className="vura-notch-desc">
               {slides[activeSlide].desc}
             </p>
-          </div>
-
-          {/* Center Pagination: 3 pill dots indicating active hero slide */}
-          <div className="vura-banner-indicators" role="tablist" aria-label="Hero Slides">
-            {slides.map((s, idx) => (
-              <button
-                key={s.id}
-                type="button"
-                role="tab"
-                aria-selected={idx === activeSlide}
-                aria-label={`Slide ${idx + 1}: ${s.category}`}
-                className={`vura-banner-indicator ${idx === activeSlide ? 'active' : ''}`}
-                onClick={(e) => {
-                  e.stopPropagation();
-                  setActiveSlide(idx);
-                }}
-              />
-            ))}
           </div>
 
         </div>
