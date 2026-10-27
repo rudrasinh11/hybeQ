@@ -140,6 +140,7 @@ export const DownloadsPage: React.FC = () => {
               return (
                 <div
                   key={doc.id}
+                  className="hybeq-download-item-card"
                   style={{
                     background: '#FFFFFF',
                     border: '1.5px solid #DFE6EF',
@@ -196,7 +197,7 @@ export const DownloadsPage: React.FC = () => {
                   <button
                     type="button"
                     onClick={() => handleDownload(doc.id)}
-                    className="btn btn-outline"
+                    className="btn btn-outline hybeq-download-btn"
                     style={{
                       borderColor: isDownloading ? '#46C985' : '#DFE6EF',
                       background: isDownloading ? '#EAF8F0' : 'transparent',
