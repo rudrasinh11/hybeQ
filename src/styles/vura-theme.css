@@ -5725,3 +5725,444 @@ div.text-custom-storke-cs,
   }
 }
 
+/* ============================================================
+   ADVANCED REDESIGN — CHANGE 2
+   BORDERLESS CLIENT LOGOS (no white bg, no card shadow, no border)
+   Logos display in their original brand colors on transparent bg
+   ============================================================ */
+.vura-client-logo-card {
+  width: 154px;
+  height: 68px;
+  margin: 0 10px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 16px;
+  background: transparent !important;
+  border: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.25s ease;
+  cursor: default;
+  box-sizing: border-box;
+}
+
+.vura-client-logo-card:hover {
+  background: transparent !important;
+  border: none !important;
+  transform: translateY(-2px);
+  box-shadow: none !important;
+  opacity: 1;
+}
+
+.vura-client-logo-img {
+  max-width: 100%;
+  max-height: 48px;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  display: block;
+  opacity: 1;
+  filter: none;
+  transition: transform 0.25s ease;
+}
+
+.vura-client-logo-card:hover .vura-client-logo-img {
+  transform: scale(1.06);
+  opacity: 1;
+}
+
+/* ============================================================
+   ADVANCED REDESIGN — CHANGE 3
+   EXPORT / GLOBAL REACH SECTION
+   Placed between High-Performance Catalog and What We Offer
+   ============================================================ */
+.vura-export-section {
+  padding: 80px 0;
+  background: #071A45;
+  position: relative;
+  overflow: hidden;
+}
+
+.vura-export-section::before {
+  content: '';
+  position: absolute;
+  top: -60px;
+  right: -60px;
+  width: 320px;
+  height: 320px;
+  background: radial-gradient(circle, rgba(70, 201, 133, 0.12) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.vura-export-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+}
+
+.vura-export-text-col {
+  color: #FFFFFF;
+}
+
+.vura-export-heading {
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 900;
+  line-height: 1.15;
+  color: #FFFFFF;
+  margin: 0 0 20px 0;
+  letter-spacing: -0.02em;
+}
+
+.vura-export-accent {
+  color: #46C985;
+}
+
+.vura-export-desc {
+  font-size: 1.05rem;
+  line-height: 1.72;
+  color: rgba(255, 255, 255, 0.72);
+  margin-bottom: 36px;
+}
+
+.vura-export-stats-row {
+  display: flex;
+  gap: 32px;
+  flex-wrap: wrap;
+}
+
+.vura-export-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.vura-export-stat-num {
+  font-size: 2rem;
+  font-weight: 900;
+  color: #46C985;
+  line-height: 1;
+  font-family: 'vurasemiboldfonts', sans-serif;
+}
+
+.vura-export-stat-label {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.55);
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+}
+
+/* Globe Visual */
+.vura-export-map-col {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.vura-export-globe-visual {
+  position: relative;
+  width: 280px;
+  height: 280px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.vura-globe-ring {
+  position: absolute;
+  border-radius: 50%;
+  border: 1.5px solid rgba(70, 201, 133, 0.25);
+  animation: globe-pulse 3s ease-in-out infinite;
+}
+
+.vura-globe-ring-1 {
+  width: 280px;
+  height: 280px;
+  animation-delay: 0s;
+}
+
+.vura-globe-ring-2 {
+  width: 200px;
+  height: 200px;
+  border-color: rgba(70, 201, 133, 0.35);
+  animation-delay: 0.5s;
+}
+
+.vura-globe-ring-3 {
+  width: 120px;
+  height: 120px;
+  border-color: rgba(70, 201, 133, 0.5);
+  animation-delay: 1s;
+}
+
+@keyframes globe-pulse {
+  0%, 100% { opacity: 0.4; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.04); }
+}
+
+.vura-globe-center {
+  position: relative;
+  z-index: 2;
+  width: 80px;
+  height: 80px;
+  background: #46C985;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 30px rgba(70, 201, 133, 0.45);
+}
+
+.vura-globe-label {
+  font-size: 9px;
+  font-weight: 900;
+  letter-spacing: 0.5px;
+  text-align: center;
+  color: #071A45;
+  line-height: 1.3;
+  text-transform: uppercase;
+}
+
+.vura-globe-dot {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #46C985;
+  box-shadow: 0 0 10px rgba(70, 201, 133, 0.7);
+  z-index: 3;
+  animation: dot-blink 2s ease-in-out infinite;
+}
+
+.vura-globe-dot-india {
+  top: 50%;
+  left: 50%;
+  transform: translate(-16px, -10px);
+  background: #FFFFFF;
+  box-shadow: 0 0 10px rgba(255,255,255,0.6);
+  animation-delay: 0s;
+}
+
+.vura-globe-dot-me {
+  top: 30%;
+  left: 28%;
+  animation-delay: 0.7s;
+}
+
+.vura-globe-dot-sea {
+  top: 56%;
+  right: 18%;
+  animation-delay: 1.2s;
+}
+
+.vura-globe-dot-africa {
+  bottom: 28%;
+  left: 22%;
+  animation-delay: 0.4s;
+}
+
+@keyframes dot-blink {
+  0%, 100% { opacity: 0.6; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.4); }
+}
+
+@media (max-width: 900px) {
+  .vura-export-inner {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .vura-export-map-col {
+    order: -1;
+  }
+
+  .vura-export-globe-visual {
+    width: 200px;
+    height: 200px;
+  }
+
+  .vura-globe-ring-1 { width: 200px; height: 200px; }
+  .vura-globe-ring-2 { width: 140px; height: 140px; }
+  .vura-globe-ring-3 { width: 80px; height: 80px; }
+}
+
+/* ============================================================
+   ADVANCED REDESIGN — CHANGE 4
+   MOBILE-ONLY FOUNDATIONAL PILLARS SCROLL ANIMATION
+   Smooth fade-in + slide-up reveal triggered by IntersectionObserver
+   Only active on screens ≤ 768px
+   ============================================================ */
+@media (max-width: 768px) {
+  .vura-pillar-card {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.55s ease, transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .vura-pillar-card.pillar-revealed {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .vura-pillar-card:nth-child(2) {
+    transition-delay: 0.15s;
+  }
+
+  .vura-pillar-card:nth-child(3) {
+    transition-delay: 0.3s;
+  }
+}
+
+/* ============================================================
+   ADVANCED REDESIGN — CHANGE 6/7/8
+   SIMPLIFIED HOMEPAGE PRODUCT CARD
+   Only: image (taller stage), product name, View + Buy actions
+   No overlay badges, no category, no description, no feature bullets
+   ============================================================ */
+.vura-product-card-simple {
+  padding: 16px 16px 20px;
+}
+
+.vura-product-card-simple .vura-product-stage-box {
+  height: 260px;
+  margin-bottom: 14px;
+}
+
+.vura-product-card-simple .vura-card-title {
+  font-size: 16px;
+  font-weight: 700;
+  margin: 0 0 12px 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  min-height: 40px;
+}
+
+.vura-product-card-simple .vura-card-action-footer {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  padding-top: 12px;
+  border-top: 1px solid var(--color-border);
+  margin-top: 0;
+}
+
+.vura-product-card-simple .vura-card-btn-specs {
+  font-size: 13px;
+  padding: 9px 0;
+  font-weight: 700;
+  text-align: center;
+  border: 1.5px solid var(--color-border);
+  border-radius: 6px;
+  color: var(--color-primary);
+  background: transparent;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.vura-product-card-simple .vura-card-btn-specs:hover {
+  border-color: var(--color-primary);
+  background: rgba(10, 35, 98, 0.04);
+}
+
+.vura-product-card-simple .vura-card-btn-inquire {
+  font-size: 13px;
+  padding: 9px 0;
+  font-weight: 700;
+  text-align: center;
+  border: none;
+  border-radius: 6px;
+  color: #FFFFFF;
+  background: #46C985;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.18s ease;
+}
+
+.vura-product-card-simple .vura-card-btn-inquire:hover {
+  background: #38B373;
+  transform: translateY(-1px);
+}
+
+/* ============================================================
+   ADVANCED REDESIGN — CHANGE 1
+   EDITORIAL NUMBERED TITLE LABEL FOR HERO SECTION
+   Overlaps the upper-left of the hero banner stage
+   Shows slide number (01/02/03) + category label
+   ============================================================ */
+.vura-banner-v2-thumb {
+  position: relative;
+}
+
+.vura-editorial-label {
+  position: absolute;
+  top: -1px;
+  left: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  gap: 0;
+  background: #0A2362;
+  border-radius: 12px 0 16px 0;
+  overflow: hidden;
+  pointer-events: none;
+  box-shadow: 4px 4px 16px rgba(10, 35, 98, 0.25);
+  animation: editorial-fade 0.4s ease;
+}
+
+@keyframes editorial-fade {
+  from { opacity: 0; transform: translateY(-6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.vura-editorial-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: #46C985;
+  color: #071A45;
+  font-size: 1.05rem;
+  font-weight: 900;
+  font-family: 'vurasemiboldfonts', sans-serif;
+  width: 52px;
+  height: 44px;
+  letter-spacing: -0.5px;
+  flex-shrink: 0;
+}
+
+.vura-editorial-category {
+  display: inline-block;
+  color: #FFFFFF;
+  font-size: 0.65rem;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  padding: 0 14px;
+  line-height: 1.3;
+  max-width: 180px;
+}
+
+@media (max-width: 600px) {
+  .vura-editorial-label {
+    border-radius: 8px 0 12px 0;
+  }
+
+  .vura-editorial-num {
+    font-size: 0.9rem;
+    width: 44px;
+    height: 38px;
+  }
+
+  .vura-editorial-category {
+    font-size: 0.58rem;
+    padding: 0 10px;
+    max-width: 130px;
+  }
+}
+

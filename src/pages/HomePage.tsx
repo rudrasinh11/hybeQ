@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import {
   ArrowUpRight,
@@ -27,6 +27,33 @@ export const HomePage: React.FC<HomePageProps> = ({
 }) => {
   const [selectedProductCategory, setSelectedProductCategory] = useState<string>('all');
   const carouselRef = useRef<HTMLDivElement>(null);
+  const pillarsGridRef = useRef<HTMLDivElement>(null);
+
+  // Change 4: Mobile-only IntersectionObserver for Foundational Pillars scroll animation
+  useEffect(() => {
+    const grid = pillarsGridRef.current;
+    if (!grid) return;
+    // Only activate on mobile
+    if (window.innerWidth > 768) return;
+
+    const cards = grid.querySelectorAll<HTMLElement>('.vura-pillar-card');
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            (entry.target as HTMLElement).classList.add('pillar-revealed');
+          } else {
+            (entry.target as HTMLElement).classList.remove('pillar-revealed');
+          }
+        });
+      },
+      { threshold: 0.15 }
+    );
+
+    cards.forEach((card) => observer.observe(card));
+    return () => cards.forEach((card) => observer.unobserve(card));
+  }, []);
+
 
   // Requirement 4: Display approximately 5-6 products per horizontal carousel
   const carouselProducts = (
@@ -66,9 +93,8 @@ export const HomePage: React.FC<HomePageProps> = ({
           ============================================================ */}
       <section className="vura-products-section" id="featured-products">
         <div className="vura-container">
-          <div className="vura-products-header">
+        <div className="vura-products-header">
             <div>
-              <span className="vura-section-tag">Engineered Formulations</span>
               <h2 className="vura-section-heading" style={{ margin: 0 }}>
                 High-Performance Catalog
               </h2>
@@ -153,27 +179,74 @@ export const HomePage: React.FC<HomePageProps> = ({
       </section>
 
       {/* ============================================================
-          SECTION 4: WHAT WE OFFER — OUR PRODUCT RANGE
+          SECTION 4: EXPORT / GLOBAL REACH
+          (Inserted between High-Performance Catalog and What We Offer)
+          ============================================================ */}
+      <section className="vura-export-section" id="global-reach" aria-label="Export and Global Reach">
+        <div className="vura-container">
+          <div className="vura-export-inner">
+            <div className="vura-export-text-col">
+              <h2 className="vura-export-heading">
+                Reaching Builders<br /><span className="vura-export-accent">Across the Globe</span>
+              </h2>
+              <p className="vura-export-desc">
+                HYBEQ construction chemicals are trusted in infrastructure projects across India and exported to markets in the Middle East, Southeast Asia, and Africa. Our ISO-certified manufacturing ensures every batch meets international quality standards.
+              </p>
+              <div className="vura-export-stats-row">
+                <div className="vura-export-stat">
+                  <span className="vura-export-stat-num">15+</span>
+                  <span className="vura-export-stat-label">Export Countries</span>
+                </div>
+                <div className="vura-export-stat">
+                  <span className="vura-export-stat-num">ISO</span>
+                  <span className="vura-export-stat-label">Certified Manufacturing</span>
+                </div>
+                <div className="vura-export-stat">
+                  <span className="vura-export-stat-num">4</span>
+                  <span className="vura-export-stat-label">Global Regions Served</span>
+                </div>
+              </div>
+            </div>
+            <div className="vura-export-map-col">
+              <div className="vura-export-globe-visual">
+                <div className="vura-globe-ring vura-globe-ring-1" />
+                <div className="vura-globe-ring vura-globe-ring-2" />
+                <div className="vura-globe-ring vura-globe-ring-3" />
+                <div className="vura-globe-center">
+                  <span className="vura-globe-label">GLOBAL<br />REACH</span>
+                </div>
+                {/* Hotspots */}
+                <div className="vura-globe-dot vura-globe-dot-india" title="India (HQ)" />
+                <div className="vura-globe-dot vura-globe-dot-me" title="Middle East" />
+                <div className="vura-globe-dot vura-globe-dot-sea" title="Southeast Asia" />
+                <div className="vura-globe-dot vura-globe-dot-africa" title="Africa" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ============================================================
+          SECTION 5: WHAT WE OFFER — OUR PRODUCT RANGE
           (Dual-Layer Kinetic Typography Marquee)
           ============================================================ */}
       <ProductRangeMarquee />
 
       {/* ============================================================
-          SECTION 5: THREE PILLARS (PRINCIPLE, MISSION, VISION)
+          SECTION 6: THREE PILLARS (PRINCIPLE, MISSION, VISION)
           ============================================================ */}
-      <section className="vura-pillars-section">
+      <section className="vura-pillars-section" id="foundational-pillars">
         <div className="vura-container">
           <div style={{ textAlign: 'center', maxWidth: 760, margin: '0 auto' }}>
-            <span className="vura-section-tag">Foundational Pillars</span>
-            <h2 className="vura-section-heading">
-              Built On Integrity, Precision &amp; Engineering Excellence
-            </h2>
+              <h2 className="vura-section-heading">
+                Built On Integrity, Precision &amp; Engineering Excellence
+              </h2>
             <p className="vura-section-desc">
               Three non-negotiable principles that drive our formulation chemistry, raw material selection, and applicator training programs across India.
             </p>
           </div>
 
-          <div className="vura-pillars-grid">
+          <div className="vura-pillars-grid" ref={pillarsGridRef}>
             {/* Pillar 1: Principle */}
             <div className="vura-pillar-card">
               <div className="vura-pillar-media">
@@ -250,7 +323,6 @@ export const HomePage: React.FC<HomePageProps> = ({
         <div className="vura-container">
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', flexWrap: 'wrap', gap: 20 }}>
             <div>
-              <span className="vura-section-tag">Technical Knowledge Base</span>
               <h2 className="vura-section-heading" style={{ margin: 0 }}>
                 Inside Story &amp; Engineering Guides
               </h2>

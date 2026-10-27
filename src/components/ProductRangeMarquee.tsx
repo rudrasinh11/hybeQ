@@ -150,7 +150,6 @@ export const ProductRangeMarquee: React.FC = () => {
           2. Main Title: Our Product Range directly below tag
           ============================================================ */}
       <div className="vura-range-center-header">
-        <span className="vura-range-what-we-offer">WHAT WE OFFER</span>
         <h2 className="vura-range-main-title">Our Product Range</h2>
       </div>
 

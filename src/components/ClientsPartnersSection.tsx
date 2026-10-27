@@ -97,14 +97,6 @@ export const ClientsPartnersSection: React.FC = () => {
     <section className="vura-clients-section" id="clients" aria-label="Clients and Partners">
       <div className="vura-clients-header-container">
         
-        {/* Top Tag Badge */}
-        <div className="vura-clients-badge-wrap">
-          <div className="vura-clients-badge">
-            <span className="vura-clients-badge-dot"></span>
-            <span>OUR CLIENTS &amp; PARTNERS</span>
-          </div>
-        </div>
-
         {/* Section Heading & Simplified, Balanced Subtitle */}
         <div className="vura-clients-title-center">
           <h2 className="vura-clients-main-heading">

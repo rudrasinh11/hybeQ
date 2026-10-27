@@ -133,9 +133,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
 
         {/* ============================================================
             HERO SHOWCASE BANNER CONTAINER:
-            Switchable carousel with transparent stepped shape,
-            interactive notch card with changeable enquiry form,
-            and sleek navigation controls.
+            Editorial outer wrapper with rounded corners
             ============================================================ */}
         <div
           className="vura-banner-v2-thumb"
@@ -151,6 +149,14 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
           onTouchStart={handleTouchStart}
           onTouchEnd={handleTouchEnd}
         >
+          {/* Editorial Numbered Category Label — overlaps upper-left of stage */}
+          <div className="vura-editorial-label">
+            <span className="vura-editorial-num">
+              {String(activeSlide + 1).padStart(2, '0')}
+            </span>
+            <span className="vura-editorial-category">{slides[activeSlide].category}</span>
+          </div>
+
           {/* Main Visual Stage (Image Slide + Arrows + Pagination Indicators) */}
           <div className="vura-banner-stage">
             {/* Active Carousel Banner Image Slides */}
