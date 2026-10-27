@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link, NavLink, useNavigate } from 'react-router-dom';
-import { ArrowUpRight, Search, Calculator, Menu, X, ChevronDown, ChevronRight } from 'lucide-react';
+import { ArrowUpRight, Search, Calculator, Menu, X, ChevronDown } from 'lucide-react';
 
 interface HeaderProps {
   onOpenSearch: () => void;
@@ -13,12 +13,10 @@ export const Header: React.FC<HeaderProps> = ({
 }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [productsMegaOpen, setProductsMegaOpen] = useState(false);
-  const [aboutMenuOpen, setAboutMenuOpen] = useState(false);
   const [mobileProductsOpen, setMobileProductsOpen] = useState(false);
   const [mobileAboutOpen, setMobileAboutOpen] = useState(false);
   
   const productsTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const aboutTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const headerRef = useRef<HTMLElement>(null);
   const navigate = useNavigate();
 
@@ -27,7 +25,6 @@ export const Header: React.FC<HeaderProps> = ({
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
         setProductsMegaOpen(false);
-        setAboutMenuOpen(false);
         setMobileMenuOpen(false);
       }
     };
@@ -40,7 +37,6 @@ export const Header: React.FC<HeaderProps> = ({
     const handleClickOutside = (e: MouseEvent) => {
       if (headerRef.current && !headerRef.current.contains(e.target as Node)) {
         setProductsMegaOpen(false);
-        setAboutMenuOpen(false);
       }
     };
     document.addEventListener('mousedown', handleClickOutside);
@@ -50,7 +46,6 @@ export const Header: React.FC<HeaderProps> = ({
   // Handlers for Products Mega Menu hover with grace period
   const handleProductsEnter = () => {
     if (productsTimeoutRef.current) clearTimeout(productsTimeoutRef.current);
-    setAboutMenuOpen(false);
     setProductsMegaOpen(true);
   };
 
@@ -60,22 +55,8 @@ export const Header: React.FC<HeaderProps> = ({
     }, 200);
   };
 
-  // Handlers for About Us Menu hover with grace period
-  const handleAboutEnter = () => {
-    if (aboutTimeoutRef.current) clearTimeout(aboutTimeoutRef.current);
-    setProductsMegaOpen(false);
-    setAboutMenuOpen(true);
-  };
-
-  const handleAboutLeave = () => {
-    aboutTimeoutRef.current = setTimeout(() => {
-      setAboutMenuOpen(false);
-    }, 200);
-  };
-
   const closeAllMenus = () => {
     setProductsMegaOpen(false);
-    setAboutMenuOpen(false);
     setMobileMenuOpen(false);
   };
 
@@ -305,54 +286,10 @@ export const Header: React.FC<HeaderProps> = ({
             <span>INNOVATIONS</span>
           </NavLink>
 
-          {/* 5. ABOUT US with Submenu (Arrow removed) */}
-          <div
-            className="vura-nav-item-wrap"
-            onMouseEnter={handleAboutEnter}
-            onMouseLeave={handleAboutLeave}
-          >
-            <NavLink
-              to="/about"
-              className={({ isActive }) => `vura-nav-link ${isActive || aboutMenuOpen ? 'active' : ''}`}
-              onClick={() => setAboutMenuOpen(!aboutMenuOpen)}
-              aria-expanded={aboutMenuOpen}
-              aria-haspopup="true"
-            >
-              <span>ABOUT US</span>
-            </NavLink>
-
-            {/* About Us Submenu Dropdown */}
-            {aboutMenuOpen && (
-              <div
-                className="vura-about-dropdown"
-                onMouseEnter={handleAboutEnter}
-                onMouseLeave={handleAboutLeave}
-                role="menu"
-                aria-label="About Us Submenu"
-              >
-                <Link to="/about#story" className="vura-about-item" onClick={closeAllMenus} role="menuitem">
-                  <span>Story</span>
-                  <ChevronRight size={14} className="vura-submenu-arrow" />
-                </Link>
-                <Link to="/about#principle" className="vura-about-item" onClick={closeAllMenus} role="menuitem">
-                  <span>Principle</span>
-                  <ChevronRight size={14} className="vura-submenu-arrow" />
-                </Link>
-                <Link to="/about#mission" className="vura-about-item" onClick={closeAllMenus} role="menuitem">
-                  <span>Mission</span>
-                  <ChevronRight size={14} className="vura-submenu-arrow" />
-                </Link>
-                <Link to="/about#vision" className="vura-about-item" onClick={closeAllMenus} role="menuitem">
-                  <span>Vision</span>
-                  <ChevronRight size={14} className="vura-submenu-arrow" />
-                </Link>
-                <Link to="/about#infrastructure" className="vura-about-item" onClick={closeAllMenus} role="menuitem">
-                  <span>Infrastructure</span>
-                  <ChevronRight size={14} className="vura-submenu-arrow" />
-                </Link>
-              </div>
-            )}
-          </div>
+          {/* 5. ABOUT US (Direct link without hover dropdown) */}
+          <NavLink to="/about" className={({ isActive }) => `vura-nav-link ${isActive ? 'active' : ''}`}>
+            <span>ABOUT US</span>
+          </NavLink>
 
           {/* 6. BLOG */}
           <NavLink to="/blog" className={({ isActive }) => `vura-nav-link ${isActive ? 'active' : ''}`}>

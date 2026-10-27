@@ -1,13 +1,12 @@
 import React from 'react';
-import { ArrowRight, PhoneCall, ShieldCheck, Award, Layers, Play } from 'lucide-react';
+import { ArrowRight, PhoneCall, ShieldCheck, Award, Layers } from 'lucide-react';
 
 interface HeroSectionProps {
-  onOpenVideo: () => void;
+  onOpenVideo?: () => void;
   onOpenEnquiry?: (productName?: string) => void;
 }
 
 export const HeroSection: React.FC<HeroSectionProps> = ({
-  onOpenVideo,
   onOpenEnquiry
 }) => {
   const scrollToProducts = () => {
@@ -106,24 +105,12 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
           {/* Main Visual Card */}
           <div className="hybeq-hero-main-card">
             <img
-              src="/images/hero-facade.jpg"
+              src="/images/hybeq_live/page_hybeq_20building642.jpeg"
               alt="Engineered Civil Structure Protected by HYBEQ Formulations"
               className="hybeq-hero-img"
               loading="eager"
             />
             <div className="hybeq-hero-img-overlay" />
-
-            {/* Play Button Overlay */}
-            <button
-              type="button"
-              className="hybeq-hero-play-btn"
-              onClick={onOpenVideo}
-              aria-label="Watch Corporate Lab & Application Video"
-              title="Watch Lab & Quality Video"
-            >
-              <div className="hybeq-hero-play-ripple" />
-              <Play size={20} fill="currentColor" />
-            </button>
 
             {/* Bottom Floating HUD Card: Featured Technical Product */}
             <div className="hybeq-hero-hud-card">

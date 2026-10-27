@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, useNavigate } from 'react-router-dom';
 import { CheckCircle2, Download, Calculator, ArrowUpRight, Check, FileText } from 'lucide-react';
 import { PRODUCTS, getProductImage } from '../data/productsData';
 import { CalculatorWidget } from '../components/CalculatorWidget';
@@ -10,6 +10,7 @@ interface ProductDetailPageProps {
 
 export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ onOpenEnquiry }) => {
   const { id } = useParams<{ id: string }>();
+  const navigate = useNavigate();
   const [downloadSuccess, setDownloadSuccess] = useState(false);
 
   const product = PRODUCTS.find(p => p.id === id) || PRODUCTS[0];
@@ -206,7 +207,17 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ onOpenEnqu
                   Estimate bags required for <strong>{product.name}</strong> according to your specific site area.
                 </p>
 
-                <CalculatorWidget onOpenEnquiry={onOpenEnquiry} compact={true} />
+                <CalculatorWidget
+                  initialProductId={product.id}
+                  onOpenEnquiry={onOpenEnquiry}
+                  compact={true}
+                  onProductChange={(newId) => {
+                    const targetProd = PRODUCTS.find(p => p.id === newId);
+                    if (targetProd) {
+                      navigate(`/products/${targetProd.category}/${targetProd.id}`);
+                    }
+                  }}
+                />
 
                 <div style={{ marginTop: 24, paddingTop: 20, borderTop: '1px solid #DFE6EF', display: 'flex', flexDirection: 'column', gap: 12 }}>
                   <button

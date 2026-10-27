@@ -1,20 +1,39 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Calculator, ArrowRight, CheckCircle2, RotateCcw } from 'lucide-react';
 import { PRODUCTS } from '../data/productsData';
 
 interface CalculatorWidgetProps {
   onOpenEnquiry?: (productName: string) => void;
   compact?: boolean;
+  initialProductId?: string;
+  onProductChange?: (productId: string) => void;
 }
 
 export const CalculatorWidget: React.FC<CalculatorWidgetProps> = ({
   onOpenEnquiry,
-  compact = false
+  compact = false,
+  initialProductId,
+  onProductChange
 }) => {
-  const [selectedProductId, setSelectedProductId] = useState<string>('hyintra-507');
+  const [selectedProductId, setSelectedProductId] = useState<string>(initialProductId || 'hycera-505');
+
+  useEffect(() => {
+    if (initialProductId) {
+      setSelectedProductId(initialProductId);
+    }
+  }, [initialProductId]);
+
   const [area, setArea] = useState<number>(500);
   const [unit, setUnit] = useState<'sqft' | 'sqm'>('sqft');
   const [notchSize, setNotchSize] = useState<number>(6); // mm
+
+  const handleProductSelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const newId = e.target.value;
+    setSelectedProductId(newId);
+    if (onProductChange) {
+      onProductChange(newId);
+    }
+  };
 
   const selectedProduct = PRODUCTS.find(p => p.id === selectedProductId) || PRODUCTS[0];
 
@@ -109,7 +128,7 @@ export const CalculatorWidget: React.FC<CalculatorWidgetProps> = ({
             </label>
             <select
               value={selectedProductId}
-              onChange={e => setSelectedProductId(e.target.value)}
+              onChange={handleProductSelect}
               style={{
                 width: '100%',
                 padding: '10px 14px',

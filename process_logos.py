@@ -1,5 +1,5 @@
 import os
-from PIL import Image, ImageOps
+from PIL import Image
 import numpy as np
 
 src_dir = 'public/images/hybeq_live'
@@ -12,33 +12,32 @@ for f in files:
     path = os.path.join(src_dir, f)
     try:
         img = Image.open(path).convert('RGBA')
+        arr = np.array(img, dtype=np.float32)
         
-        # Get data
-        arr = np.array(img)
         r, g, b, a = arr[:,:,0], arr[:,:,1], arr[:,:,2], arr[:,:,3]
         
-        # Find white / near-white background pixels
-        # If pixels are very bright (> 230 in r, g, b) or already transparent
-        is_white_bg = (r > 225) & (g > 225) & (b > 225)
+        min_val = np.minimum(np.minimum(r, g), b)
+        max_val = np.maximum(np.maximum(r, g), b)
+        diff = max_val - min_val
         
-        # For non-white pixels, compute luminance/ink intensity
-        # Luminance from 0 (black ink) to 255 (white)
-        lum = 0.299 * r + 0.587 * g + 0.114 * b
+        # White background pixels (high brightness and low saturation)
+        is_bg = (min_val > 235) & (diff < 20)
         
-        # New alpha: dark pixels become opaque white, white pixels become transparent
-        # Inverted luminance gives ink opacity
-        new_a = np.where(is_white_bg | (a < 50), 0, np.clip((255 - lum) * 1.5, 0, 255)).astype(np.uint8)
+        # Calculate new alpha with edge feathering
+        alpha = np.where(is_bg, 0.0, a)
+        edge_zone = (min_val >= 215) & (min_val <= 245) & (diff < 25)
+        feather_alpha = (245 - min_val) / 30.0 * 255.0
+        alpha = np.where(edge_zone & (alpha > 0), np.minimum(alpha, feather_alpha), alpha)
+        alpha = np.clip(alpha, 0, 255).astype(np.uint8)
         
-        # Make all non-transparent pixels pure white (255, 255, 255)
-        new_arr = np.zeros_like(arr)
-        new_arr[:,:,0] = 255
-        new_arr[:,:,1] = 255
-        new_arr[:,:,2] = 255
-        new_arr[:,:,3] = new_a
+        # Preserve original brand colors!
+        out_arr = np.zeros_like(arr, dtype=np.uint8)
+        out_arr[:,:,0] = arr[:,:,0].astype(np.uint8)
+        out_arr[:,:,1] = arr[:,:,1].astype(np.uint8)
+        out_arr[:,:,2] = arr[:,:,2].astype(np.uint8)
+        out_arr[:,:,3] = alpha
         
-        out_img = Image.fromarray(new_arr, 'RGBA')
-        
-        # Trim transparent borders
+        out_img = Image.fromarray(out_arr, 'RGBA')
         bbox = out_img.getbbox()
         if bbox:
             out_img = out_img.crop(bbox)
@@ -46,6 +45,6 @@ for f in files:
         out_name = f.replace('.jpeg', '.png').replace('.webp', '.png')
         out_path = os.path.join(out_dir, out_name)
         out_img.save(out_path, 'PNG')
-        print(f"Processed: {out_name} (size: {out_img.size})")
+        print(f"Saved colored transparent logo: {out_name}")
     except Exception as e:
         print(f"Error {f}: {e}")
