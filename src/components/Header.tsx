@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link, NavLink, useNavigate } from 'react-router-dom';
-import { ArrowUpRight, Search, Calculator, Menu, X, ChevronDown } from 'lucide-react';
+import { ArrowUpRight, Search, Calculator, Menu, X } from 'lucide-react';
 
 interface HeaderProps {
   onOpenSearch: () => void;
@@ -13,8 +13,6 @@ export const Header: React.FC<HeaderProps> = ({
 }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [productsMegaOpen, setProductsMegaOpen] = useState(false);
-  const [mobileProductsOpen, setMobileProductsOpen] = useState(false);
-  const [mobileAboutOpen, setMobileAboutOpen] = useState(false);
   
   const productsTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const headerRef = useRef<HTMLElement>(null);
@@ -413,45 +411,13 @@ export const Header: React.FC<HeaderProps> = ({
         <div className="vura-mobile-menu" role="dialog" aria-label="Mobile Navigation Menu">
           <div className="vura-mobile-links">
             
-            {/* 1. Mobile Products Accordion */}
-            <div className="vura-mobile-accordion">
-              <button
-                type="button"
-                className="vura-mobile-accordion-toggle"
-                onClick={() => setMobileProductsOpen(!mobileProductsOpen)}
-                aria-expanded={mobileProductsOpen}
-              >
-                <div className="vura-mobile-link-left">
-                  <ArrowUpRight size={17} className="vura-mobile-nav-arrow" />
-                  <span>PRODUCTS</span>
-                </div>
-                <ChevronDown 
-                  size={19} 
-                  className={`vura-mobile-chevron ${mobileProductsOpen ? 'open' : ''}`} 
-                />
-              </button>
-              {mobileProductsOpen && (
-                <div className="vura-mobile-sublist">
-                  {megaMenuColumns.map((col, cIdx) => (
-                    <div key={cIdx} style={{ marginBottom: 14 }}>
-                      {col.sections.map((section, sIdx) => (
-                        <div key={sIdx} style={{ marginBottom: 12 }}>
-                          <span className="vura-mobile-cat-header">{section.heading}</span>
-                          {section.products.slice(0, 4).map((p, pIdx) => (
-                            <Link key={pIdx} to={section.link} onClick={closeAllMenus} className="vura-mobile-sublink">
-                              {p}
-                            </Link>
-                          ))}
-                        </div>
-                      ))}
-                    </div>
-                  ))}
-                  <Link to="/products" onClick={closeAllMenus} className="vura-mobile-view-all">
-                    View Complete Catalog &rarr;
-                  </Link>
-                </div>
-              )}
-            </div>
+            {/* 1. Mobile Products (Direct link to open full products section on phone) */}
+            <Link to="/products" onClick={closeAllMenus} className="vura-mobile-link">
+              <div className="vura-mobile-link-left">
+                <ArrowUpRight size={17} className="vura-mobile-nav-arrow" />
+                <span>PRODUCTS</span>
+              </div>
+            </Link>
 
             {/* 2. Sustainability */}
             <Link to="/sustainability" onClick={closeAllMenus} className="vura-mobile-link">
@@ -474,31 +440,12 @@ export const Header: React.FC<HeaderProps> = ({
               </div>
             </Link>
 
-            {/* 5. Mobile About Us Accordion */}
-            <div className="vura-mobile-accordion">
-              <button
-                type="button"
-                className="vura-mobile-accordion-toggle"
-                onClick={() => setMobileAboutOpen(!mobileAboutOpen)}
-                aria-expanded={mobileAboutOpen}
-              >
-                <div className="vura-mobile-link-left">
-                  <span>ABOUT US</span>
-                </div>
-                <ChevronDown 
-                  size={19} 
-                  className={`vura-mobile-chevron ${mobileAboutOpen ? 'open' : ''}`} 
-                />
-              </button>
-              {mobileAboutOpen && (
-                <div className="vura-mobile-sublist">
-                  <Link to="/about#story" onClick={closeAllMenus} className="vura-mobile-sublink">Our Story</Link>
-                  <Link to="/about#principle" onClick={closeAllMenus} className="vura-mobile-sublink">Guiding Principles</Link>
-                  <Link to="/about#mission" onClick={closeAllMenus} className="vura-mobile-sublink">Mission & Vision</Link>
-                  <Link to="/about#infrastructure" onClick={closeAllMenus} className="vura-mobile-sublink">Manufacturing Plant</Link>
-                </div>
-              )}
-            </div>
+            {/* 5. Mobile About Us Link (Direct link without dropdown options) */}
+            <Link to="/about" onClick={closeAllMenus} className="vura-mobile-link">
+              <div className="vura-mobile-link-left">
+                <span>ABOUT US</span>
+              </div>
+            </Link>
 
             {/* 6. Blog */}
             <Link to="/blog" onClick={closeAllMenus} className="vura-mobile-link">
