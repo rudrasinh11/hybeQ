@@ -105,7 +105,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
           {/* Main Visual Card */}
           <div className="hybeq-hero-main-card">
             <img
-              src="/images/hybeq_live/page_hybeq_20building642.jpeg"
+              src="/images/hybeq_hero_architecture.jpg"
               alt="Engineered Civil Structure Protected by HYBEQ Formulations"
               className="hybeq-hero-img"
               loading="eager"
