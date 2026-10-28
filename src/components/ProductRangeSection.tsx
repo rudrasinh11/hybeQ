@@ -175,7 +175,7 @@ export const ProductRangeSection: React.FC<ProductRangeSectionProps> = ({ onOpen
               className={`vura-range-tab-btn ${idx === activeDivision ? 'active' : ''}`}
               onClick={() => setActiveDivision(idx)}
             >
-              <span className="vura-range-tab-num">{div.number}</span>
+              
               <span className="vura-range-tab-title">{div.name}</span>
               <span className="vura-range-tab-bar-indicator" />
             </button>

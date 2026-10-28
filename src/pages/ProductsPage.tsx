@@ -290,33 +290,6 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({ onOpenEnquiry }) => 
                     >
                       {/* 3D Product Stage */}
                       <div className="catalog-card-stage">
-                        {/* Clean Standard Pill (Technical compliance, not promotional green tag) */}
-                        <div style={{ position: 'absolute', top: 12, left: 12, zIndex: 2 }}>
-                          <span style={{
-                            fontSize: '0.6875rem',
-                            fontWeight: 700,
-                            background: '#0A2362',
-                            color: '#FFFFFF',
-                            padding: '3px 8px',
-                            borderRadius: 4,
-                            letterSpacing: 0.5
-                          }}>
-                            {product.badge}
-                          </span>
-                        </div>
-                        <div style={{ position: 'absolute', top: 12, right: 12, zIndex: 2 }}>
-                          <span style={{
-                            fontSize: '0.75rem',
-                            color: '#64748B',
-                            fontWeight: 600,
-                            background: 'rgba(255,255,255,0.92)',
-                            padding: '2px 8px',
-                            borderRadius: 4,
-                            border: '1px solid #DFE6EF'
-                          }}>
-                            {product.packaging}
-                          </span>
-                        </div>
                         <Link
                           to={`/products/${product.category}/${product.id}`}
                           style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '100%', height: '100%' }}

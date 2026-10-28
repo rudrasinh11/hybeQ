@@ -33,22 +33,19 @@ export const ProductCard: React.FC<ProductCardProps> = ({
         </div>
       </Link>
 
-      {/* Content Area: Name + two actions only */}
+      {/* Content Area: Category + Name + Short Desc + two actions */}
       <div className="vura-card-content-area">
+        <span className="vura-card-category">{product.categoryLabel}</span>
         <h3 className="vura-card-title">
           <Link to={productUrl} className="vura-card-title-link">
             {product.name}
           </Link>
         </h3>
+        <p className="vura-card-short-desc">{product.shortDesc}</p>
 
         {/* Action Footer: View + Buy (Inquire) */}
         <div className="vura-card-action-footer">
-          <Link
-            to={productUrl}
-            className="vura-card-btn-specs"
-          >
-            View
-          </Link>
+          <Link to={productUrl} className="vura-card-btn-specs">View</Link>
           <button
             type="button"
             className="vura-card-btn-inquire"

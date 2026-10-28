@@ -26,15 +26,23 @@ export const HomePage: React.FC<HomePageProps> = ({
   onOpenEnquiry
 }) => {
   const [selectedProductCategory, setSelectedProductCategory] = useState<string>('all');
+  const [activePillar, setActivePillar] = useState(0);
   const carouselRef = useRef<HTMLDivElement>(null);
   const pillarsGridRef = useRef<HTMLDivElement>(null);
 
-  // Change 4: Mobile-only IntersectionObserver for Foundational Pillars scroll animation
+  // IntersectionObserver: scroll reveal for ALL viewports, respects reduced-motion
   useEffect(() => {
     const grid = pillarsGridRef.current;
     if (!grid) return;
-    // Only activate on mobile
-    if (window.innerWidth > 768) return;
+
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReduced) {
+      // Skip animation: reveal all cards immediately
+      grid.querySelectorAll<HTMLElement>('.vura-pillar-card').forEach(card => {
+        card.classList.add('pillar-revealed');
+      });
+      return;
+    }
 
     const cards = grid.querySelectorAll<HTMLElement>('.vura-pillar-card');
     const observer = new IntersectionObserver(
@@ -42,12 +50,12 @@ export const HomePage: React.FC<HomePageProps> = ({
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             (entry.target as HTMLElement).classList.add('pillar-revealed');
-          } else {
-            (entry.target as HTMLElement).classList.remove('pillar-revealed');
+            // Once revealed, stop observing (don't remove class on scroll away)
+            observer.unobserve(entry.target);
           }
         });
       },
-      { threshold: 0.15 }
+      { threshold: 0.12, rootMargin: '0px 0px -40px 0px' }
     );
 
     cards.forEach((card) => observer.observe(card));
@@ -150,22 +158,36 @@ export const HomePage: React.FC<HomePageProps> = ({
 
           {/* Curated Product Carousel: Limited to 5-6 products per section */}
           <div className="vura-products-carousel-wrap">
-            <div
-              className="vura-products-carousel-track"
-              ref={carouselRef}
-              tabIndex={0}
-              role="region"
-              aria-label="Featured Products Carousel (up to 6 products)"
-            >
-              {carouselProducts.map(product => (
-                <div key={product.id} className="vura-carousel-card-item">
-                  <ProductCard
-                    product={product}
-                    onOpenEnquiry={onOpenEnquiry}
-                  />
-                </div>
-              ))}
-            </div>
+            {carouselProducts.length === 0 ? (
+              <div style={{ textAlign: 'center', padding: '48px 20px', color: '#64748B' }}>
+                <p style={{ margin: '0 0 12px', fontSize: '1rem', fontWeight: 600 }}>No formulations found in this category.</p>
+                <button
+                  type="button"
+                  onClick={() => setSelectedProductCategory('all')}
+                  className="vura-cat-pill active"
+                  style={{ display: 'inline-block' }}
+                >
+                  Show All Products
+                </button>
+              </div>
+            ) : (
+              <div
+                className="vura-products-carousel-track"
+                ref={carouselRef}
+                tabIndex={0}
+                role="region"
+                aria-label="Featured Products Carousel (up to 6 products)"
+              >
+                {carouselProducts.map(product => (
+                  <div key={product.id} className="vura-carousel-card-item">
+                    <ProductCard
+                      product={product}
+                      onOpenEnquiry={onOpenEnquiry}
+                    />
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
 
           {/* Discoverability: Link to complete product catalog */}
@@ -186,7 +208,7 @@ export const HomePage: React.FC<HomePageProps> = ({
       <section className="reach-section" id="global-reach" aria-label="Export and Global Reach">
         {/* Top text content */}
         <div className="reach-text-block">
-          <span className="reach-eyebrow">OUR  REACH</span>
+          
           <h2 className="reach-heading">
             Local Expertise. <span className="reach-accent">Global Ambition.</span>
           </h2>
@@ -196,7 +218,7 @@ export const HomePage: React.FC<HomePageProps> = ({
             industry relationships, and a commitment to serving the evolving needs of
             construction markets.
           </p>
-          <a href="/contact" className="reach-cta-btn">Connect With HYBEQ</a>
+          <Link to="/contact" className="reach-cta-btn">Connect With HYBEQ</Link>
         </div>
         {/* Full-bleed port image */}
         <div className="reach-image-block">
@@ -231,9 +253,15 @@ export const HomePage: React.FC<HomePageProps> = ({
             </p>
           </div>
 
-          <div className="vura-pillars-grid" ref={pillarsGridRef}>
-            {/* Pillar 1: Principle */}
-            <div className="vura-pillar-card">
+          <div className="vura-pillars-grid" ref={pillarsGridRef}>            {/* Pillar 1: Principle */}
+            <div
+              className={`vura-pillar-card ${activePillar === 0 ? 'active' : ''}`}
+              onClick={() => setActivePillar(0)}
+              role="button"
+              tabIndex={0}
+              onKeyDown={(e) => (e.key === 'Enter' || e.key === ' ') && (e.preventDefault(), setActivePillar(0))}
+              aria-pressed={activePillar === 0}
+            >
               <div className="vura-pillar-media">
                 <img
                   src="/images/plant-blending-tower.jpg"
@@ -252,10 +280,15 @@ export const HomePage: React.FC<HomePageProps> = ({
                   We use 100% virgin redispersible polymer powders sourced directly from certified European synthesizers. We never dilute with calcium carbonate fillers or unreacted extenders.
                 </p>
               </div>
-            </div>
-
-            {/* Pillar 2: Mission */}
-            <div className="vura-pillar-card">
+            </div>            {/* Pillar 2: Mission */}
+            <div
+              className={`vura-pillar-card ${activePillar === 1 ? 'active' : ''}`}
+              onClick={() => setActivePillar(1)}
+              role="button"
+              tabIndex={0}
+              onKeyDown={(e) => (e.key === 'Enter' || e.key === ' ') && (e.preventDefault(), setActivePillar(1))}
+              aria-pressed={activePillar === 1}
+            >
               <div className="vura-pillar-media">
                 <img
                   src="/images/lab-testing-rig.jpg"
@@ -274,10 +307,15 @@ export const HomePage: React.FC<HomePageProps> = ({
                   Eliminating post-handover tile debonding, basement flooding, and concrete carbonation through high-durability polymer mortars designed for a 50+ year design life.
                 </p>
               </div>
-            </div>
-
-            {/* Pillar 3: Vision */}
-            <div className="vura-pillar-card">
+            </div>            {/* Pillar 3: Vision */}
+            <div
+              className={`vura-pillar-card ${activePillar === 2 ? 'active' : ''}`}
+              onClick={() => setActivePillar(2)}
+              role="button"
+              tabIndex={0}
+              onKeyDown={(e) => (e.key === 'Enter' || e.key === ' ') && (e.preventDefault(), setActivePillar(2))}
+              aria-pressed={activePillar === 2}
+            >
               <div className="vura-pillar-media">
                 <img
                   src="/images/hero-facade.jpg"
