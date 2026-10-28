@@ -1145,7 +1145,12 @@ body {
   }
 }
 
-.vura-banner-slide-img {
+.vura-banner-slide-picture {
+    display: block !important;
+    width: 100% !important;
+    height: 100% !important;
+  }
+  .vura-banner-slide-img {
   width: 100%;
   /* Desktop: wide cinematic ratio */
   aspect-ratio: 1410 / 521;
@@ -1557,6 +1562,11 @@ body {
     aspect-ratio: 16 / 9;
   }
   /* Tablet: make carousel taller */
+  .vura-banner-slide-picture {
+    display: block !important;
+    width: 100% !important;
+    height: 100% !important;
+  }
   .vura-banner-slide-img {
     aspect-ratio: 16 / 8;
   }
@@ -1614,8 +1624,14 @@ body {
     margin-right: 2px;
   }
   /* Mobile: make carousel image TALL — close to square */
+  .vura-banner-slide-picture {
+    display: block !important;
+    width: 100% !important;
+    height: 100% !important;
+  }
   .vura-banner-slide-img {
-    aspect-ratio: 4 / 3.2;
+    width: 100%;
+    height: 100%;
     object-fit: cover;
     object-position: center;
   }
@@ -6393,7 +6409,7 @@ div.text-custom-storke-cs,
   position: absolute !important;
   top: 0 !important;
   left: 0 !important;
-  width: 0% !important;
+  width: 0%;
   height: 100% !important;
   display: inline-block !important;
   color: #46C985 !important;
@@ -6421,8 +6437,13 @@ div.text-custom-storke-cs,
 
 /* ── 2. Mobile Hero: Single Image at a Time (<= 767px) ── */
 @media (max-width: 767px) {
-  /* Clean White Theme Background */
+  html, body {
+    overflow-x: hidden !important;
+    max-width: 100% !important;
+  }
   .vura-hero-section {
+    overflow-x: hidden !important;
+    max-width: 100% !important;
     background: #FFFFFF !important;
     padding-top: 0 !important;
   }
@@ -6498,14 +6519,51 @@ div.text-custom-storke-cs,
 
   /* Stage: One large, editorial image with consistent aspect ratio */
   .vura-banner-stage {
-    aspect-ratio: 16 / 10 !important;
-    min-height: 220px !important;
-    max-height: 310px !important;
+    aspect-ratio: 4 / 5 !important;
+    width: 100% !important;
+    min-height: auto !important;
+    max-height: none !important;
     border-radius: 14px !important;
     overflow: hidden !important;
     position: relative !important;
     background: #F8FAFC !important;
     border: none !important;
+  }
+
+  .vura-carousel-inner {
+    width: 100% !important;
+    height: 100% !important;
+    position: relative !important;
+  }
+
+  .vura-carousel-slide {
+    display: none !important;
+    width: 100% !important;
+    height: 100% !important;
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+  }
+
+  .vura-carousel-slide.active {
+    display: block !important;
+    position: relative !important;
+    animation: vuraFade 0.45s ease !important;
+  }
+
+  .vura-banner-slide-picture {
+    display: block !important;
+    width: 100% !important;
+    height: 100% !important;
+  }
+
+  .vura-banner-slide-img {
+    width: 100% !important;
+    height: 100% !important;
+    aspect-ratio: 4 / 5 !important;
+    object-fit: cover !important;
+    object-position: center center !important;
+    display: block !important;
   }
 
   /* Ensure only the active slide is visible */
@@ -6520,6 +6578,11 @@ div.text-custom-storke-cs,
     animation: vuraFade 0.45s ease !important;
   }
 
+  .vura-banner-slide-picture {
+    display: block !important;
+    width: 100% !important;
+    height: 100% !important;
+  }
   .vura-banner-slide-img {
     width: 100% !important;
     height: 100% !important;
@@ -6579,24 +6642,63 @@ div.text-custom-storke-cs,
     box-shadow: 0 1px 6px rgba(70, 201, 133, 0.5) !important;
   }
 
-  /* Bottom social strip in clean white theme */
+  /* Bottom social strip: ONLY one clean horizontal icon row on mobile */
   .vura-hero-bottom-strip {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: center !important;
     background: #FFFFFF !important;
     border-top: 1px solid rgba(10, 35, 98, 0.08) !important;
-    padding: 10px 0 14px !important;
-    margin-top: 4px !important;
+    padding: 14px 0 !important;
+    margin-top: 6px !important;
+    width: 100% !important;
+  }
+
+  /* Completely remove text-style social links on mobile */
+  .vura-bottom-socials {
+    display: none !important;
+  }
+
+  /* Completely remove contact text links on mobile hero */
+  .vura-bottom-contacts {
+    display: none !important;
+  }
+
+  /* Mobile social icons in a clean single centered horizontal row */
+  .mobile-social-icons {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
     justify-content: center !important;
+    gap: 16px !important;
+    margin: 0 auto !important;
+    padding: 0 !important;
+    width: 100% !important;
+    flex-wrap: nowrap !important;
   }
 
   .mobile-social-icon-link {
-    color: #64748B !important;
-    background: rgba(10, 35, 98, 0.04) !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 42px !important;
+    height: 42px !important;
+    border-radius: 50% !important;
+    color: #0A2362 !important;
+    background: rgba(10, 35, 98, 0.05) !important;
+    border: 1px solid rgba(10, 35, 98, 0.08) !important;
+    text-decoration: none !important;
+    transition: all 0.22s ease !important;
   }
 
   .mobile-social-icon-link:hover,
   .mobile-social-icon-link:focus-visible {
-    color: #0A2362 !important;
-    background: rgba(70, 201, 133, 0.2) !important;
+    color: #46C985 !important;
+    background: rgba(70, 201, 133, 0.12) !important;
+    border-color: #46C985 !important;
+    transform: translateY(-2px);
+    outline: none !important;
   }
 }
 
@@ -6619,6 +6721,18 @@ div.text-custom-storke-cs,
   }
   .vura-banner-thumb-content {
     display: block !important;
+  }
+  .vura-hero-bottom-strip {
+    display: flex !important;
+  }
+  .vura-bottom-socials {
+    display: flex !important;
+  }
+  .vura-bottom-contacts {
+    display: flex !important;
+  }
+  .mobile-social-icons {
+    display: none !important;
   }
 }
 

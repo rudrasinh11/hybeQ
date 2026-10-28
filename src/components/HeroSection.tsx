@@ -18,7 +18,8 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
   const slides = [
     {
       id: 0,
-      image: '/images/hero_banner_01.png?v=8',
+      image: '/images/hero_banner_01.png?v=9',
+      mobileImage: '/images/hero_banner_01_mobile.png?v=9',
       category: 'TILE & STONE ADHESIVE',
       badge: 'FORMULATED WITH WORLD-CLASS GERMAN TECHNOLOGY',
       desc: 'We engineer advanced bonding solutions for each market, using a combination of high-grade polymers, natural minerals, and specialized additives along with our deep expertise in specialized building chemicals.',
@@ -27,7 +28,8 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
     },
     {
       id: 1,
-      image: '/images/hero_banner_02.png?v=8',
+      image: '/images/hero_banner_02.png?v=9',
+      mobileImage: '/images/hero_banner_02_mobile.png?v=9',
       category: 'WATERPROOFING SOLUTIONS',
       badge: 'ADVANCED WATERPROOFING TO STOP WATER LEAKS',
       desc: 'We develop innovative waterproofing solutions for each market, using a combination of elastomeric and crystalline raw materials along with our deep knowledge & expertise in specialized building chemicals.',
@@ -36,7 +38,8 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
     },
     {
       id: 2,
-      image: '/images/hero_banner_03.png?v=8',
+      image: '/images/hero_banner_03.png?v=9',
+      mobileImage: '/images/hero_banner_03_mobile.png?v=9',
       category: 'PRECISION TILE FIXING & GROUTS',
       badge: 'LET THE WORLD KNOW YOUR COLORFUL PERSONALITY!',
       desc: 'We formulate precision epoxy solutions for each market, using a combination of stain-resistant resins and high-purity quartz fillers along with our deep knowledge & expertise in specialized building chemicals.',
@@ -178,13 +181,16 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                   className={`vura-carousel-slide ${idx === activeSlide ? 'active' : ''}`}
                   aria-hidden={idx !== activeSlide}
                 >
-                  <img
-                    src={s.image}
-                    alt={s.alt}
-                    className="vura-banner-slide-img"
-                    loading={idx === 0 ? 'eager' : 'lazy'}
-                    fetchPriority={idx === 0 ? 'high' : 'auto'}
-                  />
+                  <picture className="vura-banner-slide-picture">
+                    <source media="(max-width: 767px)" srcSet={s.mobileImage} />
+                    <img
+                      src={s.image}
+                      alt={s.alt}
+                      className="vura-banner-slide-img"
+                      loading={idx === 0 ? 'eager' : 'lazy'}
+                      fetchPriority={idx === 0 ? 'high' : 'auto'}
+                    />
+                  </picture>
 
                 </div>
               ))}
