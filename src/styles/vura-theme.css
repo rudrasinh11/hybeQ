@@ -7024,14 +7024,18 @@ div.text-custom-storke-cs,
    6. Built On Integrity ScrollStack Animation
    ============================================================ */
 
-/* ── 1. Global Responsive Spacing Scale ── */
+/* ── 1. Global Responsive Spacing Scale (Optimized for Laptop & Desktop) ── */
 .vura-clients-section {
-  padding: 72px 0 56px !important;
+  padding: 44px 0 16px !important;
   margin: 0 !important;
 }
 
+.vura-big-stats-section {
+  padding: 20px 0 24px !important;
+}
+
 .vura-products-section {
-  padding: 80px 0 !important;
+  padding: 44px 0 44px !important;
   margin: 0 !important;
 }
 
@@ -7040,40 +7044,67 @@ div.text-custom-storke-cs,
 }
 
 .reach-text-block {
-  padding: 72px 24px 0 !important;
+  padding: 44px 24px 0 !important;
+}
+
+.reach-desc {
+  margin: 0 0 24px !important;
+}
+
+.vura-range-kinetic-section {
+  padding: 38px 0 38px !important;
+  margin: 0 !important;
 }
 
 .vura-core-principles-section {
-  padding: 88px 0 !important;
+  padding: 44px 0 48px !important;
   margin: 0 !important;
   background: #F8FAFC;
   border-top: 1px solid var(--color-border, #E2E8F0);
   border-bottom: 1px solid var(--color-border, #E2E8F0);
 }
 
+.vura-principles-header {
+  margin: 0 auto 28px !important;
+}
+
 .vura-articles-section {
-  padding: 80px 0 !important;
+  padding: 44px 0 48px !important;
   margin: 0 !important;
+}
+
+.footer-topversion-one {
+  padding: 52px 0 32px !important;
 }
 
 @media (max-width: 767px) {
   .vura-clients-section {
-    padding: 38px 0 32px !important;
+    padding: 32px 0 16px !important;
     margin: 0 !important;
   }
+  .vura-big-stats-section {
+    padding: 16px 0 18px !important;
+  }
   .vura-products-section {
-    padding: 38px 0 42px !important;
+    padding: 32px 0 36px !important;
     margin: 0 !important;
   }
   .reach-text-block {
-    padding: 38px 16px 0 !important;
+    padding: 32px 16px 0 !important;
+  }
+  .reach-desc {
+    margin: 0 0 18px !important;
+  }
+  .vura-range-kinetic-section {
+    padding: 28px 0 !important;
+    margin: 0 !important;
   }
   .vura-core-principles-section {
-    padding: 42px 0 !important;
+    padding: 34px 0 38px !important;
     margin: 0 !important;
   }
   .vura-articles-section {
-    padding: 40px 0 44px !important;
+    padding: 32px 0 36px !important;
     margin: 0 !important;
   }
 }
@@ -7344,13 +7375,13 @@ div.text-custom-storke-cs,
   background: #F8FAFC;
   position: relative;
   overflow: hidden;
-  padding: 48px 0 64px;
+  padding: 44px 0 52px;
 }
 
 .vura-principles-header {
   text-align: center;
   max-width: 780px;
-  margin: 0 auto 40px;
+  margin: 0 auto 32px;
   padding: 0 20px;
 }
 
@@ -7365,7 +7396,7 @@ div.text-custom-storke-cs,
   border: 1px solid rgba(70, 201, 133, 0.3);
   padding: 5px 14px;
   border-radius: 9999px;
-  margin-bottom: 14px;
+  margin-bottom: 12px;
 }
 
 .vura-core-principles-section .vura-section-heading {
@@ -7373,7 +7404,7 @@ div.text-custom-storke-cs,
   font-weight: 900;
   color: #071A45;
   line-height: 1.22;
-  margin-bottom: 14px;
+  margin-bottom: 12px;
   letter-spacing: -0.02em;
 }
 
@@ -7388,11 +7419,13 @@ div.text-custom-storke-cs,
   margin: 0 auto;
 }
 
-/* ── Desktop View: ScrollStack Cards ── */
+/* ============================================================
+   1. LAPTOP / DESKTOP VIEW: SCROLLSTACK STICKY CARD LAYER
+   ============================================================ */
 .scroll-stack-wrapper {
   max-width: 980px;
   margin: 0 auto;
-  min-height: 720px;
+  min-height: 600px;
   padding: 0 16px;
 }
 
@@ -7402,12 +7435,12 @@ div.text-custom-storke-cs,
   border-radius: 24px !important;
   box-shadow: 0 18px 42px rgba(10, 35, 98, 0.08) !important;
   padding: 28px !important;
-  transition: transform 0.3s ease, box-shadow 0.3s ease !important;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease !important;
   cursor: pointer;
 }
 
 .core-principle-card:hover {
-  box-shadow: 0 24px 50px rgba(10, 35, 98, 0.14), 0 0 0 1px rgba(70, 201, 133, 0.4) !important;
+  box-shadow: 0 24px 50px rgba(10, 35, 98, 0.14), 0 0 0 1.5px rgba(70, 201, 133, 0.45) !important;
 }
 
 .core-principle-card-layout {
@@ -7429,7 +7462,7 @@ div.text-custom-storke-cs,
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 16px;
+  margin-bottom: 14px;
 }
 
 .core-principle-step {
@@ -7472,7 +7505,7 @@ div.text-custom-storke-cs,
   font-size: 0.95rem;
   color: #475569;
   line-height: 1.65;
-  margin-bottom: 20px;
+  margin-bottom: 18px;
 }
 
 .core-principle-bottom-bar {
@@ -7480,7 +7513,7 @@ div.text-custom-storke-cs,
   align-items: center;
   justify-content: space-between;
   gap: 16px;
-  padding-top: 16px;
+  padding-top: 14px;
   border-top: 1px solid #EDF2F7;
 }
 
@@ -7581,49 +7614,132 @@ div.text-custom-storke-cs,
   border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
-/* ── Mobile View: Smooth Natural Scroll Track & Entrance Animations ── */
-.mobile-principles-track {
+/* ============================================================
+   2. PHONE / MOBILE VIEW: DEDICATED 3D PHYSICAL CARD DECK ANIMATION
+   ============================================================ */
+.mobile-deck-experience {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 16px;
   padding: 0 16px;
+  position: relative;
 }
 
-.mobile-principle-card-item {
+.mobile-deck-tabs {
+  display: flex;
+  background: #E2E8F0;
+  padding: 4px;
+  border-radius: 9999px;
+  gap: 4px;
+  margin-bottom: 4px;
+}
+
+.mobile-deck-tab {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 8px 6px;
+  border-radius: 9999px;
+  background: transparent;
+  border: none;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #64748B;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.mobile-deck-tab.active {
+  background: #0A2362;
+  color: #FFFFFF;
+  box-shadow: 0 2px 8px rgba(10, 35, 98, 0.25);
+}
+
+.deck-tab-num {
+  font-weight: 900;
+  font-size: 0.8rem;
+  color: #46C985;
+}
+
+.mobile-deck-tab.active .deck-tab-num {
+  color: #46C985;
+}
+
+.deck-tab-title {
+  white-space: nowrap;
+}
+
+.mobile-deck-stage {
+  position: relative;
+  width: 100%;
+  min-height: 430px;
+}
+
+.mobile-deck-card-ghost {
+  position: absolute;
+  inset: 0;
+  border-radius: 20px;
+  background: #FFFFFF;
+  border: 1px solid #E2E8F0;
+  pointer-events: none;
+  transition: all 0.3s ease;
+}
+
+.mobile-deck-card-ghost.ghost-mid {
+  transform: translateY(10px) scale(0.96);
+  z-index: 2;
+  opacity: 0.6;
+  box-shadow: 0 8px 20px rgba(10, 35, 98, 0.05);
+}
+
+.mobile-deck-card-ghost.ghost-back {
+  transform: translateY(20px) scale(0.92);
+  z-index: 1;
+  opacity: 0.35;
+  box-shadow: 0 4px 12px rgba(10, 35, 98, 0.04);
+}
+
+.mobile-deck-card-active {
+  position: relative;
+  z-index: 10;
   background: #FFFFFF;
   border: 1px solid #E2E8F0;
   border-radius: 20px;
   overflow: hidden;
-  box-shadow: 0 10px 25px rgba(10, 35, 98, 0.06);
-  opacity: 1;
-  transform: translateY(0);
-  transition: opacity 0.45s ease, transform 0.45s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease;
+  box-shadow: 0 14px 32px rgba(10, 35, 98, 0.1);
   cursor: pointer;
+  animation: mobileCardSwap 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  transform-origin: center bottom;
 }
 
-.mobile-principle-card-item.is-revealed {
-  opacity: 1;
-  transform: translateY(0);
+@keyframes mobileCardSwap {
+  0% {
+    opacity: 0.5;
+    transform: translateY(-10px) scale(0.97);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
 }
 
-.mobile-principle-card-item:active {
-  transform: scale(0.98);
-}
-
-.mobile-principle-media {
+.mobile-deck-media {
   position: relative;
   width: 100%;
   height: 190px;
   overflow: hidden;
+  background: #071A45;
 }
 
-.mobile-principle-img {
+.mobile-deck-img {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
 
-.mobile-principle-badges {
+.mobile-deck-badges {
   position: absolute;
   top: 12px;
   left: 12px;
@@ -7633,84 +7749,85 @@ div.text-custom-storke-cs,
   align-items: center;
 }
 
-.mobile-principle-step {
-  font-size: 1.15rem;
+.mobile-deck-step-badge {
+  font-size: 1.1rem;
   font-weight: 900;
   color: #FFFFFF;
   background: #0A2362;
   border: 1px solid rgba(70, 201, 133, 0.5);
   padding: 4px 12px;
   border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 }
 
-.mobile-principle-tag {
-  font-size: 0.7rem;
-  font-weight: 700;
+.mobile-deck-tag-badge {
+  font-size: 0.68rem;
+  font-weight: 800;
   text-transform: uppercase;
   color: #071A45;
   background: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(4px);
   padding: 4px 10px;
   border-radius: 9999px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
 }
 
-.mobile-principle-content {
-  padding: 20px 18px;
+.mobile-deck-content {
+  padding: 16px 18px 18px;
 }
 
-.mobile-principle-title {
+.mobile-deck-title {
   font-size: 1.25rem;
   font-weight: 800;
   color: #071A45;
-  margin-bottom: 4px;
+  margin-bottom: 2px;
+  line-height: 1.25;
 }
 
-.mobile-principle-subtitle {
-  font-size: 0.8rem;
+.mobile-deck-subtitle {
+  font-size: 0.78rem;
   font-weight: 700;
   color: #46C985;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  margin-bottom: 10px;
+  margin-bottom: 8px;
 }
 
-.mobile-principle-desc {
-  font-size: 0.88rem;
+.mobile-deck-desc {
+  font-size: 0.86rem;
   color: #64748B;
   line-height: 1.55;
-  margin-bottom: 16px;
+  margin-bottom: 14px;
 }
 
-.mobile-principle-footer {
+.mobile-deck-footer {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding-top: 12px;
+  padding-top: 10px;
   border-top: 1px solid #F1F5F9;
 }
 
-.mobile-metric-chip {
+.mobile-deck-metric {
   display: flex;
   flex-direction: column;
 }
 
-.mobile-metric-chip strong {
+.mobile-deck-metric strong {
   font-size: 1.15rem;
   font-weight: 900;
   color: #0A2362;
   line-height: 1.1;
 }
 
-.mobile-metric-chip span {
+.mobile-deck-metric span {
   font-size: 0.68rem;
   font-weight: 600;
   color: #94A3B8;
   text-transform: uppercase;
 }
 
-.mobile-preview-btn {
+.mobile-deck-preview-action {
   display: inline-flex;
   align-items: center;
   gap: 5px;
@@ -7724,7 +7841,61 @@ div.text-custom-storke-cs,
   border-radius: 8px;
 }
 
-/* ── Full Preview Modal Styles ── */
+.mobile-deck-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 14px;
+}
+
+.mobile-deck-arrow-btn {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: #FFFFFF;
+  border: 1px solid #CBD5E1;
+  color: #0A2362;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 6px rgba(10, 35, 98, 0.06);
+}
+
+.mobile-deck-arrow-btn:active {
+  background: #0A2362;
+  color: #FFFFFF;
+  border-color: #0A2362;
+  transform: scale(0.94);
+}
+
+.mobile-deck-dots {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.mobile-deck-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 9999px;
+  background: #CBD5E1;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.mobile-deck-dot.active {
+  width: 24px;
+  background: #0A2362;
+}
+
+/* ============================================================
+   3. FULL PREVIEW MODAL
+   ============================================================ */
 .principle-modal-backdrop {
   position: fixed;
   inset: 0;
@@ -7974,7 +8145,7 @@ div.text-custom-storke-cs,
 }
 
 /* ============================================================
-   FOOTER WHITE SPACE REMOVAL & PERFECT VIEWPORT GROUNDING
+   4. FOOTER GROUNDING & SAFE-AREA PROTECTION
    ============================================================ */
 .footer-version-one,
 .vura-footer {

@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { X, ArrowRight, ShieldCheck, CheckCircle2, Maximize2 } from 'lucide-react';
+import { X, ArrowRight, ShieldCheck, CheckCircle2, Maximize2, ChevronLeft, ChevronRight } from 'lucide-react';
 import ScrollStack, { ScrollStackItem } from './ScrollStack';
 
 export interface PrincipleItem {
@@ -72,19 +72,20 @@ export const PRINCIPLES: PrincipleItem[] = [
 export function CorePrinciplesSection() {
   const [selectedPrinciple, setSelectedPrinciple] = useState<PrincipleItem | null>(null);
   const [isMobile, setIsMobile] = useState(false);
-  const mobileCardsRef = useRef<(HTMLDivElement | null)[]>([]);
+  const [activeMobileIdx, setActiveMobileIdx] = useState(0);
+  const touchStartX = useRef<number | null>(null);
 
-  // Detect mobile viewports for smooth tailored scrolling
+  // Responsive device check
   useEffect(() => {
-    const checkMobile = () => {
+    const checkViewport = () => {
       setIsMobile(window.innerWidth < 768);
     };
-    checkMobile();
-    window.addEventListener('resize', checkMobile);
-    return () => window.removeEventListener('resize', checkMobile);
+    checkViewport();
+    window.addEventListener('resize', checkViewport);
+    return () => window.removeEventListener('resize', checkViewport);
   }, []);
 
-  // Handle keyboard Escape to dismiss modal
+  // Modal accessibility & body scroll lock
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
@@ -103,57 +104,63 @@ export function CorePrinciplesSection() {
     };
   }, [selectedPrinciple]);
 
-  // Mobile scroll entrance animation with IntersectionObserver
-  useEffect(() => {
-    if (!isMobile) return;
+  // Mobile swipe handlers
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX;
+  };
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('is-revealed');
-          }
-        });
-      },
-      { threshold: 0.15, rootMargin: '0px 0px -40px 0px' }
-    );
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    if (touchStartX.current === null) return;
+    const diff = touchStartX.current - e.changedTouches[0].clientX;
+    if (Math.abs(diff) > 40) {
+      if (diff > 0) {
+        // Swipe left -> Next card
+        setActiveMobileIdx((prev) => (prev + 1) % PRINCIPLES.length);
+      } else {
+        // Swipe right -> Prev card
+        setActiveMobileIdx((prev) => (prev - 1 + PRINCIPLES.length) % PRINCIPLES.length);
+      }
+    }
+    touchStartX.current = null;
+  };
 
-    mobileCardsRef.current.forEach((el) => {
-      if (el) observer.observe(el);
-    });
-
-    return () => observer.disconnect();
-  }, [isMobile]);
+  const currentPrinciple = PRINCIPLES[activeMobileIdx];
 
   return (
     <section className="vura-core-principles-section" id="foundational-pillars">
       <div className="vura-container">
-        {/* Header Section */}
+        {/* Section Heading & Subtitle */}
         <div className="vura-principles-header">
           <span className="vura-principles-badge">CORE ENGINEERING PHILOSOPHY</span>
           <h2 className="vura-section-heading">
             Built On <span className="vura-accent-green">Integrity, Precision</span> &amp; Engineering Excellence
           </h2>
           <p className="vura-section-desc">
-            Three non-negotiable principles that drive our formulations, certified manufacturing, and project execution.
+            Three non-negotiable principles that drive our formulations and projects.
           </p>
         </div>
 
-        {/* Desktop View: Interactive ScrollStack */}
+        {/* ============================================================
+            1. LAPTOP / DESKTOP VIEW: SCROLLSTACK STICKY CARD ANIMATION
+            Cards stick and stack naturally as the user scrolls the window
+            ============================================================ */}
         {!isMobile ? (
           <div className="scroll-stack-wrapper">
             <ScrollStack
-              itemDistance={130}
-              itemStackDistance={24}
-              stackPosition="18%"
-              itemScale={0.03}
-              baseScale={0.92}
-              dimAmount={0.15}
+              itemDistance={90}
+              itemStackDistance={20}
+              stackPosition="20%"
+              itemScale={0.04}
+              baseScale={0.88}
+              dimAmount={0.2}
               smoothScroll={true}
               useWindowScroll={true}
             >
               {PRINCIPLES.map((p, idx) => (
-                <ScrollStackItem key={idx} itemClassName="core-principle-card">
+                <ScrollStackItem
+                  key={idx}
+                  itemClassName="core-principle-card border border-slate-200 shadow-xl bg-white"
+                >
                   <div
                     className="core-principle-card-layout"
                     onClick={() => setSelectedPrinciple(p)}
@@ -165,13 +172,13 @@ export function CorePrinciplesSection() {
                         setSelectedPrinciple(p);
                       }
                     }}
-                    title="Click to view complete technical preview"
+                    title="Click to open full technical preview"
                   >
                     {/* Left: Text & Specs */}
                     <div className="core-principle-text-col">
                       <div className="core-principle-top">
                         <span className="core-principle-step">{p.step}</span>
-                        <span className="core-principle-tag">{p.tag}</span>
+                        <span className="core-principle-tag">Principle</span>
                       </div>
 
                       <div className="core-principle-body">
@@ -199,7 +206,7 @@ export function CorePrinciplesSection() {
                       </div>
                     </div>
 
-                    {/* Right: Rich Image Thumbnail */}
+                    {/* Right: High-Res Image Showcase */}
                     <div className="core-principle-media-col">
                       <div className="core-principle-img-wrap">
                         <img
@@ -221,52 +228,116 @@ export function CorePrinciplesSection() {
             </ScrollStack>
           </div>
         ) : (
-          /* Mobile View: Natural touch-scroll stack with smooth entrance animation */
-          <div className="mobile-principles-track">
-            {PRINCIPLES.map((p, idx) => (
+          /* ============================================================
+             2. PHONE / MOBILE VIEW: DEDICATED 3D CARD DECK ANIMATION
+             Smooth step selector tabs + 3D layered card swipe & tap preview
+             ============================================================ */
+          <div className="mobile-deck-experience">
+            {/* Step Switcher Segmented Pills */}
+            <div className="mobile-deck-tabs" role="tablist">
+              {PRINCIPLES.map((p, idx) => (
+                <button
+                  key={idx}
+                  type="button"
+                  role="tab"
+                  aria-selected={activeMobileIdx === idx}
+                  className={`mobile-deck-tab ${activeMobileIdx === idx ? 'active' : ''}`}
+                  onClick={() => setActiveMobileIdx(idx)}
+                >
+                  <span className="deck-tab-num">{p.step}</span>
+                  <span className="deck-tab-title">
+                    {idx === 0 ? 'Integrity' : idx === 1 ? 'Precision' : 'Engineering'}
+                  </span>
+                </button>
+              ))}
+            </div>
+
+            {/* 3D Physical Card Deck */}
+            <div
+              className="mobile-deck-stage"
+              onTouchStart={handleTouchStart}
+              onTouchEnd={handleTouchEnd}
+            >
+              {/* Subtle back cards peeking to create tangible physical stack */}
+              <div className="mobile-deck-card-ghost ghost-back" />
+              <div className="mobile-deck-card-ghost ghost-mid" />
+
+              {/* Active Foreground Card */}
               <div
-                key={idx}
-                ref={(el) => {
-                  mobileCardsRef.current[idx] = el;
-                }}
-                className="mobile-principle-card-item"
-                onClick={() => setSelectedPrinciple(p)}
+                key={activeMobileIdx}
+                className="mobile-deck-card-active"
+                onClick={() => setSelectedPrinciple(currentPrinciple)}
                 role="button"
                 tabIndex={0}
               >
-                {/* Image Header with Step badge */}
-                <div className="mobile-principle-media">
+                {/* Image Header with Step & Tag */}
+                <div className="mobile-deck-media">
                   <img
-                    src={p.image}
-                    alt={p.title}
-                    className="mobile-principle-img"
-                    loading="lazy"
+                    src={currentPrinciple.image}
+                    alt={currentPrinciple.title}
+                    className="mobile-deck-img"
                   />
-                  <div className="mobile-principle-badges">
-                    <span className="mobile-principle-step">{p.step}</span>
-                    <span className="mobile-principle-tag">{p.tag}</span>
+                  <div className="mobile-deck-badges">
+                    <span className="mobile-deck-step-badge">{currentPrinciple.step}</span>
+                    <span className="mobile-deck-tag-badge">{currentPrinciple.tag}</span>
                   </div>
                 </div>
 
-                {/* Content */}
-                <div className="mobile-principle-content">
-                  <h3 className="mobile-principle-title">{p.title}</h3>
-                  <p className="mobile-principle-subtitle">{p.subtitle}</p>
-                  <p className="mobile-principle-desc">{p.desc}</p>
+                {/* Card Content */}
+                <div className="mobile-deck-content">
+                  <h3 className="mobile-deck-title">{currentPrinciple.title}</h3>
+                  <p className="mobile-deck-subtitle">{currentPrinciple.subtitle}</p>
+                  <p className="mobile-deck-desc">{currentPrinciple.desc}</p>
 
-                  <div className="mobile-principle-footer">
-                    <div className="mobile-metric-chip">
-                      <strong>{p.highlightMetric}</strong>
-                      <span>{p.metricLabel}</span>
+                  <div className="mobile-deck-footer">
+                    <div className="mobile-deck-metric">
+                      <strong>{currentPrinciple.highlightMetric}</strong>
+                      <span>{currentPrinciple.metricLabel}</span>
                     </div>
-                    <span className="mobile-preview-btn">
-                      <span>Preview</span>
+
+                    <span className="mobile-deck-preview-action">
+                      <span>Full Preview</span>
                       <Maximize2 size={13} />
                     </span>
                   </div>
                 </div>
               </div>
-            ))}
+            </div>
+
+            {/* Mobile Controls: Previous / Next and Pagination Dots */}
+            <div className="mobile-deck-controls">
+              <button
+                type="button"
+                className="mobile-deck-arrow-btn"
+                onClick={() =>
+                  setActiveMobileIdx((prev) => (prev - 1 + PRINCIPLES.length) % PRINCIPLES.length)
+                }
+                aria-label="Previous Principle"
+              >
+                <ChevronLeft size={18} />
+              </button>
+
+              <div className="mobile-deck-dots">
+                {PRINCIPLES.map((_, idx) => (
+                  <button
+                    key={idx}
+                    type="button"
+                    aria-label={`Go to slide ${idx + 1}`}
+                    className={`mobile-deck-dot ${activeMobileIdx === idx ? 'active' : ''}`}
+                    onClick={() => setActiveMobileIdx(idx)}
+                  />
+                ))}
+              </div>
+
+              <button
+                type="button"
+                className="mobile-deck-arrow-btn"
+                onClick={() => setActiveMobileIdx((prev) => (prev + 1) % PRINCIPLES.length)}
+                aria-label="Next Principle"
+              >
+                <ChevronRight size={18} />
+              </button>
+            </div>
           </div>
         )}
       </div>

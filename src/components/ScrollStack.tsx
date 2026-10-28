@@ -31,8 +31,8 @@ export const ScrollStackItem: React.FC<ScrollStackItemProps> = ({
       className={`scroll-stack-item ${className} ${itemClassName}`}
       style={{
         borderRadius: '24px',
-        padding: '36px 32px',
-        transition: 'transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease, filter 0.3s ease',
+        padding: '32px 32px',
+        transition: 'transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.35s ease, box-shadow 0.35s ease',
         willChange: 'transform, opacity',
         ...style
       }}
@@ -66,7 +66,6 @@ export const ScrollStack: React.FC<ScrollStackProps> = ({
 
       // Calculate progress for each card
       const newProgress = items.map((_, idx) => {
-        // Distance each card travels before sticking
         const cardTrigger = viewportHeight * 0.25 + idx * itemDistance;
         const currentDistance = -containerRect.top + cardTrigger;
         return Math.max(0, currentDistance);
@@ -89,13 +88,13 @@ export const ScrollStack: React.FC<ScrollStackProps> = ({
         display: 'flex',
         flexDirection: 'column',
         gap: `${itemDistance}px`,
-        paddingBottom: '40px'
+        paddingBottom: '32px'
       }}
     >
       {items.map((child, idx) => {
         // Sticky offset for each card
         const topOffset = `calc(${stackPosition} + ${idx * itemStackDistance}px)`;
-        const isCovered = idx < items.length - 1 && scrollProgress[idx + 1] > 60;
+        const isCovered = idx < items.length - 1 && scrollProgress[idx + 1] > 40;
         const scaleVal = isCovered
           ? Math.max(baseScale, 1 - (items.length - 1 - idx) * itemScale)
           : 1;
@@ -113,7 +112,7 @@ export const ScrollStack: React.FC<ScrollStackProps> = ({
               opacity: opacityVal,
               transition: 'transform 0.35s ease, opacity 0.35s ease',
               transformOrigin: 'top center',
-              marginBottom: `${Math.max(16, itemDistance / 2)}px`
+              marginBottom: idx === items.length - 1 ? '24px' : '150px'
             }}
           >
             {child}
@@ -125,4 +124,3 @@ export const ScrollStack: React.FC<ScrollStackProps> = ({
 };
 
 export default ScrollStack;
-
