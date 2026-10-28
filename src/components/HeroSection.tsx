@@ -185,10 +185,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                     loading={idx === 0 ? 'eager' : 'lazy'}
                     fetchPriority={idx === 0 ? 'high' : 'auto'}
                   />
-                  {/* Mobile slogan overlay matching reference image */}
-                  <div className="vura-mobile-slide-overlay">
-                    <p className="vura-mobile-slogan">{s.badge}</p>
-                  </div>
+
                 </div>
               ))}
             </div>

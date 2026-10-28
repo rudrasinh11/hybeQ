@@ -6362,393 +6362,280 @@ div.text-custom-storke-cs,
   }
 }
 
+
 /* ============================================================
-   MOBILE HERO — VURA Reference Style
-   Dark background, product image with rounded corners,
-   headline above image, text overlay at image bottom
+   HYBEQ HERO SECTION — FINAL REFINEMENT (AUTHENTIC WHITE THEME)
+   Preserves HYBEQ's clean white visual style, original brand colors,
+   and fluid liquid green fill animation on "BOUNDARIES".
    ============================================================ */
 
-/* Dark hero background on mobile (≤640px) to match VURA reference */
-@media (max-width: 640px) {
-  .vura-hero-section {
-    background: #0d1117 !important;
-  }
+/* ── 1. Headline Animation: Continuous Liquid Green Sweep ── */
+.vura-word-the {
+  color: var(--color-primary, #0A2362) !important;
+  font-weight: 800;
+}
 
-  /* Header on dark background */
-  .vura-hero-section .vura-header {
-    background: #0d1117 !important;
-    border-bottom-color: rgba(255,255,255,0.08) !important;
-  }
+.vura-word-boundaries {
+  color: transparent !important;
+  -webkit-text-fill-color: transparent !important;
+  -webkit-text-stroke: 2px #46C985 !important;
+  text-stroke: 2px #46C985 !important;
+  font-weight: 900;
+  letter-spacing: 0.02em;
+  position: relative;
+  display: inline-block;
+  cursor: default;
+  white-space: nowrap;
+}
 
-  /* Headline text: white on dark */
-  .vura-headline-line1 {
-    color: #ffffff !important;
-  }
+.vura-word-boundaries::before {
+  content: attr(data-text) !important;
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 0% !important;
+  height: 100% !important;
+  display: inline-block !important;
+  color: #46C985 !important;
+  -webkit-text-fill-color: #46C985 !important;
+  -webkit-text-stroke: 0px transparent !important;
+  text-stroke: 0px transparent !important;
+  overflow: hidden !important;
+  white-space: nowrap !important;
+  animation: vuraLiquidBoundaries 4s cubic-bezier(0.4, 0, 0.2, 1) infinite !important;
+  filter: drop-shadow(0 0 14px rgba(70, 201, 133, 0.55)) !important;
+  will-change: width;
+}
 
-  /* "THE" stays white, "BOUNDARIES" stays brand green */
-  .vura-headline-line2 {
-    color: #ffffff !important;
+@keyframes vuraLiquidBoundaries {
+  0% {
+    width: 0%;
   }
-
-  /* Arrow icon: match VURA grey/white */
-  .vura-headline-arrow-icon {
-    filter: invert(1) !important;
-    opacity: 0.7;
+  38%, 62% {
+    width: 100%;
   }
-
-  /* Carousel image — add round corners on mobile like VURA */
-  .vura-banner-stage {
-    border-radius: 18px !important;
-    overflow: hidden;
-    margin: 0 0 0 0 !important;
-  }
-
-  /* Carousel wrapper: small horizontal margin for breathing room */
-  .vura-carousel-wrapper {
-    padding: 0 0px !important;
-    margin: 0 !important;
-  }
-
-  /* Hero container inner padding */
-  .vura-hero-container {
-    padding-left: 16px !important;
-    padding-right: 16px !important;
-  }
-
-  /* Bottom strip: white text on dark */
-  .vura-hero-bottom-strip {
-    background: #0d1117 !important;
-    color: rgba(255,255,255,0.55) !important;
-    border-top-color: rgba(255,255,255,0.1) !important;
-  }
-
-  .vura-hero-bottom-strip a,
-  .vura-hero-bottom-strip span {
-    color: rgba(255,255,255,0.55) !important;
-  }
-
-  /* Description below carousel — white text */
-  .vura-banner-thumb-content {
-    color: rgba(255,255,255,0.75) !important;
-    background: transparent !important;
-    border: none !important;
+  92%, 100% {
+    width: 0%;
   }
 }
 
-
-/* ============================================================
-   MOBILE HERO DARK BG — Fix page wrapper conflict
-   The .vura-home-page has white background inline style;
-   we use the hero section's own background to create the dark area
-   ============================================================ */
-
-@media (max-width: 640px) {
-  /* The hero section itself becomes full-bleed dark */
-  .vura-hero-section {
-    background: #0d1117 !important;
-    /* Bleed to screen edges */
-    margin-left: -16px;
-    margin-right: -16px;
-    padding-left: 16px;
-    padding-right: 16px;
-    width: calc(100% + 32px);
-  }
-
-  /* Tighten gap between header and headline */
-  .vura-hero-top-row {
-    margin-top: 0 !important;
-    padding-top: 12px !important;
-  }
-
-  /* White headline line 1 */
-  .vura-headline-line1 {
-    color: #ffffff !important;
-  }
-
-  /* Headline line 2: white base */
-  .vura-headline-line2 {
-    color: #ffffff !important;
-  }
-
-  /* Keep accent words in green */
-  .vura-headline-line2 .vura-highlight {
-    color: var(--color-accent, #00c37d) !important;
-  }
-
-  /* Arrow icon — invert to white */
-  .vura-headline-arrow-icon,
-  .vura-arrow-svg {
-    filter: brightness(0) invert(1) !important;
-    opacity: 0.6;
-  }
-
-  /* Carousel stage — prominent rounded corners like VURA */
-  .vura-carousel-wrapper {
-    padding: 0 !important;
-    margin: 0 !important;
-  }
-
-  .vura-banner-stage {
-    border-radius: 16px !important;
-    overflow: hidden !important;
-  }
-
-  /* Bottom socials strip dark */
-  .vura-hero-bottom-strip {
-    background: #0d1117 !important;
-    border-top: 1px solid rgba(255,255,255,0.1) !important;
-  }
-
-  .vura-hero-bottom-strip a,
-  .vura-hero-bottom-strip span,
-  .vura-hero-social-link,
-  .vura-hero-contact-item {
-    color: rgba(255,255,255,0.5) !important;
-  }
-}
-
-
-/* ============================================================
-   MOBILE HERO — Specific word color corrections for dark bg
-   ============================================================ */
-@media (max-width: 640px) {
-  /* "THE" — white on dark background */
-  .vura-word-the {
-    color: #ffffff !important;
-  }
-
-  /* Arrow image — invert navy to white */
-  .vura-headline-arrow-img {
-    filter: brightness(0) invert(1) !important;
-    opacity: 0.65;
-  }
-
-  /* "BOUNDARIES" stroke stays green — no change needed since it's transparent fill */
-  /* vura-word-boundaries already works on dark bg (transparent + green stroke) */
-
-  /* hero section dark bg bleed — override inline white page bg */
-  #hero.vura-hero-section {
-    background: #0d1117 !important;
-  }
-}
-
-/* ============================================================
-   FINAL RESPONSIVE MASTER REFINEMENT
-   ============================================================ */
-
-/* -- 1. MOBILE HERO THREE-IMAGE COMPOSITION (<=767px) -- */
+/* ── 2. Mobile Hero: Single Image at a Time (<= 767px) ── */
 @media (max-width: 767px) {
-  /* Hide the awkward carousel on mobile phones */
-  .vura-banner-v2-thumb {
-    display: none !important;
+  /* Clean White Theme Background */
+  .vura-hero-section {
+    background: #FFFFFF !important;
+    padding-top: 0 !important;
   }
-  .vura-banner-thumb-content {
-    display: none !important;
+
+  /* Header stays clean white */
+  .vura-header,
+  .vura-site-header {
+    background: #FFFFFF !important;
+    border-bottom: 1px solid var(--color-border, #E2E8F0) !important;
   }
+
+  .vura-logo-img {
+    filter: none !important;
+  }
+
+  /* Top headline row */
+  .vura-hero-top-row {
+    padding-top: 14px !important;
+    margin-bottom: 10px !important;
+    display: block !important;
+  }
+
   .vura-hero-play-wrap {
     display: none !important;
   }
 
-  /* Show the clean 3-image editorial hero trio */
-  .mobile-hero-trio {
-    display: flex !important;
-    flex-direction: column;
-    width: 100%;
-    margin: 14px 0 18px;
-    gap: 10px;
-    box-sizing: border-box;
-  }
-
-  .mobile-hero-trio-main {
-    position: relative;
-    width: 100%;
-    height: clamp(200px, 52vw, 260px);
-    border-radius: 16px;
-    overflow: hidden;
-    background: #0A2362;
-    box-shadow: 0 8px 24px rgba(10, 35, 98, 0.12);
-  }
-
-  .mobile-hero-trio-row {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
-    width: 100%;
-    box-sizing: border-box;
-  }
-
-  .mobile-hero-trio-secondary {
-    position: relative;
-    width: 100%;
-    height: clamp(110px, 28vw, 136px);
-    border-radius: 12px;
-    overflow: hidden;
-    background: #0A2362;
-    box-shadow: 0 4px 16px rgba(10, 35, 98, 0.08);
-  }
-
-  .mobile-trio-img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center;
-    display: block;
-  }
-
-  .mobile-trio-caption {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    padding: 24px 12px 10px;
-    background: linear-gradient(180deg, transparent 0%, rgba(7, 26, 69, 0.88) 100%);
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-    pointer-events: none;
-  }
-
-  .mobile-trio-tag {
-    font-size: 10px;
-    font-weight: 800;
-    letter-spacing: 0.8px;
-    color: #46C985;
-    text-transform: uppercase;
-  }
-
-  .mobile-trio-title {
-    font-size: 12.5px;
-    font-weight: 700;
-    color: #FFFFFF;
-    line-height: 1.25;
-  }
-
-  .mobile-trio-caption.compact {
-    padding: 18px 8px 6px;
-  }
-
-  .mobile-trio-caption.compact .mobile-trio-tag {
-    font-size: 9.5px;
-  }
-
-  /* Compact hero headline on phone */
-  .vura-hero-top-row {
+  .vura-headline-line1 {
+    color: #071A45 !important;
+    font-size: clamp(26px, 7.5vw, 34px) !important;
+    font-weight: 800 !important;
+    line-height: 1.18 !important;
+    letter-spacing: -0.5px !important;
+    display: block !important;
     margin-bottom: 4px !important;
   }
-  .vura-headline-line1,
+
   .vura-headline-line2 {
-    font-size: clamp(24px, 7.5vw, 32px) !important;
-    line-height: 1.15 !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    font-size: clamp(26px, 7.5vw, 34px) !important;
+    font-weight: 800 !important;
+    line-height: 1.18 !important;
+    letter-spacing: -0.5px !important;
+  }
+
+  /* Original navy arrow */
+  .vura-headline-arrow-icon,
+  .vura-headline-arrow-img {
+    filter: none !important;
+    opacity: 0.9 !important;
+    width: 22px !important;
+    height: 22px !important;
+  }
+
+  .vura-word-the {
+    color: #071A45 !important;
+  }
+
+  /* Single-image carousel container: clean white theme */
+  .vura-banner-v2-thumb {
+    display: block !important;
+    width: 100% !important;
+    margin: 10px 0 14px !important;
+    border-radius: 14px !important;
+    overflow: hidden !important;
+    position: relative !important;
+    background: #F8FAFC !important;
+    box-shadow: 0 4px 18px rgba(10, 35, 98, 0.06) !important;
+    border: 1px solid rgba(10, 35, 98, 0.08) !important;
+    outline: none !important;
+  }
+
+  /* Stage: One large, editorial image with consistent aspect ratio */
+  .vura-banner-stage {
+    aspect-ratio: 16 / 10 !important;
+    min-height: 220px !important;
+    max-height: 310px !important;
+    border-radius: 14px !important;
+    overflow: hidden !important;
+    position: relative !important;
+    background: #F8FAFC !important;
+    border: none !important;
+  }
+
+  /* Ensure only the active slide is visible */
+  .vura-carousel-slide {
+    display: none !important;
+    width: 100% !important;
+    height: 100% !important;
+  }
+
+  .vura-carousel-slide.active {
+    display: block !important;
+    animation: vuraFade 0.45s ease !important;
+  }
+
+  .vura-banner-slide-img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    object-position: center !important;
+    display: block !important;
+  }
+
+  /* Hide 3-image grid on mobile */
+  .mobile-hero-trio {
+    display: none !important;
+  }
+
+  /* Hide editorial category notch on mobile */
+  .vura-editorial-label {
+    display: none !important;
+  }
+
+  /* Hide description card below carousel on phone */
+  .vura-banner-thumb-content {
+    display: none !important;
+  }
+
+  /* Hide navigation arrows on phone */
+  .vura-carousel-nav-btn {
+    display: none !important;
+  }
+
+  /* Minimal, restrained pagination indicators in HYBEQ colors */
+  .vura-banner-indicators {
+    position: absolute !important;
+    bottom: 10px !important;
+    left: 0 !important;
+    right: 0 !important;
+    display: flex !important;
+    justify-content: center !important;
+    gap: 7px !important;
+    z-index: 10 !important;
+    background: transparent !important;
+    padding: 0 !important;
+  }
+
+  .vura-banner-indicator {
+    width: 22px !important;
+    height: 4px !important;
+    border-radius: 2px !important;
+    background: rgba(10, 35, 98, 0.2) !important;
+    border: none !important;
+    padding: 0 !important;
+    cursor: pointer !important;
+    transition: all 0.25s ease !important;
+  }
+
+  .vura-banner-indicator.active {
+    background: #46C985 !important;
+    width: 32px !important;
+    box-shadow: 0 1px 6px rgba(70, 201, 133, 0.5) !important;
+  }
+
+  /* Bottom social strip in clean white theme */
+  .vura-hero-bottom-strip {
+    background: #FFFFFF !important;
+    border-top: 1px solid rgba(10, 35, 98, 0.08) !important;
+    padding: 10px 0 14px !important;
+    margin-top: 4px !important;
+    justify-content: center !important;
+  }
+
+  .mobile-social-icon-link {
+    color: #64748B !important;
+    background: rgba(10, 35, 98, 0.04) !important;
+  }
+
+  .mobile-social-icon-link:hover,
+  .mobile-social-icon-link:focus-visible {
+    color: #0A2362 !important;
+    background: rgba(70, 201, 133, 0.2) !important;
   }
 }
 
-/* Desktop & tablet: preserve existing hero structure */
+/* ── 3. Desktop and Tablet Preservation (>=768px) ── */
 @media (min-width: 768px) {
+  .vura-hero-section {
+    background: #FFFFFF !important;
+  }
   .mobile-hero-trio {
     display: none !important;
   }
   .vura-banner-v2-thumb {
     display: block !important;
   }
-}
-
-/* -- 2. MOBILE FOOTER � SOCIAL ICONS ONLY (<=767px) -- */
-@media (max-width: 767px) {
-  /* Remove text-based social links & contact details from mobile strip */
-  .vura-hero-bottom-strip .vura-bottom-socials {
-    display: none !important;
-  }
-  .vura-hero-bottom-strip .vura-bottom-contacts {
-    display: none !important;
-  }
-  .vura-hero-bottom-strip {
-    padding: 12px 0 16px !important;
-    justify-content: center !important;
-    margin-top: 12px !important;
-  }
-
-  /* Show recognizable social media icons */
-  .mobile-social-icons {
-    display: flex !important;
-    align-items: center;
-    justify-content: center;
-    gap: 18px;
-    width: 100%;
-  }
-
-  .mobile-social-icon-link {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 42px;
-    height: 42px;
-    border-radius: 50%;
-    color: #0A2362;
-    background: rgba(10, 35, 98, 0.05);
-    transition: all 0.2s ease;
-    text-decoration: none;
-  }
-
-  .mobile-social-icon-link:hover,
-  .mobile-social-icon-link:focus-visible {
-    color: #071A45;
-    background: #46C985;
-    transform: translateY(-2px);
-  }
-}
-
-@media (min-width: 768px) {
-  .mobile-social-icons {
-    display: none !important;
-  }
-  .vura-hero-bottom-strip .vura-bottom-socials {
+  .vura-editorial-label {
     display: flex !important;
   }
-  .vura-hero-bottom-strip .vura-bottom-contacts {
+  .vura-carousel-nav-btn {
     display: flex !important;
+  }
+  .vura-banner-thumb-content {
+    display: block !important;
   }
 }
 
-/* -- 3. EXPORT / GLOBAL REACH SECTION � BRAND BUTTON -- */
-.reach-section {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  background: #FFFFFF;
-  overflow: hidden;
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .vura-word-boundaries::before {
+    animation: none !important;
+    width: 100% !important;
+  }
+  .vura-carousel-slide {
+    animation: none !important;
+    transition: none !important;
+  }
 }
 
-.reach-text-block {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  padding: clamp(48px, 6vw, 76px) clamp(20px, 4vw, 80px) 0;
-  background: #FFFFFF;
-}
-
-.reach-heading {
-  font-size: clamp(28px, 4.2vw, 48px);
-  font-weight: 800;
-  line-height: 1.18;
-  color: #071A45;
-  margin: 0 0 18px;
-  max-width: 720px;
-}
-
-.reach-accent {
-  color: #46C985;
-}
-
-.reach-desc {
-  font-size: clamp(14px, 1.35vw, 16.5px);
-  line-height: 1.7;
-  color: #475569;
-  max-width: 640px;
-  margin: 0 0 34px;
-}
-
-/* Established HYBEQ Brand Palette CTA Button */
+/* ── 4. Non-Hero Improvements Preserved ── */
+/* Reach Section Brand Button */
 .reach-cta-btn {
   display: inline-block;
   background: #0A2362;
@@ -6767,7 +6654,6 @@ div.text-custom-storke-cs,
   transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
   outline: none;
 }
-
 .reach-cta-btn:hover,
 .reach-cta-btn:focus-visible {
   background: #46C985;
@@ -6777,37 +6663,7 @@ div.text-custom-storke-cs,
   transform: translateY(-2px);
 }
 
-.reach-image-block {
-  width: 100%;
-  position: relative;
-  overflow: hidden;
-  padding-top: 28px;
-  line-height: 0;
-}
-
-.reach-port-img {
-  width: 100%;
-  height: clamp(260px, 45vw, 680px);
-  object-fit: cover;
-  object-position: center 40%;
-  display: block;
-}
-
-@media (max-width: 768px) {
-  .reach-text-block {
-    padding: 36px 18px 0;
-  }
-  .reach-cta-btn {
-    font-size: 0.88rem;
-    padding: 13px 30px;
-    margin-bottom: -22px;
-  }
-  .reach-image-block {
-    padding-top: 22px;
-  }
-}
-
-/* -- 4. HOMEPAGE PRODUCT CARDS � SHORT DESCRIPTION & ALIGNMENT -- */
+/* Product Cards Short Description & Simple Layout */
 .vura-product-card-simple {
   display: flex;
   flex-direction: column;
@@ -6821,13 +6677,11 @@ div.text-custom-storke-cs,
   box-shadow: 0 4px 16px rgba(10, 35, 98, 0.05);
   transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
 }
-
 .vura-product-card-simple:hover {
   transform: translateY(-5px);
   border-color: #46C985;
   box-shadow: 0 16px 36px rgba(10, 35, 98, 0.1);
 }
-
 .vura-product-card-simple .vura-product-stage-box {
   height: 220px;
   width: 100%;
@@ -6839,13 +6693,11 @@ div.text-custom-storke-cs,
   border-radius: 8px;
   overflow: hidden;
 }
-
 .vura-product-card-simple .vura-card-content-area {
   display: flex;
   flex-direction: column;
   flex: 1;
 }
-
 .vura-product-card-simple .vura-card-category {
   display: block;
   font-size: 0.72rem;
@@ -6855,7 +6707,6 @@ div.text-custom-storke-cs,
   text-transform: uppercase;
   margin-bottom: 6px;
 }
-
 .vura-product-card-simple .vura-card-title {
   font-size: 1.08rem;
   font-weight: 800;
@@ -6868,7 +6719,6 @@ div.text-custom-storke-cs,
   overflow: hidden;
   line-height: 1.3;
 }
-
 .vura-product-card-simple .vura-card-short-desc {
   font-size: 0.8125rem;
   line-height: 1.55;
@@ -6880,7 +6730,6 @@ div.text-custom-storke-cs,
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
-
 .vura-product-card-simple .vura-card-action-footer {
   margin-top: auto;
   display: grid;
@@ -6889,7 +6738,6 @@ div.text-custom-storke-cs,
   padding-top: 14px;
   border-top: 1px solid #EEF2F6;
 }
-
 .vura-product-card-simple .vura-card-btn-specs {
   font-size: 13px;
   padding: 9px 0;
@@ -6905,12 +6753,10 @@ div.text-custom-storke-cs,
   justify-content: center;
   transition: all 0.2s ease;
 }
-
 .vura-product-card-simple .vura-card-btn-specs:hover {
   border-color: var(--color-primary);
   background: rgba(10, 35, 98, 0.04);
 }
-
 .vura-product-card-simple .vura-card-btn-inquire {
   font-size: 13px;
   padding: 9px 0;
@@ -6923,58 +6769,49 @@ div.text-custom-storke-cs,
   cursor: pointer;
   transition: background 0.2s ease, transform 0.18s ease;
 }
-
 .vura-product-card-simple .vura-card-btn-inquire:hover {
   background: #38B373;
   transform: translateY(-1px);
 }
 
-/* -- 5. CLIENT COUNTER � 2-COLUMN MOBILE GRID & REMOVE EXCESS GAP (<=767px) -- */
+/* Client Counter 2-Column Mobile Grid & Remove Excess Space */
 @media (max-width: 767px) {
   .vura-big-stats-section {
     padding: 24px 0 18px !important;
     border-bottom: none !important;
   }
-
   .vura-big-stats-container {
     grid-template-columns: repeat(2, 1fr) !important;
     gap: 18px 14px !important;
     padding: 0 16px !important;
   }
-
   .vura-big-stat-col {
     align-items: flex-start !important;
     text-align: left !important;
   }
-
   .vura-big-stat-num-outline {
     font-size: clamp(34px, 8.5vw, 46px) !important;
     line-height: 1 !important;
   }
-
   .vura-big-stat-divider {
     margin: 10px 0 8px !important;
     width: 100% !important;
   }
-
   .vura-big-stat-label {
     font-size: 13px !important;
     line-height: 1.3 !important;
     font-weight: 600 !important;
   }
-
-  /* Remove excessive blank area between client counter and catalog */
   .vura-products-section {
     padding: 30px 0 48px !important;
     border-top: none !important;
   }
-
   .vura-products-header {
     margin-bottom: 22px !important;
   }
 }
 
-/* -- 6. HOMEPAGE PRODUCT FILTERS � CLEAN NAVIGATION SYSTEM -- */
+/* Category Filter Navigation */
 .vura-cat-pills {
   display: flex;
   gap: 8px;
@@ -6985,7 +6822,6 @@ div.text-custom-storke-cs,
   border: 1px solid #E2E8F0;
   box-sizing: border-box;
 }
-
 .vura-cat-pill {
   padding: 8px 18px;
   border-radius: 8px;
@@ -7000,24 +6836,20 @@ div.text-custom-storke-cs,
   flex-shrink: 0;
   outline: none;
 }
-
 .vura-cat-pill:hover {
   color: #0A2362;
   background: rgba(10, 35, 98, 0.05);
 }
-
 .vura-cat-pill.active {
   background: #0A2362 !important;
   color: #FFFFFF !important;
   border-color: #0A2362 !important;
   box-shadow: 0 2px 8px rgba(10, 35, 98, 0.18);
 }
-
 .vura-cat-pill:focus-visible {
   outline: 2px solid #46C985;
   outline-offset: 2px;
 }
-
 @media (max-width: 767px) {
   .vura-cat-pills {
     overflow-x: auto;
@@ -7034,7 +6866,7 @@ div.text-custom-storke-cs,
   }
 }
 
-/* -- 7. FOUNDATIONAL PILLARS � POLISHED CLICK & SCROLL INTERACTION -- */
+/* Foundational Pillars Active States */
 .vura-pillar-card {
   cursor: pointer;
   position: relative;
@@ -7042,543 +6874,26 @@ div.text-custom-storke-cs,
   outline: none;
   box-sizing: border-box;
 }
-
 .vura-pillar-card:focus-visible {
   outline: 2px solid #46C985;
   outline-offset: 4px;
 }
-
 .vura-pillar-card.active {
   border: 2px solid #46C985 !important;
   box-shadow: 0 16px 36px rgba(10, 35, 98, 0.16), 0 0 0 1px #46C985 !important;
   transform: translateY(-4px) !important;
 }
-
 .vura-pillar-card.active .vura-pillar-icon-box {
   background: #46C985 !important;
   color: #071A45 !important;
   border-color: #46C985 !important;
 }
 
-/* -- 8. PRODUCTS PAGE � STRICTLY HIDE THE TWO UNWANTED OVERLAY TAGS -- */
+/* Products Page Tags Removed */
 .vura-card-badges-row,
 .vura-badge-classification,
 .vura-badge-packaging,
 .vura-product-badge,
 .vura-product-pack {
   display: none !important;
-}
-
-
-/* ============================================================
-   MOBILE HERO � EXACT VURA REFERENCE (BLACK & YELLOW THEME)
-   1. Shows ONLY ONE single image card at first look
-   2. Auto changes every 2 seconds one-by-one with smooth transition
-   3. Black background, white headline, bright yellow BOUNDARIES
-   4. Portrait rounded card with bottom slogan & 3 pill bars
-   ============================================================ */
-
-@media (max-width: 767px) {
-  /* -- Pure Black/Dark Hero Background -- */
-  .vura-hero-section {
-    background: #0B0D11 !important;
-    padding-top: 0 !important;
-  }
-
-  /* -- Mobile Header Integration: Dark Theme with Yellow Accent -- */
-  .vura-header {
-    background: #0B0D11 !important;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
-  }
-
-  .vura-header .vura-logo-img {
-    filter: brightness(0) invert(1) !important;
-  }
-
-  .vura-header .vura-icon-btn {
-    color: #FFFFFF !important;
-    border-color: rgba(255, 255, 255, 0.14) !important;
-    background: rgba(255, 255, 255, 0.06) !important;
-  }
-
-  /* Yellow Hamburger Menu Lines (1:1 VURA Reference) */
-  .vura-header .vura-mobile-toggle {
-    color: #FFCC00 !important;
-    border-color: rgba(255, 204, 0, 0.3) !important;
-    background: rgba(255, 204, 0, 0.08) !important;
-  }
-
-  /* -- Hero Top Row & Typography -- */
-  .vura-hero-top-row {
-    padding-top: 18px !important;
-    margin-bottom: 10px !important;
-    display: block !important;
-  }
-
-  .vura-hero-play-wrap {
-    display: none !important;
-  }
-
-  .vura-headline-line1 {
-    color: #FFFFFF !important;
-    font-size: clamp(28px, 8.2vw, 36px) !important;
-    font-weight: 800 !important;
-    letter-spacing: -0.5px !important;
-    display: block !important;
-    margin-bottom: 4px !important;
-  }
-
-  .vura-headline-line2 {
-    display: flex !important;
-    align-items: center !important;
-    gap: 10px !important;
-    font-size: clamp(28px, 8.2vw, 36px) !important;
-    font-weight: 800 !important;
-    letter-spacing: -0.5px !important;
-    color: #FFFFFF !important;
-  }
-
-  .vura-headline-arrow-icon,
-  .vura-headline-arrow-img {
-    filter: brightness(0) invert(1) !important;
-    opacity: 0.35 !important;
-    width: 22px !important;
-    height: 22px !important;
-  }
-
-  .vura-word-the {
-    color: #FFFFFF !important;
-    font-weight: 800 !important;
-  }
-
-  /* Vibrant Yellow BOUNDARIES with subtle glow (1:1 VURA Reference) */
-  .vura-word-boundaries {
-    color: #FFCC00 !important;
-    -webkit-text-fill-color: #FFCC00 !important;
-    -webkit-text-stroke: 0px !important;
-    font-weight: 900 !important;
-    text-shadow: 0 0 24px rgba(255, 204, 0, 0.45) !important;
-  }
-
-  .vura-word-boundaries::before {
-    display: none !important;
-  }
-
-  /* -- SINGLE IMAGE HERO CARD: TALL PORTRAIT WITH ROUNDED CORNERS -- */
-  .vura-banner-v2-thumb {
-    display: block !important;
-    width: 100% !important;
-    margin: 14px 0 18px !important;
-    border-radius: 20px !important;
-    overflow: hidden !important;
-    position: relative !important;
-    background: transparent !important;
-    box-shadow: none !important;
-    border: none !important;
-  }
-
-  /* Stage container: ONLY ONE image visible, tall aspect ratio */
-  .vura-banner-stage {
-    aspect-ratio: 3 / 4 !important;
-    min-height: 400px !important;
-    max-height: 480px !important;
-    border-radius: 20px !important;
-    overflow: hidden !important;
-    position: relative !important;
-    background: #10131A !important;
-    box-shadow: 0 16px 44px rgba(0, 0, 0, 0.6) !important;
-    border: 1px solid rgba(255, 255, 255, 0.08) !important;
-  }
-
-  /* Hide the 3-image grid if lingering */
-  .mobile-hero-trio {
-    display: none !important;
-  }
-
-  /* Clean top: hide editorial badge on mobile for pristine presentation */
-  .vura-editorial-label {
-    display: none !important;
-  }
-
-  /* Hide external description card on mobile */
-  .vura-banner-thumb-content {
-    display: none !important;
-  }
-
-  /* Hide manual arrow buttons on mobile */
-  .vura-carousel-nav-btn {
-    display: none !important;
-  }
-
-  /* Image fills the portrait stage completely */
-  .vura-banner-slide-img {
-    width: 100% !important;
-    height: 100% !important;
-    object-fit: cover !important;
-    object-position: center !important;
-    display: block !important;
-  }
-
-  /* -- Mobile Slogan Overlay at Bottom Inside Image Stage -- */
-  .vura-mobile-slide-overlay {
-    position: absolute !important;
-    bottom: 0 !important;
-    left: 0 !important;
-    right: 0 !important;
-    padding: 48px 18px 36px !important;
-    background: linear-gradient(180deg, transparent 0%, rgba(11, 13, 17, 0.55) 45%, rgba(11, 13, 17, 0.94) 100%) !important;
-    pointer-events: none !important;
-    z-index: 5 !important;
-  }
-
-  .vura-mobile-slogan {
-    color: #FFFFFF !important;
-    font-size: clamp(17px, 5vw, 22px) !important;
-    font-weight: 800 !important;
-    line-height: 1.25 !important;
-    text-transform: uppercase !important;
-    margin: 0 !important;
-    letter-spacing: -0.2px !important;
-    text-shadow: 0 2px 12px rgba(0, 0, 0, 0.85) !important;
-    text-align: left !important;
-  }
-
-  /* -- Pagination Indicator Bars (3 Pill Dots at Bottom Inside Card) -- */
-  .vura-banner-indicators {
-    position: absolute !important;
-    bottom: 14px !important;
-    left: 0 !important;
-    right: 0 !important;
-    display: flex !important;
-    justify-content: center !important;
-    gap: 8px !important;
-    z-index: 10 !important;
-    background: transparent !important;
-    border-radius: 0 !important;
-    padding: 0 !important;
-  }
-
-  .vura-banner-indicator {
-    width: 32px !important;
-    height: 3.5px !important;
-    border-radius: 3px !important;
-    background: rgba(255, 255, 255, 0.38) !important;
-    border: none !important;
-    padding: 0 !important;
-    cursor: pointer !important;
-    transition: all 0.25s ease !important;
-  }
-
-  .vura-banner-indicator.active {
-    background: #FFFFFF !important;
-    width: 44px !important;
-  }
-
-  /* -- Mobile Social Strip on Dark Theme -- */
-  .vura-hero-bottom-strip {
-    background: #0B0D11 !important;
-    border-top: 1px solid rgba(255, 255, 255, 0.08) !important;
-    padding: 14px 0 18px !important;
-    margin-top: 4px !important;
-  }
-
-  .mobile-social-icon-link {
-    color: rgba(255, 255, 255, 0.65) !important;
-    background: rgba(255, 255, 255, 0.06) !important;
-  }
-
-  .mobile-social-icon-link:hover,
-  .mobile-social-icon-link:focus-visible {
-    color: #071A45 !important;
-    background: #FFCC00 !important;
-  }
-}
-
-
-/* ============================================================
-   MASTER REFINEMENT: HYBEQ MOBILE HERO SINGLE-IMAGE AUTO SLIDER
-   Reference: VURA Mobile Screenshot
-   Palette:
-     Main background: #0B0D10
-     Header background: #151515
-     Primary text: #FFFFFF
-     Secondary text: #B8BEC7
-     Yellow accent: #FFD600
-     Subtle borders: #292D34
-   ============================================================ */
-
-@media (max-width: 767px) {
-  /* ── 1. Main Background ── */
-  .vura-hero-section {
-    background: #0B0D10 !important;
-    padding-top: 0 !important;
-    overflow: hidden !important;
-  }
-
-  /* ── 2. Header: Compact Dark Background (#151515) ── */
-  .vura-header,
-  .vura-site-header {
-    background: #151515 !important;
-    border-bottom: 1px solid #292D34 !important;
-  }
-
-  /* HYBEQ logo retained in authentic original brand colors (no inversion/recoloring) */
-  .vura-logo-img {
-    filter: none !important;
-  }
-
-  .vura-header .vura-icon-btn {
-    color: #FFFFFF !important;
-    border-color: #292D34 !important;
-    background: rgba(255, 255, 255, 0.05) !important;
-  }
-
-  /* Yellow Accent on Mobile Menu Hamburger Toggle */
-  .vura-header .vura-mobile-toggle {
-    color: #FFD600 !important;
-    border-color: rgba(255, 214, 0, 0.35) !important;
-    background: rgba(255, 214, 0, 0.08) !important;
-  }
-
-  /* ── 3. Headline: Left-aligned, Bold White with Yellow Accent ── */
-  .vura-hero-top-row {
-    padding-top: 16px !important;
-    margin-bottom: 8px !important;
-    display: block !important;
-  }
-
-  /* Hide floating play button on mobile phones */
-  .vura-hero-play-wrap {
-    display: none !important;
-  }
-
-  .vura-hero-headline-wrap {
-    text-align: left !important;
-  }
-
-  .vura-headline-line1 {
-    color: #FFFFFF !important;
-    font-size: clamp(28px, 8vw, 36px) !important;
-    font-weight: 800 !important;
-    line-height: 1.15 !important;
-    letter-spacing: -0.5px !important;
-    display: block !important;
-    margin-bottom: 4px !important;
-  }
-
-  .vura-headline-line2 {
-    display: flex !important;
-    align-items: center !important;
-    gap: 8px !important;
-    font-size: clamp(28px, 8vw, 36px) !important;
-    font-weight: 800 !important;
-    line-height: 1.15 !important;
-    letter-spacing: -0.5px !important;
-    color: #FFFFFF !important;
-  }
-
-  /* Subtle arrow icon before THE */
-  .vura-headline-arrow-icon,
-  .vura-headline-arrow-img {
-    filter: brightness(0) invert(1) !important;
-    opacity: 0.35 !important;
-    width: 22px !important;
-    height: 22px !important;
-  }
-
-  .vura-word-the {
-    color: #FFFFFF !important;
-    font-weight: 800 !important;
-  }
-
-  /* Yellow Accent on BOUNDARIES phrase (#FFD600) */
-  .vura-word-boundaries {
-    color: #FFD600 !important;
-    -webkit-text-fill-color: #FFD600 !important;
-    -webkit-text-stroke: 0px !important;
-    font-weight: 900 !important;
-    text-shadow: 0 0 24px rgba(255, 214, 0, 0.4) !important;
-  }
-
-  .vura-word-boundaries::before {
-    display: none !important;
-  }
-
-  /* ── 4. SINGLE-IMAGE HERO CAROUSEL: EXACTLY ONE IMAGE AT A TIME ── */
-  .vura-banner-v2-thumb {
-    display: block !important;
-    width: 100% !important;
-    margin: 12px 0 16px !important;
-    border-radius: 18px !important;
-    overflow: hidden !important;
-    position: relative !important;
-    background: transparent !important;
-    box-shadow: none !important;
-    border: none !important;
-    outline: none !important;
-  }
-
-  /* The stage container: consistent height, 18px corner radius, #292D34 border */
-  .vura-banner-stage {
-    aspect-ratio: 3 / 4 !important;
-    min-height: 400px !important;
-    max-height: 480px !important;
-    border-radius: 18px !important;
-    overflow: hidden !important;
-    position: relative !important;
-    background: #12141A !important;
-    border: 1px solid #292D34 !important;
-    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.55) !important;
-  }
-
-  /* Hide the 3-image grid completely on mobile */
-  .mobile-hero-trio {
-    display: none !important;
-  }
-
-  /* Hide top-left editorial category badge on mobile */
-  .vura-editorial-label {
-    display: none !important;
-  }
-
-  /* Hide description card beneath carousel on mobile */
-  .vura-banner-thumb-content {
-    display: none !important;
-  }
-
-  /* Hide manual arrow navigation on mobile phones */
-  .vura-carousel-nav-btn {
-    display: none !important;
-  }
-
-  /* Active slide image: fills the single stage with cover fit */
-  .vura-banner-slide-img {
-    width: 100% !important;
-    height: 100% !important;
-    object-fit: cover !important;
-    object-position: center !important;
-    display: block !important;
-  }
-
-  /* ── 5. Slide Slogan Overlay: Bottom Gradient + Bold White Text ── */
-  .vura-mobile-slide-overlay {
-    position: absolute !important;
-    bottom: 0 !important;
-    left: 0 !important;
-    right: 0 !important;
-    padding: 50px 18px 38px !important;
-    background: linear-gradient(180deg, transparent 0%, rgba(11, 13, 16, 0.55) 45%, rgba(11, 13, 16, 0.94) 100%) !important;
-    pointer-events: none !important;
-    z-index: 5 !important;
-  }
-
-  .vura-mobile-slogan {
-    color: #FFFFFF !important;
-    font-size: clamp(17px, 5vw, 22px) !important;
-    font-weight: 800 !important;
-    line-height: 1.25 !important;
-    text-transform: uppercase !important;
-    margin: 0 !important;
-    letter-spacing: -0.2px !important;
-    text-shadow: 0 2px 12px rgba(0, 0, 0, 0.85) !important;
-    text-align: left !important;
-  }
-
-  /* ── 6. Pagination Indicators: Minimal Yellow Highlight ── */
-  .vura-banner-indicators {
-    position: absolute !important;
-    bottom: 12px !important;
-    left: 0 !important;
-    right: 0 !important;
-    display: flex !important;
-    justify-content: center !important;
-    gap: 8px !important;
-    z-index: 10 !important;
-    background: transparent !important;
-    border-radius: 0 !important;
-    padding: 0 !important;
-  }
-
-  .vura-banner-indicator {
-    min-height: 44px !important;
-    min-width: 44px !important;
-    padding: 0 !important;
-    background: transparent !important;
-    border: none !important;
-    display: inline-flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    cursor: pointer !important;
-    outline: none !important;
-  }
-
-  .vura-banner-indicator::after {
-    content: '' !important;
-    display: block !important;
-    width: 28px !important;
-    height: 3.5px !important;
-    border-radius: 3px !important;
-    background: rgba(255, 255, 255, 0.3) !important;
-    transition: all 0.25s ease !important;
-  }
-
-  /* Active Indicator highlighted in Yellow (#FFD600) */
-  .vura-banner-indicator.active::after {
-    background: #FFD600 !important;
-    width: 42px !important;
-    box-shadow: 0 0 10px rgba(255, 214, 0, 0.5) !important;
-  }
-
-  /* ── 7. Mobile Social Strip ── */
-  .vura-hero-bottom-strip {
-    background: #0B0D10 !important;
-    border-top: 1px solid #292D34 !important;
-    padding: 12px 0 16px !important;
-    margin-top: 2px !important;
-    justify-content: center !important;
-  }
-
-  .mobile-social-icon-link {
-    color: #B8BEC7 !important;
-    background: rgba(255, 255, 255, 0.05) !important;
-  }
-
-  .mobile-social-icon-link:hover,
-  .mobile-social-icon-link:focus-visible {
-    color: #071A45 !important;
-    background: #FFD600 !important;
-  }
-}
-
-/* ── 8. Desktop and Tablet Preservation (>=768px) ── */
-@media (min-width: 768px) {
-  .vura-mobile-slide-overlay {
-    display: none !important;
-  }
-  .mobile-hero-trio {
-    display: none !important;
-  }
-  .vura-banner-v2-thumb {
-    display: block !important;
-  }
-  .vura-editorial-label {
-    display: flex !important;
-  }
-  .vura-carousel-nav-btn {
-    display: flex !important;
-  }
-  .vura-banner-thumb-content {
-    display: block !important;
-  }
-}
-
-/* Respect prefers-reduced-motion */
-@media (prefers-reduced-motion: reduce) {
-  .vura-carousel-slide {
-    animation: none !important;
-    transition: none !important;
-  }
-  .vura-banner-indicator::after {
-    transition: none !important;
-  }
 }
