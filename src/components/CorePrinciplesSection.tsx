@@ -1,6 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
 import { X, ArrowRight, ShieldCheck, CheckCircle2, Maximize2, ChevronLeft, ChevronRight } from 'lucide-react';
-import ScrollStack, { ScrollStackItem } from './ScrollStack';
 
 export interface PrincipleItem {
   step: string;
@@ -75,7 +74,7 @@ export function CorePrinciplesSection() {
   const [activeMobileIdx, setActiveMobileIdx] = useState(0);
   const touchStartX = useRef<number | null>(null);
 
-  // Responsive device check
+  // Responsive device check (< 768px mobile, >= 768px tablet & laptop)
   useEffect(() => {
     const checkViewport = () => {
       setIsMobile(window.innerWidth < 768);
@@ -104,7 +103,7 @@ export function CorePrinciplesSection() {
     };
   }, [selectedPrinciple]);
 
-  // Mobile swipe handlers
+  // Mobile swipe handlers (preserved 100% for phone view)
   const handleTouchStart = (e: React.TouchEvent) => {
     touchStartX.current = e.touches[0].clientX;
   };
@@ -136,101 +135,80 @@ export function CorePrinciplesSection() {
             Built On <span className="vura-accent-green">Integrity, Precision</span> &amp; Engineering Excellence
           </h2>
           <p className="vura-section-desc">
-            Three non-negotiable principles that drive our formulations and projects.
+            Three non-negotiable principles that drive our formulations, certified manufacturing, and project execution.
           </p>
         </div>
 
         {/* ============================================================
-            1. LAPTOP / DESKTOP VIEW: SCROLLSTACK STICKY CARD ANIMATION
-            Cards stick and stack naturally as the user scrolls the window
+            1. LAPTOP / DESKTOP & TABLET VIEW: GRAND 3-CARD INTERACTIVE GRID
+            Clean side-by-side architectural grid with zero vertical empty gaps
             ============================================================ */}
         {!isMobile ? (
-          <div className="scroll-stack-wrapper">
-            <ScrollStack
-              itemDistance={90}
-              itemStackDistance={20}
-              stackPosition="20%"
-              itemScale={0.04}
-              baseScale={0.88}
-              dimAmount={0.2}
-              smoothScroll={true}
-              useWindowScroll={true}
-            >
-              {PRINCIPLES.map((p, idx) => (
-                <ScrollStackItem
-                  key={idx}
-                  itemClassName="core-principle-card border border-slate-200 shadow-xl bg-white"
-                >
-                  <div
-                    className="core-principle-card-layout"
-                    onClick={() => setSelectedPrinciple(p)}
-                    role="button"
-                    tabIndex={0}
-                    onKeyDown={(e) => {
-                      if (e.key === 'Enter' || e.key === ' ') {
-                        e.preventDefault();
-                        setSelectedPrinciple(p);
-                      }
-                    }}
-                    title="Click to open full technical preview"
-                  >
-                    {/* Left: Text & Specs */}
-                    <div className="core-principle-text-col">
-                      <div className="core-principle-top">
-                        <span className="core-principle-step">{p.step}</span>
-                        <span className="core-principle-tag">Principle</span>
-                      </div>
-
-                      <div className="core-principle-body">
-                        <h3 className="core-principle-title">{p.title}</h3>
-                        <p className="core-principle-subtitle">{p.subtitle}</p>
-                        <p className="core-principle-desc">{p.desc}</p>
-                      </div>
-
-                      <div className="core-principle-bottom-bar">
-                        <div className="core-principle-metric-chip">
-                          <span className="metric-val">{p.highlightMetric}</span>
-                          <span className="metric-lbl">{p.metricLabel}</span>
-                        </div>
-                        <button
-                          type="button"
-                          className="core-principle-preview-trigger"
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            setSelectedPrinciple(p);
-                          }}
-                        >
-                          <span>Full Preview</span>
-                          <Maximize2 size={14} />
-                        </button>
-                      </div>
-                    </div>
-
-                    {/* Right: High-Res Image Showcase */}
-                    <div className="core-principle-media-col">
-                      <div className="core-principle-img-wrap">
-                        <img
-                          src={p.image}
-                          alt={p.title}
-                          className="core-principle-img"
-                          loading="lazy"
-                        />
-                        <div className="core-principle-img-overlay">
-                          <span className="img-overlay-btn">
-                            <Maximize2 size={16} /> Tap to expand
-                          </span>
-                        </div>
-                      </div>
-                    </div>
+          <div className="laptop-principles-grid">
+            {PRINCIPLES.map((p, idx) => (
+              <div
+                key={idx}
+                className="laptop-principle-card"
+                onClick={() => setSelectedPrinciple(p)}
+                role="button"
+                tabIndex={0}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    setSelectedPrinciple(p);
+                  }
+                }}
+                title={`Click to preview complete specifications for ${p.title}`}
+              >
+                {/* Media Image Header with Badges */}
+                <div className="laptop-card-media">
+                  <img
+                    src={p.image}
+                    alt={p.title}
+                    className="laptop-card-img"
+                    loading="lazy"
+                  />
+                  <div className="laptop-card-media-overlay" />
+                  <div className="laptop-card-badges">
+                    <span className="laptop-card-step">{p.step}</span>
+                    <span className="laptop-card-tag">{p.tag}</span>
                   </div>
-                </ScrollStackItem>
-              ))}
-            </ScrollStack>
+                </div>
+
+                {/* Card Content Body */}
+                <div className="laptop-card-content">
+                  <div className="laptop-card-header">
+                    <h3 className="laptop-card-title">{p.title}</h3>
+                    <p className="laptop-card-subtitle">{p.subtitle}</p>
+                    <p className="laptop-card-desc">{p.desc}</p>
+                  </div>
+
+                  <div className="laptop-card-footer">
+                    <div className="laptop-card-metric">
+                      <strong className="metric-number">{p.highlightMetric}</strong>
+                      <span className="metric-label">{p.metricLabel}</span>
+                    </div>
+
+                    <button
+                      type="button"
+                      className="laptop-card-preview-btn"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setSelectedPrinciple(p);
+                      }}
+                    >
+                      <span>Full Preview</span>
+                      <Maximize2 size={13} />
+                    </button>
+                  </div>
+                </div>
+              </div>
+            ))}
           </div>
         ) : (
           /* ============================================================
-             2. PHONE / MOBILE VIEW: DEDICATED 3D CARD DECK ANIMATION
-             Smooth step selector tabs + 3D layered card swipe & tap preview
+             2. PHONE / MOBILE VIEW: PRESERVED 3D CARD DECK ANIMATION
+             Kept 100% untouched as requested by user ("seee in phone view alll is sooo goodd and doneee")
              ============================================================ */
           <div className="mobile-deck-experience">
             {/* Step Switcher Segmented Pills */}
