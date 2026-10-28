@@ -1309,6 +1309,7 @@ body {
 }
 
 .vura-banner-indicators {
+  display: none !important;
   position: absolute;
   bottom: clamp(10px, 2.2vw, 18px);
   left: 50%;
@@ -6613,6 +6614,7 @@ div.text-custom-storke-cs,
 
   /* Minimal, restrained pagination indicators in HYBEQ colors */
   .vura-banner-indicators {
+  display: none !important;
     position: absolute !important;
     bottom: 10px !important;
     left: 0 !important;

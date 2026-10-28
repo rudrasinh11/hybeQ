@@ -220,23 +220,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
               <ChevronRight size={22} />
             </button>
 
-            {/* Center Pagination: 3 pill dots indicating active hero slide */}
-            <div className="vura-banner-indicators" role="tablist" aria-label="Hero Slides">
-              {slides.map((s, idx) => (
-                <button
-                  key={s.id}
-                  type="button"
-                  role="tab"
-                  aria-selected={idx === activeSlide}
-                  aria-label={`Slide ${idx + 1}: ${s.category}`}
-                  className={`vura-banner-indicator ${idx === activeSlide ? 'active' : ''}`}
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    setActiveSlide(idx);
-                  }}
-                />
-              ))}
-            </div>
+            
           </div>
 
           {/* ============================================================
