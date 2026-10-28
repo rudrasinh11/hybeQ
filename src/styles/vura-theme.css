@@ -777,6 +777,7 @@ body {
   overflow-x: hidden;
   position: relative;
   z-index: 1;
+  padding-top: clamp(20px, 3vw, 48px);
 }
 
 /* Page Stacking Context: Everything renders cleanly above fixed background lines */
@@ -1146,6 +1147,7 @@ body {
 
 .vura-banner-slide-img {
   width: 100%;
+  /* Desktop: wide cinematic ratio */
   aspect-ratio: 1410 / 521;
   height: auto;
   display: block;
@@ -1425,8 +1427,8 @@ body {
   align-items: center;
   text-align: center;
   width: 100%;
-  margin-top: 36px;
-  padding: 18px 10px 44px 10px;
+  margin-top: clamp(16px, 2.5vw, 36px);
+  padding: 16px 10px clamp(20px, 4vw, 44px) 10px;
   gap: 14px;
   font-family: "vurafonts", system-ui, -apple-system, sans-serif;
   font-size: 0.8125rem;
@@ -1524,23 +1526,26 @@ body {
     align-items: center;
     justify-content: center;
   }
+  /* On tablet: headline takes full width; play button sits at top-right corner */
   .vura-hero-top-row {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 16px;
+    position: relative;
+    display: block;
+    margin-bottom: 16px;
+  }
+  .vura-hero-headline-wrap {
+    width: 100%;
+    padding-right: 130px; /* make room for play button */
   }
   .vura-hero-play-wrap {
-    align-self: flex-end;
-    padding-top: 0;
-    margin-top: -12px;
-    margin-right: 0;
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 0;
+    padding: 0;
   }
   .vura-step-textcircle {
     width: clamp(92px, 20vw, 116px);
     height: clamp(92px, 20vw, 116px);
-  }
-  .vura-hero-headline-wrap {
-    width: 100%;
   }
   .vura-hero-support-row {
     justify-content: flex-start;
@@ -1550,6 +1555,10 @@ body {
   }
   .vura-hero-media-card {
     aspect-ratio: 16 / 9;
+  }
+  /* Tablet: make carousel taller */
+  .vura-banner-slide-img {
+    aspect-ratio: 16 / 8;
   }
 }
 
@@ -1567,16 +1576,31 @@ body {
     display: none;
   }
   .vura-header-container {
-    height: 64px;
+    height: 62px;
   }
   .vura-logo-img {
     height: 28px;
   }
+  /* Mobile: headline full-width, no room-for-play-button padding */
+  .vura-hero-headline-wrap {
+    padding-right: 0;
+    width: 100%;
+  }
+  /* Mobile: hide the play button — saves ~120px of vertical space */
+  .vura-hero-play-wrap {
+    display: none !important;
+  }
+  /* Mobile: hero top-row just contains the headline */
+  .vura-hero-top-row {
+    display: block;
+    margin-bottom: 14px;
+    position: static;
+  }
   .vura-headline-line1,
   .vura-headline-line2 {
-    font-size: clamp(25px, 7.2vw, 42px);
-    line-height: 1.1;
-    letter-spacing: -0.02em;
+    font-size: clamp(28px, 8.5vw, 44px);
+    line-height: 1.08;
+    letter-spacing: -0.025em;
   }
   .vura-headline-line2 {
     display: inline-flex;
@@ -1585,38 +1609,65 @@ body {
     gap: 8px;
   }
   .vura-headline-arrow-icon {
-    width: clamp(26px, 6.5vw, 40px);
-    height: clamp(26px, 6.5vw, 40px);
+    width: clamp(28px, 7vw, 42px);
+    height: clamp(28px, 7vw, 42px);
     margin-right: 2px;
   }
-  .vura-hero-play-wrap {
-    align-self: flex-end;
-    margin-top: -16px;
+  /* Mobile: make carousel image TALL — close to square */
+  .vura-banner-slide-img {
+    aspect-ratio: 4 / 3.2;
+    object-fit: cover;
+    object-position: center;
   }
-  .vura-step-textcircle {
-    width: clamp(82px, 22vw, 98px);
-    height: clamp(82px, 22vw, 98px);
+  /* Mobile: carousel rounded corners */
+  .vura-banner-stage,
+  .vura-carousel-inner {
+    border-radius: 14px;
   }
-  .vura-hero-media-card {
-    border-radius: 18px;
-    aspect-ratio: 4 / 3;
-  }
+  /* Mobile: compress bottom strip significantly */
   .vura-hero-bottom-strip {
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    gap: 12px;
+    margin-top: 8px;
+    padding: 12px 10px 20px 10px;
+    gap: 10px;
+    font-size: 0.7rem;
+    letter-spacing: 1px;
   }
   .vura-bottom-socials {
     justify-content: center;
-    gap: 18px;
+    gap: 14px;
     flex-wrap: wrap;
   }
   .vura-bottom-contacts {
     justify-content: center;
     flex-wrap: wrap;
-    gap: 14px;
+    gap: 10px;
+    font-size: 0.65rem;
+  }
+  /* Mobile: description card below carousel — cleaner style */
+  .vura-banner-thumb-content {
+    position: relative;
+    top: auto;
+    right: auto;
+    width: 100%;
+    max-width: 100%;
+    margin-top: 12px;
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    border-radius: 0;
+    padding: 0;
+    box-sizing: border-box;
+    pointer-events: auto;
+  }
+  .vura-notch-desc {
+    font-size: 0.85rem;
+    line-height: 1.6;
+    color: var(--color-body-text);
+    text-align: left;
+  }
+  .vura-hero-media-card {
+    border-radius: 18px;
+    aspect-ratio: 4 / 3;
   }
 }
 
@@ -3309,18 +3360,6 @@ div.text-custom-storke-cs,
 }
 
 @media (max-width: 768px) {
-  .vura-hero-top-row {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 20px;
-  }
-  .vura-hero-play-wrap {
-    align-self: flex-end;
-    margin-top: -20px;
-  }
-  .vura-headline-line2 {
-    gap: 12px;
-  }
   .vura-hero-slide-content {
     padding: 24px 20px 50px;
   }
@@ -3330,13 +3369,6 @@ div.text-custom-storke-cs,
   }
   .vura-shelf-product-img {
     height: 110px;
-  }
-  .vura-hero-bottom-strip {
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    gap: 12px;
   }
   .vura-bottom-socials {
     justify-content: center;
@@ -4594,25 +4626,10 @@ div.text-custom-storke-cs,
 }
 
 @media (max-width: 768px) {
-  .vura-hero-top-row {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 16px;
-    margin-bottom: 20px;
-  }
-  .vura-hero-play-wrap {
-    align-self: flex-end;
-    margin-top: -14px;
-    margin-right: 0;
-  }
+  /* hero-top-row and hero-play-wrap are controlled by the main 992px/640px breakpoints above */
   .vura-step-textcircle {
     width: clamp(82px, 20vw, 104px);
     height: clamp(82px, 20vw, 104px);
-  }
-  .vura-headline-line1,
-  .vura-headline-line2 {
-    font-size: clamp(25px, 7.2vw, 42px);
-    line-height: 1.1;
   }
   .vura-headline-arrow-icon {
     width: clamp(26px, 6.5vw, 38px);
@@ -4625,13 +4642,6 @@ div.text-custom-storke-cs,
   }
   .vura-kinetic-word {
     font-size: clamp(2.4rem, 8.5vw, 4.2rem);
-  }
-  .vura-banner-thumb-content {
-    position: relative;
-    max-width: 100%;
-    width: 100%;
-    margin: 14px 0 0 0;
-    box-sizing: border-box;
   }
   .vura-banner-certificate-img {
     display: none;
@@ -6163,6 +6173,62 @@ div.text-custom-storke-cs,
     font-size: 0.58rem;
     padding: 0 10px;
     max-width: 130px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+
+/* ============================================================
+   MASTER RESPONSIVE FIX — FINAL POLISH
+   Remaining tweaks after core layout fixes
+   ============================================================ */
+
+/* Carousel nav arrows: always visible on touch devices (don't require hover) */
+@media (max-width: 992px) {
+  .vura-carousel-nav-btn {
+    opacity: 0.85;
+  }
+
+  .vura-carousel-nav-btn.prev {
+    left: 10px;
+  }
+
+  .vura-carousel-nav-btn.next {
+    right: 10px;
+  }
+}
+
+/* Very small phones ≤374px */
+@media (max-width: 374px) {
+  .vura-editorial-category {
+    max-width: 90px;
+  }
+
+  .vura-headline-line1,
+  .vura-headline-line2 {
+    font-size: clamp(22px, 7.5vw, 30px);
+  }
+
+  .vura-hero-container {
+    padding: 0 12px;
+  }
+}
+
+/* Hide description paragraph below carousel on very small phones
+   (keeps hero tight and clean; description visible as slide text overlay) */
+@media (max-width: 430px) {
+  .vura-banner-thumb-content {
+    display: none;
+  }
+}
+
+/* Ensure social bottom strip stays compact on mobile */
+@media (max-width: 640px) {
+  .vura-hero-bottom-strip {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
   }
 }
 
