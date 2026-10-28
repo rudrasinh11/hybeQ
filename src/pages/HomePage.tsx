@@ -82,15 +82,25 @@ export const HomePage: React.FC<HomePageProps> = ({
                     { id: 'all', label: 'All Products' },
                     { id: 'tile-fixing', label: 'Tile & Stone' },
                     { id: 'waterproofing', label: 'Waterproofing' },
-                    { id: 'surface-treatment', label: 'Surface Treatment' },
+                    { id: 'grouts', label: 'Grouts' },
                     { id: 'structural-repair', label: 'Structural Repair' },
-                    { id: 'grouts', label: 'Grouts' }
+                    { id: 'surface-treatment', label: 'Surface Treatment' },
+                    { id: 'precast-additives', label: 'Precast Additives' },
+                    { id: 'plasticizers', label: 'Plasticizers' },
+                    { id: 'bonding-agent', label: 'Bonding Agent' },
+                    { id: 'sealants', label: 'Sealants' },
+                    { id: 'decorative-floor-wall', label: 'Decorative Floors' },
+                    { id: 'drymix-mortar', label: 'Drymix Mortar' },
+                    { id: 'curing-compounds', label: 'Curing Compounds' },
+                    { id: 'epoxy-flooring', label: 'Epoxy Flooring' },
+                    { id: 'epoxy-screed', label: 'Epoxy Screed' }
                   ].map(cat => (
                     <button
                       key={cat.id}
                       type="button"
-                      onClick={() => {
+                      onClick={(e) => {
                         setSelectedProductCategory(cat.id);
+                        (e.currentTarget as HTMLElement).scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
                         if (carouselRef.current) carouselRef.current.scrollTo({ left: 0, behavior: 'smooth' });
                       }}
                       className={`vura-cat-pill ${selectedProductCategory === cat.id ? 'active' : ''}`}
@@ -98,6 +108,13 @@ export const HomePage: React.FC<HomePageProps> = ({
                       {cat.label}
                     </button>
                   ))}
+                  <Link
+                    to="/products"
+                    className="vura-cat-pill vura-cat-pill-view-all"
+                    title="View all 14 categories in full catalog"
+                  >
+                    <span>View All Categories →</span>
+                  </Link>
                 </div>
               </div>
 
@@ -160,10 +177,10 @@ export const HomePage: React.FC<HomePageProps> = ({
           </div>
 
           {/* Discoverability: Link to complete product catalog */}
-          <div style={{ textAlign: 'center', marginTop: 44 }}>
-            <Link to="/products" className="vura-enquiry-btn" style={{ padding: '14px 34px' }}>
+          <div className="vura-catalog-cta-wrap">
+            <Link to="/products" className="vura-catalog-cta-btn">
               <span>VIEW COMPLETE CATALOGUE ({PRODUCTS.length} PRODUCTS)</span>
-              <ArrowUpRight size={18} className="vura-enquiry-arrow" />
+              <ArrowUpRight size={18} className="vura-catalog-cta-arrow" />
             </Link>
           </div>
         </div>
