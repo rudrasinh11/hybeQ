@@ -130,7 +130,6 @@ export function CorePrinciplesSection() {
       <div className="vura-container">
         {/* Section Heading & Subtitle */}
         <div className="vura-principles-header">
-          <span className="vura-principles-badge">CORE ENGINEERING PHILOSOPHY</span>
           <h2 className="vura-section-heading">
             Built On <span className="vura-accent-green">Integrity, Precision</span> &amp; Engineering Excellence
           </h2>
