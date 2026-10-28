@@ -7013,3 +7013,392 @@ div.text-custom-storke-cs,
 .vura-product-pack {
   display: none !important;
 }
+
+/* ============================================================
+   MASTER IMPLEMENTATION: UI/UX & RESPONSIVE POLISH
+   1. Standardized Spacing & Section Margins
+   2. Local Expertise & Export Section Modern Gradient CTA
+   3. Hero Section Mobile Flow & Proportional Mockup
+   4. Glassmorphic Metric Counter Cards (2x2 Mobile Grid)
+   5. Smooth Horizontal Category Filter with Edge Fade Masking
+   6. Built On Integrity ScrollStack Animation
+   ============================================================ */
+
+/* ── 1. Global Responsive Spacing Scale ── */
+.vura-clients-section {
+  padding: 72px 0 56px !important;
+  margin: 0 !important;
+}
+
+.vura-products-section {
+  padding: 80px 0 !important;
+  margin: 0 !important;
+}
+
+.reach-section {
+  margin: 0 !important;
+}
+
+.reach-text-block {
+  padding: 72px 24px 0 !important;
+}
+
+.vura-core-principles-section {
+  padding: 88px 0 !important;
+  margin: 0 !important;
+  background: #F8FAFC;
+  border-top: 1px solid var(--color-border, #E2E8F0);
+  border-bottom: 1px solid var(--color-border, #E2E8F0);
+}
+
+.vura-articles-section {
+  padding: 80px 0 !important;
+  margin: 0 !important;
+}
+
+@media (max-width: 767px) {
+  .vura-clients-section {
+    padding: 38px 0 32px !important;
+    margin: 0 !important;
+  }
+  .vura-products-section {
+    padding: 38px 0 42px !important;
+    margin: 0 !important;
+  }
+  .reach-text-block {
+    padding: 38px 16px 0 !important;
+  }
+  .vura-core-principles-section {
+    padding: 42px 0 !important;
+    margin: 0 !important;
+  }
+  .vura-articles-section {
+    padding: 40px 0 44px !important;
+    margin: 0 !important;
+  }
+}
+
+/* ── 2. Local Expertise & Export Section: High-End Industrial Gradient CTA ── */
+.reach-cta-btn {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 10px !important;
+  background: linear-gradient(135deg, #10b981 0%, #2563eb 100%) !important;
+  color: #FFFFFF !important;
+  font-size: 0.875rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.05em !important;
+  text-transform: uppercase !important;
+  padding: 14px 28px !important;
+  border-radius: 14px !important;
+  border: 1px solid rgba(255, 255, 255, 0.25) !important;
+  box-shadow: 0 10px 25px -5px rgba(16, 185, 129, 0.4), 0 8px 10px -6px rgba(37, 99, 235, 0.3) !important;
+  text-decoration: none !important;
+  position: relative !important;
+  z-index: 10 !important;
+  margin-bottom: -24px !important;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  cursor: pointer !important;
+  outline: none !important;
+}
+
+.reach-cta-btn:hover,
+.reach-cta-btn:focus-visible {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 16px 32px -5px rgba(16, 185, 129, 0.5), 0 10px 14px -6px rgba(37, 99, 235, 0.4) !important;
+  filter: brightness(1.08) !important;
+}
+
+.reach-btn-arrow {
+  display: inline-block;
+  font-size: 1.15rem;
+  font-weight: 700;
+  line-height: 1;
+  transition: transform 0.22s ease;
+}
+
+.reach-cta-btn:hover .reach-btn-arrow {
+  transform: translateX(4px);
+}
+
+.reach-image-block {
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  padding-top: 0 !important;
+  margin-top: 0 !important;
+  line-height: 0;
+}
+
+.reach-port-img {
+  width: 100%;
+  height: auto;
+  max-height: 600px;
+  object-fit: cover;
+  display: block;
+}
+
+/* ── 3. Hero Section Mobile Optimization & Clear Hierarchy ── */
+.vura-hero-mobile-flow {
+  display: none;
+}
+
+@media (max-width: 767px) {
+  .vura-hero-mobile-flow {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 10px !important;
+    margin: 12px 0 14px !important;
+  }
+
+  .vura-hero-value-tag {
+    display: inline-flex !important;
+    align-items: center !important;
+    background: #EAF8F0 !important;
+    color: #0A2362 !important;
+    font-size: 0.72rem !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.04em !important;
+    text-transform: uppercase !important;
+    padding: 6px 14px !important;
+    border-radius: 9999px !important;
+    border: 1px solid rgba(70, 201, 133, 0.4) !important;
+    line-height: 1.3 !important;
+  }
+
+  .vura-hero-mobile-cta {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    background: linear-gradient(135deg, #0A2362 0%, #1e3a8a 100%) !important;
+    color: #FFFFFF !important;
+    font-size: 0.8125rem !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.06em !important;
+    text-transform: uppercase !important;
+    padding: 10px 20px !important;
+    border-radius: 12px !important;
+    border: 1px solid rgba(70, 201, 133, 0.4) !important;
+    box-shadow: 0 4px 14px rgba(10, 35, 98, 0.2) !important;
+    cursor: pointer !important;
+  }
+
+  .vura-hero-cta-arrow {
+    display: inline-block;
+    font-size: 1.05rem;
+    line-height: 1;
+    color: #46C985;
+  }
+
+  .vura-banner-v2-thumb {
+    border-radius: 16px !important;
+    max-width: 100% !important;
+    margin: 8px 0 12px !important;
+  }
+
+  .vura-banner-stage {
+    border-radius: 16px !important;
+  }
+
+  .vura-banner-slide-img {
+    border-radius: 16px !important;
+  }
+}
+
+/* ── 4. Modern Glassmorphic Client Metric Counter Cards ── */
+.vura-big-stats-section {
+  width: 100%;
+  padding: 36px 0 24px;
+}
+
+.vura-big-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.vura-stat-glass-card {
+  background: rgba(248, 250, 252, 0.85);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(226, 232, 240, 0.85);
+  border-radius: 16px;
+  padding: 24px 20px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 16px rgba(10, 35, 98, 0.04);
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.vura-stat-glass-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 24px rgba(10, 35, 98, 0.08);
+  border-color: rgba(70, 201, 133, 0.45);
+}
+
+.vura-stat-glass-num {
+  font-size: clamp(2rem, 3.2vw, 2.5rem);
+  font-weight: 900;
+  color: #0A2362;
+  line-height: 1.1;
+  margin-bottom: 6px;
+  letter-spacing: -0.02em;
+}
+
+.vura-stat-glass-label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #64748B;
+  line-height: 1.3;
+}
+
+@media (max-width: 767px) {
+  .vura-big-stats-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 14px !important;
+    padding: 0 16px !important;
+  }
+  .vura-stat-glass-card {
+    padding: 18px 12px !important;
+  }
+  .vura-stat-glass-num {
+    font-size: 1.85rem !important;
+  }
+  .vura-stat-glass-label {
+    font-size: 0.68rem !important;
+  }
+}
+
+/* ── 5. Product Catalog: Smooth Horizontal Category Filter ── */
+.vura-cat-pills-scroll-wrap {
+  display: flex;
+  align-items: center;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  -webkit-overflow-scrolling: touch;
+  max-width: 100%;
+}
+
+.vura-cat-pills-scroll-wrap::-webkit-scrollbar {
+  display: none;
+}
+
+@media (max-width: 767px) {
+  .vura-cat-pills-scroll-wrap {
+    mask-image: linear-gradient(to right, black 85%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to right, black 85%, transparent 100%);
+    padding: 4px 16px 4px 0 !important;
+  }
+}
+
+.vura-cat-pills {
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  flex-wrap: nowrap !important;
+}
+
+.vura-cat-pill {
+  background: #F1F5F9 !important;
+  color: #475569 !important;
+  border-radius: 9999px !important;
+  padding: 8px 18px !important;
+  font-size: 0.8125rem !important;
+  font-weight: 600 !important;
+  white-space: nowrap !important;
+  flex-shrink: 0 !important;
+  border: none !important;
+  cursor: pointer !important;
+  transition: all 0.2s ease !important;
+}
+
+.vura-cat-pill:hover {
+  background: #E2E8F0 !important;
+  color: #0A2362 !important;
+}
+
+.vura-cat-pill.active {
+  background: #071A45 !important;
+  color: #FFFFFF !important;
+  box-shadow: 0 2px 8px rgba(7, 26, 69, 0.25) !important;
+}
+
+/* ── 6. Built On Integrity: ScrollStack Animation ── */
+.vura-principles-header {
+  text-align: center;
+  max-width: 760px;
+  margin: 0 auto 48px;
+}
+
+.scroll-stack-wrapper {
+  max-width: 900px;
+  margin: 0 auto;
+  min-height: 500px;
+}
+
+.core-principle-card {
+  background: #FFFFFF !important;
+  border: 1px solid rgba(226, 232, 240, 0.9) !important;
+  border-radius: 24px !important;
+  box-shadow: 0 16px 36px rgba(10, 35, 98, 0.08) !important;
+  min-height: 240px;
+}
+
+.core-principle-inner {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.core-principle-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+
+.core-principle-step {
+  font-size: 2.25rem;
+  font-weight: 900;
+  color: #10b981;
+  line-height: 1;
+}
+
+.core-principle-tag {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #94A3B8;
+  background: #F1F5F9;
+  padding: 4px 12px;
+  border-radius: 9999px;
+}
+
+.core-principle-title {
+  font-size: clamp(1.25rem, 2.5vw, 1.65rem);
+  font-weight: 800;
+  color: #071A45;
+  margin-bottom: 10px;
+  line-height: 1.25;
+}
+
+.core-principle-desc {
+  font-size: 0.95rem;
+  color: #475569;
+  line-height: 1.65;
+  margin: 0;
+}

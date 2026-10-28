@@ -9,7 +9,7 @@ interface HeroSectionProps {
 
 export const HeroSection: React.FC<HeroSectionProps> = ({
   onOpenVideo,
-  onOpenEnquiry: _onOpenEnquiry
+  onOpenEnquiry
 }) => {
   const [activeSlide, setActiveSlide] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
@@ -136,6 +136,21 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                 </span>
               </span>
             </h1>
+
+            {/* Mobile Visual Hierarchy: Concise value proposition tag + CTA */}
+            <div className="vura-hero-mobile-flow">
+              <span className="vura-hero-value-tag">
+                German Polymer Technology • C2TES1 Compliant
+              </span>
+              <button
+                type="button"
+                onClick={() => onOpenEnquiry?.(slides[activeSlide].productName)}
+                className="vura-hero-mobile-cta"
+              >
+                <span>EXPLORE FORMULATIONS</span>
+                <span className="vura-hero-cta-arrow">→</span>
+              </button>
+            </div>
           </div>
 
           {/* Right: Circular Rotating Play Button */}

@@ -66,7 +66,6 @@ export const ClientsPartnersSection: React.FC = () => {
           if (entry.isIntersecting) {
             setStatsVisible(true);
           } else {
-            // Reset when scrolled away so it plays each time user enters the section
             setStatsVisible(false);
           }
         });
@@ -97,7 +96,7 @@ export const ClientsPartnersSection: React.FC = () => {
     <section className="vura-clients-section" id="clients" aria-label="Clients and Partners">
       <div className="vura-clients-header-container">
         
-        {/* Section Heading & Simplified, Balanced Subtitle */}
+        {/* Section Heading & Subtitle */}
         <div className="vura-clients-title-center">
           <h2 className="vura-clients-main-heading">
             Trusted by Leading <span style={{ color: '#46C985' }}>Builders &amp; Developers</span>
@@ -109,7 +108,7 @@ export const ClientsPartnersSection: React.FC = () => {
 
       </div>
 
-      {/* Dual Opposite Marquee Container (No Black Background, Clean Logos) */}
+      {/* Dual Opposite Marquee Container */}
       <div
         className="vura-clients-dual-marquee"
         onMouseEnter={() => setIsPaused(true)}
@@ -137,7 +136,7 @@ export const ClientsPartnersSection: React.FC = () => {
           </div>
         </div>
 
-        {/* Row 2: Moves Right (Opposite Direction) */}
+        {/* Row 2: Moves Right */}
         <div className="vura-marquee-row">
           <div className={`vura-marquee-track vura-marquee-track-right ${isPaused ? 'paused' : ''}`}>
             {row2Items.map((client, idx) => (
@@ -159,50 +158,38 @@ export const ClientsPartnersSection: React.FC = () => {
       </div>
 
       {/* ============================================================
-          BIG OUTLINED METRIC COUNTERS (1:1 with user reference image)
-          Columns: 500+ Happy Clients | 200+ Complete Project | 21+ Years of Expertise | 4+ Winning Awards
+          MODERN GLASSMORPHIC METRIC COUNTERS
+          500+ Happy Clients | 200+ Complete Projects | 21+ Years | 4+ Awards
           ============================================================ */}
       <div className="vura-big-stats-section" ref={bottomBarRef}>
-        <div className="vura-big-stats-container">
+        <div className="vura-big-stats-grid">
           
-          <div className="vura-big-stat-col">
-            <div className="vura-big-stat-number-wrap">
-              <span className="vura-big-stat-num-outline">
-                <CounterNumber end={500} suffix="+" startTrigger={statsVisible} duration={2200} />
-              </span>
-            </div>
-            <div className="vura-big-stat-divider" />
-            <span className="vura-big-stat-label">Happy Clients</span>
+          <div className="vura-stat-glass-card">
+            <span className="vura-stat-glass-num">
+              <CounterNumber end={500} suffix="+" startTrigger={statsVisible} duration={2200} />
+            </span>
+            <span className="vura-stat-glass-label">Happy Clients</span>
           </div>
 
-          <div className="vura-big-stat-col">
-            <div className="vura-big-stat-number-wrap">
-              <span className="vura-big-stat-num-outline">
-                <CounterNumber end={200} suffix="+" startTrigger={statsVisible} duration={2000} />
-              </span>
-            </div>
-            <div className="vura-big-stat-divider" />
-            <span className="vura-big-stat-label">Complete Project</span>
+          <div className="vura-stat-glass-card">
+            <span className="vura-stat-glass-num">
+              <CounterNumber end={200} suffix="+" startTrigger={statsVisible} duration={2000} />
+            </span>
+            <span className="vura-stat-glass-label">Complete Projects</span>
           </div>
 
-          <div className="vura-big-stat-col">
-            <div className="vura-big-stat-number-wrap">
-              <span className="vura-big-stat-num-outline">
-                <CounterNumber end={21} suffix="+" startTrigger={statsVisible} duration={1800} />
-              </span>
-            </div>
-            <div className="vura-big-stat-divider" />
-            <span className="vura-big-stat-label">Years of Expertise</span>
+          <div className="vura-stat-glass-card">
+            <span className="vura-stat-glass-num">
+              <CounterNumber end={21} suffix="+" startTrigger={statsVisible} duration={1800} />
+            </span>
+            <span className="vura-stat-glass-label">Years of Expertise</span>
           </div>
 
-          <div className="vura-big-stat-col">
-            <div className="vura-big-stat-number-wrap">
-              <span className="vura-big-stat-num-outline">
-                <CounterNumber end={4} suffix="+" startTrigger={statsVisible} duration={1500} />
-              </span>
-            </div>
-            <div className="vura-big-stat-divider" />
-            <span className="vura-big-stat-label">Winning Awards</span>
+          <div className="vura-stat-glass-card">
+            <span className="vura-stat-glass-num">
+              <CounterNumber end={4} suffix="+" startTrigger={statsVisible} duration={1500} />
+            </span>
+            <span className="vura-stat-glass-label">Winning Awards</span>
           </div>
 
         </div>
@@ -210,3 +197,5 @@ export const ClientsPartnersSection: React.FC = () => {
     </section>
   );
 };
+
+export default ClientsPartnersSection;
