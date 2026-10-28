@@ -7069,3 +7069,228 @@ div.text-custom-storke-cs,
   display: none !important;
 }
 
+
+/* ============================================================
+   MOBILE HERO — EXACT VURA REFERENCE (BLACK & YELLOW THEME)
+   1. Shows ONLY ONE single image card at first look
+   2. Auto changes every 2 seconds one-by-one with smooth transition
+   3. Black background, white headline, bright yellow BOUNDARIES
+   4. Portrait rounded card with bottom slogan & 3 pill bars
+   ============================================================ */
+
+@media (max-width: 767px) {
+  /* -- Pure Black/Dark Hero Background -- */
+  .vura-hero-section {
+    background: #0B0D11 !important;
+    padding-top: 0 !important;
+  }
+
+  /* -- Mobile Header Integration: Dark Theme with Yellow Accent -- */
+  .vura-header {
+    background: #0B0D11 !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+  }
+
+  .vura-header .vura-logo-img {
+    filter: brightness(0) invert(1) !important;
+  }
+
+  .vura-header .vura-icon-btn {
+    color: #FFFFFF !important;
+    border-color: rgba(255, 255, 255, 0.14) !important;
+    background: rgba(255, 255, 255, 0.06) !important;
+  }
+
+  /* Yellow Hamburger Menu Lines (1:1 VURA Reference) */
+  .vura-header .vura-mobile-toggle {
+    color: #FFCC00 !important;
+    border-color: rgba(255, 204, 0, 0.3) !important;
+    background: rgba(255, 204, 0, 0.08) !important;
+  }
+
+  /* -- Hero Top Row & Typography -- */
+  .vura-hero-top-row {
+    padding-top: 18px !important;
+    margin-bottom: 10px !important;
+    display: block !important;
+  }
+
+  .vura-hero-play-wrap {
+    display: none !important;
+  }
+
+  .vura-headline-line1 {
+    color: #FFFFFF !important;
+    font-size: clamp(28px, 8.2vw, 36px) !important;
+    font-weight: 800 !important;
+    letter-spacing: -0.5px !important;
+    display: block !important;
+    margin-bottom: 4px !important;
+  }
+
+  .vura-headline-line2 {
+    display: flex !important;
+    align-items: center !important;
+    gap: 10px !important;
+    font-size: clamp(28px, 8.2vw, 36px) !important;
+    font-weight: 800 !important;
+    letter-spacing: -0.5px !important;
+    color: #FFFFFF !important;
+  }
+
+  .vura-headline-arrow-icon,
+  .vura-headline-arrow-img {
+    filter: brightness(0) invert(1) !important;
+    opacity: 0.35 !important;
+    width: 22px !important;
+    height: 22px !important;
+  }
+
+  .vura-word-the {
+    color: #FFFFFF !important;
+    font-weight: 800 !important;
+  }
+
+  /* Vibrant Yellow BOUNDARIES with subtle glow (1:1 VURA Reference) */
+  .vura-word-boundaries {
+    color: #FFCC00 !important;
+    -webkit-text-fill-color: #FFCC00 !important;
+    -webkit-text-stroke: 0px !important;
+    font-weight: 900 !important;
+    text-shadow: 0 0 24px rgba(255, 204, 0, 0.45) !important;
+  }
+
+  .vura-word-boundaries::before {
+    display: none !important;
+  }
+
+  /* -- SINGLE IMAGE HERO CARD: TALL PORTRAIT WITH ROUNDED CORNERS -- */
+  .vura-banner-v2-thumb {
+    display: block !important;
+    width: 100% !important;
+    margin: 14px 0 18px !important;
+    border-radius: 20px !important;
+    overflow: hidden !important;
+    position: relative !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    border: none !important;
+  }
+
+  /* Stage container: ONLY ONE image visible, tall aspect ratio */
+  .vura-banner-stage {
+    aspect-ratio: 3 / 4 !important;
+    min-height: 400px !important;
+    max-height: 480px !important;
+    border-radius: 20px !important;
+    overflow: hidden !important;
+    position: relative !important;
+    background: #10131A !important;
+    box-shadow: 0 16px 44px rgba(0, 0, 0, 0.6) !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  }
+
+  /* Hide the 3-image grid if lingering */
+  .mobile-hero-trio {
+    display: none !important;
+  }
+
+  /* Clean top: hide editorial badge on mobile for pristine presentation */
+  .vura-editorial-label {
+    display: none !important;
+  }
+
+  /* Hide external description card on mobile */
+  .vura-banner-thumb-content {
+    display: none !important;
+  }
+
+  /* Hide manual arrow buttons on mobile */
+  .vura-carousel-nav-btn {
+    display: none !important;
+  }
+
+  /* Image fills the portrait stage completely */
+  .vura-banner-slide-img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    object-position: center !important;
+    display: block !important;
+  }
+
+  /* -- Mobile Slogan Overlay at Bottom Inside Image Stage -- */
+  .vura-mobile-slide-overlay {
+    position: absolute !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    padding: 48px 18px 36px !important;
+    background: linear-gradient(180deg, transparent 0%, rgba(11, 13, 17, 0.55) 45%, rgba(11, 13, 17, 0.94) 100%) !important;
+    pointer-events: none !important;
+    z-index: 5 !important;
+  }
+
+  .vura-mobile-slogan {
+    color: #FFFFFF !important;
+    font-size: clamp(17px, 5vw, 22px) !important;
+    font-weight: 800 !important;
+    line-height: 1.25 !important;
+    text-transform: uppercase !important;
+    margin: 0 !important;
+    letter-spacing: -0.2px !important;
+    text-shadow: 0 2px 12px rgba(0, 0, 0, 0.85) !important;
+    text-align: left !important;
+  }
+
+  /* -- Pagination Indicator Bars (3 Pill Dots at Bottom Inside Card) -- */
+  .vura-banner-indicators {
+    position: absolute !important;
+    bottom: 14px !important;
+    left: 0 !important;
+    right: 0 !important;
+    display: flex !important;
+    justify-content: center !important;
+    gap: 8px !important;
+    z-index: 10 !important;
+    background: transparent !important;
+    border-radius: 0 !important;
+    padding: 0 !important;
+  }
+
+  .vura-banner-indicator {
+    width: 32px !important;
+    height: 3.5px !important;
+    border-radius: 3px !important;
+    background: rgba(255, 255, 255, 0.38) !important;
+    border: none !important;
+    padding: 0 !important;
+    cursor: pointer !important;
+    transition: all 0.25s ease !important;
+  }
+
+  .vura-banner-indicator.active {
+    background: #FFFFFF !important;
+    width: 44px !important;
+  }
+
+  /* -- Mobile Social Strip on Dark Theme -- */
+  .vura-hero-bottom-strip {
+    background: #0B0D11 !important;
+    border-top: 1px solid rgba(255, 255, 255, 0.08) !important;
+    padding: 14px 0 18px !important;
+    margin-top: 4px !important;
+  }
+
+  .mobile-social-icon-link {
+    color: rgba(255, 255, 255, 0.65) !important;
+    background: rgba(255, 255, 255, 0.06) !important;
+  }
+
+  .mobile-social-icon-link:hover,
+  .mobile-social-icon-link:focus-visible {
+    color: #071A45 !important;
+    background: #FFCC00 !important;
+  }
+}
+

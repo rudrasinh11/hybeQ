@@ -20,7 +20,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
       id: 0,
       image: '/images/hero_banner_01.png?v=8',
       category: 'TILE & STONE ADHESIVE',
-      badge: 'ENGINEERED FOR STRONGER STRUCTURES',
+      badge: 'FORMULATED WITH WORLD-CLASS GERMAN TECHNOLOGY',
       desc: 'We engineer advanced bonding solutions for each market, using a combination of high-grade polymers, natural minerals, and specialized additives along with our deep expertise in specialized building chemicals.',
       productName: 'HYBEQ Tile & Stone Adhesive (505, 507, 515+)',
       alt: 'HYBEQ Tile & Stone Adhesive - German Polymer Technology'
@@ -29,7 +29,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
       id: 1,
       image: '/images/hero_banner_02.png?v=8',
       category: 'WATERPROOFING SOLUTIONS',
-      badge: 'PROTECT WHAT MATTERS MOST',
+      badge: 'ADVANCED WATERPROOFING TO STOP WATER LEAKS',
       desc: 'We develop innovative waterproofing solutions for each market, using a combination of elastomeric and crystalline raw materials along with our deep knowledge & expertise in specialized building chemicals.',
       productName: 'HYBEQ Waterproofing Solutions (DAMPPROOF, MASTERFLEX PU)',
       alt: 'HYBEQ Advanced Waterproofing Solutions - Stop Water Leaks Permanently'
@@ -38,7 +38,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
       id: 2,
       image: '/images/hero_banner_03.png?v=8',
       category: 'PRECISION TILE FIXING & GROUTS',
-      badge: 'LET THE WORLD KNOW YOUR COLORFUL PERSONALITY',
+      badge: 'LET THE WORLD KNOW YOUR COLORFUL PERSONALITY!',
       desc: 'We formulate precision epoxy solutions for each market, using a combination of stain-resistant resins and high-purity quartz fillers along with our deep knowledge & expertise in specialized building chemicals.',
       productName: 'HYBEQ Tile Fixing & Grout (SPOT BOND EP510, STONESEAL)',
       alt: 'HYBEQ Precision Tile Fixing & Epoxy Grouts - Stain-Resistant & Vibrant'
@@ -56,7 +56,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
   // Auto-advance carousel every 6.5s unless paused
   useEffect(() => {
     if (isPaused) return;
-    const timer = setInterval(nextSlide, 6500);
+    const timer = setInterval(nextSlide, 2000);
     return () => clearInterval(timer);
   }, [isPaused, slides.length]);
 
@@ -132,49 +132,6 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
         </div>
 
         {/* ============================================================
-            MOBILE (<=767px): Static 3-image composition (replaces carousel)
-            One large dominant image + two supporting images in a balanced row
-            ============================================================ */}
-        <div className="mobile-hero-trio" aria-label="HYBEQ Featured Formulations">
-          <div className="mobile-hero-trio-main">
-            <img
-              src="/images/hero_banner_01.png?v=8"
-              alt="HYBEQ Tile & Stone Adhesive - German Polymer Technology"
-              className="mobile-trio-img"
-              loading="eager"
-            />
-            <div className="mobile-trio-caption">
-              <span className="mobile-trio-tag">TILE &amp; STONE FIXING</span>
-              <span className="mobile-trio-title">German Polymer Adhesives</span>
-            </div>
-          </div>
-          <div className="mobile-hero-trio-row">
-            <div className="mobile-hero-trio-secondary">
-              <img
-                src="/images/hero_banner_02.png?v=8"
-                alt="HYBEQ Advanced Waterproofing Solutions"
-                className="mobile-trio-img"
-                loading="lazy"
-              />
-              <div className="mobile-trio-caption compact">
-                <span className="mobile-trio-tag">WATERPROOFING</span>
-              </div>
-            </div>
-            <div className="mobile-hero-trio-secondary">
-              <img
-                src="/images/hero_banner_03.png?v=8"
-                alt="HYBEQ Precision Tile Fixing & Epoxy Grouts"
-                className="mobile-trio-img"
-                loading="lazy"
-              />
-              <div className="mobile-trio-caption compact">
-                <span className="mobile-trio-tag">EPOXY GROUTS</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* ============================================================
             HERO SHOWCASE BANNER CONTAINER:
             Editorial outer wrapper with rounded corners
             ============================================================ */}
@@ -217,6 +174,10 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                     loading={idx === 0 ? 'eager' : 'lazy'}
                     fetchPriority={idx === 0 ? 'high' : 'auto'}
                   />
+                  {/* Mobile slogan overlay matching reference image */}
+                  <div className="vura-mobile-slide-overlay">
+                    <p className="vura-mobile-slogan">{s.badge}</p>
+                  </div>
                 </div>
               ))}
             </div>
