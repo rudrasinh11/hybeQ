@@ -179,50 +179,35 @@ export const HomePage: React.FC<HomePageProps> = ({
       </section>
 
       {/* ============================================================
-          SECTION 4: EXPORT / GLOBAL REACH
-          (Inserted between High-Performance Catalog and What We Offer)
+          SECTION 4: EXPORT / GLOBAL REACH — Redesigned
+          White text block (eyebrow + heading + desc + CTA)
+          followed by full-bleed aerial port photograph
           ============================================================ */}
-      <section className="vura-export-section" id="global-reach" aria-label="Export and Global Reach">
-        <div className="vura-container">
-          <div className="vura-export-inner">
-            <div className="vura-export-text-col">
-              <h2 className="vura-export-heading">
-                Reaching Builders<br /><span className="vura-export-accent">Across the Globe</span>
-              </h2>
-              <p className="vura-export-desc">
-                HYBEQ construction chemicals are trusted in infrastructure projects across India and exported to markets in the Middle East, Southeast Asia, and Africa. Our ISO-certified manufacturing ensures every batch meets international quality standards.
-              </p>
-              <div className="vura-export-stats-row">
-                <div className="vura-export-stat">
-                  <span className="vura-export-stat-num">15+</span>
-                  <span className="vura-export-stat-label">Export Countries</span>
-                </div>
-                <div className="vura-export-stat">
-                  <span className="vura-export-stat-num">ISO</span>
-                  <span className="vura-export-stat-label">Certified Manufacturing</span>
-                </div>
-                <div className="vura-export-stat">
-                  <span className="vura-export-stat-num">4</span>
-                  <span className="vura-export-stat-label">Global Regions Served</span>
-                </div>
-              </div>
-            </div>
-            <div className="vura-export-map-col">
-              <div className="vura-export-globe-visual">
-                <div className="vura-globe-ring vura-globe-ring-1" />
-                <div className="vura-globe-ring vura-globe-ring-2" />
-                <div className="vura-globe-ring vura-globe-ring-3" />
-                <div className="vura-globe-center">
-                  <span className="vura-globe-label">GLOBAL<br />REACH</span>
-                </div>
-                {/* Hotspots */}
-                <div className="vura-globe-dot vura-globe-dot-india" title="India (HQ)" />
-                <div className="vura-globe-dot vura-globe-dot-me" title="Middle East" />
-                <div className="vura-globe-dot vura-globe-dot-sea" title="Southeast Asia" />
-                <div className="vura-globe-dot vura-globe-dot-africa" title="Africa" />
-              </div>
-            </div>
-          </div>
+      <section className="reach-section" id="global-reach" aria-label="Export and Global Reach">
+        {/* Top text content */}
+        <div className="reach-text-block">
+          <span className="reach-eyebrow">OUR  REACH</span>
+          <h2 className="reach-heading">
+            Local Expertise. <span className="reach-accent">Global Ambition.</span>
+          </h2>
+          <p className="reach-desc">
+            Construction challenges may differ across regions, but the need for reliable materials
+            remains universal. HYBEQ aims to expand its reach through quality-focused solutions,
+            industry relationships, and a commitment to serving the evolving needs of
+            construction markets.
+          </p>
+          <a href="/contact" className="reach-cta-btn">Connect With HYBEQ</a>
+        </div>
+        {/* Full-bleed port image */}
+        <div className="reach-image-block">
+          <img
+            src="/images/export-port-hero.jpg"
+            alt="Aerial view of international shipping port — HYBEQ global export reach"
+            className="reach-port-img"
+            loading="lazy"
+            width="1440"
+            height="680"
+          />
         </div>
       </section>
 
