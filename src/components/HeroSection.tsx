@@ -53,10 +53,16 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
     setActiveSlide((prev) => (prev - 1 + slides.length) % slides.length);
   };
 
-  // Auto-advance carousel every 6.5s unless paused
+  // Auto-advance carousel every 2 seconds (2000ms), respecting prefers-reduced-motion
   useEffect(() => {
     if (isPaused) return;
-    const timer = setInterval(nextSlide, 2000);
+    const prefersReducedMotion = typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReducedMotion) return;
+
+    const timer = setInterval(() => {
+      setActiveSlide((prev) => (prev + 1) % slides.length);
+    }, 2000);
+
     return () => clearInterval(timer);
   }, [isPaused, slides.length]);
 
@@ -69,23 +75,28 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
     }
   };
 
-  // Touch swipe support
+  // Touch swipe & touch interaction support with graceful autoplay resume
   const handleTouchStart = (e: React.TouchEvent) => {
     touchStartX.current = e.touches[0].clientX;
+    setIsPaused(true);
   };
 
   const handleTouchEnd = (e: React.TouchEvent) => {
-    if (touchStartX.current === null) return;
-    const touchEndX = e.changedTouches[0].clientX;
-    const diff = touchStartX.current - touchEndX;
-    if (Math.abs(diff) > 40) {
-      if (diff > 0) {
-        nextSlide();
-      } else {
-        prevSlide();
+    if (touchStartX.current !== null) {
+      const touchEndX = e.changedTouches[0].clientX;
+      const diff = touchStartX.current - touchEndX;
+      if (Math.abs(diff) > 35) {
+        if (diff > 0) {
+          nextSlide();
+        } else {
+          prevSlide();
+        }
       }
     }
     touchStartX.current = null;
+    // Resume autoplay smoothly after 3 seconds of inactivity
+    const resumeTimer = setTimeout(() => setIsPaused(false), 3000);
+    return () => clearTimeout(resumeTimer);
   };
 
   return (
