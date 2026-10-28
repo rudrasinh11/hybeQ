@@ -35,7 +35,7 @@ export const App: React.FC = () => {
 
   return (
     <BrowserRouter>
-      <div className="hybeq-site-layout" style={{ minHeight: '100vh', backgroundColor: '#FFFFFF', position: 'relative' }}>
+      <div className="hybeq-site-layout" style={{ minHeight: '100vh', backgroundColor: '#071A45', position: 'relative' }}>
         {/* Scroll restoration helper */}
         <ScrollToTop />
 
@@ -49,7 +49,7 @@ export const App: React.FC = () => {
         />
 
         {/* 2. Main Page Content */}
-        <main id="main-content">
+        <main id="main-content" style={{ backgroundColor: '#FFFFFF' }}>
           <Routes>
             <Route
               path="/"

@@ -137,11 +137,8 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
               </span>
             </h1>
 
-            {/* Mobile Visual Hierarchy: Concise value proposition tag + CTA */}
+            {/* Mobile Visual Hierarchy: CTA */}
             <div className="vura-hero-mobile-flow">
-              <span className="vura-hero-value-tag">
-                German Polymer Technology • C2TES1 Compliant
-              </span>
               <button
                 type="button"
                 onClick={() => onOpenEnquiry?.(slides[activeSlide].productName)}
