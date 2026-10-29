@@ -2,6 +2,7 @@ import React, { useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import {
   ArrowUpRight,
+  ArrowRight,
   ChevronLeft,
   ChevronRight
 } from 'lucide-react';
@@ -215,7 +216,7 @@ export const HomePage: React.FC<HomePageProps> = ({
             src="/images/export-port-hero.jpg"
             alt="Aerial view of international shipping port — HYBEQ global export reach"
             className="reach-port-img"
-            loading="lazy"
+            loading="eager"
             width="1440"
             height="680"
           />
@@ -236,41 +237,158 @@ export const HomePage: React.FC<HomePageProps> = ({
 
       {/* ============================================================
           SECTION 8: INSIDE STORY / BLOG ARTICLES
+          Editorial Two-Part Layout Inspired by Reference Composition
           ============================================================ */}
-      <section className="vura-articles-section">
+      <section className="vura-articles-section" id="editorial-guides">
         <div className="vura-container">
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', flexWrap: 'wrap', gap: 20 }}>
+          {/* Editorial Header Row: Heading + Subtitle + Right Aligned CTA Button */}
+          <div className="vura-articles-header">
             <div>
               <h2 className="vura-section-heading" style={{ margin: 0 }}>
                 Inside Story &amp; Engineering Guides
               </h2>
+              <p className="vura-articles-subheading">
+                Technical formulations, structural rehabilitation studies, and application methodologies direct from HYBEQ engineers.
+              </p>
             </div>
-            <Link to="/blog" className="vura-enquiry-btn" style={{ padding: '10px 20px' }}>
+            <Link to="/blog" className="vura-articles-all-btn">
               <span>ALL ARTICLES</span>
-              <ArrowUpRight size={15} className="vura-enquiry-arrow" />
+              <ArrowRight size={16} className="vura-articles-btn-arrow" />
             </Link>
           </div>
 
-          <div className="vura-articles-grid">
-            {BLOG_POSTS.map((post, idx) => (
-              <article key={post.id} className="vura-article-card">
-                <div>
-                  <div style={{ height: 160, borderRadius: 10, overflow: 'hidden', marginBottom: 18, border: '1px solid rgba(255,255,255,0.08)' }}>
+          {/* Editorial Composition: Left Featured + Right 2 Supporting Split Cards */}
+          <div className="vura-editorial-layout">
+            {/* Left: Large Featured Article Card */}
+            {BLOG_POSTS[0] && (
+              <article className="vura-editorial-featured-card">
+                <div className="vura-editorial-featured-media">
+                  <img
+                    src="/images/hero-waterproofing.jpg"
+                    alt={BLOG_POSTS[0].title}
+                    className="vura-editorial-featured-img"
+                    loading="eager"
+                  />
+                  <div className="vura-editorial-featured-overlay" />
+                </div>
+                <div className="vura-editorial-featured-content">
+                  <div className="vura-editorial-meta">
+                    <span>By HYBEQ</span>
+                    <span className="vura-editorial-meta-dot">•</span>
+                    <span>{BLOG_POSTS[0].date}</span>
+                    <span className="vura-editorial-meta-dot">•</span>
+                    <span>{BLOG_POSTS[0].readTime}</span>
+                  </div>
+                  <h3 className="vura-editorial-featured-title">
+                    <Link to={`/blog/${BLOG_POSTS[0].slug}`}>
+                      {BLOG_POSTS[0].title}
+                    </Link>
+                  </h3>
+                  <p className="vura-editorial-featured-snippet">
+                    {BLOG_POSTS[0].summary}
+                  </p>
+                  <div className="vura-editorial-bottom-row">
+                    <span className="vura-editorial-cat-badge">
+                      {BLOG_POSTS[0].category}
+                    </span>
+                    <Link
+                      to={`/blog/${BLOG_POSTS[0].slug}`}
+                      className="vura-editorial-read-link"
+                    >
+                      <span>Read Technical Guide</span>
+                      <ArrowRight size={15} />
+                    </Link>
+                  </div>
+                </div>
+              </article>
+            )}
+
+            {/* Right: Supporting Articles (Stacked 2 Cards in Balanced Split Layout) */}
+            <div className="vura-editorial-supporting-col">
+              {/* Supporting Card 1: Tile Adhesives */}
+              {BLOG_POSTS[2] && (
+                <article className="vura-editorial-split-card">
+                  <div className="vura-editorial-split-content">
+                    <div className="vura-editorial-meta">
+                      <span>By HYBEQ</span>
+                      <span className="vura-editorial-meta-dot">•</span>
+                      <span>{BLOG_POSTS[2].date}</span>
+                    </div>
+                    <h4 className="vura-editorial-split-title">
+                      <Link to={`/blog/${BLOG_POSTS[2].slug}`}>
+                        {BLOG_POSTS[2].title}
+                      </Link>
+                    </h4>
+                    <p className="vura-editorial-split-snippet">
+                      {BLOG_POSTS[2].summary}
+                    </p>
+                    <div className="vura-editorial-split-footer">
+                      <span className="vura-editorial-cat-badge">
+                        {BLOG_POSTS[2].category}
+                      </span>
+                      <Link
+                        to={`/blog/${BLOG_POSTS[2].slug}`}
+                        className="vura-editorial-circle-btn"
+                        aria-label={`Read ${BLOG_POSTS[2].title}`}
+                        title="Read Technical Guide"
+                      >
+                        <ArrowUpRight size={16} />
+                      </Link>
+                    </div>
+                  </div>
+                  <div className="vura-editorial-split-media">
                     <img
-                      src={idx % 2 === 0 ? '/images/hybeq_live/blog_b3370.jpeg' : '/images/hybeq_live/blog_b2692.jpeg'}
-                      alt={post.title}
-                      style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                      src="/images/hybeq_live/blog_b2692.jpeg"
+                      alt={BLOG_POSTS[2].title}
+                      className="vura-editorial-split-img"
+                      loading="eager"
                     />
                   </div>
-                  <span className="vura-article-tag">{post.category} • {post.readTime}</span>
-                  <h3 className="vura-article-title">{post.title}</h3>
-                  <p className="vura-article-snippet">{post.summary}</p>
-                </div>
-                <Link to={`/blog/${post.slug}`} className="vura-article-link">
-                  Read Technical Guide <ArrowUpRight size={16} />
-                </Link>
-              </article>
-            ))}
+                </article>
+              )}
+
+              {/* Supporting Card 2: Concrete Waterproofing & Rebar Rehabilitation */}
+              {BLOG_POSTS[1] && (
+                <article className="vura-editorial-split-card">
+                  <div className="vura-editorial-split-content">
+                    <div className="vura-editorial-meta">
+                      <span>By HYBEQ</span>
+                      <span className="vura-editorial-meta-dot">•</span>
+                      <span>{BLOG_POSTS[1].date}</span>
+                    </div>
+                    <h4 className="vura-editorial-split-title">
+                      <Link to={`/blog/${BLOG_POSTS[1].slug}`}>
+                        {BLOG_POSTS[1].title}
+                      </Link>
+                    </h4>
+                    <p className="vura-editorial-split-snippet">
+                      {BLOG_POSTS[1].summary}
+                    </p>
+                    <div className="vura-editorial-split-footer">
+                      <span className="vura-editorial-cat-badge">
+                        {BLOG_POSTS[1].category}
+                      </span>
+                      <Link
+                        to={`/blog/${BLOG_POSTS[1].slug}`}
+                        className="vura-editorial-circle-btn"
+                        aria-label={`Read ${BLOG_POSTS[1].title}`}
+                        title="Read Technical Guide"
+                      >
+                        <ArrowUpRight size={16} />
+                      </Link>
+                    </div>
+                  </div>
+                  <div className="vura-editorial-split-media">
+                    <img
+                      src="/images/hybeq_live/blog_b3370.jpeg"
+                      alt={BLOG_POSTS[1].title}
+                      className="vura-editorial-split-img"
+                      loading="eager"
+                    />
+                  </div>
+                </article>
+              )}
+            </div>
           </div>
         </div>
       </section>

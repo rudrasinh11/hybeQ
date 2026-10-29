@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { X, Search, ArrowRight, Layers, FileText, ChevronRight } from 'lucide-react';
+import { X, Search, Layers, FileText, ChevronRight, ArrowUpRight } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { PRODUCTS } from '../data/productsData';
 import type { Product } from '../data/productsData';
@@ -20,13 +20,24 @@ export const SearchModal: React.FC<SearchModalProps> = ({ isOpen, onClose }) => 
 
   useEffect(() => {
     if (isOpen) {
-      setTimeout(() => inputRef.current?.focus(), 100);
+      document.body.style.overflow = 'hidden';
+      const timer = setTimeout(() => inputRef.current?.focus(), 100);
+      const handleKeyDown = (e: KeyboardEvent) => {
+        if (e.key === 'Escape') onClose();
+      };
+      window.addEventListener('keydown', handleKeyDown);
+      return () => {
+        clearTimeout(timer);
+        document.body.style.overflow = '';
+        window.removeEventListener('keydown', handleKeyDown);
+      };
     } else {
+      document.body.style.overflow = '';
       setQuery('');
       setMatchingProducts([]);
       setMatchingPosts([]);
     }
-  }, [isOpen]);
+  }, [isOpen, onClose]);
 
   useEffect(() => {
     const q = query.trim().toLowerCase();
@@ -67,76 +78,85 @@ export const SearchModal: React.FC<SearchModalProps> = ({ isOpen, onClose }) => 
   };
 
   return (
-    <div className={`modal-overlay ${isOpen ? 'active' : ''}`} onClick={onClose}>
-      <div className="modal-card" style={{ maxWidth: 720 }} onClick={e => e.stopPropagation()}>
-        <button type="button" className="modal-close-btn" onClick={onClose} aria-label="Close Search">
-          <X size={20} />
-        </button>
-
-        <div style={{ marginBottom: 24 }}>
-          <span className="section-tag" style={{ marginBottom: 8 }}>Catalog Search</span>
-          <h3 style={{ fontSize: '1.5rem', color: '#0A2362', fontWeight: 800 }}>Search Hybeq Technical Solutions</h3>
+    <div
+      className="modal-overlay active"
+      onClick={onClose}
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="hybeq-search-modal-title"
+    >
+      <div
+        className="hybeq-search-modal-card"
+        onClick={e => e.stopPropagation()}
+      >
+        {/* Header Row: Title + Close Button */}
+        <div className="hybeq-search-header">
+          <div>
+            <h3 id="hybeq-search-modal-title" className="hybeq-search-title">
+              Search Technical Solutions
+            </h3>
+            <p className="hybeq-search-subtitle">
+              Search products, standards or applications
+            </p>
+          </div>
+          <button
+            type="button"
+            className="hybeq-search-close-btn"
+            onClick={onClose}
+            aria-label="Close search dialog"
+          >
+            <X size={19} />
+          </button>
         </div>
 
-        {/* Input Box */}
-        <div style={{
-          position: 'relative',
-          display: 'flex',
-          alignItems: 'center',
-          background: '#F5F7FB',
-          border: '2px solid #DFE6EF',
-          borderRadius: 12,
-          padding: '4px 16px',
-          marginBottom: 24,
-          transition: 'border-color 0.2s'
-        }}>
-          <Search size={22} style={{ color: '#0A2362', marginRight: 12 }} />
+        {/* Search Input Box */}
+        <div className="hybeq-search-input-wrap">
+          <Search size={20} className="hybeq-search-input-icon" />
           <input
             ref={inputRef}
             type="text"
-            placeholder="Search by product name, standard (e.g. Type 2, S2), or application..."
+            placeholder="Search products, standards or applications..."
             value={query}
             onChange={e => setQuery(e.target.value)}
-            style={{
-              width: '100%',
-              border: 'none',
-              background: 'transparent',
-              outline: 'none',
-              fontSize: '1rem',
-              fontWeight: 600,
-              color: '#0A2362',
-              padding: '12px 0'
-            }}
+            className="hybeq-search-input"
+            aria-label="Search technical catalog"
           />
           {query && (
-            <button type="button" onClick={() => setQuery('')} style={{ color: '#64748B' }}>
-              <X size={18} />
+            <button
+              type="button"
+              onClick={() => {
+                setQuery('');
+                inputRef.current?.focus();
+              }}
+              className="hybeq-search-clear-btn"
+              aria-label="Clear search input"
+            >
+              <X size={16} />
             </button>
           )}
         </div>
 
         {/* Suggested Quick Tags */}
         {!query && (
-          <div>
-            <span style={{ fontSize: '0.8125rem', fontWeight: 700, color: '#64748B', display: 'block', marginBottom: 12, textTransform: 'uppercase', letterSpacing: 1 }}>
+          <div className="hybeq-search-suggestions">
+            <span className="hybeq-search-suggestions-label">
               Popular Formulations &amp; Searches
             </span>
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
-              {['Hycera 505', 'Hyintra 507', 'Hy Dampproof Ultra', 'Epoxy Grout', 'IS 15477 Type 3', 'Waterproofing Terrace', 'SBR Latex'].map(tag => (
+            <div className="hybeq-search-chips-wrap">
+              {[
+                'Hycera 505',
+                'Hyintra 507',
+                'Hy Dampproof Ultra',
+                'Epoxy Grout',
+                'IS 15477 Type 3',
+                'Waterproofing Terrace',
+                'SBR Latex'
+              ].map(tag => (
                 <button
                   key={tag}
                   type="button"
                   onClick={() => setQuery(tag)}
-                  style={{
-                    background: '#F5F7FB',
-                    border: '1px solid #DFE6EF',
-                    padding: '6px 14px',
-                    borderRadius: 20,
-                    fontSize: '0.8125rem',
-                    fontWeight: 600,
-                    color: '#0A2362',
-                    cursor: 'pointer'
-                  }}
+                  className="hybeq-search-chip"
                 >
                   {tag}
                 </button>
@@ -145,48 +165,50 @@ export const SearchModal: React.FC<SearchModalProps> = ({ isOpen, onClose }) => 
           </div>
         )}
 
-        {/* Results */}
+        {/* Results Area */}
         {query && (
-          <div style={{ maxHeight: 380, overflowY: 'auto' }}>
+          <div className="hybeq-search-results-area">
             {matchingProducts.length === 0 && matchingPosts.length === 0 ? (
-              <div style={{ textAlign: 'center', padding: '36px 0', color: '#64748B' }}>
-                <p style={{ fontWeight: 600, fontSize: '1rem' }}>No direct matches found for "{query}".</p>
-                <p style={{ fontSize: '0.875rem', marginTop: 6 }}>Try searching for generic terms like "tile", "waterproof", "terrace", or "latex".</p>
+              <div className="hybeq-search-empty">
+                <p className="hybeq-search-empty-title">No direct matches found for "{query}".</p>
+                <p className="hybeq-search-empty-desc">
+                  Try searching for terms like "tile", "waterproof", "terrace", or "latex".
+                </p>
               </div>
             ) : (
               <div>
                 {/* Product Matches */}
                 {matchingProducts.length > 0 && (
-                  <div style={{ marginBottom: 20 }}>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: '0.8125rem', fontWeight: 800, color: '#46C985', textTransform: 'uppercase', letterSpacing: 1.5, marginBottom: 10 }}>
-                      <Layers size={16} /> Products ({matchingProducts.length})
+                  <div className="hybeq-search-results-section">
+                    <div className="hybeq-search-section-badge">
+                      <Layers size={15} />
+                      <span>Products ({matchingProducts.length})</span>
                     </div>
-                    <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+                    <div className="hybeq-search-results-list">
                       {matchingProducts.map(p => (
                         <div
                           key={p.id}
                           onClick={() => handleSelectProduct(p)}
-                          style={{
-                            display: 'flex',
-                            alignItems: 'center',
-                            justifyContent: 'space-between',
-                            padding: '12px 16px',
-                            background: '#F5F7FB',
-                            borderRadius: 8,
-                            cursor: 'pointer',
-                            transition: 'background 0.2s'
+                          className="hybeq-search-item"
+                          tabIndex={0}
+                          role="button"
+                          onKeyDown={e => {
+                            if (e.key === 'Enter' || e.key === ' ') {
+                              e.preventDefault();
+                              handleSelectProduct(p);
+                            }
                           }}
                         >
                           <div>
-                            <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-                              <strong style={{ color: '#0A2362', fontSize: '0.9375rem' }}>{p.name}</strong>
-                              <span style={{ fontSize: '0.75rem', background: '#EAF8F0', color: '#46C985', fontWeight: 700, padding: '2px 8px', borderRadius: 4 }}>
-                                {p.badge}
-                              </span>
+                            <div className="hybeq-search-item-top">
+                              <strong className="hybeq-search-item-name">{p.name}</strong>
+                              {p.badge && (
+                                <span className="hybeq-search-item-badge">{p.badge}</span>
+                              )}
                             </div>
-                            <p style={{ fontSize: '0.8125rem', color: '#64748B', margin: '4px 0 0' }}>{p.categoryLabel}</p>
+                            <p className="hybeq-search-item-desc">{p.categoryLabel}</p>
                           </div>
-                          <ChevronRight size={18} style={{ color: '#0A2362' }} />
+                          <ChevronRight size={18} className="hybeq-search-item-arrow" />
                         </div>
                       ))}
                     </div>
@@ -195,31 +217,33 @@ export const SearchModal: React.FC<SearchModalProps> = ({ isOpen, onClose }) => 
 
                 {/* Article Matches */}
                 {matchingPosts.length > 0 && (
-                  <div>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: '0.8125rem', fontWeight: 800, color: '#0A2362', textTransform: 'uppercase', letterSpacing: 1.5, marginBottom: 10 }}>
-                      <FileText size={16} /> Technical Guides &amp; Articles ({matchingPosts.length})
+                  <div className="hybeq-search-results-section">
+                    <div className="hybeq-search-section-badge">
+                      <FileText size={15} />
+                      <span>Technical Guides &amp; Articles ({matchingPosts.length})</span>
                     </div>
-                    <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+                    <div className="hybeq-search-results-list">
                       {matchingPosts.map(b => (
                         <div
                           key={b.id}
                           onClick={() => handleSelectPost(b)}
-                          style={{
-                            display: 'flex',
-                            alignItems: 'center',
-                            justifyContent: 'space-between',
-                            padding: '12px 16px',
-                            background: '#FFFFFF',
-                            border: '1px solid #DFE6EF',
-                            borderRadius: 8,
-                            cursor: 'pointer'
+                          className="hybeq-search-item"
+                          tabIndex={0}
+                          role="button"
+                          onKeyDown={e => {
+                            if (e.key === 'Enter' || e.key === ' ') {
+                              e.preventDefault();
+                              handleSelectPost(b);
+                            }
                           }}
                         >
                           <div>
-                            <strong style={{ color: '#0A2362', fontSize: '0.875rem' }}>{b.title}</strong>
-                            <p style={{ fontSize: '0.75rem', color: '#64748B', margin: '2px 0 0' }}>{b.category} &bull; {b.readTime}</p>
+                            <strong className="hybeq-search-item-name">{b.title}</strong>
+                            <p className="hybeq-search-item-desc">
+                              {b.category} &bull; {b.readTime}
+                            </p>
                           </div>
-                          <ArrowRight size={16} style={{ color: '#46C985' }} />
+                          <ArrowUpRight size={16} className="hybeq-search-item-arrow" />
                         </div>
                       ))}
                     </div>
