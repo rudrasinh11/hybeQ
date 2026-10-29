@@ -262,9 +262,15 @@ export const HomePage: React.FC<HomePageProps> = ({
             industry relationships, and a commitment to serving the evolving needs of
             construction markets.
           </p>
-          <Link to="/contact" className="reach-cta-btn">
-            <span>Connect With HYBEQ</span>
-            <span className="reach-btn-arrow">→</span>
+          <Link
+            to="/contact"
+            className="reach-cta-btn"
+            aria-label="Connect With HYBEQ for export and global partnerships"
+          >
+            <span className="reach-btn-label">CONNECT WITH HYBEQ</span>
+            <span className="reach-btn-arrow-badge" aria-hidden="true">
+              <ArrowRight size={14} strokeWidth={2.6} />
+            </span>
           </Link>
         </div>
         {/* Full-bleed port image */}
