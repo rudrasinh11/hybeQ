@@ -37,11 +37,40 @@ export const HomePage: React.FC<HomePageProps> = ({
       : PRODUCTS.filter(p => p.category === selectedProductCategory)
   ).slice(0, 6);
 
+  const pillsScrollRef = useRef<HTMLDivElement>(null);
+
   const scrollCarousel = (direction: 'left' | 'right') => {
     if (carouselRef.current) {
       const scrollAmount = 330;
       carouselRef.current.scrollBy({
         left: direction === 'left' ? -scrollAmount : scrollAmount,
+        behavior: 'smooth'
+      });
+    }
+  };
+
+  const scrollPills = (direction: 'left' | 'right') => {
+    if (pillsScrollRef.current) {
+      pillsScrollRef.current.scrollBy({
+        left: direction === 'left' ? -260 : 260,
+        behavior: 'smooth'
+      });
+    }
+  };
+
+  const handleSelectCategory = (catId: string, e: React.MouseEvent<HTMLButtonElement>) => {
+    setSelectedProductCategory(catId);
+    if (carouselRef.current) {
+      carouselRef.current.scrollTo({ left: 0, behavior: 'smooth' });
+    }
+    if (pillsScrollRef.current) {
+      const btn = e.currentTarget;
+      const container = pillsScrollRef.current;
+      const btnLeft = btn.offsetLeft;
+      const btnWidth = btn.offsetWidth;
+      const containerWidth = container.offsetWidth;
+      container.scrollTo({
+        left: btnLeft - (containerWidth / 2) + (btnWidth / 2),
         behavior: 'smooth'
       });
     }
@@ -68,79 +97,107 @@ export const HomePage: React.FC<HomePageProps> = ({
           ============================================================ */}
       <section className="vura-products-section" id="featured-products">
         <div className="vura-container">
-        <div className="vura-products-header">
+        {/* Header Row: Title on Left, Carousel Navigation (< >) on Right */}
+          <div className="vura-products-header">
             <div>
               <h2 className="vura-section-heading" style={{ margin: 0 }}>
                 High-Performance Catalog
               </h2>
+              <p className="vura-products-subheading">
+                Engineered formulations for infrastructure, tile fixing &amp; waterproofing
+              </p>
             </div>
 
-            {/* Category Filter Pills & Carousel Controls */}
-            <div className="vura-products-header-actions">
-              <div className="vura-cat-pills-scroll-wrap">
-                <div className="vura-cat-pills">
-                  {[
-                    { id: 'all', label: 'All Products' },
-                    { id: 'tile-fixing', label: 'Tile & Stone' },
-                    { id: 'waterproofing', label: 'Waterproofing' },
-                    { id: 'grouts', label: 'Grouts' },
-                    { id: 'structural-repair', label: 'Structural Repair' },
-                    { id: 'surface-treatment', label: 'Surface Treatment' },
-                    { id: 'precast-additives', label: 'Precast Additives' },
-                    { id: 'plasticizers', label: 'Plasticizers' },
-                    { id: 'bonding-agent', label: 'Bonding Agent' },
-                    { id: 'sealants', label: 'Sealants' },
-                    { id: 'decorative-floor-wall', label: 'Decorative Floors' },
-                    { id: 'drymix-mortar', label: 'Drymix Mortar' },
-                    { id: 'curing-compounds', label: 'Curing Compounds' },
-                    { id: 'epoxy-flooring', label: 'Epoxy Flooring' },
-                    { id: 'epoxy-screed', label: 'Epoxy Screed' }
-                  ].map(cat => (
-                    <button
-                      key={cat.id}
-                      type="button"
-                      onClick={(e) => {
-                        setSelectedProductCategory(cat.id);
-                        (e.currentTarget as HTMLElement).scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
-                        if (carouselRef.current) carouselRef.current.scrollTo({ left: 0, behavior: 'smooth' });
-                      }}
-                      className={`vura-cat-pill ${selectedProductCategory === cat.id ? 'active' : ''}`}
-                    >
-                      {cat.label}
-                    </button>
-                  ))}
-                  <Link
-                    to="/products"
-                    className="vura-cat-pill vura-cat-pill-view-all"
-                    title="View all 14 categories in full catalog"
+            {/* Carousel Previous / Next Controls */}
+            <div className="vura-carousel-controls-deck">
+              <button
+                type="button"
+                className="vura-carousel-control-btn"
+                onClick={() => scrollCarousel('left')}
+                aria-label="Previous products"
+                title="Previous products"
+              >
+                <ChevronLeft size={18} />
+              </button>
+              <button
+                type="button"
+                className="vura-carousel-control-btn"
+                onClick={() => scrollCarousel('right')}
+                aria-label="Next products"
+                title="Next products"
+              >
+                <ChevronRight size={18} />
+              </button>
+            </div>
+          </div>
+
+          {/* Dedicated Full-Width Category Filter Bar with Left & Right Nav */}
+          <div className="vura-cat-filter-bar">
+            <button
+              type="button"
+              className="vura-cat-scroll-arrow left"
+              onClick={() => scrollPills('left')}
+              aria-label="Scroll categories left"
+              title="Previous categories"
+            >
+              <ChevronLeft size={16} />
+            </button>
+
+            <div
+              className="vura-cat-pills-scroll-wrap"
+              ref={pillsScrollRef}
+              onWheel={(e) => {
+                if (pillsScrollRef.current && Math.abs(e.deltaX) < Math.abs(e.deltaY)) {
+                  pillsScrollRef.current.scrollLeft += e.deltaY;
+                }
+              }}
+            >
+              <div className="vura-cat-pills">
+                {[
+                  { id: 'all', label: 'All Products' },
+                  { id: 'tile-fixing', label: 'Tile & Stone' },
+                  { id: 'waterproofing', label: 'Waterproofing' },
+                  { id: 'grouts', label: 'Grouts' },
+                  { id: 'structural-repair', label: 'Structural Repair' },
+                  { id: 'surface-treatment', label: 'Surface Treatment' },
+                  { id: 'precast-additives', label: 'Precast Additives' },
+                  { id: 'plasticizers', label: 'Plasticizers' },
+                  { id: 'bonding-agent', label: 'Bonding Agent' },
+                  { id: 'sealants', label: 'Sealants' },
+                  { id: 'decorative-floor-wall', label: 'Decorative Floors' },
+                  { id: 'drymix-mortar', label: 'Drymix Mortar' },
+                  { id: 'curing-compounds', label: 'Curing Compounds' },
+                  { id: 'epoxy-flooring', label: 'Epoxy Flooring' },
+                  { id: 'epoxy-screed', label: 'Epoxy Screed' }
+                ].map(cat => (
+                  <button
+                    key={cat.id}
+                    type="button"
+                    onClick={(e) => handleSelectCategory(cat.id, e)}
+                    className={`vura-cat-pill ${selectedProductCategory === cat.id ? 'active' : ''}`}
                   >
-                    <span>View All Categories →</span>
-                  </Link>
-                </div>
-              </div>
-
-              {/* Subtle Previous / Next Carousel Buttons */}
-              <div className="vura-carousel-controls-deck">
-                <button
-                  type="button"
-                  className="vura-carousel-control-btn"
-                  onClick={() => scrollCarousel('left')}
-                  aria-label="Previous products"
-                  title="Previous products"
+                    {cat.label}
+                  </button>
+                ))}
+                <Link
+                  to="/products"
+                  className="vura-cat-pill vura-cat-pill-view-all"
+                  title="View all 14 categories in full catalog"
                 >
-                  <ChevronLeft size={18} />
-                </button>
-                <button
-                  type="button"
-                  className="vura-carousel-control-btn"
-                  onClick={() => scrollCarousel('right')}
-                  aria-label="Next products"
-                  title="Next products"
-                >
-                  <ChevronRight size={18} />
-                </button>
+                  <span>View All Categories →</span>
+                </Link>
               </div>
             </div>
+
+            <button
+              type="button"
+              className="vura-cat-scroll-arrow right"
+              onClick={() => scrollPills('right')}
+              aria-label="Scroll categories right"
+              title="Next categories"
+            >
+              <ChevronRight size={16} />
+            </button>
           </div>
 
           {/* Curated Product Carousel: Limited to 5-6 products per section */}
