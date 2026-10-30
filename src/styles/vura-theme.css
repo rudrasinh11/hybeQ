@@ -7043,20 +7043,20 @@ div.text-custom-storke-cs,
   display: inline-flex !important;
   align-items: center !important;
   justify-content: center !important;
-  gap: 12px !important;
-  background: linear-gradient(135deg, #0A2362 0%, #071A45 100%) !important;
+  gap: 14px !important;
+  background: #0A2362 !important;
   color: #FFFFFF !important;
   min-width: 245px !important;
-  max-width: 270px !important;
-  height: 50px !important;
-  padding: 0 20px 0 26px !important;
+  max-width: 280px !important;
+  height: 52px !important;
+  padding: 0 10px 0 24px !important;
   border-radius: 9999px !important;
-  border: 1.5px solid rgba(70, 201, 133, 0.45) !important;
-  box-shadow: 0 4px 16px rgba(10, 35, 98, 0.16), 0 1px 0 rgba(255, 255, 255, 0.1) inset !important;
+  border: 1.5px solid rgba(255, 255, 255, 0.2) !important;
+  box-shadow: 0 10px 28px rgba(10, 35, 98, 0.28) !important;
   text-decoration: none !important;
   position: relative !important;
-  z-index: 5 !important;
-  margin: 0 auto 38px !important;
+  z-index: 10 !important;
+  margin: 0 auto -26px !important;
   transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
   cursor: pointer !important;
   outline: none !important;
@@ -7078,14 +7078,15 @@ div.text-custom-storke-cs,
   display: inline-flex !important;
   align-items: center !important;
   justify-content: center !important;
-  width: 28px !important;
-  height: 28px !important;
+  width: 32px !important;
+  height: 32px !important;
   border-radius: 50% !important;
-  background: rgba(70, 201, 133, 0.16) !important;
-  color: #46C985 !important;
-  border: 1px solid rgba(70, 201, 133, 0.3) !important;
+  background: #46C985 !important;
+  color: #0A2362 !important;
+  border: none !important;
   flex-shrink: 0 !important;
-  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.2s ease !important;
+  box-shadow: 0 2px 8px rgba(70, 201, 133, 0.4) !important;
 }
 
 /* Hover State: Subtle lift, glowing green accent border, filled arrow badge */
@@ -7154,11 +7155,13 @@ div.text-custom-storke-cs,
 
   .reach-cta-btn {
     min-width: 200px !important;
-    max-width: 225px !important;
-    height: 44px !important;
-    padding: 0 12px 0 18px !important;
-    gap: 8px !important;
-    margin: 0 auto 26px !important;
+    max-width: 235px !important;
+    height: 46px !important;
+    padding: 0 8px 0 18px !important;
+    gap: 10px !important;
+    margin: 0 auto -23px !important;
+    position: relative !important;
+    z-index: 10 !important;
   }
 
   .reach-btn-label {
@@ -9092,5 +9095,605 @@ div.text-custom-storke-cs,
   .hybeq-search-input {
     font-size: 0.85rem !important;
     padding: 11px 0 !important;
+  }
+}
+
+
+
+/* ==========================================================================
+   HYBEQ CONTACT PAGE — MODERN INDUSTRIAL RESPONSIVE SPECIFICATION
+   Complete production-grade styling for Desktop, Laptop, Tablet, and Mobile
+   ========================================================================== */
+
+.contact-page {
+  background-color: #FFFFFF;
+  min-height: 100vh;
+  width: 100%;
+  overflow-x: hidden;
+}
+
+/* ── 1. Contact Hero Section ── */
+.contact-hero-section {
+  background: #0A2362;
+  color: #FFFFFF;
+  position: relative;
+  padding: 80px 0 64px;
+  overflow: hidden;
+}
+
+.contact-hero-section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: 
+    radial-gradient(circle at 85% 20%, rgba(70, 201, 133, 0.12) 0%, transparent 45%),
+    radial-gradient(circle at 15% 80%, rgba(16, 43, 105, 0.4) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.contact-hero-inner {
+  position: relative;
+  z-index: 2;
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.contact-hero-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(70, 201, 133, 0.15);
+  color: #46C985;
+  border: 1px solid rgba(70, 201, 133, 0.35);
+  border-radius: 9999px;
+  padding: 6px 16px;
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 18px;
+}
+
+.contact-hero-heading {
+  font-size: clamp(2.2rem, 4.2vw, 3.4rem);
+  font-weight: 900;
+  color: #FFFFFF;
+  line-height: 1.12;
+  letter-spacing: -0.02em;
+  margin: 0 0 18px;
+  max-width: 860px;
+}
+
+.contact-hero-heading .hero-highlight-green {
+  color: #46C985;
+}
+
+.contact-hero-desc {
+  font-size: clamp(0.95rem, 1.25vw, 1.125rem);
+  color: rgba(255, 255, 255, 0.88);
+  line-height: 1.68;
+  max-width: 760px;
+  margin: 0 0 32px;
+}
+
+/* Quick contact pills in Hero */
+.contact-hero-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.contact-hero-pill-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 10px;
+  padding: 8px 14px;
+  color: #FFFFFF;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.contact-hero-pill-item:hover {
+  background: rgba(255, 255, 255, 0.16);
+  border-color: #46C985;
+  color: #FFFFFF;
+  transform: translateY(-1px);
+}
+
+.contact-hero-pill-item .pill-icon {
+  color: #46C985;
+  display: flex;
+  align-items: center;
+}
+
+/* ── 2. Main Contact Layout Section ── */
+.contact-main-section {
+  padding: 80px 0 100px;
+  background: #FFFFFF;
+}
+
+.contact-main-container {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.contact-main-grid {
+  display: grid;
+  grid-template-columns: 1.25fr 1fr;
+  gap: 52px;
+  align-items: start;
+}
+
+/* ── 3. Inquiry Form Card ── */
+.contact-form-card {
+  background: #FFFFFF;
+  border: 1.5px solid #E2E8F0;
+  border-radius: 20px;
+  padding: 40px;
+  box-shadow: 0 10px 30px rgba(10, 35, 98, 0.05);
+  box-sizing: border-box;
+}
+
+.contact-form-tag {
+  display: inline-block;
+  background: #EAF8F0;
+  color: #0A2362;
+  border: 1px solid rgba(70, 201, 133, 0.5);
+  border-radius: 9999px;
+  padding: 5px 14px;
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+
+.contact-form-title {
+  font-size: clamp(1.6rem, 2.2vw, 2.15rem);
+  color: #0A2362;
+  font-weight: 900;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+  margin: 0 0 26px;
+}
+
+.contact-form-element {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Responsive 2-column to 1-column Form Row */
+.contact-form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.contact-form-group {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+.contact-form-label {
+  display: block;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  color: #0A2362;
+  margin-bottom: 7px;
+  line-height: 1.3;
+}
+
+.contact-form-label .req-star {
+  color: #EF4444;
+  margin-left: 2px;
+}
+
+.contact-form-input,
+.contact-form-select {
+  width: 100%;
+  height: 48px;
+  padding: 0 14px;
+  background-color: #FFFFFF;
+  border: 1.5px solid #DFE6EF;
+  border-radius: 8px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #0A2362;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  box-sizing: border-box;
+}
+
+.contact-form-input:focus,
+.contact-form-select:focus,
+.contact-form-textarea:focus {
+  border-color: #0A2362;
+  box-shadow: 0 0 0 3px rgba(10, 35, 98, 0.1);
+}
+
+.contact-form-input.has-error,
+.contact-form-textarea.has-error {
+  border-color: #EF4444;
+  background-color: #FFFDFD;
+}
+
+.contact-form-textarea {
+  width: 100%;
+  padding: 12px 14px;
+  background-color: #FFFFFF;
+  border: 1.5px solid #DFE6EF;
+  border-radius: 8px;
+  font-size: 0.875rem;
+  font-family: inherit;
+  font-weight: 500;
+  color: #0A2362;
+  outline: none;
+  resize: vertical;
+  min-height: 120px;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  box-sizing: border-box;
+}
+
+.contact-error-msg {
+  color: #EF4444;
+  font-size: 0.75rem;
+  font-weight: 600;
+  margin-top: 5px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* Transmit Inquiry Submit Button */
+.contact-submit-btn {
+  width: 100%;
+  height: 52px;
+  background: #0A2362;
+  color: #FFFFFF;
+  border: none;
+  border-radius: 10px;
+  font-size: 0.9375rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  cursor: pointer;
+  transition: all 0.24s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 6px 18px rgba(10, 35, 98, 0.18);
+  outline: none;
+  margin-top: 6px;
+}
+
+.contact-submit-btn:hover {
+  background: #071A45;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(10, 35, 98, 0.25);
+}
+
+.contact-submit-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Form Success Card */
+.contact-success-card {
+  background: #EAF8F0;
+  padding: 44px 32px;
+  border-radius: 16px;
+  border: 1.5px solid #46C985;
+  text-align: center;
+}
+
+.contact-success-icon-wrap {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: #46C985;
+  color: #0A2362;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 18px;
+}
+
+.contact-success-title {
+  font-size: 1.55rem;
+  color: #0A2362;
+  font-weight: 800;
+  margin: 0 0 10px;
+}
+
+.contact-success-desc {
+  color: #26344E;
+  font-size: 0.95rem;
+  line-height: 1.65;
+  max-width: 440px;
+  margin: 0 auto 24px;
+}
+
+/* ── 4. Verified Facilities & Headquarters Cards ── */
+.contact-side-column {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* Surat Headquarters Card (Matches Reference Image) */
+.contact-hq-card {
+  background: #F4F7FB;
+  border: 1.5px solid #DFE6EF;
+  border-radius: 18px;
+  padding: 32px 28px;
+  box-sizing: border-box;
+  box-shadow: 0 4px 18px rgba(10, 35, 98, 0.03);
+}
+
+.contact-hq-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 22px;
+}
+
+.contact-hq-icon-box {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: #0A2362;
+  color: #46C985;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  box-shadow: 0 4px 12px rgba(10, 35, 98, 0.15);
+}
+
+.contact-hq-title {
+  font-size: 1.2rem;
+  color: #0A2362;
+  font-weight: 800;
+  margin: 0 0 4px;
+  line-height: 1.25;
+}
+
+.contact-hq-subtitle {
+  font-size: 0.8125rem;
+  color: #46C985;
+  font-weight: 700;
+  display: block;
+}
+
+.contact-hq-details-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  font-size: 0.9rem;
+}
+
+.contact-hq-detail-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  color: #26344E;
+  line-height: 1.55;
+}
+
+.contact-hq-detail-item .item-icon {
+  color: #0A2362;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.contact-hq-link {
+  color: #0A2362;
+  font-weight: 700;
+  text-decoration: none;
+  transition: color 0.18s ease;
+}
+
+.contact-hq-link:hover {
+  color: #46C985;
+  text-decoration: underline;
+}
+
+/* Regional Depots Card */
+.contact-depots-card {
+  background: #F4F7FB;
+  border: 1.5px solid #DFE6EF;
+  border-radius: 18px;
+  padding: 28px;
+  box-sizing: border-box;
+}
+
+.contact-depots-title {
+  font-size: 1.15rem;
+  color: #0A2362;
+  font-weight: 800;
+  margin: 0 0 16px;
+  line-height: 1.3;
+}
+
+.contact-depots-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.contact-depot-item strong {
+  display: block;
+  color: #0A2362;
+  font-size: 0.9375rem;
+  font-weight: 700;
+  margin-bottom: 2px;
+}
+
+.contact-depot-item span {
+  color: #64748B;
+  font-size: 0.8125rem;
+  line-height: 1.5;
+}
+
+.contact-depot-item + .contact-depot-item {
+  border-top: 1px solid #DFE6EF;
+  padding-top: 14px;
+}
+
+/* WhatsApp Direct Button */
+.contact-whatsapp-btn {
+  background: #25D366;
+  color: #FFFFFF;
+  padding: 16px 24px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  font-weight: 800;
+  font-size: 0.9375rem;
+  text-decoration: none;
+  box-shadow: 0 6px 20px rgba(37, 211, 102, 0.28);
+  transition: all 0.22s ease;
+  box-sizing: border-box;
+}
+
+.contact-whatsapp-btn:hover {
+  background: #20BA5A;
+  color: #FFFFFF;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 26px rgba(37, 211, 102, 0.35);
+}
+
+/* ── 5. Responsive Breakpoint Rules ── */
+
+/* Laptop / Medium Desktop (1024px to 1280px) */
+@media (max-width: 1280px) {
+  .contact-main-grid {
+    gap: 36px;
+  }
+  .contact-form-card {
+    padding: 32px 28px;
+  }
+}
+
+/* Tablet (768px to 1023px) */
+@media (max-width: 991px) {
+  .contact-main-grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  .contact-hero-section {
+    padding: 60px 0 50px;
+  }
+}
+
+/* Mobile Devices (<= 767px) */
+@media (max-width: 767px) {
+  .contact-hero-section {
+    padding: 44px 0 38px;
+    text-align: center;
+  }
+
+  .contact-hero-inner {
+    padding: 0 16px;
+  }
+
+  .contact-hero-heading {
+    font-size: clamp(1.75rem, 6.2vw, 2.3rem);
+    margin: 0 auto 14px;
+  }
+
+  .contact-hero-desc {
+    font-size: 0.9rem;
+    line-height: 1.6;
+    margin: 0 auto 24px;
+  }
+
+  .contact-hero-pills {
+    justify-content: center;
+    gap: 8px;
+  }
+
+  .contact-hero-pill-item {
+    font-size: 0.77rem;
+    padding: 7px 12px;
+  }
+
+  .contact-main-section {
+    padding: 40px 0 60px;
+  }
+
+  .contact-main-container {
+    padding: 0 16px;
+  }
+
+  .contact-form-card {
+    padding: 24px 18px;
+    border-radius: 16px;
+  }
+
+  .contact-form-title {
+    font-size: 1.45rem;
+    margin-bottom: 20px;
+  }
+
+  /* CRITICAL: Convert form rows into single column to avoid crushing inputs */
+  .contact-form-row {
+    grid-template-columns: 1fr !important;
+    gap: 16px !important;
+  }
+
+  .contact-form-input,
+  .contact-form-select {
+    height: 46px;
+    font-size: 0.84rem;
+  }
+
+  .contact-hq-card,
+  .contact-depots-card {
+    padding: 24px 18px;
+    border-radius: 16px;
+  }
+
+  .contact-whatsapp-btn {
+    padding: 14px 18px;
+    font-size: 0.875rem;
+  }
+}
+
+/* Small Mobile (<= 420px) */
+@media (max-width: 420px) {
+  .contact-form-card {
+    padding: 20px 14px;
+  }
+  .contact-hero-heading {
+    font-size: 1.65rem;
+  }
+  .contact-hq-header {
+    gap: 10px;
+  }
+  .contact-hq-icon-box {
+    width: 38px;
+    height: 38px;
+  }
+  .contact-hq-title {
+    font-size: 1.08rem;
   }
 }

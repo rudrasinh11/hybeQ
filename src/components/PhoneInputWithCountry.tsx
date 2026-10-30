@@ -134,7 +134,12 @@ export const PhoneInputWithCountry: React.FC<PhoneInputWithCountryProps> = ({
             <span style={{ fontSize: '1.1rem', lineHeight: 1 }} role="img" aria-label={selectedCountry.name}>
               {selectedCountry.flag}
             </span>
-            <span style={{ letterSpacing: '0.02em' }}>{selectedCountry.dialCode}</span>
+            <span style={{ fontSize: '0.8125rem', color: '#0A2362', fontWeight: 800, letterSpacing: '0.02em' }}>
+              {selectedCountry.code}
+            </span>
+            <span style={{ letterSpacing: '0.01em', color: '#0A2362', fontWeight: 700 }}>
+              {selectedCountry.dialCode}
+            </span>
             <ChevronDown
               size={14}
               style={{
@@ -297,3 +302,4 @@ export const PhoneInputWithCountry: React.FC<PhoneInputWithCountryProps> = ({
     </div>
   );
 };
+
