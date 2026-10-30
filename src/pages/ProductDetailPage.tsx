@@ -3,6 +3,7 @@ import { useParams, Link } from 'react-router-dom';
 import { CheckCircle2, Download, Calculator, ArrowUpRight, Check, FileText } from 'lucide-react';
 import { PRODUCTS, getProductImage } from '../data/productsData';
 import { CalculatorWidget } from '../components/CalculatorWidget';
+import { RelatedProducts } from '../components/RelatedProducts';
 
 interface ProductDetailPageProps {
   onOpenEnquiry: (productName?: string) => void;
@@ -242,6 +243,9 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ onOpenEnqu
           </div>
         </div>
       </section>
+
+      {/* Related Formulations */}
+      <RelatedProducts currentProduct={product} onOpenEnquiry={onOpenEnquiry} />
     </div>
   );
 };

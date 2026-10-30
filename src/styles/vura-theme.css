@@ -862,12 +862,12 @@ body {
 
 .vura-hero-headline {
   font-family: "vurasemiboldfonts", system-ui, -apple-system, sans-serif;
-  font-size: clamp(3.2rem, 6.8vw, 6.2rem);
-  font-weight: 500;
-  line-height: 0.92;
-  letter-spacing: -0.015em;
-  text-transform: uppercase;
-  margin: 0;
+  font-size: clamp(2.3rem, 4.4vw, 3.85rem) !important;
+  font-weight: 600 !important;
+  line-height: 1.04 !important;
+  letter-spacing: -0.02em !important;
+  text-transform: uppercase !important;
+  margin: 0 0 4px 0 !important;
   animation: vuraHeadlineZoomIn 1.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
@@ -1213,35 +1213,45 @@ body {
 /* ── Notch Info Content (top-right inside stepped cutout, 1:1 VURA Reference) ── */
 .vura-banner-thumb-content {
   position: absolute;
-  top: clamp(12px, 1.6vw, 24px);
-  right: clamp(20px, 2.8vw, 54px);
+  top: clamp(8px, 1.3vw, 20px);
+  right: clamp(16px, 2.4vw, 48px);
   width: auto;
-  max-width: clamp(340px, 32vw, 440px);
+  max-width: clamp(340px, 35vw, 520px);
   z-index: 10;
   pointer-events: auto;
-
-  /* Transparent container so it blends seamlessly into the notch cutout without artificial protruding box */
   background: transparent;
   border: none;
   box-shadow: none;
-
   padding: 0;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  gap: clamp(8px, 0.8vw, 12px);
+  gap: clamp(6px, 0.6vw, 10px);
   box-sizing: border-box;
 }
 
 .vura-notch-desc {
   font-family: "vurafonts", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   color: #071A45;
-  font-size: clamp(12.5px, 0.9vw, 15px);
-  line-height: 1.55;
+  font-size: clamp(11.5px, 0.82vw, 13.5px);
+  line-height: 1.48;
   font-weight: 500;
   margin: 0;
   text-align: left;
   letter-spacing: -0.01em;
+  max-width: 100%;
+}
+
+@media (min-width: 768px) and (max-width: 1199px) {
+  .vura-banner-thumb-content {
+    top: clamp(6px, 1.1vw, 14px);
+    right: clamp(12px, 1.8vw, 32px);
+    max-width: clamp(320px, 36vw, 450px);
+  }
+  .vura-notch-desc {
+    font-size: clamp(11px, 0.78vw, 12.5px);
+    line-height: 1.42;
+  }
 }
 
 .vura-notch-cert-wrap {
@@ -1721,8 +1731,8 @@ body {
    ============================================================ */
 .vura-partner-marquee-section {
   background-color: var(--color-background, #F5F7FB);
-  border-top: 1px solid var(--color-border, #DFE6EF);
-  border-bottom: 1px solid var(--color-border, #DFE6EF);
+  border-top: none;
+  border-bottom: none;
   padding: 32px 0 28px;
   overflow: hidden;
 }
@@ -1811,12 +1821,12 @@ body {
 }
 
 .vura-section-heading {
-  font-size: clamp(2.2rem, 4vw, 3.2rem);
-  font-weight: 900;
-  line-height: 1.15;
-  color: var(--color-primary);
-  margin-bottom: 22px;
-  letter-spacing: -0.01em;
+  font-size: clamp(1.75rem, 2.5vw, 2.35rem) !important;
+  font-weight: 800 !important;
+  line-height: 1.2 !important;
+  color: var(--color-primary, #0A2362) !important;
+  margin-bottom: 12px !important;
+  letter-spacing: -0.02em !important;
 }
 
 .vura-section-desc {
@@ -1972,8 +1982,8 @@ body {
   background-color: #FFFFFF;
   padding: 80px 0 90px;
   overflow: hidden;
-  border-top: 1px solid var(--color-border, #DFE6EF);
-  border-bottom: 1px solid var(--color-border, #DFE6EF);
+  border-top: none;
+  border-bottom: none;
   z-index: 2;
 }
 
@@ -2700,7 +2710,7 @@ body {
 .vura-products-section {
   padding: 100px 0;
   background-color: var(--color-white);
-  border-top: 1px solid var(--color-border);
+  border-top: none;
 }
 
 .vura-products-header {
@@ -3938,8 +3948,8 @@ div.text-custom-storke-cs,
   padding: 72px 0 56px;
   overflow: hidden;
   width: 100%;
-  border-top: 1px solid var(--color-border, #DFE6EF);
-  border-bottom: 1px solid var(--color-border, #DFE6EF);
+  border-top: none;
+  border-bottom: none;
   gap: 24px;
 }
 
@@ -3966,7 +3976,7 @@ div.text-custom-storke-cs,
 
 .vura-range-main-title {
   font-family: "vurasemiboldfonts", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  font-size: clamp(2.4rem, 4.8vw, 4.2rem);
+  font-size: clamp(1.85rem, 3.2vw, 2.6rem);
   font-weight: 800;
   color: #071A45;
   letter-spacing: -0.02em;
@@ -6251,134 +6261,7 @@ div.text-custom-storke-cs,
 
 
 
-/* ============================================================
-   REACH SECTION — New Design
-   Reference: user-supplied screenshot
-   White text block above full-bleed aerial port image
-   CTA button as dark pill floating between text and image
-   ============================================================ */
-
-.reach-section {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  background: #ffffff;
-  overflow: hidden;
-}
-
-/* ── Top text block ── */
-.reach-text-block {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  padding: clamp(48px, 6vw, 80px) clamp(20px, 5vw, 120px) 0;
-  background: #ffffff;
-}
-
-.reach-eyebrow {
-  font-size: 0.72rem;
-  font-weight: 600;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  color: #6b7280;
-  margin-bottom: 18px;
-}
-
-.reach-heading {
-  font-size: clamp(28px, 4.5vw, 52px);
-  font-weight: 800;
-  line-height: 1.18;
-  color: #0f172a;
-  margin: 0 0 20px;
-  max-width: 700px;
-}
-
-.reach-accent {
-  color: #00c37d; /* HYBEQ brand green */
-}
-
-.reach-desc {
-  font-size: clamp(14px, 1.5vw, 17px);
-  line-height: 1.75;
-  color: #4b5563;
-  max-width: 620px;
-  margin: 0 0 36px;
-}
-
-/* CTA pill button — sits above the image */
-.reach-cta-btn {
-  display: inline-block;
-  background: #0f172a;
-  color: #ffffff;
-  font-size: 0.95rem;
-  font-weight: 600;
-  letter-spacing: 0.03em;
-  padding: 14px 38px;
-  border-radius: 50px;
-  text-decoration: none;
-  margin-bottom: -28px; /* pull it down to overlap the image edge */
-  position: relative;
-  z-index: 2;
-  transition: background 0.2s ease, transform 0.2s ease;
-  box-shadow: 0 4px 20px rgba(15, 23, 42, 0.25);
-}
-
-.reach-cta-btn:hover {
-  background: #1e3a5f;
-  transform: translateY(-2px);
-}
-
-/* ── Full-bleed port image block ── */
-.reach-image-block {
-  width: 100%;
-  position: relative;
-  overflow: hidden;
-  /* Slight top padding so button overlap works cleanly */
-  padding-top: 28px;
-  line-height: 0;
-}
-
-.reach-port-img {
-  width: 100%;
-  height: clamp(260px, 45vw, 680px);
-  object-fit: cover;
-  object-position: center 40%;
-  display: block;
-}
-
-/* ── Responsive tweaks ── */
-@media (max-width: 768px) {
-  .reach-text-block {
-    padding: 48px 24px 0;
-  }
-
-  .reach-cta-btn {
-    font-size: 0.88rem;
-    padding: 13px 30px;
-    margin-bottom: -22px;
-  }
-
-  .reach-image-block {
-    padding-top: 22px;
-  }
-}
-
-@media (max-width: 480px) {
-  .reach-heading {
-    font-size: clamp(22px, 7vw, 32px);
-  }
-
-  .reach-desc {
-    font-size: 13.5px;
-  }
-
-  .reach-cta-btn {
-    font-size: 0.84rem;
-    padding: 12px 26px;
-  }
-}
-
+/* (Legacy reach styles consolidated into modern section below) */
 
 /* ============================================================
    HYBEQ HERO SECTION — FINAL REFINEMENT (AUTHENTIC WHITE THEME)
@@ -6932,10 +6815,10 @@ div.text-custom-storke-cs,
   display: flex;
   gap: 8px;
   flex-wrap: wrap;
-  background: #F8FAFC;
-  padding: 6px;
+  background: transparent;
+  padding: 4px 0;
   border-radius: 12px;
-  border: 1px solid #E2E8F0;
+  border: none;
   box-sizing: border-box;
 }
 .vura-cat-pill {
@@ -7060,8 +6943,8 @@ div.text-custom-storke-cs,
   padding: 44px 0 48px !important;
   margin: 0 !important;
   background: #F8FAFC;
-  border-top: 1px solid var(--color-border, #E2E8F0);
-  border-bottom: 1px solid var(--color-border, #E2E8F0);
+  border-top: none !important;
+  border-bottom: none !important;
 }
 
 .vura-principles-header {
@@ -8550,7 +8433,7 @@ div.text-custom-storke-cs,
 .vura-articles-section {
   padding: 56px 0 64px !important;
   background: #F8FAFC !important;
-  border-top: 1px solid #E2E8F0 !important;
+  border-top: none !important;
   position: relative !important;
   z-index: 1 !important;
 }

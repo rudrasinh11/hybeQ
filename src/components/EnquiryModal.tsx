@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { X, CheckCircle2, Send, AlertCircle } from 'lucide-react';
 import { PRODUCTS } from '../data/productsData';
+import { PhoneInputWithCountry, COUNTRIES } from './PhoneInputWithCountry';
 
 interface EnquiryModalProps {
   isOpen: boolean;
@@ -24,6 +25,7 @@ export const EnquiryModal: React.FC<EnquiryModalProps> = ({
     message: ''
   });
 
+  const [countryCode, setCountryCode] = useState('IN');
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
@@ -32,11 +34,14 @@ export const EnquiryModal: React.FC<EnquiryModalProps> = ({
 
   const validate = () => {
     const errs: { [key: string]: string } = {};
+    const selectedCountry = COUNTRIES.find(c => c.code === countryCode) || COUNTRIES[0];
     if (!formData.name.trim()) errs.name = 'Full name is required';
     if (!formData.phone.trim()) {
       errs.phone = 'Contact phone number is required';
-    } else if (!/^[0-9]{10}$/.test(formData.phone.trim())) {
+    } else if (countryCode === 'IN' && !/^[0-9]{10}$/.test(formData.phone.trim())) {
       errs.phone = 'Phone number must contain exactly 10 digits';
+    } else if (formData.phone.trim().length < 7 || formData.phone.trim().length > selectedCountry.maxLength) {
+      errs.phone = `Phone number must be valid (${selectedCountry.format})`;
     }
     if (!formData.email.trim()) {
       errs.email = 'Email address is required';
@@ -71,6 +76,7 @@ export const EnquiryModal: React.FC<EnquiryModalProps> = ({
       projectSize: 'under-5000',
       message: ''
     });
+    setCountryCode('IN');
     setErrors({});
     onClose();
   };
@@ -122,17 +128,13 @@ export const EnquiryModal: React.FC<EnquiryModalProps> = ({
                   <label style={{ display: 'block', fontSize: '0.8125rem', fontWeight: 700, color: '#0A2362', marginBottom: 6 }}>
                     Phone / Mobile *
                   </label>
-                  <input
-                    type="tel"
-                    inputMode="numeric"
-                    maxLength={10}
-                    minLength={10}
-                    pattern="^[0-9]{10}$"
-                    value={formData.phone}
-                    onChange={e => {
-                      const cleanDigits = e.target.value.replace(/\D/g, '').slice(0, 10);
-                      setFormData({ ...formData, phone: cleanDigits });
-                      if (errors.phone && cleanDigits.length === 10) {
+                  <PhoneInputWithCountry
+                    phone={formData.phone}
+                    countryCode={countryCode}
+                    compact={true}
+                    onPhoneChange={(cleanPhone) => {
+                      setFormData(prev => ({ ...prev, phone: cleanPhone }));
+                      if (errors.phone) {
                         setErrors(prev => {
                           const updated = { ...prev };
                           delete updated.phone;
@@ -140,17 +142,10 @@ export const EnquiryModal: React.FC<EnquiryModalProps> = ({
                         });
                       }
                     }}
-                    placeholder="Enter 10-digit mobile number"
-                    style={{
-                      width: '100%',
-                      padding: '10px 14px',
-                      borderRadius: 8,
-                      border: `1.5px solid ${errors.phone ? '#EF4444' : '#DFE6EF'}`,
-                      fontSize: '0.875rem',
-                      outline: 'none'
-                    }}
+                    onCountryChange={(c) => setCountryCode(c.code)}
+                    error={errors.phone}
+                    placeholder="Enter mobile number"
                   />
-                  {errors.phone && <span style={{ color: '#EF4444', fontSize: '0.75rem', marginTop: 4, display: 'flex', alignItems: 'center', gap: 4 }}><AlertCircle size={12} /> {errors.phone}</span>}
                 </div>
               </div>
 

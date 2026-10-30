@@ -6,7 +6,6 @@ import { SearchModal } from './components/SearchModal';
 import { VideoModal } from './components/VideoModal';
 import { EnquiryModal } from './components/EnquiryModal';
 import { ScrollToTop } from './components/ScrollToTop';
-import { LineShape } from './components/LineShape';
 
 import { HomePage } from './pages/HomePage';
 import { AboutPage } from './pages/AboutPage';
@@ -39,8 +38,6 @@ export const App: React.FC = () => {
         {/* Scroll restoration helper */}
         <ScrollToTop />
 
-        {/* Global Architectural Vertical Scanning Lines (VURA Style: .line-shape .cus-z-1) */}
-        <LineShape />
 
         {/* 1. VURA-Style Header with Transparent HYBEQ Logo & Navigation */}
         <Header
