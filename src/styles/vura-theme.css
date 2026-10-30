@@ -862,13 +862,13 @@ body {
 
 .vura-hero-headline {
   font-family: "vurasemiboldfonts", system-ui, -apple-system, sans-serif;
-  font-size: clamp(2.3rem, 4.4vw, 3.85rem) !important;
+  font-size: clamp(2.2rem, 3.8vw, 3.4rem) !important;
   font-weight: 600 !important;
   line-height: 1.04 !important;
   letter-spacing: -0.02em !important;
   text-transform: uppercase !important;
   margin: 0 0 4px 0 !important;
-  animation: vuraHeadlineZoomIn 1.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  opacity: 1 !important;
 }
 
 @keyframes vuraHeadlineZoomIn {
@@ -887,7 +887,7 @@ body {
   color: var(--color-primary, #0A2362);
   margin-bottom: 6px;
   font-family: "vurasemiboldfonts", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  font-size: clamp(40px, 6vw, 76px);
+  font-size: clamp(36px, 3.6vw, 56px);
   font-weight: 800;
   letter-spacing: -0.025em;
   line-height: 1;
@@ -899,7 +899,7 @@ body {
   flex-wrap: nowrap;
   gap: clamp(12px, 1.5vw, 20px);
   font-family: "vurasemiboldfonts", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  font-size: clamp(40px, 6vw, 76px);
+  font-size: clamp(36px, 3.6vw, 56px);
   font-weight: 800;
   letter-spacing: -0.025em;
   line-height: 1;
@@ -9695,5 +9695,64 @@ div.text-custom-storke-cs,
   }
   .contact-hq-title {
     font-size: 1.08rem;
+  }
+}
+
+
+/* ============================================================
+   LAPTOP VIEW HERO SECTION REFINEMENT (768px to 1440px)
+   Prevents headline from crowding or overlapping the notch cutout
+   ============================================================ */
+@media (min-width: 768px) and (max-width: 1440px) {
+  .vura-hero-top-row {
+    margin-bottom: 22px !important;
+    gap: 20px !important;
+    align-items: center !important;
+  }
+
+  .vura-hero-headline {
+    margin: 0 !important;
+    opacity: 1 !important;
+  }
+
+  .vura-headline-line1 {
+    font-size: clamp(26px, 2.7vw, 38px) !important;
+    line-height: 1.08 !important;
+    letter-spacing: -0.02em !important;
+    margin-bottom: 4px !important;
+  }
+
+  .vura-headline-line2 {
+    font-size: clamp(26px, 2.7vw, 38px) !important;
+    line-height: 1.08 !important;
+    letter-spacing: -0.02em !important;
+    gap: clamp(6px, 0.8vw, 10px) !important;
+  }
+
+  .vura-headline-arrow-icon {
+    width: clamp(24px, 2.4vw, 32px) !important;
+    height: clamp(24px, 2.4vw, 32px) !important;
+    margin-right: 4px !important;
+  }
+
+  .vura-circular-play-container {
+    width: clamp(90px, 8vw, 110px) !important;
+    height: clamp(90px, 8vw, 110px) !important;
+  }
+
+  .vura-play-center-btn {
+    width: clamp(44px, 4vw, 54px) !important;
+    height: clamp(44px, 4vw, 54px) !important;
+  }
+
+  .vura-banner-thumb-content {
+    top: clamp(8px, 1.1vw, 16px) !important;
+    right: clamp(14px, 2.2vw, 36px) !important;
+    max-width: clamp(280px, 32vw, 420px) !important;
+  }
+
+  .vura-notch-desc {
+    font-size: clamp(11px, 0.78vw, 12.5px) !important;
+    line-height: 1.45 !important;
   }
 }
